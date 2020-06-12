@@ -1,0 +1,26 @@
+[gd_scene format=2]
+
+[node name="GameOver" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 270.842
+margin_top = 262.148
+margin_right = 829.842
+margin_bottom = 542.148
+rect_scale = Vector2( 10, 10 )
+text = "Game Over"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 987.078
+margin_top = 357.419
+margin_right = 1027.08
+margin_bottom = 371.419
+text = "U Succ"

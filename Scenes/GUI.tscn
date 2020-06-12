@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="Main" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" type="ProgressBar" parent="Main"]
+margin_left = 16.0
+margin_top = 672.0
+margin_right = 384.0
+margin_bottom = 702.0
+
+[node name="Damage" type="Button" parent="Main"]
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 120.0
+margin_bottom = 56.0
+text = "HP -10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
