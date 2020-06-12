@@ -11,11 +11,15 @@ export (int) var maxHealth = 100
 var health = maxHealth
 var dead = false
 
+var coins = 0
+
 var dir = Vector2()
 var vel = Vector2()
 
 func _ready():
 	$GUI/Main/HealthBar.max_value = maxHealth
+	$GUI/Main/HealthBar.value = maxHealth
+	
 	$GUI/Main.connect("receiveDamage", self, "_onReceiveDamage")
 
 func _physics_process(delta):
@@ -32,13 +36,21 @@ func move(delta):
 	else: vel = dir * speed * delta
 	vel = move_and_slide(vel)
 
+func addCoin():
+	coins += 1
+	$GUI/Main.updateCoins(coins)
+
 func _onReceiveDamage(damage):
 	health -= damage
-	if health <= 0 and !dead:
-		dead = true
-		emit_signal("died")
-		health = maxHealth
+	if health <= 0 and !dead: die()
 	if health <= 0 and dead:
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
 	
 	$GUI/Main.updateHealth(health)
+
+func die():
+	dead = true
+	emit_signal("died")
+	health = maxHealth
+	$AliveSprite.hide()
+	$DeadSprite.show()

@@ -8,5 +8,8 @@ func _ready():
 func updateHealth(health):
 	$HealthBar.value = health
 
+func updateCoins(coins):
+	$Coins/Label.text = str(coins)
+
 func _onDamageDown():
 	emit_signal("receiveDamage", 10)
