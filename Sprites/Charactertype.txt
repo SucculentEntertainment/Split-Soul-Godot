@@ -1,0 +1,8 @@
+Gesicht:
+Augen, Mund, Haare, Hals
+
+Körper:
+Hände (Handschuhe?), Schulterrüstung (Eisen), Harnisch(Eisen), Braune Unterkleidung
+
+Beine:
+Schwarze Hose, Beinrüstung (Schienbein und Oberschenkel; Eisen), Braune Schuhe
