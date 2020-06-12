@@ -226,20 +226,20 @@ animations = [ {
 radius = 6.0
 
 [node name="EnemySlime" type="KinematicBody2D"]
-scale = Vector2( 4, 4 )
+scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="AliveSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
 animation = "idle"
-frame = 6
+frame = 4
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 43 )
 animation = "idle"
-frame = 13
+frame = 10
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
