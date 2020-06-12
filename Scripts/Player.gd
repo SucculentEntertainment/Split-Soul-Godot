@@ -1,11 +1,8 @@
 extends KinematicBody2D
 
-const normalSpritesheet = preload("res://Sprites/PlayerNormal.png")
-const deadSpritesheet = preload("res://Sprites/PlayerDead.png")
-
 signal died
 
-export (float) var speed = 10000
+export (int) var speed = 10000
 export (int) var maxHealth = 100
 
 var health = maxHealth
@@ -47,6 +44,9 @@ func _onReceiveDamage(damage):
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
 	
 	$GUI/Main.updateHealth(health)
+
+func _onGiveDamage(damage):
+	pass
 
 func die():
 	dead = true

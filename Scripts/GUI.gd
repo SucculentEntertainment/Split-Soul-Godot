@@ -1,9 +1,11 @@
 extends Control
 
 signal receiveDamage(damage)
+signal giveDamage(damage)
 
 func _ready():
 	$Damage.connect("button_down", self, "_onDamageDown")
+	$EnemyDmg.connect("button_down", self, "_onEnemyDamageDown")
 
 func updateHealth(health):
 	$HealthBar.value = health
@@ -13,3 +15,6 @@ func updateCoins(coins):
 
 func _onDamageDown():
 	emit_signal("receiveDamage", 10)
+
+func _onEnemyDamageDown():
+	emit_signal("giveDamage", 10)

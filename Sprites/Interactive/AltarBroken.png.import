@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/altar1.png-5b1620927798e190e06a9c465d24ead7.stex"
+path="res://.import/AltarBroken.png-2643ecd2eece3a0ca175cc4517e25b9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/altar1.png"
-dest_files=[ "res://.import/altar1.png-5b1620927798e190e06a9c465d24ead7.stex" ]
+source_file="res://Sprites/Interactive/AltarBroken.png"
+dest_files=[ "res://.import/AltarBroken.png-2643ecd2eece3a0ca175cc4517e25b9e.stex" ]
 
 [params]
 

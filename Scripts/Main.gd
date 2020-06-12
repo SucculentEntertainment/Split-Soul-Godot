@@ -42,6 +42,9 @@ func changeDimension():
 	else:
 		level.get_node("Normal").show()
 		level.get_node("Dead").hide()
+	
+	for enemy in level.get_node("Enemies").get_children():
+		enemy.changeDimension()
 
 # ================================
 # Signals
@@ -49,3 +52,4 @@ func changeDimension():
 
 func connectSignals():
 	player.connect("died", self, "changeDimension")
+	player.get_node("GUI/Main").connect("giveDamage", level.get_node("Enemies/EnemySlime"), "_onReceiveDamage")
