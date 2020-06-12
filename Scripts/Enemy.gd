@@ -30,4 +30,11 @@ func changeDimension():
 			$DeadSprite.hide()
 
 func die():
+	$CollisionShape2D.disabled = true
+	
+	$AliveSprite.play("death")
+	$DeadSprite.play("death")
+	
+	yield($AliveSprite, "animation_finished")
+	yield($DeadSprite, "animation_finished")
 	queue_free()
