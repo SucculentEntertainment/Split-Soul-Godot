@@ -12,6 +12,9 @@ func _ready():
 	loadPlayer()
 	loadLevel("Test")
 	
+	for item in level.get_node("Dead/Items").get_children(): item.disable()
+	level.get_node("Dead").hide()
+	
 	connectSignals()
 	
 func loadLevel(levelName):
@@ -39,9 +42,13 @@ func changeDimension():
 	if level.get_node("Normal").visible:
 		level.get_node("Normal").hide()
 		level.get_node("Dead").show()
+		for item in level.get_node("Normal/Items").get_children(): item.disable()
+		for item in level.get_node("Dead/Items").get_children(): item.enable() 
 	else:
 		level.get_node("Normal").show()
 		level.get_node("Dead").hide()
+		for item in level.get_node("Normal/Items").get_children(): item.enable()
+		for item in level.get_node("Dead/Items").get_children(): item.disable()
 	
 	for enemy in level.get_node("Enemies").get_children():
 		enemy.changeDimension()

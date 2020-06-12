@@ -232,14 +232,14 @@ script = ExtResource( 2 )
 [node name="AliveSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 13 )
 animation = "idle"
-frame = 4
+frame = 11
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 43 )
 animation = "idle"
-frame = 10
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
