@@ -5,7 +5,7 @@ signal changeDimension(dimension)
 export (int) var speed = 10000
 export (int) var maxHealth = 100
 
-var def = preload("res://Scripts/Definitions.gd")
+onready var def = get_node("/root/Definitions")
 
 var health = maxHealth
 var coins = 0

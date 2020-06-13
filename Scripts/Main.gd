@@ -1,6 +1,6 @@
 extends Node
 
-var playerScene = preload("res://Scenes/Entities/Player.tscn")
+var playerScene = load("res://Scenes/Entities/Player.tscn")
 var player
 var level
 
@@ -17,7 +17,7 @@ func _ready():
 func loadLevel(levelName):
 	var levelScene = load(str("res://Scenes/Levels/" + levelName + ".tscn"))
 	level = levelScene.instance()
-	$Level.add_child(level);
+	$Level.add_child(level)
 	setSpawn()
 
 func setSpawn():

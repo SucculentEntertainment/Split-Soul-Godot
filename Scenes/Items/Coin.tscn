@@ -12,10 +12,12 @@ itemName = "Coin"
 layer = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 16, 16 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 16 )
 shape = SubResource( 1 )

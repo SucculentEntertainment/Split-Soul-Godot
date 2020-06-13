@@ -11,8 +11,10 @@ func _onPickup(body):
 		body.itemAction(self)
 		queue_free()
 
-func updateDimension(dimension):
+func changeDimension(dimension):
 	if dimension & layer == 1:
+		show()
 		$CollisionShape2D.disabled = false;
 	else:
+		hide()
 		$CollisionShape2D.disabled = true;
