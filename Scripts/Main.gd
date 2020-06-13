@@ -12,9 +12,6 @@ func _ready():
 	loadPlayer()
 	loadLevel("Test")
 	
-	for item in level.get_node("Dead/Items").get_children(): item.disable()
-	level.get_node("Dead").hide()
-	
 	connectSignals()
 	
 func loadLevel(levelName):
@@ -38,25 +35,14 @@ func destroyLevel():
 # Gameplay
 # ================================
 
-func changeDimension():
-	if level.get_node("Normal").visible:
-		level.get_node("Normal").hide()
-		level.get_node("Dead").show()
-		for item in level.get_node("Normal/Items").get_children(): item.disable()
-		for item in level.get_node("Dead/Items").get_children(): item.enable() 
-	else:
-		level.get_node("Normal").show()
-		level.get_node("Dead").hide()
-		for item in level.get_node("Normal/Items").get_children(): item.enable()
-		for item in level.get_node("Dead/Items").get_children(): item.disable()
-	
-	for enemy in level.get_node("Enemies").get_children():
-		enemy.changeDimension()
+func changeDimension(dimension):
+	level.changeDimension(dimension)
+	player.changeDimension(dimension)
 
 # ================================
 # Signals
 # ================================
 
 func connectSignals():
-	player.connect("died", self, "changeDimension")
+	player.connect("changeDimension", self, "changeDimension")
 	player.get_node("GUI/Main").connect("giveDamage", level.get_node("Enemies/EnemySlime"), "_onReceiveDamage")

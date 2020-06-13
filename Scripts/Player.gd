@@ -1,17 +1,22 @@
 extends KinematicBody2D
 
-signal died
+signal changeDimension(dimension)
 
 export (int) var speed = 10000
 export (int) var maxHealth = 100
 
-var health = maxHealth
-var dead = false
+var def = preload("res://Scripts/Definitions.gd")
 
+var health = maxHealth
 var coins = 0
+var dead = false
 
 var dir = Vector2()
 var vel = Vector2()
+
+# ================================
+# Utility
+# ================================
 
 func _ready():
 	$GUI/Main/HealthBar.max_value = maxHealth
@@ -20,7 +25,12 @@ func _ready():
 	$GUI/Main.connect("receiveDamage", self, "_onReceiveDamage")
 
 func _physics_process(delta):
+	$GUI/Main.updateValues(health, coins)
 	move(delta)
+
+# ================================
+# Movement
+# ================================
 
 func getMoveInput():
 	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
@@ -33,24 +43,38 @@ func move(delta):
 	else: vel = dir * speed * delta
 	vel = move_and_slide(vel)
 
-func addCoin():
-	coins += 1
-	$GUI/Main.updateCoins(coins)
+# ================================
+# Items
+# ================================
+
+func itemAction(item):
+	if item.itemName == "Coin":
+		coins += 1
+
+
+# ================================
+# Actions
+# ================================
+
+func changeDimension(dimension):
+	pass
+
+# ================================
+# Damage
+# ================================
 
 func _onReceiveDamage(damage):
 	health -= damage
-	if health <= 0 and !dead: die()
-	if health <= 0 and dead:
-		get_tree().change_scene("res://Scenes/GameOver.tscn")
-	
-	$GUI/Main.updateHealth(health)
+	if health <= 0:
+		if !dead: die()
+		else: get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _onGiveDamage(damage):
 	pass
 
 func die():
 	dead = true
-	emit_signal("died")
+	emit_signal("changeDimension", def.DIMENSION_DEAD)
 	health = maxHealth
 	$AliveSprite.hide()
 	$DeadSprite.show()

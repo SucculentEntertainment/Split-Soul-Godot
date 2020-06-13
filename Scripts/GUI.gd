@@ -7,10 +7,8 @@ func _ready():
 	$Damage.connect("button_down", self, "_onDamageDown")
 	$EnemyDmg.connect("button_down", self, "_onEnemyDamageDown")
 
-func updateHealth(health):
+func updateValues(health, coins):
 	$HealthBar.value = health
-
-func updateCoins(coins):
 	$Coins/Label.text = str(coins)
 
 func _onDamageDown():
