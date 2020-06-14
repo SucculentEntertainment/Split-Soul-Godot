@@ -12,6 +12,8 @@ var INTERACTABLE_SCENES = [
 	preload("res://Scenes/Structures/Altar.tscn")
 ]
 
+var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
+
 const DIMENSION_STRINGS = {1: "Alive", 2: "Dead"}
 const DIMENSION_ALIVE = 1; const DIMENSION_DEAD = 2
 const NUM_DIMENSIONS = 2

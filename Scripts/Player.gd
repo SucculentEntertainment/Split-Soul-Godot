@@ -13,6 +13,7 @@ var coins = 0
 var dead = false
 
 var interact = null
+var lockPos = false
 
 var dir = Vector2()
 var vel = Vector2()
@@ -24,13 +25,15 @@ var vel = Vector2()
 func _ready():
 	$GUI/Main/HealthBar.max_value = maxHealth
 	$GUI/Main/HealthBar.value = maxHealth
+	$GUI/Main/HealthBarWhite.max_value = maxHealth
+	$GUI/Main/HealthBarWhite.value = maxHealth
 	
 	$GUI/Main.connect("receiveDamage", self, "_onReceiveDamage")
 
 func _physics_process(delta):
 	$GUI/Main.updateValues(health, coins)
 	getInput()
-	move(delta)
+	if !lockPos: move(delta)
 
 # ================================
 # Movement
@@ -60,11 +63,20 @@ func itemAction(item):
 # ================================
 
 func changeDimension(dimension):
+	var transition = def.TRANSITION_SCENE.instance()
+	add_child(transition)
+	transition.get_node("AnimationPlayer").play("Close")
+	yield(transition.get_node("AnimationPlayer"), "animation_finished")
+		
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
 	
 	if textures.size() > def.logB(dimension, 2):
 		$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+	
+	transition.get_node("AnimationPlayer").play("Open")
+	yield(transition.get_node("AnimationPlayer"), "animation_finished")
+	transition.queue_free()
 
 func getInput():
 	if Input.is_action_just_pressed("ctrl_interact"):
@@ -76,6 +88,7 @@ func getInput():
 
 func _onReceiveDamage(damage):
 	health -= damage
+	$Camera2D.shake(0.2, 500, 16)
 	if health <= 0:
 		if !dead: die()
 		else: get_tree().change_scene("res://Scenes/GameOver.tscn")

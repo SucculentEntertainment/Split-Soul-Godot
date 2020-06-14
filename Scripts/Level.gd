@@ -7,6 +7,7 @@ export (String) var levelName
 
 var dimensions = []
 var currentDimension = null
+var prevDimension = null
 var currentDimensionID = 0
 
 # ================================
@@ -32,7 +33,7 @@ func loadDimensions():
 # ================================
 
 func setSpawn(player):
-	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
+	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE, player)
 	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
 
 func spawnObjects(spawnMap, objectParent, scenes):
@@ -49,7 +50,7 @@ func spawnObjects(spawnMap, objectParent, scenes):
 # Actions
 # ================================
 
-func changeDimension(dimension):
+func changeDimension(dimension, player):
 	if dimensions.size() == 0:
 		print("No Dimensions Loaded")
 		return
@@ -60,11 +61,13 @@ func changeDimension(dimension):
 		$Dimension.add_child(currentDimension)
 	
 	if availableDimensions & dimension != 0:
-		var prevDimension = currentDimension
+		prevDimension = currentDimension
 		currentDimensionID = dimension
 		currentDimension = dimensions[def.logB(dimension, 2)].instance()
+		
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
+		
 		
 		# Hide SpawnMaps
 		currentDimension.get_node("Items").hide()

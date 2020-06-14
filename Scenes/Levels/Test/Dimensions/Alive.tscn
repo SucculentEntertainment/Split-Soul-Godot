@@ -5,7 +5,7 @@
 [ext_resource path="res://Sprites/Interactive/Altar.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Items/Coin.png" type="Texture" id=4]
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=1]
 0/name = "Coin.png 0"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
@@ -21,7 +21,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=5]
+[sub_resource type="TileSet" id=2]
 0/name = "SlimeAlive.png 0"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
@@ -72,14 +72,14 @@ cell_quadrant_size = 4
 format = 1
 
 [node name="Items" type="TileMap" parent="."]
-tile_set = SubResource( 4 )
+tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1
 tile_data = PoolIntArray( 393229, 0, 0, 458771, 0, 0, 589852, 0, 0, 851978, 0, 0 )
 
 [node name="Enemies" type="TileMap" parent="."]
-tile_set = SubResource( 5 )
+tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1

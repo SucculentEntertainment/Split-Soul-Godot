@@ -12,7 +12,10 @@ func _ready():
 	$EnemyDmg.connect("button_down", self, "_onEnemyDamageDown")
 
 func updateValues(health, coins):
-	$HealthBar.value = health
+	if $HealthBar.value != health:
+		$HealthBar.value = health
+		$HealthEase.interpolate_property($HealthBarWhite, "value", $HealthBarWhite.value, health, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+		$HealthEase.start()
 	
 	if health < 25: $HealthBar.tint_progress = critical
 	elif health < 50: $HealthBar.tint_progress = damaged

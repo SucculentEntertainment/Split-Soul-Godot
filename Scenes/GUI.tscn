@@ -33,18 +33,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HealthBarWhite" type="TextureProgress" parent="Main"]
+margin_left = 16.0
+margin_top = 672.0
+margin_right = 656.0
+margin_bottom = 704.0
+value = 5.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HealthBar" type="TextureProgress" parent="Main"]
 margin_left = 16.0
 margin_top = 672.0
 margin_right = 336.0
 margin_bottom = 704.0
 value = 5.0
-texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 4 )
 tint_progress = Color( 0.211765, 0.772549, 0.164706, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthEase" type="Tween" parent="Main"]
 
 [node name="Coins" type="Control" parent="Main"]
 margin_left = 1168.0

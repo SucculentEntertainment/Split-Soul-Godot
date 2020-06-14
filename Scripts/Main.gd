@@ -36,7 +36,7 @@ func destroyLevel():
 # ================================
 
 func changeDimension(dimension):
-	level.changeDimension(dimension)
+	level.changeDimension(dimension, player)
 
 # ================================
 # Signals
