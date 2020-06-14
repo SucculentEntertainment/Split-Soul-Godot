@@ -258,6 +258,9 @@ tracks/1/keys = {
 
 [node name="EnemySlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
+healthy = Color( 0.25098, 0.976471, 0.607843, 1 )
+damaged = Color( 0.960784, 0.717647, 0, 1 )
+critical = Color( 0.956863, 0.356863, 0.411765, 1 )
 layer = 3
 
 [node name="Dimensions" type="Node2D" parent="."]
@@ -267,14 +270,14 @@ scale = Vector2( 2, 2 )
 [node name="AliveSprite" type="AnimatedSprite" parent="Dimensions"]
 frames = SubResource( 25 )
 animation = "idle"
-frame = 6
+frame = 3
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="Dimensions"]
 visible = false
 frames = SubResource( 50 )
 animation = "idle"
-frame = 13
+frame = 10
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

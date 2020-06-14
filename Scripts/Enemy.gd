@@ -6,6 +6,10 @@ var dimensions = []
 var highestDimension
 var currentDimension = 1
 
+export (Color) var healthy
+export (Color) var damaged
+export (Color) var critical
+
 export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
@@ -19,7 +23,7 @@ var health = maxHealth
 
 func _ready():
 	$HealthBar.max_value = maxHealth
-	$HealthBar.value = health
+	_onReceiveDamage(0)
 	
 	for d in $Dimensions.get_children(): d.frame = 0
 	
@@ -47,6 +51,10 @@ func changeDimension(dimension):
 func _onReceiveDamage(damage):
 	health -= damage
 	$HealthBar.value = health
+	
+	if health < 25: $HealthBar.tint_progress = critical
+	elif health < 50: $HealthBar.tint_progress = damaged
+	else: $HealthBar.tint_progress = healthy
 	
 	if health <= 0: die()
 
