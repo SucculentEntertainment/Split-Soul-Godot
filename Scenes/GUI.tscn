@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Animations/Coin.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Resources/Textures/Items/Coin.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Sprites/GUI/HealthProgress.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/GUI/HealthUnder.png" type="Texture" id=5]
@@ -60,7 +60,7 @@ __meta__ = {
 position = Vector2( 7.77417, 8 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 2 )
-frame = 4
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true

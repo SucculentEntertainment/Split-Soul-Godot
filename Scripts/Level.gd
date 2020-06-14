@@ -7,6 +7,7 @@ export (String) var levelName
 
 var dimensions = []
 var currentDimension = null
+var currentDimensionID = 0
 
 # ================================
 # Util
@@ -41,6 +42,7 @@ func spawnObjects(spawnMap, objectParent, scenes):
 		var object = scenes[objectID].instance()
 		objectParent.add_child(object)
 		object.position = spawnMap.map_to_world(objects[i]) * currentDimension.scale
+		object.changeDimension(currentDimensionID)
 	spawnMap.clear()
 
 # ================================
@@ -53,14 +55,21 @@ func changeDimension(dimension):
 		return
 	
 	if currentDimension == null:
+		currentDimensionID = def.DIMENSION_ALIVE
 		currentDimension = dimensions[def.logB(def.DIMENSION_ALIVE, 2)].instance()
 		$Dimension.add_child(currentDimension)
 	
 	if availableDimensions & dimension != 0:
 		var prevDimension = currentDimension
+		currentDimensionID = dimension
 		currentDimension = dimensions[def.logB(dimension, 2)].instance()
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
+		
+		# Hide SpawnMaps
+		currentDimension.get_node("Items").hide()
+		currentDimension.get_node("Enemies").hide()
+		currentDimension.get_node("Interactables").hide()
 		
 		for i in $Items.get_children(): i.changeDimension(dimension)
 		for e in $Enemies.get_children(): e.changeDimension(dimension)

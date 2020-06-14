@@ -4,6 +4,7 @@ signal changeDimension(dimension)
 
 export (int) var speed = 10000
 export (int) var maxHealth = 100
+export (Array, SpriteFrames) var textures
 
 onready var def = get_node("/root/Definitions")
 
@@ -59,11 +60,15 @@ func itemAction(item):
 # ================================
 
 func changeDimension(dimension):
-	pass
+	emit_signal("changeDimension", dimension)
+	$CollisionShape2D.disabled = false;
+	
+	if textures.size() > def.logB(dimension, 2):
+		$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
 
 func getInput():
 	if Input.is_action_just_pressed("ctrl_interact"):
-		if interact != null: interact.interact()
+		if interact != null: interact.interact(self)
 
 # ================================
 # Damage
@@ -80,7 +85,5 @@ func _onGiveDamage(damage):
 
 func die():
 	dead = true
-	emit_signal("changeDimension", def.DIMENSION_DEAD)
+	changeDimension(def.DIMENSION_DEAD)
 	health = maxHealth
-	$AliveSprite.hide()
-	$DeadSprite.show()

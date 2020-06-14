@@ -1,6 +1,13 @@
 extends StaticBody2D
 
+onready var def = get_node("/root/Definitions")
+
 export (String) var interactableName
+export (int, FLAGS, "Alive", "Dead") var layer
+export (Array, SpriteFrames) var textures
+export (int, FLAGS, "Alive", "Dead") var canInteract
+
+var currentDimension = 0
 
 # ================================
 # Util
@@ -15,7 +22,20 @@ func _ready():
 # ================================
 
 func changeDimension(dimension):
-	pass
+	if dimension & layer != 0:
+		show()
+		$CollisionShape2D.disabled = false;
+		if dimension & canInteract != 0: 
+			$Interaction/CollisionShape2D.disabled = false;
+		else:
+			$Interaction/CollisionShape2D.disabled = true;
+		
+		if textures.size() > def.logB(dimension, 2):
+			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+	else:
+		hide()
+		$CollisionShape2D.disabled = true;
+		$Interaction/CollisionShape2D.disabled = true;
 
 # ================================
 # Interaction
@@ -31,6 +51,7 @@ func _onExited(body):
 		$E.hide()
 		body.interact = null
 
-func interact():
+func interact(player):
 	if interactableName == "Altar":
-		print("<Insert Dimension change here>")
+		player.changeDimension(def.DIMENSION_ALIVE)
+		player.dead = false

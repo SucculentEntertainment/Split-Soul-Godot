@@ -2,10 +2,6 @@ extends KinematicBody2D
 
 onready var def = get_node("/root/Definitions")
 
-var dimensions = []
-var highestDimension
-var currentDimension = 1
-
 export (Color) var healthy
 export (Color) var damaged
 export (Color) var critical
@@ -14,6 +10,7 @@ export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
+export (Array, SpriteFrames) var textures
 
 var health = maxHealth
 
@@ -24,25 +21,21 @@ var health = maxHealth
 func _ready():
 	$HealthBar.max_value = maxHealth
 	_onReceiveDamage(0)
-	
-	for d in $Dimensions.get_children(): d.frame = 0
-	
-	highestDimension = getHighestDimension()
-
-func getHighestDimension():
-	for dimension in $Dimensions.get_children():
-		dimensions.append(dimension)
-	return 1 << (dimensions.size() - 1)
 
 # ================================
 # Actions
 # ================================
 
 func changeDimension(dimension):
-	if dimension <= highestDimension and layer & dimension != 0:
-		dimensions[def.logB(currentDimension, 2)].hide()
-		dimensions[def.logB(dimension, 2)].show()
-		currentDimension = dimension
+	if dimension & layer != 0:
+		show()
+		$CollisionShape2D.disabled = false;
+		
+		if textures.size() > def.logB(dimension, 2):
+			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+	else:
+		hide()
+		$CollisionShape2D.disabled = true;
 
 # ================================
 # Damage
@@ -61,7 +54,7 @@ func _onReceiveDamage(damage):
 func die():
 	$CollisionShape2D.disabled = true
 	
-	dimensions[def.logB(currentDimension, 2)].play("death")
-	yield(dimensions[def.logB(currentDimension, 2)], "animation_finished")
+	$AnimatedSprite.play("death")
+	yield($AnimatedSprite, "animation_finished")
 	
 	queue_free()
