@@ -11,6 +11,8 @@ var health = maxHealth
 var coins = 0
 var dead = false
 
+var interact = null
+
 var dir = Vector2()
 var vel = Vector2()
 
@@ -26,6 +28,7 @@ func _ready():
 
 func _physics_process(delta):
 	$GUI/Main.updateValues(health, coins)
+	getInput()
 	move(delta)
 
 # ================================
@@ -51,13 +54,16 @@ func itemAction(item):
 	if item.itemName == "Coin":
 		coins += 1
 
-
 # ================================
 # Actions
 # ================================
 
 func changeDimension(dimension):
 	pass
+
+func getInput():
+	if Input.is_action_just_pressed("ctrl_interact"):
+		if interact != null: interact.interact()
 
 # ================================
 # Damage

@@ -100,6 +100,7 @@ animations = [ {
 
 [node name="Altar" type="StaticBody2D"]
 script = ExtResource( 1 )
+interactableName = "Altar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 32, 60 )
@@ -118,7 +119,7 @@ shape = SubResource( 2 )
 position = Vector2( 32, 32 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 19 )
-frame = 13
+frame = 11
 playing = true
 
 [node name="E" type="AnimatedSprite" parent="."]
