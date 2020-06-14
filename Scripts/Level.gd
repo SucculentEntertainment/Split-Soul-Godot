@@ -1,29 +1,33 @@
 extends Node2D
 
 onready var def = get_node("/root/Definitions")
+
+export (int, FLAGS, "Alive", "Dead") var availableDimensions
+export (String) var levelName
+
 var dimensions = []
-var highestDimension
-var currentDimension = 1
+var currentDimension = null
 
 # ================================
 # Util
 # ================================
 
 func _ready():
-	spawnItems()
-	spawnEnemies()
-	spawnStructures()
-	
-	highestDimension = getHighestDimension()
+	loadDimensions()
 
-func getHighestDimension():
-	for dimension in $Dimensions.get_children():
-		dimensions.append(dimension)
-	return 1 << (dimensions.size() - 1)
+func loadDimensions():
+	for i in def.NUM_DIMENSIONS:
+		var dimension = availableDimensions & (1 << i)
+		if dimension != 0:
+			dimensions.append(load(str("res://Scenes/Levels/" + levelName + "/Dimensions/" + def.DIMENSION_STRINGS[dimension] + ".tscn")))
 
 # ================================
 # Spawns
 # ================================
+
+func setSpawn(player):
+	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
+	player.position = currentDimension.get_node("Spawn").position
 
 func spawnItems():
 	var items = $ItemSpawns.get_used_cells()
@@ -57,11 +61,20 @@ func spawnStructures():
 # ================================
 
 func changeDimension(dimension):
-	if dimension <= highestDimension:
-		dimensions[def.logB(currentDimension, 2)].hide()
-		dimensions[def.logB(dimension, 2)].show()
-		currentDimension = dimension
+	if dimensions.size() == 0:
+		print("No Dimensions Loaded")
+		return
+	
+	if currentDimension == null:
+		currentDimension = dimensions[def.logB(def.DIMENSION_ALIVE, 2)].instance()
+		$Dimension.add_child(currentDimension)
+	
+	if availableDimensions & dimension != 0:
+		var prevDimension = currentDimension
+		currentDimension = dimensions[def.logB(dimension, 2)].instance()
+		$Dimension.add_child(currentDimension)
+		prevDimension.queue_free()
 		
 		for i in $Items.get_children(): i.changeDimension(dimension)
 		for e in $Enemies.get_children(): e.changeDimension(dimension)
-		for s in $Structures.get_children(): s.changeDimension(dimension)
+		for s in $Interactables.get_children(): s.changeDimension(dimension)

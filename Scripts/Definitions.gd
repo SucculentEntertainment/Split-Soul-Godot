@@ -12,8 +12,9 @@ var STRUCTURE_SCENES = [
 	preload("res://Scenes/Structures/Altar.tscn")
 ]
 
-const DIMENSION_ALIVE = 1
-const DIMENSION_DEAD = 2
+const DIMENSION_STRINGS = {1: "Alive", 2: "Dead"}
+const DIMENSION_ALIVE = 1; const DIMENSION_DEAD = 2
+const NUM_DIMENSIONS = 2
 
 func logB(x, b):
 	var e = 0

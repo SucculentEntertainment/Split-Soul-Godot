@@ -1,8 +1,9 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Sprites/Enemies/SlimeDead.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Enemies/SlimeAlive.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -237,14 +238,14 @@ position = Vector2( 8, 8 )
 [node name="AliveSprite" type="AnimatedSprite" parent="Dimensions"]
 frames = SubResource( 25 )
 animation = "idle"
-frame = 11
+frame = 8
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="Dimensions"]
 visible = false
 frames = SubResource( 50 )
 animation = "idle"
-frame = 4
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -255,7 +256,7 @@ shape = SubResource( 51 )
 margin_left = -12.0
 margin_top = -16.0
 margin_right = 28.0
-margin_bottom = -2.0
+custom_fonts/font = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

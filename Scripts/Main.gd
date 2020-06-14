@@ -1,5 +1,7 @@
 extends Node
 
+export (int, "Easy", "Normal", "Hard") var difficulty
+
 var playerScene = load("res://Scenes/Entities/Player.tscn")
 var player
 var level
@@ -15,13 +17,10 @@ func _ready():
 	connectSignals()
 	
 func loadLevel(levelName):
-	var levelScene = load(str("res://Scenes/Levels/" + levelName + ".tscn"))
+	var levelScene = load(str("res://Scenes/Levels/" + levelName + "/" + levelName + ".tscn"))
 	level = levelScene.instance()
 	$Level.add_child(level)
-	setSpawn()
-
-func setSpawn():
-	player.position = level.get_node("Spawn").position
+	level.setSpawn(player)
 
 func loadPlayer():
 	player = playerScene.instance()

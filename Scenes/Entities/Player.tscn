@@ -83,7 +83,7 @@ smoothing_enabled = true
 scale = Vector2( 8, 8 )
 frames = SubResource( 9 )
 animation = "walking_down"
-frame = 4
+frame = 2
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="."]
@@ -91,7 +91,6 @@ visible = false
 scale = Vector2( 8, 8 )
 frames = SubResource( 12 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

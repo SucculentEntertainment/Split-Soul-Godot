@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Resources/TileSets/Dead.tres" type="TileSet" id=1]
+
+[node name="Dead" type="Node2D"]
+
+[node name="Spawn" type="Node2D" parent="."]
+
+[node name="Ground" type="TileMap" parent="."]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_quadrant_size = 4
+format = 1
+
+[node name="Environment" type="TileMap" parent="."]
+format = 1
+
+[node name="Items" type="TileMap" parent="."]
+format = 1
+
+[node name="Enemies" type="TileMap" parent="."]
+format = 1
+
+[node name="Interactables" type="TileMap" parent="."]
+format = 1
