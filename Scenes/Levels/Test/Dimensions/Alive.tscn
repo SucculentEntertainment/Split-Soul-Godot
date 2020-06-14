@@ -90,4 +90,4 @@ tile_set = SubResource( 3 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1
-tile_data = PoolIntArray( 720916, 0, 0 )
+tile_data = PoolIntArray( 196617, 0, 0 )

@@ -32,7 +32,7 @@ func loadDimensions():
 
 func setSpawn(player):
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
-	player.position = currentDimension.get_node("Spawn").position
+	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
 
 func spawnObjects(spawnMap, objectParent, scenes):
 	var objects = spawnMap.get_used_cells()

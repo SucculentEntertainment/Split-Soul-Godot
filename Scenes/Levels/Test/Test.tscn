@@ -2,16 +2,19 @@
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=3]
 
-[node name="Test" type="Node2D"]
-scale = Vector2( 2, 2 )
+[node name="Test" type="YSort"]
 script = ExtResource( 3 )
 availableDimensions = 3
 levelName = "Test"
 
-[node name="Dimension" type="Node2D" parent="."]
+[node name="Dimension" type="YSort" parent="."]
+scale = Vector2( 2, 2 )
 
-[node name="Items" type="Node2D" parent="."]
+[node name="Items" type="YSort" parent="."]
+scale = Vector2( 2, 2 )
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" type="YSort" parent="."]
+scale = Vector2( 2, 2 )
 
-[node name="Interactables" type="Node2D" parent="."]
+[node name="Interactables" type="YSort" parent="."]
+scale = Vector2( 2, 2 )

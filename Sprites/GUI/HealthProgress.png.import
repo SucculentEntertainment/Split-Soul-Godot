@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HealthRed.png-fb5dfcbe28b5649cf25ca528fe714ccc.stex"
+path="res://.import/HealthProgress.png-134b81e9ebcfcb8d82e954b21d9d5925.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GUI/HealthRed.png"
-dest_files=[ "res://.import/HealthRed.png-fb5dfcbe28b5649cf25ca528fe714ccc.stex" ]
+source_file="res://Sprites/GUI/HealthProgress.png"
+dest_files=[ "res://.import/HealthProgress.png-134b81e9ebcfcb8d82e954b21d9d5925.stex" ]
 
 [params]
 
