@@ -21,6 +21,7 @@ func loadLevel(levelName):
 	level = levelScene.instance()
 	$Level.add_child(level)
 	level.setSpawn(player)
+	level.spawn()
 
 func loadPlayer():
 	player = playerScene.instance()
@@ -44,4 +45,4 @@ func changeDimension(dimension):
 
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
-	player.get_node("GUI/Main").connect("giveDamage", level.get_node("Enemies/EnemySlime"), "_onReceiveDamage")
+	#player.get_node("GUI/Main").connect("giveDamage", level.get_node("Enemies/EnemySlime"), "_onReceiveDamage")

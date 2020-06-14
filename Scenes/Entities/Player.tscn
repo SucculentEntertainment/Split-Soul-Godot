@@ -83,7 +83,7 @@ smoothing_enabled = true
 scale = Vector2( 8, 8 )
 frames = SubResource( 9 )
 animation = "walking_down"
-frame = 2
+frame = 5
 playing = true
 
 [node name="DeadSprite" type="AnimatedSprite" parent="."]

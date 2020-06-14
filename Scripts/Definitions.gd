@@ -8,7 +8,7 @@ var ENEMY_SCENES = [
 	preload("res://Scenes/Entities/Enemies/Slime.tscn")
 ]
 
-var STRUCTURE_SCENES = [
+var INTERACTABLE_SCENES = [
 	preload("res://Scenes/Structures/Altar.tscn")
 ]
 

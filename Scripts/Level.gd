@@ -14,6 +14,11 @@ var currentDimension = null
 
 func _ready():
 	loadDimensions()
+	
+func spawn():
+	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
+	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
+	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
 
 func loadDimensions():
 	for i in def.NUM_DIMENSIONS:
@@ -29,32 +34,14 @@ func setSpawn(player):
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position
 
-func spawnItems():
-	var items = $ItemSpawns.get_used_cells()
-	for i in items.size():
-		var itemID = $ItemSpawns.get_cellv(items[i])
-		var item = def.ITEM_SCENES[itemID].instance()
-		$Items.add_child(item)
-		item.position = $ItemSpawns.map_to_world(items[i]) * $ItemSpawns.scale
-	$ItemSpawns.clear()
-
-func spawnEnemies():
-	var enemies = $EnemySpawns.get_used_cells()
-	for e in enemies.size():
-		var enemyID = $EnemySpawns.get_cellv(enemies[e])
-		var enemy = def.ENEMY_SCENES[enemyID].instance()
-		$Enemies.add_child(enemy)
-		enemy.position = $EnemySpawns.map_to_world(enemies[e]) * $EnemySpawns.scale
-	$EnemySpawns.clear()
-
-func spawnStructures():
-	var structures = $StructureSpawns.get_used_cells()
-	for s in structures.size():
-		var structureID = $StructureSpawns.get_cellv(structures[s])
-		var structure = def.STRUCTURE_SCENES[structureID].instance()
-		$Structures.add_child(structure)
-		structure.position = $StructureSpawns.map_to_world(structures[s]) * $StructureSpawns.scale
-	$StructureSpawns.clear()
+func spawnObjects(spawnMap, objectParent, scenes):
+	var objects = spawnMap.get_used_cells()
+	for i in objects.size():
+		var objectID = spawnMap.get_cellv(objects[i])
+		var object = scenes[objectID].instance()
+		objectParent.add_child(object)
+		object.position = spawnMap.map_to_world(objects[i]) * currentDimension.scale
+	spawnMap.clear()
 
 # ================================
 # Actions
