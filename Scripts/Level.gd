@@ -74,6 +74,8 @@ func spawnObjects(spawnMap, objectParent, scenes):
 # ================================
 
 func changeDimension(dimension):
+	dimension = int(dimension)
+	
 	if dimensions.size() == 0:
 		print("No Dimensions Loaded")
 		return

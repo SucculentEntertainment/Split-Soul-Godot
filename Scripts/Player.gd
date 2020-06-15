@@ -14,7 +14,7 @@ export (Array, SpriteFrames) var textures
 onready var def = get_node("/root/Definitions")
 
 var interact = null
-var lockPos = false
+var disableIn = false
 
 var gui = null
 
@@ -30,11 +30,13 @@ func _ready():
 
 func initGUI(gui):
 	self.gui = gui
+	gui.givePlayerReference(self)
 	gui.updateValues(vars.health, vars.coins)
 
 func _physics_process(delta):
-	getInput()
-	if !lockPos: move(delta)
+	if !disableIn: 
+		getInput()
+		move(delta)
 
 # ================================
 # Movement
@@ -83,6 +85,8 @@ func changeDimension(dimension):
 func getInput():
 	if Input.is_action_just_pressed("ctrl_interact"):
 		if interact != null: interact.interact(self)
+	if Input.is_action_just_pressed("ctrl_console"):
+		if gui != null: gui.get_node("Console").toggle()
 
 # ================================
 # Damage
@@ -103,3 +107,4 @@ func die():
 	vars.dead = true
 	changeDimension(def.DIMENSION_DEAD)
 	vars.health = maxHealth
+	gui.updateValues(vars.health, vars.coins)

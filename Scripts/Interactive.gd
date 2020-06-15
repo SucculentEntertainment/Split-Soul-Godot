@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 onready var def = get_node("/root/Definitions")
+onready var vars = get_node("/root/PlayerVars")
 
 export (String) var interactableName
 export (int, FLAGS, "Alive", "Dead") var layer
@@ -54,4 +55,4 @@ func _onExited(body):
 func interact(player):
 	if interactableName == "Altar":
 		player.changeDimension(def.DIMENSION_ALIVE)
-		player.dead = false
+		vars.dead = false
