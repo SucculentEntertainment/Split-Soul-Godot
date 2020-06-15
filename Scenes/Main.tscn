@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
 
-[node name="Main" type="YSort"]
+[node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Player" type="YSort" parent="."]
+[node name="Level" type="Node2D" parent="."]
 
-[node name="Level" type="YSort" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 1 )]

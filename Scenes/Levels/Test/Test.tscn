@@ -7,7 +7,7 @@ script = ExtResource( 3 )
 availableDimensions = 3
 levelName = "Test"
 
-[node name="Dimension" type="YSort" parent="."]
+[node name="Dimension" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
 [node name="Items" type="YSort" parent="."]

@@ -3,101 +3,27 @@
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Textures/Items/Coin.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Sprites/GUI/HealthProgress.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/GUI/HealthUnder.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GUI/AmountDisplay.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
 
-[node name="GUI" type="CanvasLayer"]
-
-[node name="Main" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="GUI" type="Control"]
+margin_right = 1280.0
+margin_bottom = 720.0
 theme = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-healthy = Color( 0.25098, 0.976471, 0.607843, 1 )
-damaged = Color( 0.960784, 0.717647, 0, 1 )
-critical = Color( 0.956863, 0.356863, 0.411765, 1 )
 
-[node name="Damage" type="Button" parent="Main"]
-margin_left = 32.0
-margin_top = 24.0
-margin_right = 120.0
-margin_bottom = 56.0
-text = "HP -10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 680.0
+margin_bottom = 8.0
 
-[node name="HealthBarWhite" type="TextureProgress" parent="Main"]
-margin_left = 16.0
-margin_top = 672.0
-margin_right = 656.0
-margin_bottom = 704.0
-value = 5.0
-texture_under = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthBar" type="TextureProgress" parent="Main"]
-margin_left = 16.0
-margin_top = 672.0
-margin_right = 336.0
-margin_bottom = 704.0
-value = 5.0
-texture_progress = ExtResource( 4 )
-tint_progress = Color( 0.211765, 0.772549, 0.164706, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthEase" type="Tween" parent="Main"]
-
-[node name="Coins" type="Control" parent="Main"]
-margin_left = 1168.0
-margin_top = 672.0
-margin_right = 1218.0
-margin_bottom = 689.0
-rect_scale = Vector2( 2, 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Main/Coins"]
-position = Vector2( 7.77417, 8 )
-scale = Vector2( 2, 2 )
-frames = ExtResource( 2 )
-frame = 2
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Label" type="Label" parent="Main/Coins"]
-margin_left = 16.0
-margin_top = 2.0
-margin_right = 48.0
-margin_bottom = 16.0
-text = "0
-"
-align = 2
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="EnemyDmg" type="Button" parent="Main"]
-margin_left = 136.0
-margin_top = 24.0
-margin_right = 280.0
-margin_bottom = 56.0
-text = "Enemy HP -10"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Coins" parent="." instance=ExtResource( 5 )]
+icon = ExtResource( 2 )

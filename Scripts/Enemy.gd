@@ -19,7 +19,6 @@ var health = maxHealth
 # ================================
 
 func _ready():
-	$HealthBar.max_value = maxHealth
 	_onReceiveDamage(0)
 
 # ================================
@@ -43,11 +42,7 @@ func changeDimension(dimension):
 
 func _onReceiveDamage(damage):
 	health -= damage
-	$HealthBar.value = health
-	
-	if health < 25: $HealthBar.tint_progress = critical
-	elif health < 50: $HealthBar.tint_progress = damaged
-	else: $HealthBar.tint_progress = healthy
+	$HealthBar.changeHealth(health)
 	
 	if health <= 0: die()
 

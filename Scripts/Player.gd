@@ -1,6 +1,11 @@
 extends KinematicBody2D
 
+onready var vars = get_node("/root/PlayerVars")
+
 signal changeDimension(dimension)
+
+signal initGUI(maxHealth)
+signal updateGUI(health, coins)
 
 export (int) var speed = 10000
 export (int) var maxHealth = 100
@@ -8,12 +13,10 @@ export (Array, SpriteFrames) var textures
 
 onready var def = get_node("/root/Definitions")
 
-var health = maxHealth
-var coins = 0
-var dead = false
-
 var interact = null
 var lockPos = false
+
+var gui = null
 
 var dir = Vector2()
 var vel = Vector2()
@@ -23,15 +26,13 @@ var vel = Vector2()
 # ================================
 
 func _ready():
-	$GUI/Main/HealthBar.max_value = maxHealth
-	$GUI/Main/HealthBar.value = maxHealth
-	$GUI/Main/HealthBarWhite.max_value = maxHealth
-	$GUI/Main/HealthBarWhite.value = maxHealth
-	
-	$GUI/Main.connect("receiveDamage", self, "_onReceiveDamage")
+	pass
+
+func initGUI(gui):
+	self.gui = gui
+	gui.updateValues(vars.health, vars.coins)
 
 func _physics_process(delta):
-	$GUI/Main.updateValues(health, coins)
 	getInput()
 	if !lockPos: move(delta)
 
@@ -56,7 +57,8 @@ func move(delta):
 
 func itemAction(item):
 	if item.itemName == "Coin":
-		coins += 1
+		vars.coins += 1
+	gui.updateValues(vars.health, vars.coins)
 
 # ================================
 # Actions
@@ -67,7 +69,7 @@ func changeDimension(dimension):
 	add_child(transition)
 	transition.get_node("AnimationPlayer").play("Close")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
-		
+	
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
 	
@@ -87,16 +89,17 @@ func getInput():
 # ================================
 
 func _onReceiveDamage(damage):
-	health -= damage
+	vars.health -= damage
+	gui.updateValues(vars.health, vars.coins)
 	$Camera2D.shake(0.2, 500, 16)
-	if health <= 0:
-		if !dead: die()
+	if vars.health <= 0:
+		if !vars.dead: die()
 		else: get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _onGiveDamage(damage):
 	pass
 
 func die():
-	dead = true
+	vars.dead = true
 	changeDimension(def.DIMENSION_DEAD)
-	health = maxHealth
+	vars.health = maxHealth

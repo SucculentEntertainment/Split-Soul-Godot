@@ -1,5 +1,7 @@
 extends Node
 
+var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
+
 var ITEM_SCENES = [
 	preload("res://Scenes/Items/Coin.tscn")
 ]
@@ -9,7 +11,7 @@ var ENEMY_SCENES = [
 ]
 
 var INTERACTABLE_SCENES = [
-	preload("res://Scenes/Structures/Altar.tscn")
+	preload("res://Scenes/Interactables/Altar.tscn")
 ]
 
 var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")

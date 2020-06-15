@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/EnemyHealthProgress.png-e68a5c6e357ce03ed8a0fb6d36647fed.stex"
+path="res://.import/Vegetation.png-4a2f50c4ec97e2b995b56573487721ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/GUI/EnemyHealthProgress.png"
-dest_files=[ "res://.import/EnemyHealthProgress.png-e68a5c6e357ce03ed8a0fb6d36647fed.stex" ]
+source_file="res://Sprites/Environment/Vegetation.png"
+dest_files=[ "res://.import/Vegetation.png-4a2f50c4ec97e2b995b56573487721ea.stex" ]
 
 [params]
 
