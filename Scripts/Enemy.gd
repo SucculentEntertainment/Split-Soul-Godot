@@ -42,7 +42,7 @@ func changeDimension(dimension):
 
 func _onReceiveDamage(damage):
 	health -= damage
-	$HealthBar.changeHealth(health)
+	$HealthBar.changeHealth(health, maxHealth)
 	
 	if health <= 0: die()
 

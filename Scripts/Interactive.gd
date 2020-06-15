@@ -7,7 +7,9 @@ export (String) var interactableName
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, SpriteFrames) var textures
 export (int, FLAGS, "Alive", "Dead") var canInteract
+export (int) var cooldown
 
+var onCooldown = false
 var currentDimension = 0
 
 # ================================
@@ -17,6 +19,23 @@ var currentDimension = 0
 func _ready():
 	$Interaction.connect("body_entered", self, "_onEntered")
 	$Interaction.connect("body_exited", self, "_onExited")
+	
+	$Timer.wait_time = cooldown
+	$Timer.connect("timeout", self, "_onCooldownTimeout")
+
+func _process(delta):
+	$CooldownBar.changeHealth($Timer.time_left * 100, $Timer.wait_time * 100)
+
+func _onCooldownTimeout():
+	onCooldown = false
+	$CooldownBar.hide()
+	
+	var bodies = $Interaction.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			$E.show()
+			if onCooldown: $CooldownBar.show()
+			body.interact = self
 
 # ================================
 # Actions
@@ -33,6 +52,13 @@ func changeDimension(dimension):
 		
 		if textures.size() > def.logB(dimension, 2):
 			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+		
+		var bodies = $Interaction.get_overlapping_bodies()
+		for body in bodies:
+			if "Player" in body.name:
+				$E.show()
+				if onCooldown: $CooldownBar.show()
+				body.interact = self
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
@@ -43,16 +69,25 @@ func changeDimension(dimension):
 # ================================
 
 func _onEntered(body):
-	if "Player" in body.name:
-		$E.show()
-		body.interact = self
+	if !onCooldown:
+		if "Player" in body.name:
+			$E.show()
+			body.interact = self
+	else:
+		$CooldownBar.show()
 
 func _onExited(body):
 	if "Player" in body.name:
 		$E.hide()
+		$CooldownBar.hide()
 		body.interact = null
 
 func interact(player):
-	if interactableName == "Altar":
-		player.changeDimension(def.DIMENSION_ALIVE)
-		vars.dead = false
+	if !onCooldown:
+		onCooldown = true
+		$CooldownBar.changeHealth($Timer.wait_time, $Timer.wait_time)
+		$Timer.start()
+		
+		if interactableName == "Altar":
+			player.changeDimension(def.DIMENSION_ALIVE)
+			vars.dead = false

@@ -9,6 +9,6 @@ func givePlayerReference(player):
 	self.player = player
 	$Console.givePlayerReference(player)
 
-func updateValues(health, coins):
-	$HealthBar.changeHealth(health)
+func updateValues(health, maxHealth, coins):
+	$HealthBar.changeHealth(health, maxHealth)
 	$Coins.changeAmount(coins)
