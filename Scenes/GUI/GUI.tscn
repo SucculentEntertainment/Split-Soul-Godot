@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Textures/Items/Coin.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/GUI/AmountDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/GUI/Console.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resources/Textures/Items/SoulPoints.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://Scenes/GUI/DialogBox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -47,3 +48,6 @@ margin_left = 752.0
 margin_top = 392.0
 margin_right = 760.0
 margin_bottom = 408.32
+
+[node name="DialogBox" parent="." instance=ExtResource( 8 )]
+visible = false
