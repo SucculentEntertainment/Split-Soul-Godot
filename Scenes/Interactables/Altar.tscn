@@ -37,11 +37,9 @@ canInteract = 2
 cooldown = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 4, 4 )
 shape = SubResource( 1 )
 
 [node name="Interaction" type="Area2D" parent="."]
-scale = Vector2( 4, 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -50,27 +48,27 @@ __meta__ = {
 shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -28 )
-scale = Vector2( 4, 4 )
+position = Vector2( 0, -7 )
 frames = ExtResource( 2 )
-frame = 1
+frame = 6
 playing = true
 
 [node name="E" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 0, -80 )
-scale = Vector2( 2, 2 )
+position = Vector2( 0, -20 )
+scale = Vector2( 0.5, 0.5 )
 z_index = 2
 frames = SubResource( 5 )
+frame = 1
 playing = true
 
 [node name="CooldownBar" parent="." instance=ExtResource( 5 )]
 visible = false
-margin_left = -64.0
-margin_top = -72.0
-margin_right = 576.0
-margin_bottom = -32.0
-rect_scale = Vector2( 0.2, 0.2 )
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 624.0
+margin_bottom = 24.0
+rect_scale = Vector2( 0.05, 0.05 )
 healthy = Color( 0.32549, 0.701961, 0.796078, 1 )
 damaged = Color( 0.345098, 0.690196, 0.611765, 1 )
 critical = Color( 0.364706, 0.67451, 0.423529, 1 )

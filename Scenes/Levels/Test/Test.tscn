@@ -10,6 +10,10 @@ levelName = "Test"
 [node name="Dimension" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Environment" type="YSort" parent="."]
+
 [node name="Items" type="YSort" parent="."]
 scale = Vector2( 2, 2 )
 

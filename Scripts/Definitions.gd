@@ -2,8 +2,26 @@ extends Node
 
 var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
 
+var TILE_SCENES = [
+	[
+		preload("res://Scenes/Environment/Tiles/Alive/Grass.tscn"),
+		preload("res://Scenes/Environment/Tiles/Alive/Sand.tscn"),
+		preload("res://Scenes/Environment/Tiles/Alive/Stone.tscn"),
+		preload("res://Scenes/Environment/Tiles/Alive/Dirt.tscn"),
+		preload("res://Scenes/Environment/Tiles/Alive/Snow.tscn")
+	],
+	[
+		preload("res://Scenes/Environment/Tiles/Dead/Grass.tscn")
+	]
+]
+
+var ENVIRONMENT_SCENES = [
+	
+]
+
 var ITEM_SCENES = [
-	preload("res://Scenes/Items/Coin.tscn")
+	preload("res://Scenes/Items/Coin.tscn"),
+	preload("res://Scenes/Items/SoulPoint.tscn")
 ]
 
 var ENEMY_SCENES = [
