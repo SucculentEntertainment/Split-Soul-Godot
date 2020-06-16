@@ -1,5 +1,7 @@
 extends Node
 
+onready var def = get_node("/root/Definitions")
+
 export (int, "Easy", "Normal", "Hard") var difficulty
 var level
 
@@ -15,7 +17,7 @@ func loadLevel(levelName):
 	level = levelScene.instance()
 	$Level.add_child(level)
 	
-	level.spawn()
+	level.changeDimension(def.DIMENSION_ALIVE)
 	level.initPlayer($CanvasLayer/GUI)
 
 func destroyLevel():

@@ -7,6 +7,7 @@ export (int, FLAGS, "Alive", "Dead") var availableDimensions
 export (String) var levelName
 
 var dimensions = []
+var spawnedDimensions = []
 var currentDimension = null
 var prevDimension = null
 var currentDimensionID = 0
@@ -97,7 +98,9 @@ func changeDimension(dimension):
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
 		
-		spawn()
+		if spawnedDimensions.find(currentDimensionID) == -1:
+			spawnedDimensions.append(currentDimensionID)
+			spawn()
 		
 	# Hide SpawnMaps
 	currentDimension.get_node("Tiles").hide()
