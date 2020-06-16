@@ -5,6 +5,9 @@ onready var vars = get_node("/root/PlayerVars")
 
 export (int, FLAGS, "Alive", "Dead") var availableDimensions
 export (String) var levelName
+export (int) var easyEnemies
+export (int) var mediumEnemies
+export (int) var hardEnemies
 
 var dimensions = []
 var spawnedDimensions = []
@@ -72,7 +75,6 @@ func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1):
 		object.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
-
 
 # ================================
 # Actions
