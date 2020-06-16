@@ -7,7 +7,7 @@ scale = Vector2( 4, 4 )
 
 [node name="Spawn" type="Node2D" parent="."]
 
-[node name="Ground" type="TileMap" parent="."]
+[node name="Tiles" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4

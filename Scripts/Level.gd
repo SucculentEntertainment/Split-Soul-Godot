@@ -25,6 +25,7 @@ func _ready():
 	setSpawn()
 	
 func spawn():
+	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
 	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
 	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
@@ -56,7 +57,7 @@ func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
 
-func spawnObjects(spawnMap, objectParent, scenes):
+func spawnObjects(spawnMap, objectParent, scenes, scale = 1):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
@@ -64,10 +65,12 @@ func spawnObjects(spawnMap, objectParent, scenes):
 		var object = scenes[objectID].instance()
 		
 		objectParent.add_child(object)
-		object.position = spawnMap.map_to_world(objects[i]) * currentDimension.scale
+		object.scale = currentDimension.scale * scale
+		object.position = spawnMap.map_to_world(objects[i]) * object.scale + Vector2(8 * object.scale.x, 8 * object.scale.y)
 		object.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
+
 
 # ================================
 # Actions
@@ -93,11 +96,17 @@ func changeDimension(dimension):
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
 		
+		spawn()
+		
 	# Hide SpawnMaps
+	currentDimension.get_node("Tiles").hide()
+	currentDimension.get_node("Environment").hide()
 	currentDimension.get_node("Items").hide()
 	currentDimension.get_node("Enemies").hide()
 	currentDimension.get_node("Interactables").hide()
 	
+	for t in $Tiles.get_children(): t.changeDimension(dimension)
+	#for e in $Environment.get_children(): e.changeDimension(dimension)
 	for i in $Items.get_children(): i.changeDimension(dimension)
 	for e in $Enemies.get_children(): e.changeDimension(dimension)
 	for s in $Interactables.get_children(): s.changeDimension(dimension)
