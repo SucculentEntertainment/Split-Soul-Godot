@@ -31,7 +31,7 @@ func _ready():
 func initGUI(gui):
 	self.gui = gui
 	gui.givePlayerReference(self)
-	gui.updateValues(vars.health, maxHealth, vars.coins)
+	gui.updateValues(maxHealth)
 
 func _physics_process(delta):
 	if !disableIn: 
@@ -60,7 +60,10 @@ func move(delta):
 func itemAction(item):
 	if item.itemName == "Coin":
 		vars.coins += 1
-	gui.updateValues(vars.health, maxHealth, vars.coins)
+	elif item.itemName == "SoulPoint":
+		vars.soulpoints += 1
+	
+	gui.updateValues(maxHealth)
 
 # ================================
 # Actions
@@ -94,7 +97,7 @@ func getInput():
 
 func _onReceiveDamage(damage):
 	vars.health -= damage
-	gui.updateValues(vars.health, maxHealth, vars.coins)
+	gui.updateValues(maxHealth)
 	$Camera2D.shake(0.2, 500, 16)
 	if vars.health <= 0:
 		if !vars.dead: die()
@@ -107,4 +110,4 @@ func die():
 	vars.dead = true
 	changeDimension(def.DIMENSION_DEAD)
 	vars.health = maxHealth
-	gui.updateValues(vars.health, maxHealth, vars.coins)
+	gui.updateValues(maxHealth)
