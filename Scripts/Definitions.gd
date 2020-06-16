@@ -11,12 +11,20 @@ var TILE_SCENES = [
 		preload("res://Scenes/Environment/Tiles/Alive/Snow.tscn")
 	],
 	[
-		preload("res://Scenes/Environment/Tiles/Dead/Grass.tscn")
+		preload("res://Scenes/Environment/Tiles/Dead/Grass.tscn"),
+		preload("res://Scenes/Environment/Tiles/Dead/Sand.tscn"),
+		preload("res://Scenes/Environment/Tiles/Dead/Stone.tscn"),
+		preload("res://Scenes/Environment/Tiles/Dead/Dirt.tscn"),
+		preload("res://Scenes/Environment/Tiles/Dead/Snow.tscn")
 	]
 ]
 
 var ENVIRONMENT_SCENES = [
-	
+	preload("res://Scenes/Environment/Objects/OakTree1.tscn"),
+	preload("res://Scenes/Environment/Objects/PineTree.tscn"),
+	preload("res://Scenes/Environment/Objects/BirchTree.tscn"),
+	preload("res://Scenes/Environment/Objects/Bush.tscn"),
+	preload("res://Scenes/Environment/Objects/OakTree2.tscn")
 ]
 
 var ITEM_SCENES = [

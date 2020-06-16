@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Sprites/Environment/GroundAlive.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Tile.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Environment/GroundDead.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Tile.gd" type="Script" id=3]
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 64, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -19,12 +19,12 @@ animations = [ {
 extents = Vector2( 8, 8 )
 
 [node name="Snow" type="StaticBody2D"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 tileName = "Snow"
-layer = "d_alive"
+layer = "d_dead"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
+frames = SubResource( 5 )
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

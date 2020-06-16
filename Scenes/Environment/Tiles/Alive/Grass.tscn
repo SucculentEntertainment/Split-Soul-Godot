@@ -21,6 +21,7 @@ extents = Vector2( 8, 8 )
 [node name="Grass" type="StaticBody2D"]
 script = ExtResource( 3 )
 tileName = "Grass"
+layer = "d_alive"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
