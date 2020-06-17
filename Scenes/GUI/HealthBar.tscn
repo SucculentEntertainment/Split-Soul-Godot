@@ -32,4 +32,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="."]
+margin_left = 24.0
+margin_right = 256.0
+margin_bottom = 32.0
+valign = 1
+
 [node name="Tween" type="Tween" parent="."]

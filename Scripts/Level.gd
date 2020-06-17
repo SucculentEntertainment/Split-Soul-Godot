@@ -81,6 +81,8 @@ func spawnEnemies():
 	var spawnedOn = []
 	var tiles = currentDimension.get_node("Spawnable").get_used_cells()
 	
+	if tiles.size() <= 0: return
+	
 	for i in numEnemies[vars.difficulty]:
 		rng.randomize()
 		var enemyType = def.SPAWNABLE_ENEMIES[rng.randi_range(0, def.SPAWNABLE_ENEMIES.size() - 1)]

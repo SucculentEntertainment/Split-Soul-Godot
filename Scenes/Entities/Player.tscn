@@ -6,9 +6,10 @@
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 4 )
+extents = Vector2( 20, 4 )
 
 [node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
 speed = 50000
 textures = [ ExtResource( 2 ), ExtResource( 4 ) ]
@@ -23,7 +24,7 @@ smoothing_enabled = true
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -56 )
+position = Vector2( 0, -112 )
 scale = Vector2( 8, 8 )
 frames = ExtResource( 2 )
 playing = true

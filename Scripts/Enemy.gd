@@ -15,6 +15,7 @@ export (Array, SpriteFrames) var textures
 export (bool) var canSpawn
 
 var health = maxHealth
+var damageCooldown = false
 
 # ================================
 # Util
@@ -22,6 +23,11 @@ var health = maxHealth
 
 func _ready():
 	_onReceiveDamage(0)
+	$Alerter.connect("body_entered", self, "_onAwakened")
+	$AudioStreamPlayer.connect("finished", self, "_onAudioEnd")
+	
+	$Damager.connect("body_entered", self, "_onGiveDamage")
+	$Damager/Timer.connect("timeout", self, "_onDamageTimeout")
 
 # ================================
 # Actions
@@ -39,6 +45,26 @@ func changeDimension(dimension):
 		$CollisionShape2D.disabled = true;
 
 # ================================
+# Events
+# ================================
+
+func _onAwakened(body):
+	if "Player" in body.name:
+		$AudioStreamPlayer.play()
+		$Alert.show()
+
+func _onAudioEnd():
+	$Alert.hide()
+
+func _onDamageTimeout():
+	damageCooldown = false
+	
+	var bodies = $Damager.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			_onGiveDamage(body)
+
+# ================================
 # Damage
 # ================================
 
@@ -47,6 +73,12 @@ func _onReceiveDamage(damage):
 	$HealthBar.changeHealth(health, maxHealth)
 	
 	if health <= 0: die()
+
+func _onGiveDamage(body):
+	if "Player" in body.name and !damageCooldown:
+		body._onReceiveDamage(damage)
+		damageCooldown = true
+		$Damager/Timer.start()
 
 func die():
 	$CollisionShape2D.disabled = true

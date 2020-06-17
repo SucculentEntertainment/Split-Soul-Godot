@@ -1,13 +1,22 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Resources/Textures/Enemies/SlimeDead.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Textures/Enemies/SlimeAlive.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
 height = 8.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 32.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 3.0
+height = 5.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Move"
@@ -50,6 +59,7 @@ canSpawn = true
 position = Vector2( 0, -3 )
 scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
+frame = 8
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -57,12 +67,39 @@ rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 
+[node name="Alerter" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alerter"]
+shape = SubResource( 3 )
+
+[node name="Damager" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damager"]
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="Damager"]
+one_shot = true
+
 [node name="HealthBar" parent="." instance=ExtResource( 4 )]
 margin_left = -8.0
 margin_top = -8.0
 margin_right = -8.0
 margin_bottom = -8.0
 rect_scale = Vector2( 0.025, 0.025 )
+healthy = Color( 0, 0.658824, 0.419608, 1 )
+damaged = Color( 1, 0.784314, 0.341176, 1 )
+critical = Color( 0.870588, 0.180392, 0.168627, 1 )
+
+[node name="Alert" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -11 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Move = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -6.0
