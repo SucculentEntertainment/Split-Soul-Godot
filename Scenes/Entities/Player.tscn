@@ -27,6 +27,7 @@ script = ExtResource( 5 )
 position = Vector2( 0, -112 )
 scale = Vector2( 8, 8 )
 frames = ExtResource( 2 )
+animation = "walk_right"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

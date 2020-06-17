@@ -18,6 +18,9 @@ var disableIn = false
 
 var gui = null
 
+var moving = false
+var prevDir = Vector2()
+
 var dir = Vector2()
 var vel = Vector2()
 
@@ -48,10 +51,35 @@ func getMoveInput():
 	dir = dir.normalized()
 
 func move(delta):
+	prevDir = dir
 	getMoveInput()
+	
 	if dir == Vector2(): vel = Vector2()
 	else: vel = dir * speed * delta
+	
+	changeAnimation()
 	vel = move_and_slide(vel)
+
+func changeAnimation():
+	var dir = self.dir
+	if dir == Vector2():
+		dir = prevDir
+		moving = false
+	else:
+		moving = true
+	
+	if dir.y < 0:
+		if moving: $AnimatedSprite.play("walk_up")
+		else: $AnimatedSprite.play("idle_up")
+	if dir.y > 0:
+		if moving: $AnimatedSprite.play("walk_down")
+		else: $AnimatedSprite.play("idle_down")
+	if dir.x < 0:
+		if moving: $AnimatedSprite.play("walk_left")
+		else: $AnimatedSprite.play("idle_left")
+	if dir.x > 0:
+		if moving: $AnimatedSprite.play("walk_right")
+		else: $AnimatedSprite.play("idle_right")
 
 # ================================
 # Items
