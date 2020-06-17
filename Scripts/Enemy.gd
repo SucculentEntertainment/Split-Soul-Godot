@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 onready var def = get_node("/root/Definitions")
 
+export (String) var enemyName
+
 export (Color) var healthy
 export (Color) var damaged
 export (Color) var critical
@@ -43,6 +45,17 @@ func changeDimension(dimension):
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
+
+# ================================
+# Movement
+# ================================
+
+func _physics_process(delta):
+	move()
+
+func move():
+	if enemyName == "Slime":
+		pass
 
 # ================================
 # Events

@@ -29,7 +29,7 @@ var vel = Vector2()
 # ================================
 
 func _ready():
-	pass
+	$AnimatedSprite.play("idle_down")
 
 func initGUI(gui):
 	self.gui = gui
