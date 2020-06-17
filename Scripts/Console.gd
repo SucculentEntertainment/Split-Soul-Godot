@@ -77,5 +77,15 @@ func parseCommand(rawCommand):
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
 				
+	elif command[0] == "/speed":
+		if command.size() != 2:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[1].is_valid_integer():
+				player.speed = int(command[1])
+				chatlog.bbcode_text += "Set Speed of player to " + command[1] + "\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
+				
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

@@ -12,6 +12,8 @@ export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, SpriteFrames) var textures
 
+export (bool) var canSpawn
+
 var health = maxHealth
 
 # ================================

@@ -6,9 +6,7 @@
 script = ExtResource( 3 )
 availableDimensions = 3
 levelName = "Test"
-easyEnemies = 50
-mediumEnemies = 100
-hardEnemies = 150
+numEnemies = [ 10, 20, 30 ]
 
 [node name="Dimension" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )

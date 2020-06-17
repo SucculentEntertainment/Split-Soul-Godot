@@ -1,6 +1,7 @@
 extends Node
 
 onready var def = get_node("/root/Definitions")
+onready var vars = get_node("/root/PlayerVars")
 
 export (int, "Easy", "Normal", "Hard") var difficulty
 var level
@@ -10,6 +11,7 @@ var level
 # ================================
 
 func _ready():
+	vars.difficulty = difficulty
 	loadLevel("Test")
 
 func loadLevel(levelName):

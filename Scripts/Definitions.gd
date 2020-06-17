@@ -48,6 +48,8 @@ const NUM_DIMENSIONS = 2
 
 const DIMENSION_NAMES = ["d_alive", "d_dead"]
 
+var SPAWNABLE_ENEMIES = [0]
+
 func logB(x, b):
 	var e = 0
 	var ans = pow(b, e)

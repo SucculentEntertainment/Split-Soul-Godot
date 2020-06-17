@@ -5,9 +5,7 @@ onready var vars = get_node("/root/PlayerVars")
 
 export (int, FLAGS, "Alive", "Dead") var availableDimensions
 export (String) var levelName
-export (int) var easyEnemies
-export (int) var mediumEnemies
-export (int) var hardEnemies
+export (Array, int) var numEnemies
 
 var dimensions = []
 var spawnedDimensions = []
@@ -16,6 +14,7 @@ var prevDimension = null
 var currentDimensionID = 0
 
 var player = null
+var rng = RandomNumberGenerator.new()
 
 # ================================
 # Util
@@ -30,10 +29,12 @@ func _ready():
 	
 func spawn():
 	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
-	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 1, 2)
+	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 1, 2, Vector2(0, 1))
 	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
 	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
+	
+	spawnEnemies()
 
 func initPlayer(gui):
 	if player != null:
@@ -62,7 +63,7 @@ func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
 
-func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1):
+func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, offset = Vector2(0, 0)):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
@@ -71,10 +72,29 @@ func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1):
 		
 		objectParent.add_child(object)
 		object.scale = currentDimension.scale * scale
-		object.position = spawnMap.map_to_world(objects[i]) * object.scale * positionScale + Vector2(8 * object.scale.x, 8 * object.scale.y)
+		object.position = (spawnMap.map_to_world(objects[i]) + (object.get_node("AnimatedSprite").frames.get_frame("default", 0).get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
 		object.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
+
+func spawnEnemies():
+	var spawnedOn = []
+	var tiles = currentDimension.get_node("Spawnable").get_used_cells()
+	
+	for i in numEnemies[vars.difficulty]:
+		rng.randomize()
+		var enemyType = def.SPAWNABLE_ENEMIES[rng.randi_range(0, def.SPAWNABLE_ENEMIES.size() - 1)]
+		
+		rng.randomize()
+		var tile = null
+		while spawnedOn.find(tile) == -1:
+			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
+			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
+		
+		var enemy = def.ENEMY_SCENES[enemyType].instance()
+		$Enemies.add_child(enemy)
+		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (enemy.get_node("AnimatedSprite").frames.get_frame("default", 0).get_size() / 2)) * enemy.scale * currentDimension.scale
+		enemy.scale *= currentDimension.scale
 
 # ================================
 # Actions
@@ -110,6 +130,7 @@ func changeDimension(dimension):
 	currentDimension.get_node("Items").hide()
 	currentDimension.get_node("Enemies").hide()
 	currentDimension.get_node("Interactables").hide()
+	currentDimension.get_node("Spawnable").hide()
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
 	for e in $Environment.get_children(): e.changeDimension(dimension)
