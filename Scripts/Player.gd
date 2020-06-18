@@ -9,7 +9,7 @@ signal updateGUI(health, coins)
 
 export (int) var speed = 10000
 export (int) var maxHealth = 100
-export (Array, SpriteFrames) var textures
+export (Array, Texture) var textures
 
 onready var def = get_node("/root/Definitions")
 
@@ -29,7 +29,7 @@ var vel = Vector2()
 # ================================
 
 func _ready():
-	$AnimatedSprite.play("idle_down")
+	$AnimationTree.get("parameters/playback").start("Idle")
 
 func initGUI(gui):
 	self.gui = gui

@@ -12,7 +12,7 @@ export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, SpriteFrames) var textures
+export (Array, Texture) var textures
 
 export (bool) var canSpawn
 export (int) var jumpHeight
