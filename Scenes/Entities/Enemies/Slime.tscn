@@ -68,12 +68,12 @@ transitions = [ "Jump", "Death", SubResource( 8 ) ]
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
 [node name="EnemySlime" type="KinematicBody2D"]
-position = Vector2( 32, 0 )
 script = ExtResource( 2 )
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 maxHealth = 10
+speed = 10000
 damage = 10
 layer = 3
 textures = [ ExtResource( 7 ), ExtResource( 1 ) ]
@@ -85,12 +85,22 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 vframes = 4
 hframes = 34
-frame = 1
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = -8.0
+margin_bottom = -8.0
+rect_scale = Vector2( 0.025, 0.025 )
+healthy = Color( 0, 0.658824, 0.419608, 1 )
+damaged = Color( 1, 0.784314, 0.341176, 1 )
+critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
 
@@ -106,17 +116,12 @@ shape = SubResource( 3 )
 [node name="Timer" type="Timer" parent="Damager"]
 one_shot = true
 
-[node name="MoveTimeout" type="Timer" parent="."]
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
 
-[node name="HealthBar" parent="." instance=ExtResource( 4 )]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = -8.0
-margin_bottom = -8.0
-rect_scale = Vector2( 0.025, 0.025 )
-healthy = Color( 0, 0.658824, 0.419608, 1 )
-damaged = Color( 1, 0.784314, 0.341176, 1 )
-critical = Color( 0.870588, 0.180392, 0.168627, 1 )
+[node name="Interest" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="Alert" type="Sprite" parent="."]
 visible = false

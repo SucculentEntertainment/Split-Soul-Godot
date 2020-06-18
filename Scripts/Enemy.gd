@@ -15,10 +15,16 @@ export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, Texture) var textures
 
 export (bool) var canSpawn
-export (int) var jumpHeight
+export (bool) var useMovementCooldown
 
 var health = maxHealth
+
 var damageCooldown = false
+var movementCooldown = false
+
+var player = null
+var dir = Vector2()
+var vel = Vector2()
 
 # ================================
 # Util
@@ -27,10 +33,12 @@ var damageCooldown = false
 func _ready():
 	_onReceiveDamage(0)
 	$Alerter.connect("body_entered", self, "_onAwakened")
-	$AudioStreamPlayer.connect("finished", self, "_onAudioEnd")
+	$Interest.connect("timeout", self, "_onInterestLoss")
 	
 	$Damager.connect("body_entered", self, "_onGiveDamage")
 	$Damager/Timer.connect("timeout", self, "_onDamageTimeout")
+	
+	$MoveTimer.connect("timeout", self, "_onMovementTimeout")
 	
 	$AnimationTree.get("parameters/playback").start("Jump")
 
@@ -55,11 +63,28 @@ func changeDimension(dimension):
 # ================================
 
 func _physics_process(delta):
-	move()
+	move(delta)
 
-func move():
-	if enemyName == "Slime":
-		pass
+func move(delta):
+	if player == null: 
+		dir = Vector2()
+	else:
+		dir = self.global_position.direction_to(player.global_position)
+	
+	if dir == Vector2(): vel = Vector2()
+	else: vel = dir * speed * delta
+	
+	vel = move_and_slide(vel)
+	
+	var bodies = $Alerter.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			$Interest.start()
+	
+	if useMovementCooldown and !movementCooldown:
+		$MoveTimer.start()
+		movementCooldown = true
+		dir = Vector2()
 
 # ================================
 # Events
@@ -69,8 +94,12 @@ func _onAwakened(body):
 	if "Player" in body.name:
 		$AudioStreamPlayer.play()
 		$Alert.show()
+		
+		player = body
+		$Interest.start()
 
-func _onAudioEnd():
+func _onInterestLoss():
+	player = null
 	$Alert.hide()
 
 func _onDamageTimeout():
@@ -80,6 +109,9 @@ func _onDamageTimeout():
 	for body in bodies:
 		if "Player" in body.name:
 			_onGiveDamage(body)
+
+func _onMovementTimeout():
+	movementCooldown = false
 
 # ================================
 # Damage

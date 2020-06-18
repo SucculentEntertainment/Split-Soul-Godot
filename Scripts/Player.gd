@@ -24,12 +24,15 @@ var prevDir = Vector2()
 var dir = Vector2()
 var vel = Vector2()
 
+var invincibility = false
+
 # ================================
 # Utility
 # ================================
 
 func _ready():
 	$AnimationTree.get("parameters/playback").start("Idle")
+	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
 
 func initGUI(gui):
 	self.gui = gui
@@ -111,12 +114,13 @@ func getInput():
 # ================================
 
 func _onReceiveDamage(damage):
-	vars.health -= damage
-	gui.updateValues(maxHealth)
-	$Camera2D.shake(0.2, 500, 16)
-	if vars.health <= 0:
-		if !vars.dead: die()
-		else: get_tree().change_scene("res://Scenes/GameOver.tscn")
+	if !invincibility:
+		vars.health -= damage
+		gui.updateValues(maxHealth)
+		$Camera2D.shake(0.2, 500, 16)
+		if vars.health <= 0:
+			if !vars.dead: die()
+			else: get_tree().change_scene("res://Scenes/GameOver.tscn")
 
 func _onGiveDamage(damage):
 	pass
@@ -126,3 +130,9 @@ func die():
 	changeDimension(def.DIMENSION_DEAD)
 	vars.health = maxHealth
 	gui.updateValues(maxHealth)
+	
+	invincibility = true
+	$InvincibilityTimer.start()
+
+func _onInvincibilityEnd():
+	invincibility = false
