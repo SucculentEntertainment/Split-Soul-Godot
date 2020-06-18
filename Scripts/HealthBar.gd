@@ -23,6 +23,6 @@ func changeHealth(health, maxHealth):
 			$Tween.interpolate_property($Effect, "value", $Effect.value, health, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 			$Tween.start()
 	
-	if float(health) / float(maxHealth) < 0.25: $Normal.tint_progress = critical
-	elif float(health) / float(maxHealth) < 0.5: $Normal.tint_progress = damaged
+	if float(health) / float(maxHealth) <= 0.25: $Normal.tint_progress = critical
+	elif float(health) / float(maxHealth) <= 0.5: $Normal.tint_progress = damaged
 	else: $Normal.tint_progress = healthy
