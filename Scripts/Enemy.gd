@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 onready var def = get_node("/root/Definitions")
 
+export (String) var enemyName
+
 export (Color) var healthy
 export (Color) var damaged
 export (Color) var critical
@@ -10,9 +12,10 @@ export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, SpriteFrames) var textures
+export (Array, Texture) var textures
 
 export (bool) var canSpawn
+export (int) var jumpHeight
 
 var health = maxHealth
 var damageCooldown = false
@@ -28,6 +31,8 @@ func _ready():
 	
 	$Damager.connect("body_entered", self, "_onGiveDamage")
 	$Damager/Timer.connect("timeout", self, "_onDamageTimeout")
+	
+	$AnimationTree.get("parameters/playback").start("Jump")
 
 # ================================
 # Actions
@@ -39,10 +44,22 @@ func changeDimension(dimension):
 		$CollisionShape2D.disabled = false;
 		
 		if textures.size() > def.logB(dimension, 2):
-			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+			$Sprite.texture = textures[def.logB(dimension, 2)]
+			pass
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
+
+# ================================
+# Movement
+# ================================
+
+func _physics_process(delta):
+	move()
+
+func move():
+	if enemyName == "Slime":
+		pass
 
 # ================================
 # Events
@@ -83,7 +100,7 @@ func _onGiveDamage(body):
 func die():
 	$CollisionShape2D.disabled = true
 	
-	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
+	$AnimationTree.get("parameters/playback").travel("Death")
+	yield($AnimationPlayer, "animation_finished")
 	
 	queue_free()

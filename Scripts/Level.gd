@@ -72,7 +72,12 @@ func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, 
 		
 		objectParent.add_child(object)
 		object.scale = currentDimension.scale * scale
-		object.position = (spawnMap.map_to_world(objects[i]) + (object.get_node("AnimatedSprite").frames.get_frame("default", 0).get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
+		
+		var texture = null
+		if objectParent == $Enemies: texture = object.get_node("Sprite").texture
+		else: texture = object.get_node("AnimatedSprite").frames.get_frame("default", 0)
+		
+		object.position = (spawnMap.map_to_world(objects[i]) + (texture.get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
 		object.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
@@ -95,7 +100,7 @@ func spawnEnemies():
 		
 		var enemy = def.ENEMY_SCENES[enemyType].instance()
 		$Enemies.add_child(enemy)
-		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (enemy.get_node("AnimatedSprite").frames.get_frame("default", 0).get_size() / 2)) * enemy.scale * currentDimension.scale
+		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (enemy.get_node("Sprite").texture.get_size() / 2)) * enemy.scale * currentDimension.scale
 		enemy.scale *= currentDimension.scale
 
 # ================================
