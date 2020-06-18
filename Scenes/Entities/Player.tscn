@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/PlayerDead.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Player/PlayerAlive.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -243,3 +244,9 @@ parameters/Walk/blend_position = Vector2( 0, 0 )
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -78.0001 )
+texture = ExtResource( 4 )
+color = Color( 0, 0.905882, 1, 1 )

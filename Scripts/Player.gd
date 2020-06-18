@@ -96,6 +96,9 @@ func changeDimension(dimension):
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
 	
+	if dimension & 2 != 0: enableGlow()
+	else: disableGlow()
+	
 	if textures.size() > def.logB(dimension, 2):
 		$Sprite.texture = textures[def.logB(dimension, 2)]
 	
@@ -108,6 +111,12 @@ func getInput():
 		if interact != null: interact.interact(self)
 	if Input.is_action_just_pressed("ctrl_console"):
 		if gui != null: gui.get_node("Console").toggle()
+
+func enableGlow():
+	$Light2D.show()
+
+func disableGlow():
+	$Light2D.hide()
 
 # ================================
 # Damage
