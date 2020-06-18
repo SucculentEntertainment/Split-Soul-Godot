@@ -8,11 +8,7 @@ region = Rect2( 0, 96, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 96, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 96, 16, 32 )
+region = Rect2( 0, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
@@ -20,15 +16,11 @@ region = Rect2( 0, 64, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 64, 16, 32 )
+region = Rect2( 0, 96, 16, 32 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 16, 32 )
+region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
@@ -40,11 +32,7 @@ region = Rect2( 0, 0, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 32 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 32 )
+region = Rect2( 0, 32, 16, 32 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 2 )
@@ -52,14 +40,14 @@ region = Rect2( 0, 64, 16, 32 )
 
 [resource]
 animations = [ {
-"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"frames": [ SubResource( 9 ) ],
 "loop": true,
-"name": "idle_left",
-"speed": 2.0
+"name": "walk_left",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "walk_left",
+"name": "walk_up",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ) ],
@@ -69,13 +57,13 @@ animations = [ {
 }, {
 "frames": [ SubResource( 18 ) ],
 "loop": true,
-"name": "walk_up",
+"name": "idle_left",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 13 ), SubResource( 14 ) ],
+"frames": [ SubResource( 10 ) ],
 "loop": true,
-"name": "idle_up",
-"speed": 2.0
+"name": "walk_down",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
@@ -84,7 +72,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 19 ) ],
 "loop": true,
-"name": "walk_down",
+"name": "idle_up",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 20 ) ],

@@ -31,6 +31,8 @@ func _ready():
 	
 	$Damager.connect("body_entered", self, "_onGiveDamage")
 	$Damager/Timer.connect("timeout", self, "_onDamageTimeout")
+	
+	$AnimationTree.get("parameters/playback").start("Jump")
 
 # ================================
 # Actions
@@ -42,7 +44,8 @@ func changeDimension(dimension):
 		$CollisionShape2D.disabled = false;
 		
 		if textures.size() > def.logB(dimension, 2):
-			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+			$Sprite.texture = textures[def.logB(dimension, 2)]
+			pass
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
@@ -97,7 +100,7 @@ func _onGiveDamage(body):
 func die():
 	$CollisionShape2D.disabled = true
 	
-	$AnimatedSprite.play("death")
-	yield($AnimatedSprite, "animation_finished")
+	$AnimationTree.get("parameters/playback").travel("Death")
+	yield($AnimationPlayer, "animation_finished")
 	
 	queue_free()

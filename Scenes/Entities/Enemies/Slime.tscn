@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Resources/Textures/Enemies/SlimeDead.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Enemies/SlimeAlive.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -18,10 +19,59 @@ radius = 32.0
 radius = 3.0
 height = 5.0
 
+[sub_resource type="Animation" id=7]
+resource_name = "Death"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.25, 0.38, 0.5, 0.63, 0.75, 0.88, 1, 1.13 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 34, 35, 36, 37, 38, 39, 40, 41, 42, 43 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Jump"
+length = 1.75
+tracks/0/type = "value"
+loop = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/loop_wrap = true
+tracks/0/interp = 1
+tracks/0/enabled = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.13, 0.25, 0.38, 0.5, 0.63, 0.75, 0.88, 1, 1.13, 1.25, 1.38, 1.5, 1.63 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Death"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+[sub_resource type="AnimationNodeStateMachine" id=5]
+
+states/Death/node = SubResource( 8 )
+states/Jump/node = SubResource( 9 )
+states/Death/position = Vector2( 260, 85 )
+states/Jump/position = Vector2( 101, 85 )
+transitions = [ "Jump", "Death", SubResource( 10 ) ]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
+
 [node name="EnemySlime" type="KinematicBody2D"]
 position = Vector2( 32, 0 )
 script = ExtResource( 2 )
-enemyName = "Slime"
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
@@ -31,12 +81,13 @@ layer = 3
 textures = [ ExtResource( 3 ), ExtResource( 1 ) ]
 canSpawn = true
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -3 )
 scale = Vector2( 0.5, 0.5 )
-frames = ExtResource( 3 )
-frame = 13
-playing = true
+texture = ExtResource( 7 )
+vframes = 4
+hframes = 34
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -78,3 +129,13 @@ texture = ExtResource( 6 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -6.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Death = SubResource( 7 )
+anims/Jump = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 6 )

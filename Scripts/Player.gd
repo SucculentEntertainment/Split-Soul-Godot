@@ -61,25 +61,12 @@ func move(delta):
 	vel = move_and_slide(vel)
 
 func changeAnimation():
-	var dir = self.dir
-	if dir == Vector2():
-		dir = prevDir
-		moving = false
+	if dir != Vector2():
+		$AnimationTree.set("parameters/Idle/blend_position", dir)
+		$AnimationTree.set("parameters/Walk/blend_position", dir)
+		$AnimationTree.get("parameters/playback").travel("Walk")
 	else:
-		moving = true
-	
-	if dir.y < 0:
-		if moving: $AnimatedSprite.play("walk_up")
-		else: $AnimatedSprite.play("idle_up")
-	if dir.y > 0:
-		if moving: $AnimatedSprite.play("walk_down")
-		else: $AnimatedSprite.play("idle_down")
-	if dir.x < 0:
-		if moving: $AnimatedSprite.play("walk_left")
-		else: $AnimatedSprite.play("idle_left")
-	if dir.x > 0:
-		if moving: $AnimatedSprite.play("walk_right")
-		else: $AnimatedSprite.play("idle_right")
+		$AnimationTree.get("parameters/playback").travel("Idle")
 
 # ================================
 # Items
@@ -107,7 +94,7 @@ func changeDimension(dimension):
 	$CollisionShape2D.disabled = false;
 	
 	if textures.size() > def.logB(dimension, 2):
-		$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+		$Sprite.texture = textures[def.logB(dimension, 2)]
 	
 	transition.get_node("AnimationPlayer").play("Open")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
