@@ -15,6 +15,7 @@ export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, SpriteFrames) var textures
 
 export (bool) var canSpawn
+export (int) var jumpHeight
 
 var health = maxHealth
 var damageCooldown = false

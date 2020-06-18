@@ -35,7 +35,7 @@ canSpawn = true
 position = Vector2( 0, -3 )
 scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
-frame = 7
+frame = 13
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -56,6 +56,8 @@ shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="Damager"]
 one_shot = true
+
+[node name="MoveTimeout" type="Timer" parent="."]
 
 [node name="HealthBar" parent="." instance=ExtResource( 4 )]
 margin_left = -8.0
