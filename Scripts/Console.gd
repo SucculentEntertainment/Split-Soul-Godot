@@ -52,7 +52,7 @@ func parseCommand(rawCommand):
 	
 	if command[0] == "/help":
 		chatlog.bbcode_text += "Help Page\n" 
-		
+	
 	elif command[0] == "/dimension":
 		if command.size() != 2:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
@@ -62,7 +62,7 @@ func parseCommand(rawCommand):
 				chatlog.bbcode_text += "Changed Dimension to: " + command[1] + "\n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Invalid dimension: " + command[1] + "[/color]\n"
-				
+	
 	elif command[0] == "/kill":
 		player._onReceiveDamage(999)
 		chatlog.bbcode_text += "Killed Player \n"
@@ -76,7 +76,7 @@ func parseCommand(rawCommand):
 				chatlog.bbcode_text += "Dealt " + command[1] + " Damage to Player \n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
-				
+	
 	elif command[0] == "/speed":
 		if command.size() != 2:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
@@ -86,6 +86,6 @@ func parseCommand(rawCommand):
 				chatlog.bbcode_text += "Set Speed of player to " + command[1] + "\n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
-				
+	
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

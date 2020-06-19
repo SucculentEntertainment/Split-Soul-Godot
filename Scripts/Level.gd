@@ -74,7 +74,7 @@ func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, 
 		object.scale = currentDimension.scale * scale
 		
 		var texture = null
-		if objectParent == $Enemies: texture = object.get_node("Sprite").texture
+		if objectParent == $Enemies or objectParent == $Items: texture = object.get_node("Sprite").texture
 		else: texture = object.get_node("AnimatedSprite").frames.get_frame("default", 0)
 		
 		object.position = (spawnMap.map_to_world(objects[i]) + (texture.get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale

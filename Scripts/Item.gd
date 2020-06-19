@@ -4,15 +4,22 @@ onready var def = get_node("/root/Definitions")
 
 export (String) var itemName
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, SpriteFrames) var textures
+export (Array, Texture) var textures
 
 func _ready():
-	connect("body_entered", self, "_onPickup")
+	$AnimationPlayer.play("Idle")
+	connect("body_entered", self, "_onDirectPickup")
+	connect("area_entered", self, "_onIndirectPickup")
 
-func _onPickup(body):
+func _onDirectPickup(body):
 	if "Player" in body.name:
 		body.itemAction(self)
 		queue_free()
+
+func _onIndirectPickup(area):
+	if "Player" in area.name:
+		var body = area.get_parent()
+		if body != null: _onDirectPickup(body)
 
 func changeDimension(dimension):
 	if dimension & layer != 0:
@@ -20,7 +27,7 @@ func changeDimension(dimension):
 		$CollisionShape2D.disabled = false;
 		
 		if textures.size() > def.logB(dimension, 2):
-			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+			$Sprite.texture = textures[def.logB(dimension, 2)]
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
