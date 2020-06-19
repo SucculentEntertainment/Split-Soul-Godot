@@ -25,6 +25,7 @@ tracks/0/keys = {
 }
 
 [node name="SoulPoint" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 itemName = "SoulPoint"
 layer = 2

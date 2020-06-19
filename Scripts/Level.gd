@@ -29,7 +29,7 @@ func _ready():
 	
 func spawnAll():
 	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
-	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 1, 2, Vector2(0, 1))
+	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 2, Vector2(0, 1))
 	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
 	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
@@ -63,25 +63,19 @@ func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
 
-func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, offset = Vector2(0, 0)):
+func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
 		var objectID = spawnMap.get_cellv(objects[i])
-		var object = scenes[objectID].instance()
 		
-		objectParent.add_child(object)
-		object.scale = currentDimension.scale * scale
+		var pos = Vector2()
+		var scale = Vector2()
 		
-		var sprite = null
-		var textureSize = Vector2()
+		scale = Vector2(scalar, scalar) * currentDimension.scale
+		pos = spawnMap.map_to_world(objects[i] + offset) * scale
 		
-		sprite = object.get_node("Sprite")
-		textureSize.x = sprite.texture.get_size().x / sprite.hframes
-		textureSize.y = sprite.texture.get_size().y / sprite.vframes
-		
-		object.position = (spawnMap.map_to_world(objects[i]) + (textureSize / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
-		object.changeDimension(currentDimensionID)
+		var object = spawn(pos, objectParent, scenes[objectID], scale)
 	
 	spawnMap.clear()
 
@@ -101,24 +95,28 @@ func spawnEnemies():
 			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
 			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
 		
-		var enemy = def.ENEMY_SCENES[enemyType].instance()
-		$Enemies.add_child(enemy)
-		
-		var sprite = null
-		var textureSize = Vector2()
-		sprite = enemy.get_node("Sprite")
-		textureSize.x = sprite.texture.get_size().x / sprite.hframes
-		textureSize.y = sprite.texture.get_size().y / sprite.vframes
-		
-		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (textureSize / 2)) * enemy.scale * currentDimension.scale
-		enemy.scale *= currentDimension.scale
+		var pos = currentDimension.get_node("Spawnable").map_to_world(tile) * currentDimension.scale
+		spawn(pos, $Enemies, def.ENEMY_SCENES[enemyType], currentDimension.scale)
 
-func spawn(pos, scale, parent, scene):
+func spawn(pos, parent, scene, scale = Vector2(1, 1)):
 	var object = scene.instance()
-	parent.add_hild(object)
+	parent.add_child(object)
 	
-	object.global_position = pos * scale
+	var offset = Vector2()
+	
+	var sprite = object.get_node("Sprite")
+	var textureSize = Vector2()
+	
+	textureSize.x = sprite.texture.get_size().x / sprite.hframes * scale.x
+	textureSize.y = sprite.texture.get_size().y / sprite.vframes * scale.y
+	
+	offset.x = textureSize.x / 2
+	offset.y = textureSize.y / 2
+	
+	object.position = pos + offset
 	object.scale = scale
+	object.changeDimension(currentDimensionID)
+	return object
 
 # ================================
 # Actions
