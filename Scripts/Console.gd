@@ -87,5 +87,15 @@ func parseCommand(rawCommand):
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
 	
+	elif command[0] == "/heal":
+		if command.size() != 2:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[1].is_valid_integer():
+				player._onHealReceived(int(command[1]))
+				chatlog.bbcode_text += "Healed player with " + command[1] + " HP\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
+	
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

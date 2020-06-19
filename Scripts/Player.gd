@@ -145,3 +145,12 @@ func die():
 
 func _onInvincibilityEnd():
 	invincibility = false
+
+# ================================
+# Heal
+# ================================
+
+func _onHealReceived(heal):
+	vars.health += heal
+	if vars.health > maxHealth: vars.health = maxHealth
+	gui.updateValues(maxHealth)

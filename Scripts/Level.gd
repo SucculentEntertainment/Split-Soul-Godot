@@ -73,11 +73,17 @@ func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, 
 		objectParent.add_child(object)
 		object.scale = currentDimension.scale * scale
 		
-		var texture = null
-		if objectParent == $Enemies or objectParent == $Items: texture = object.get_node("Sprite").texture
-		else: texture = object.get_node("AnimatedSprite").frames.get_frame("default", 0)
+		var sprite = null
+		var textureSize = Vector2()
+		if objectParent == $Enemies or objectParent == $Items:
+			sprite = object.get_node("Sprite")
+			textureSize.x = sprite.texture.get_size().x / sprite.hframes
+			textureSize.y = sprite.texture.get_size().y / sprite.vframes
+		else:
+			sprite = object.get_node("AnimatedSprite").frames.get_frame("default", 0)
+			textureSize = sprite.get_size()
 		
-		object.position = (spawnMap.map_to_world(objects[i]) + (texture.get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
+		object.position = (spawnMap.map_to_world(objects[i]) + (textureSize / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
 		object.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
@@ -100,7 +106,14 @@ func spawnEnemies():
 		
 		var enemy = def.ENEMY_SCENES[enemyType].instance()
 		$Enemies.add_child(enemy)
-		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (enemy.get_node("Sprite").texture.get_size() / 2)) * enemy.scale * currentDimension.scale
+		
+		var sprite = null
+		var textureSize = Vector2()
+		sprite = enemy.get_node("Sprite")
+		textureSize.x = sprite.texture.get_size().x / sprite.hframes
+		textureSize.y = sprite.texture.get_size().y / sprite.vframes
+		
+		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (textureSize / 2)) * enemy.scale * currentDimension.scale
 		enemy.scale *= currentDimension.scale
 
 # ================================
