@@ -6,14 +6,14 @@ var TILE_SCENES = [
 	[
 		preload("res://Scenes/Environment/Tiles/Alive/Grass.tscn"),
 		preload("res://Scenes/Environment/Tiles/Alive/Sand.tscn"),
-		preload("res://Scenes/Environment/Tiles/Alive/Stone.tscn"),
+		preload("res://Scenes/Environment/Tiles/Alive/Gravel.tscn"),
 		preload("res://Scenes/Environment/Tiles/Alive/Dirt.tscn"),
 		preload("res://Scenes/Environment/Tiles/Alive/Snow.tscn")
 	],
 	[
 		preload("res://Scenes/Environment/Tiles/Dead/Grass.tscn"),
 		preload("res://Scenes/Environment/Tiles/Dead/Sand.tscn"),
-		preload("res://Scenes/Environment/Tiles/Dead/Stone.tscn"),
+		preload("res://Scenes/Environment/Tiles/Dead/Gravel.tscn"),
 		preload("res://Scenes/Environment/Tiles/Dead/Dirt.tscn"),
 		preload("res://Scenes/Environment/Tiles/Dead/Snow.tscn")
 	]

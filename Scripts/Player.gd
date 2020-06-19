@@ -96,7 +96,7 @@ func changeDimension(dimension):
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
 	
-	if dimension & 2 != 0: enableGlow()
+	if int(dimension) & 2 != 0: enableGlow()
 	else: disableGlow()
 	
 	if textures.size() > def.logB(dimension, 2):

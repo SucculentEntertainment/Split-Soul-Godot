@@ -6,9 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Sand" type="StaticBody2D"]
+[node name="Gravel" type="StaticBody2D"]
 script = ExtResource( 2 )
-tileName = "Sand"
+tileName = "Gravel"
 variations = 4
 layer = "d_dead"
 
@@ -16,7 +16,7 @@ layer = "d_dead"
 texture = ExtResource( 1 )
 vframes = 11
 hframes = 4
-frame = 4
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
