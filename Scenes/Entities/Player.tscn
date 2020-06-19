@@ -9,10 +9,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 4 )
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 48, 96 )
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ 0, 7 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -42,7 +42,7 @@ tracks/0/keys = {
 "values": [ 24, 31 ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -57,7 +57,7 @@ tracks/0/keys = {
 "values": [ 16, 23 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -72,7 +72,7 @@ tracks/0/keys = {
 "values": [ 8, 15 ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -87,7 +87,7 @@ tracks/0/keys = {
 "values": [ 32, 39 ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=8]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "values": [ 56, 63 ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -117,7 +117,7 @@ tracks/0/keys = {
 "values": [ 48, 55 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=10]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -132,62 +132,62 @@ tracks/0/keys = {
 "values": [ 40, 47 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "idle_down"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle_left"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "idle_up"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=38]
-blend_point_0/node = SubResource( 34 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=15]
+blend_point_0/node = SubResource( 11 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 35 )
+blend_point_1/node = SubResource( 12 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 36 )
+blend_point_2/node = SubResource( 13 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 37 )
+blend_point_3/node = SubResource( 14 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "walk_left"
 
-[sub_resource type="AnimationNodeAnimation" id=40]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "walk_up"
 
-[sub_resource type="AnimationNodeAnimation" id=41]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "walk_right"
 
-[sub_resource type="AnimationNodeAnimation" id=42]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "walk_down"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=43]
-blend_point_0/node = SubResource( 39 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 16 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 40 )
+blend_point_1/node = SubResource( 17 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 41 )
+blend_point_2/node = SubResource( 18 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 42 )
+blend_point_3/node = SubResource( 19 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
 
-[sub_resource type="AnimationNodeStateMachine" id=46]
-states/Idle/node = SubResource( 38 )
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/Idle/node = SubResource( 15 )
 states/Idle/position = Vector2( 138, 55 )
-states/Walk/node = SubResource( 43 )
+states/Walk/node = SubResource( 20 )
 states/Walk/position = Vector2( 284, 55 )
-transitions = [ "Idle", "Walk", SubResource( 44 ), "Walk", "Idle", SubResource( 45 ) ]
+transitions = [ "Idle", "Walk", SubResource( 21 ), "Walk", "Idle", SubResource( 22 ) ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
@@ -222,20 +222,20 @@ shape = SubResource( 1 )
 position = Vector2( 0, -88.0255 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerItemDetector"]
-shape = SubResource( 25 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle_down = SubResource( 26 )
-anims/idle_left = SubResource( 27 )
-anims/idle_right = SubResource( 28 )
-anims/idle_up = SubResource( 29 )
-anims/walk_down = SubResource( 30 )
-anims/walk_left = SubResource( 31 )
-anims/walk_right = SubResource( 32 )
-anims/walk_up = SubResource( 33 )
+anims/idle_down = SubResource( 3 )
+anims/idle_left = SubResource( 4 )
+anims/idle_right = SubResource( 5 )
+anims/idle_up = SubResource( 6 )
+anims/walk_down = SubResource( 7 )
+anims/walk_left = SubResource( 8 )
+anims/walk_right = SubResource( 9 )
+anims/walk_up = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 46 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0

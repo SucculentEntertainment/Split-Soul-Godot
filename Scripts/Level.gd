@@ -55,6 +55,10 @@ func loadPlayer():
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
 
+func setBoundary():
+	player.setBoundaries((currentDimension.get_node("Tiles").get_used_rect().end - Vector2(1, 1)) * 16 * currentDimension.scale * 2)
+	
+
 # ================================
 # Spawns
 # ================================
@@ -133,6 +137,7 @@ func changeDimension(dimension):
 		currentDimensionID = def.DIMENSION_ALIVE
 		currentDimension = dimensions[def.logB(def.DIMENSION_ALIVE, 2)].instance()
 		$Dimension.add_child(currentDimension)
+		setBoundary()
 	
 	if availableDimensions & dimension != 0:
 		prevDimension = currentDimension
@@ -141,6 +146,7 @@ func changeDimension(dimension):
 		
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
+		setBoundary()
 		
 		if spawnedDimensions.find(currentDimensionID) == -1:
 			spawnedDimensions.append(currentDimensionID)
