@@ -16,6 +16,7 @@ export (Array, Texture) var textures
 
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
+export (bool) var longRange
 
 var health
 
@@ -27,11 +28,12 @@ var dir = Vector2()
 var vel = Vector2()
 
 enum {
-	MOVE,
+	IDLE,
+	ATTACK,
 	DEAD
 }
 
-var state = MOVE
+var state = IDLE
 
 # ================================
 # Util
@@ -67,37 +69,52 @@ func changeDimension(dimension):
 		hide()
 		$CollisionShape2D.disabled = true;
 
+func updateInterest():
+	var bodies = $Alerter.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			player = body
+			state = ATTACK
+			$Interest.start()
+
 # ================================
 # Movement
 # ================================
 
 func _physics_process(delta):
 	match state:
-		MOVE:
-			move(delta)
+		IDLE:
+			idle(delta)
+		ATTACK:
+			attack(delta)
 		DEAD:
 			die()
 
 func move(delta):
-	if player == null: 
-		dir = Vector2()
-	else:
+	if !movementCooldown:
+		vel = dir * speed * delta
+		vel = move_and_slide(vel)
+		
+		if useMovementCooldown:
+			movementCooldown = true
+			$MoveTimer.start()
+
+# ================================
+# Idle
+# ================================
+
+func idle(delta):
+	pass
+
+# ================================
+# Attack
+# ================================
+
+func attack(delta):
+	if !longRange:
 		dir = self.global_position.direction_to(player.global_position)
-	
-	if dir == Vector2(): vel = Vector2()
-	else: vel = dir * speed * delta
-	
-	vel = move_and_slide(vel)
-	
-	var bodies = $Alerter.get_overlapping_bodies()
-	for body in bodies:
-		if "Player" in body.name:
-			$Interest.start()
-	
-	if useMovementCooldown and !movementCooldown:
-		$MoveTimer.start()
-		movementCooldown = true
-		dir = Vector2()
+		move(delta)
+		updateInterest()
 
 # ================================
 # Events
@@ -108,11 +125,13 @@ func _onAwakened(body):
 		$AudioStreamPlayer.play()
 		$Alert.show()
 		
+		state = ATTACK
 		player = body
 		$Interest.start()
 
 func _onInterestLoss():
 	player = null
+	state = IDLE
 	$Alert.hide()
 
 func _onDamageTimeout():
