@@ -5,7 +5,6 @@
 [ext_resource path="res://Resources/TileSets/SpawnMap.tres" type="TileSet" id=3]
 
 [node name="Dead" type="Node2D"]
-scale = Vector2( 4, 4 )
 
 [node name="Spawn" type="Node2D" parent="."]
 

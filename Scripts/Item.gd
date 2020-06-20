@@ -8,18 +8,15 @@ export (Array, Texture) var textures
 
 func _ready():
 	$AnimationPlayer.play("Idle")
-	connect("body_entered", self, "_onDirectPickup")
-	connect("area_entered", self, "_onIndirectPickup")
+	connect("area_entered", self, "_onPickup")
 
-func _onDirectPickup(body):
-	if "Player" in body.name:
-		body.itemAction(self)
-		queue_free()
-
-func _onIndirectPickup(area):
-	if "Player" in area.name:
+func _onPickup(area):
+	if "Interactions" in area.name:
 		var body = area.get_parent()
-		if body != null: _onDirectPickup(body)
+		
+		if body != null and "Player" in body.name:
+			body.itemAction(self)
+			queue_free()
 
 func changeDimension(dimension):
 	if dimension & layer != 0:

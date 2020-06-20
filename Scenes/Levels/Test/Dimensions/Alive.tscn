@@ -112,7 +112,6 @@
 0/z_index = 0
 
 [node name="Alive" type="Node2D"]
-scale = Vector2( 4, 4 )
 
 [node name="Spawn" type="Node2D" parent="."]
 position = Vector2( 192, 96 )

@@ -65,7 +65,7 @@ func setBoundary():
 
 func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
-	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
+	player.position = currentDimension.get_node("Spawn").position * 2
 
 func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()):
 	var objects = spawnMap.get_used_cells()
@@ -76,7 +76,7 @@ func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()
 		var pos = Vector2()
 		var scale = Vector2()
 		
-		scale = Vector2(scalar, scalar) * currentDimension.scale
+		scale = Vector2(scalar, scalar)
 		pos = spawnMap.map_to_world(objects[i] + offset) * scale
 		
 		var object = spawn(pos, objectParent, scenes[objectID], scale)
@@ -99,8 +99,8 @@ func spawnEnemies():
 			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
 			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
 		
-		var pos = currentDimension.get_node("Spawnable").map_to_world(tile) * currentDimension.scale
-		spawn(pos, $Enemies, def.ENEMY_SCENES[enemyType], currentDimension.scale)
+		var pos = currentDimension.get_node("Spawnable").map_to_world(tile)
+		spawn(pos, $Enemies, def.ENEMY_SCENES[enemyType])
 
 func spawn(pos, parent, scene, scale = Vector2(1, 1)):
 	var object = scene.instance()

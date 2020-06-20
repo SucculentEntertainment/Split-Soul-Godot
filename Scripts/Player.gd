@@ -11,6 +11,8 @@ export (int) var speed = 10000
 export (int) var maxHealth = 100
 export (Array, Texture) var textures
 
+var damage = 2
+
 onready var def = get_node("/root/Definitions")
 
 var interact = null
@@ -26,13 +28,22 @@ var vel = Vector2()
 
 var invincibility = false
 
+enum {
+	MOVE,
+	ATTACK
+}
+
+var state = MOVE
+
 # ================================
 # Utility
 # ================================
 
 func _ready():
+	$AnimationTree.active = true
 	$AnimationTree.get("parameters/playback").start("Idle")
 	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
+	$HitboxPivot/Hitbox.connect("area_entered", self, "_onGiveDamage")
 
 func initGUI(gui):
 	self.gui = gui
@@ -41,8 +52,12 @@ func initGUI(gui):
 
 func _physics_process(delta):
 	if !disableIn: 
-		getInput()
-		move(delta)
+		match state:
+			MOVE:
+				getInput()
+				move(delta)
+			ATTACK:
+				attack(delta)
 
 func setBoundaries(boundaries):
 	$Camera2D.limit_right = boundaries.x
@@ -71,9 +86,26 @@ func changeAnimation():
 	if dir != Vector2():
 		$AnimationTree.set("parameters/Idle/blend_position", dir)
 		$AnimationTree.set("parameters/Walk/blend_position", dir)
+		$AnimationTree.set("parameters/Attack/blend_position", dir)
 		$AnimationTree.get("parameters/playback").travel("Walk")
 	else:
 		$AnimationTree.get("parameters/playback").travel("Idle")
+
+# ================================
+# Attack
+# ================================
+
+func _onGiveDamage(area):
+	if "Hurtbox" in area.name:
+		var body = area.get_parent()
+		if body != null and "Enemy" in body.name:
+			body.receiveDamage(damage)
+
+func attack(delta):
+	$AnimationTree.get("parameters/playback").travel("Attack")
+
+func attackEnd():
+	state = MOVE
 
 # ================================
 # Items
@@ -115,6 +147,8 @@ func getInput():
 		if interact != null: interact.interact(self)
 	if Input.is_action_just_pressed("ctrl_console"):
 		if gui != null: gui.get_node("Console").toggle()
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		state = ATTACK
 
 func enableGlow():
 	$Light2D.show()
@@ -134,9 +168,6 @@ func _onReceiveDamage(damage):
 		if vars.health <= 0:
 			if !vars.dead: die()
 			else: get_tree().change_scene("res://Scenes/GameOver.tscn")
-
-func _onGiveDamage(damage):
-	pass
 
 func die():
 	vars.dead = true
