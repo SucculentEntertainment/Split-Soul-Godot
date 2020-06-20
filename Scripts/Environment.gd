@@ -7,10 +7,16 @@ export (String) var objectName
 export (String) var layer
 export (bool) var hasCollision
 
+var animSpeedMin = 0.8
+var animSpeedMax = 1.2
+
 func _ready():
 	rng.randomize()
 	$CollisionShape2D.disabled = !hasCollision
-	$AnimatedSprite.frame = rng.randi_range(0, $AnimatedSprite.frames.get_frame_count("default") - 1)
+	
+	$AnimationPlayer.play("Idle")
+	$AnimationPlayer.seek(rng.randf_range(0.0, $AnimationPlayer.current_animation_length))
+	$AnimationPlayer.playback_speed = rng.randf_range(animSpeedMin, animSpeedMax)
 
 func changeDimension(dimension):
 	if def.DIMENSION_NAMES.has(layer):

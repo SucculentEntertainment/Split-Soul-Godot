@@ -5,7 +5,7 @@ onready var vars = get_node("/root/PlayerVars")
 
 export (String) var interactableName
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, SpriteFrames) var textures
+export (Array, Texture) var textures
 export (int, FLAGS, "Alive", "Dead") var canInteract
 export (int) var cooldown
 
@@ -22,6 +22,8 @@ func _ready():
 	
 	$Timer.wait_time = cooldown
 	$Timer.connect("timeout", self, "_onCooldownTimeout")
+	
+	$AnimationPlayer.play("Idle")
 
 func _process(delta):
 	$CooldownBar.changeHealth($Timer.time_left * 100, $Timer.wait_time * 100)
@@ -44,14 +46,17 @@ func _onCooldownTimeout():
 func changeDimension(dimension):
 	if dimension & layer != 0:
 		show()
-		$CollisionShape2D.disabled = false;
+		$CollisionShape2D.disabled = false
+		
 		if dimension & canInteract != 0: 
-			$Interaction/CollisionShape2D.disabled = false;
+			$Interaction/CollisionShape2D.disabled = false
+			$Light2D.show()
 		else:
-			$Interaction/CollisionShape2D.disabled = true;
+			$Interaction/CollisionShape2D.disabled = true
+			$Light2D.hide()
 		
 		if textures.size() > def.logB(dimension, 2):
-			$AnimatedSprite.frames = textures[def.logB(dimension, 2)]
+			$Sprite.texture = textures[def.logB(dimension, 2)]
 		
 		var bodies = $Interaction.get_overlapping_bodies()
 		for body in bodies:
@@ -61,8 +66,8 @@ func changeDimension(dimension):
 				body.interact = self
 	else:
 		hide()
-		$CollisionShape2D.disabled = true;
-		$Interaction/CollisionShape2D.disabled = true;
+		$CollisionShape2D.disabled = true
+		$Interaction/CollisionShape2D.disabled = true
 
 # ================================
 # Interaction

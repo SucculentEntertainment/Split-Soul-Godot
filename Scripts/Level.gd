@@ -27,9 +27,9 @@ func _ready():
 	connectSignals()
 	setSpawn()
 	
-func spawn():
+func spawnAll():
 	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
-	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 1, 2, Vector2(0, 1))
+	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 2, Vector2(0, 1))
 	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
 	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
@@ -55,30 +55,31 @@ func loadPlayer():
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
 
+func setBoundary():
+	player.setBoundaries((currentDimension.get_node("Tiles").get_used_rect().end - Vector2(1, 1)) * 16 * currentDimension.scale * 2)
+	
+
 # ================================
 # Spawns
 # ================================
 
 func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
-	player.position = currentDimension.get_node("Spawn").position * currentDimension.scale * 2
+	player.position = currentDimension.get_node("Spawn").position * 2
 
-func spawnObjects(spawnMap, objectParent, scenes, scale = 1, positionScale = 1, offset = Vector2(0, 0)):
+func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
 		var objectID = spawnMap.get_cellv(objects[i])
-		var object = scenes[objectID].instance()
 		
-		objectParent.add_child(object)
-		object.scale = currentDimension.scale * scale
+		var pos = Vector2()
+		var scale = Vector2()
 		
-		var texture = null
-		if objectParent == $Enemies: texture = object.get_node("Sprite").texture
-		else: texture = object.get_node("AnimatedSprite").frames.get_frame("default", 0)
+		scale = Vector2(scalar, scalar)
+		pos = spawnMap.map_to_world(objects[i] + offset) * scale
 		
-		object.position = (spawnMap.map_to_world(objects[i]) + (texture.get_size() / 2) + spawnMap.map_to_world(offset)) * object.scale * positionScale
-		object.changeDimension(currentDimensionID)
+		var object = spawn(pos, objectParent, scenes[objectID], scale)
 	
 	spawnMap.clear()
 
@@ -98,10 +99,28 @@ func spawnEnemies():
 			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
 			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
 		
-		var enemy = def.ENEMY_SCENES[enemyType].instance()
-		$Enemies.add_child(enemy)
-		enemy.position = (currentDimension.get_node("Spawnable").map_to_world(tile) + (enemy.get_node("Sprite").texture.get_size() / 2)) * enemy.scale * currentDimension.scale
-		enemy.scale *= currentDimension.scale
+		var pos = currentDimension.get_node("Spawnable").map_to_world(tile)
+		spawn(pos, $Enemies, def.ENEMY_SCENES[enemyType])
+
+func spawn(pos, parent, scene, scale = Vector2(1, 1)):
+	var object = scene.instance()
+	parent.add_child(object)
+	
+	var offset = Vector2()
+	
+	var sprite = object.get_node("Sprite")
+	var textureSize = Vector2()
+	
+	textureSize.x = sprite.texture.get_size().x / sprite.hframes * scale.x
+	textureSize.y = sprite.texture.get_size().y / sprite.vframes * scale.y
+	
+	offset.x = textureSize.x / 2
+	offset.y = textureSize.y / 2
+	
+	object.position = pos + offset
+	object.scale = scale
+	object.changeDimension(currentDimensionID)
+	return object
 
 # ================================
 # Actions
@@ -118,6 +137,7 @@ func changeDimension(dimension):
 		currentDimensionID = def.DIMENSION_ALIVE
 		currentDimension = dimensions[def.logB(def.DIMENSION_ALIVE, 2)].instance()
 		$Dimension.add_child(currentDimension)
+		setBoundary()
 	
 	if availableDimensions & dimension != 0:
 		prevDimension = currentDimension
@@ -126,10 +146,11 @@ func changeDimension(dimension):
 		
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
+		setBoundary()
 		
 		if spawnedDimensions.find(currentDimensionID) == -1:
 			spawnedDimensions.append(currentDimensionID)
-			spawn()
+			spawnAll()
 		
 	# Hide SpawnMaps
 	currentDimension.get_node("Tiles").hide()

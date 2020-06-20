@@ -1,25 +1,45 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Resources/Textures/Items/Coin.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Item.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Items/Coin.png" type="Texture" id=3]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
-height = 15.0
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.75
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 5 ]
+}
 
 [node name="Coin" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 itemName = "Coin"
 layer = 1
-textures = [ ExtResource( 1 ) ]
+textures = [ ExtResource( 3 ) ]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -2 )
-frames = ExtResource( 1 )
-frame = 3
-playing = true
+texture = ExtResource( 3 )
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
 rotation = 1.5708
 scale = Vector2( 0.25, 0.25 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
