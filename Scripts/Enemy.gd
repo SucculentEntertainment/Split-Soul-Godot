@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 onready var def = get_node("/root/Definitions")
 
+var rng = RandomNumberGenerator.new()
+
 export (String) var enemyName
 
 export (Color) var healthy
@@ -39,6 +41,8 @@ enum {
 
 var state = IDLE
 
+var maxAnimOffset = 1
+
 # ================================
 # Util
 # ================================
@@ -49,6 +53,9 @@ func _ready():
 	
 	$AnimationTree.active = true
 	$AnimationTree.get("parameters/playback").start("Idle")
+	
+	rng.randomize()
+	$AnimationTree.advance(rng.randf_range(0.0, maxAnimOffset))
 	
 	$Alerter.connect("body_entered", self, "_onAwakened")
 	$Interest.connect("timeout", self, "_onInterestLoss")
