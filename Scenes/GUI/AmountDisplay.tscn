@@ -40,7 +40,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 8.0
 } ]
 
 [node name="AmountDisplay" type="Control"]
@@ -56,7 +56,7 @@ __meta__ = {
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Amount" type="Label" parent="."]

@@ -16,7 +16,10 @@ export (Array, Texture) var textures
 
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
-export (bool) var longRange
+export (bool) var canLongRange
+
+export (int) var closeRange
+export (int) var longRange
 
 var health
 
@@ -29,6 +32,7 @@ var vel = Vector2()
 
 enum {
 	IDLE,
+	MOVE,
 	ATTACK,
 	DEAD
 }
@@ -43,15 +47,14 @@ func _ready():
 	health = maxHealth
 	$HealthBar.changeHealth(health, maxHealth)
 	
+	$AnimationTree.active = true
+	$AnimationTree.get("parameters/playback").start("Idle")
+	
 	$Alerter.connect("body_entered", self, "_onAwakened")
 	$Interest.connect("timeout", self, "_onInterestLoss")
 	
 	$Hitbox.connect("area_entered", self, "_onGiveDamage")
 	$Hitbox/Timer.connect("timeout", self, "_onDamageTimeout")
-	$Hurtbox.connect("area_entered", self, "_onReceiveDamage")
-	$MoveTimer.connect("timeout", self, "_onMovementTimeout")
-	
-	$AnimationTree.get("parameters/playback").start("Jump")
 
 # ================================
 # Actions
@@ -74,7 +77,7 @@ func updateInterest():
 	for body in bodies:
 		if "Player" in body.name:
 			player = body
-			state = ATTACK
+			state = MOVE
 			$Interest.start()
 
 # ================================
@@ -85,6 +88,8 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			idle(delta)
+		MOVE:
+			targetPlayer(delta)
 		ATTACK:
 			attack(delta)
 		DEAD:
@@ -94,27 +99,52 @@ func move(delta):
 	if !movementCooldown:
 		vel = dir * speed * delta
 		vel = move_and_slide(vel)
-		
-		if useMovementCooldown:
-			movementCooldown = true
-			$MoveTimer.start()
+
+
+func moveCooldownStart():
+	if useMovementCooldown:
+		movementCooldown = true
+
+func moveCooldownEnd():
+	if useMovementCooldown:
+		movementCooldown = false
 
 # ================================
 # Idle
 # ================================
 
 func idle(delta):
-	pass
+	$AnimationTree.get("parameters/playback").travel("Idle")
 
 # ================================
 # Attack
 # ================================
 
-func attack(delta):
-	if !longRange:
-		dir = self.global_position.direction_to(player.global_position)
-		move(delta)
+func targetPlayer(delta):
+	$AnimationTree.get("parameters/playback").travel("Move")
+	
+	if !canLongRange:
+		if movementCooldown or !useMovementCooldown:
+			dir = self.global_position.direction_to(player.global_position)
+		
+			$AnimationTree.set("parameters/Idle/blend_position", dir)
+			$AnimationTree.set("parameters/Move/blend_position", dir)
+			$AnimationTree.set("parameters/Attack/blend_position", dir)
+		
+		if self.global_position.distance_to(player.global_position) > closeRange:
+			move(delta)
+		else:
+			state = ATTACK
+		
 		updateInterest()
+	else:
+		state = IDLE
+
+func attack(delta):
+	$AnimationTree.get("parameters/playback").travel("Attack")
+
+func attackEnd():
+	state = IDLE
 
 # ================================
 # Events
@@ -125,7 +155,7 @@ func _onAwakened(body):
 		$AudioStreamPlayer.play()
 		$Alert.show()
 		
-		state = ATTACK
+		state = MOVE
 		player = body
 		$Interest.start()
 
@@ -143,9 +173,6 @@ func _onDamageTimeout():
 		
 		if body != null and "Player" in body.name:
 			_onGiveDamage(area)
-
-func _onMovementTimeout():
-	movementCooldown = false
 
 # ================================
 # Damage
