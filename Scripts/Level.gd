@@ -79,7 +79,7 @@ func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()
 		scale = Vector2(scalar, scalar)
 		pos = spawnMap.map_to_world(objects[i] + offset) * scale
 		
-		var object = spawn(pos, objectParent, scenes[objectID], scale)
+		spawn(pos, objectParent, scenes[objectID], scale)
 	
 	spawnMap.clear()
 

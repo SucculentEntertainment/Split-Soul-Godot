@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 onready var def = get_node("/root/Definitions")
 
+var rng = RandomNumberGenerator.new()
+
 export (String) var enemyName
 
 export (Color) var healthy
@@ -16,6 +18,10 @@ export (Array, Texture) var textures
 
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
+export (bool) var canLongRange
+
+export (int) var closeRange
+export (int) var longRange
 
 var health
 
@@ -27,11 +33,15 @@ var dir = Vector2()
 var vel = Vector2()
 
 enum {
+	IDLE,
 	MOVE,
+	ATTACK,
 	DEAD
 }
 
-var state = MOVE
+var state = IDLE
+
+var maxAnimOffset = 1
 
 # ================================
 # Util
@@ -41,15 +51,17 @@ func _ready():
 	health = maxHealth
 	$HealthBar.changeHealth(health, maxHealth)
 	
+	$AnimationTree.active = true
+	$AnimationTree.get("parameters/playback").start("Idle")
+	
+	rng.randomize()
+	$AnimationTree.advance(rng.randf_range(0.0, maxAnimOffset))
+	
 	$Alerter.connect("body_entered", self, "_onAwakened")
 	$Interest.connect("timeout", self, "_onInterestLoss")
 	
 	$Hitbox.connect("area_entered", self, "_onGiveDamage")
 	$Hitbox/Timer.connect("timeout", self, "_onDamageTimeout")
-	$Hurtbox.connect("area_entered", self, "_onReceiveDamage")
-	$MoveTimer.connect("timeout", self, "_onMovementTimeout")
-	
-	$AnimationTree.get("parameters/playback").start("Jump")
 
 # ================================
 # Actions
@@ -67,37 +79,79 @@ func changeDimension(dimension):
 		hide()
 		$CollisionShape2D.disabled = true;
 
+func updateInterest():
+	var bodies = $Alerter.get_overlapping_bodies()
+	for body in bodies:
+		if "Player" in body.name:
+			player = body
+			state = MOVE
+			$Interest.start()
+
 # ================================
 # Movement
 # ================================
 
 func _physics_process(delta):
 	match state:
+		IDLE:
+			idle(delta)
 		MOVE:
-			move(delta)
+			targetPlayer(delta)
+		ATTACK:
+			attack(delta)
 		DEAD:
 			die()
 
 func move(delta):
-	if player == null: 
-		dir = Vector2()
-	else:
-		dir = self.global_position.direction_to(player.global_position)
-	
-	if dir == Vector2(): vel = Vector2()
-	else: vel = dir * speed * delta
-	
-	vel = move_and_slide(vel)
-	
-	var bodies = $Alerter.get_overlapping_bodies()
-	for body in bodies:
-		if "Player" in body.name:
-			$Interest.start()
-	
-	if useMovementCooldown and !movementCooldown:
-		$MoveTimer.start()
+	if !movementCooldown:
+		vel = dir * speed * delta
+		vel = move_and_slide(vel)
+
+
+func moveCooldownStart():
+	if useMovementCooldown:
 		movementCooldown = true
-		dir = Vector2()
+
+func moveCooldownEnd():
+	if useMovementCooldown:
+		movementCooldown = false
+
+# ================================
+# Idle
+# ================================
+
+func idle(delta):
+	$AnimationTree.get("parameters/playback").travel("Idle")
+
+# ================================
+# Attack
+# ================================
+
+func targetPlayer(delta):
+	$AnimationTree.get("parameters/playback").travel("Move")
+	
+	if !canLongRange:
+		if movementCooldown or !useMovementCooldown:
+			dir = self.global_position.direction_to(player.global_position)
+		
+			$AnimationTree.set("parameters/Idle/blend_position", dir)
+			$AnimationTree.set("parameters/Move/blend_position", dir)
+			$AnimationTree.set("parameters/Attack/blend_position", dir)
+		
+		if self.global_position.distance_to(player.global_position) > closeRange:
+			move(delta)
+		else:
+			state = ATTACK
+		
+		updateInterest()
+	else:
+		state = IDLE
+
+func attack(delta):
+	$AnimationTree.get("parameters/playback").travel("Attack")
+
+func attackEnd():
+	state = IDLE
 
 # ================================
 # Events
@@ -108,11 +162,13 @@ func _onAwakened(body):
 		$AudioStreamPlayer.play()
 		$Alert.show()
 		
+		state = MOVE
 		player = body
 		$Interest.start()
 
 func _onInterestLoss():
 	player = null
+	state = IDLE
 	$Alert.hide()
 
 func _onDamageTimeout():
@@ -124,9 +180,6 @@ func _onDamageTimeout():
 		
 		if body != null and "Player" in body.name:
 			_onGiveDamage(area)
-
-func _onMovementTimeout():
-	movementCooldown = false
 
 # ================================
 # Damage
