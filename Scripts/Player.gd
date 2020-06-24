@@ -7,7 +7,7 @@ signal changeDimension(dimension)
 signal initGUI(maxHealth)
 signal updateGUI(health, coins)
 
-export (int) var speed = 10000
+export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, Texture) var textures
 
