@@ -1,11 +1,12 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scripts/Interactive.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Map/Interactive.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Interactive/AltarBroken.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/GUI/EBtn.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/Interactive/Altar.png" type="Texture" id=6]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 1 )
