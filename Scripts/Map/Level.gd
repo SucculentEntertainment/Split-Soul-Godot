@@ -30,7 +30,7 @@ func _ready():
 func spawnAll():
 	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
 	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 2, Vector2(0, 1))
-	spawnObjects(currentDimension.get_node("Items"), $Items, def.ITEM_SCENES)
+	spawnObjects(currentDimension.get_node("Powerups"), $Powerups, def.POWERUP_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
 	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
 	
@@ -155,13 +155,13 @@ func changeDimension(dimension):
 	# Hide SpawnMaps
 	currentDimension.get_node("Tiles").hide()
 	currentDimension.get_node("Environment").hide()
-	currentDimension.get_node("Items").hide()
+	currentDimension.get_node("Powerups").hide()
 	currentDimension.get_node("Enemies").hide()
 	currentDimension.get_node("Interactables").hide()
 	currentDimension.get_node("Spawnable").hide()
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
 	for e in $Environment.get_children(): e.changeDimension(dimension)
-	for i in $Items.get_children(): i.changeDimension(dimension)
+	for p in $Powerups.get_children(): p.changeDimension(dimension)
 	for e in $Enemies.get_children(): e.changeDimension(dimension)
 	for s in $Interactables.get_children(): s.changeDimension(dimension)

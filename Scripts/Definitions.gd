@@ -28,8 +28,8 @@ var ENVIRONMENT_SCENES = [
 ]
 
 var POWERUP_SCENES = [
-	preload("res://Scenes/Items/Coin.tscn"),
-	preload("res://Scenes/Items/SoulPoint.tscn")
+	preload("res://Scenes/Powerups/Coin.tscn"),
+	preload("res://Scenes/Powerups/SoulPoint.tscn")
 ]
 
 var ENEMY_SCENES = [
@@ -49,7 +49,7 @@ const DIMENSION_NAMES = ["d_alive", "d_dead"]
 
 var SPAWNABLE_ENEMIES = [0]
 
-const ITEMS = [
+const ITEM_NAMES = [
 	"i_test1",
 	"i_test2"
 ]

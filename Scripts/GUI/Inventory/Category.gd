@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var slotScene = preload("res://Scenes/GUI/Inventory/Slot.tscn")
 var slots = []

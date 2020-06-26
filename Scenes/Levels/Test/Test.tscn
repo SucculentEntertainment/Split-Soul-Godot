@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Map/Level.gd" type="Script" id=3]
 
-
 [node name="Test" type="YSort"]
 script = ExtResource( 3 )
 availableDimensions = 3
@@ -16,7 +15,7 @@ scale = Vector2( 2, 2 )
 
 [node name="Environment" type="YSort" parent="."]
 
-[node name="Items" type="YSort" parent="."]
+[node name="Powerups" type="YSort" parent="."]
 scale = Vector2( 2, 2 )
 
 [node name="Enemies" type="YSort" parent="."]
