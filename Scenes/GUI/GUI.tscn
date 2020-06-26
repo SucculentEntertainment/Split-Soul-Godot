@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://Scripts/GUI.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Items/Soulpoint.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/GUI/Console.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/Items/Coin.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/GUI/DialogBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/GUI/Inventory/Inventory.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -128,4 +129,7 @@ margin_right = 760.0
 margin_bottom = 408.32
 
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="Inventory" parent="." instance=ExtResource( 9 )]
 visible = false

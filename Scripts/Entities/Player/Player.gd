@@ -149,6 +149,8 @@ func getInput():
 		if gui != null: gui.get_node("Console").toggle()
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
 		state = ATTACK
+	if Input.is_action_just_pressed("ctrl_inventory"):
+		if gui != null: gui.get_node("Inventory").toggle()
 
 func enableGlow():
 	$Light2D.show()

@@ -18,6 +18,7 @@ func _input(_event):
 func givePlayerReference(player):
 	self.player = player
 	$Console.givePlayerReference(player)
+	$Inventory.givePlayerReference(player)
 
 func updateValues(maxHealth):
 	$HealthBar.changeHealth(vars.health, maxHealth)

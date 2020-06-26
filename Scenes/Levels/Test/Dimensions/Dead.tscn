@@ -20,7 +20,7 @@ cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1
 
-[node name="Items" type="TileMap" parent="."]
+[node name="Powerups" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
