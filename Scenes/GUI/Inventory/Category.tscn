@@ -2,7 +2,20 @@
 
 [ext_resource path="res://Scripts/GUI/Inventory/Category.gd" type="Script" id=1]
 
-[node name="Category" type="Node2D"]
+[node name="Category" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Slots" type="Node2D" parent="."]
+[node name="Slots" type="HBoxContainer" parent="."]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

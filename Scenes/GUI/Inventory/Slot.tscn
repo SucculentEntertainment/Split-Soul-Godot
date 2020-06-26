@@ -2,5 +2,15 @@
 
 [ext_resource path="res://Scripts/GUI/Inventory/Slot.gd" type="Script" id=1]
 
-[node name="Slot" type="Node2D"]
+[node name="Slot" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

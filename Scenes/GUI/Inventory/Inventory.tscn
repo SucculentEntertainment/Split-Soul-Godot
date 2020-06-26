@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="Inventory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 320.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Categories" type="VBoxContainer" parent="."]
+margin_right = 320.0
+margin_bottom = 720.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

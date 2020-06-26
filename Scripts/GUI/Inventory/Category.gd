@@ -11,3 +11,5 @@ func _ready():
 	for i in numSlots:
 		slots.append(slotScene.instance())
 		$Slots.add_child(slots[slots.size() - 1])
+	
+	$Label.text = categoryName
