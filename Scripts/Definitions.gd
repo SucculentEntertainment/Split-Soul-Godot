@@ -27,7 +27,7 @@ var ENVIRONMENT_SCENES = [
 	preload("res://Scenes/Environment/Objects/OakTree2.tscn")
 ]
 
-var ITEM_SCENES = [
+var POWERUP_SCENES = [
 	preload("res://Scenes/Items/Coin.tscn"),
 	preload("res://Scenes/Items/SoulPoint.tscn")
 ]
@@ -45,10 +45,18 @@ var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
 const DIMENSION_STRINGS = {1: "Alive", 2: "Dead"}
 const DIMENSION_ALIVE = 1; const DIMENSION_DEAD = 2
 const NUM_DIMENSIONS = 2
-
 const DIMENSION_NAMES = ["d_alive", "d_dead"]
 
 var SPAWNABLE_ENEMIES = [0]
+
+const ITEMS = [
+	"i_test1",
+	"i_test2"
+]
+
+var ITEM_SCENES = [
+	
+]
 
 func logB(x, b):
 	var e = 0
