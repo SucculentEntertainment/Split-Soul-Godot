@@ -6,10 +6,16 @@ export (String) var item
 export (int) var amount
 
 func _ready():
-	var itemID = def.ITEM_NAMES.find(self.item)
-	if itemID == -1: return
+	# TEMP
+	updateItem("i_test1", 5)
+	# TEMP END
+
+func updateItem(item, amount):
+	self.item = item
+	self.amount = amount
+	if item == "" or amount == 0: return
 	
-	var itemScene = def.ITEM_SCENES[itemID]
-	var item = itemScene.instance()
+	var itemObject = def.ITEM_SCENE.instance()
+	itemObject.setType(item, def)
 	
-	add_child(item)
+	add_child(itemObject)
