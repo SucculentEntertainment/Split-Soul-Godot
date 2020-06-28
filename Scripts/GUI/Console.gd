@@ -34,9 +34,8 @@ func toggle():
 
 func sendCommand(command):
 	chatlog.bbcode_text += "[color=#999999]> " + command + "[/color]\n" 
-
+	
 	if player != null: parseCommand(command)
-
 
 func text_entered(text):
 	if text != "":
@@ -96,6 +95,20 @@ func parseCommand(rawCommand):
 				chatlog.bbcode_text += "Healed player with " + command[1] + " HP\n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid amount: " + command[1] + "[/color]\n"
+	
+	elif command[0] == "/give":
+		if command.size() != 3:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[2].is_valid_integer() and def.ITEM_NAMES.find(command[1]) != -1:
+				var returnVal = get_parent().get_node("Inventory").insertItem(command[1], int(command[2]))
+				
+				if returnVal == -1:
+					chatlog.bbcode_text += "[color=#FF001D]Not enough space in Inventory[/color]\n"
+				else:
+					chatlog.bbcode_text += "Gave player " + command[1] + " x" + command[2] + "\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Inavlid item: " + command[1] + " or amount: " + command[2] + "[/color]\n"
 	
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

@@ -49,6 +49,11 @@ const DIMENSION_NAMES = ["d_alive", "d_dead"]
 
 var SPAWNABLE_ENEMIES = [0]
 
+const ITEM_NAMES = [
+	"i_test1",
+	"i_test2"
+]
+
 const ITEM_FRAMES = {
 	"i_test1": 0,
 	"i_test2": 1
@@ -57,6 +62,11 @@ const ITEM_FRAMES = {
 const ITEM_DESCS = {
 	"i_test1": "Test item 1",
 	"i_test2": "Test item 2"
+}
+
+const ITEM_STACK_SIZES = {
+	"i_test1": 64,
+	"i_test2": 256
 }
 
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")

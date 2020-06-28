@@ -4,6 +4,9 @@
 [ext_resource path="res://Sprites/Items/Items.png" type="Texture" id=2]
 
 [node name="Item" type="Control"]
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -11,4 +14,5 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+centered = false
 hframes = 2
