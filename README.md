@@ -1,2 +1,2 @@
-# Death is not the end
+# Split Soul
 ## An Adventure game
