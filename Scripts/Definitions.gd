@@ -2,22 +2,69 @@ extends Node
 
 var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
 
-var TILE_SCENES = [
+# ================================
+# Tiles
+# ================================
+
+var TILE_NAMES = {
+	"d_alive":
 	[
-		preload("res://Scenes/Environment/Tiles/Alive/Grass.tscn"),
-		preload("res://Scenes/Environment/Tiles/Alive/Sand.tscn"),
-		preload("res://Scenes/Environment/Tiles/Alive/Gravel.tscn"),
-		preload("res://Scenes/Environment/Tiles/Alive/Dirt.tscn"),
-		preload("res://Scenes/Environment/Tiles/Alive/Snow.tscn")
+		"t_grass_a",
+		"t_sand_a",
+		"t_gravel_a",
+		"t_dirt_a",
+		"t_snow_a",
 	],
+	
+	"d_dead":
 	[
-		preload("res://Scenes/Environment/Tiles/Dead/Grass.tscn"),
-		preload("res://Scenes/Environment/Tiles/Dead/Sand.tscn"),
-		preload("res://Scenes/Environment/Tiles/Dead/Gravel.tscn"),
-		preload("res://Scenes/Environment/Tiles/Dead/Dirt.tscn"),
-		preload("res://Scenes/Environment/Tiles/Dead/Snow.tscn")
+		"t_grass_d",
+		"t_sand_d",
+		"t_gravel_d",
+		"t_dirt_d",
+		"t_snow_d"
 	]
+}
+
+var TILE_FRAMES = {
+	"t_grass_a": 0 * 54,
+	"t_sand_a": 1 * 54,
+	"t_gravel_a": 2 * 54,
+	"t_dirt_a": 3 * 54,
+	"t_snow_a": 4 * 54,
+	
+	"t_grass_d": 12 * 54,
+	"t_sand_d": 13 * 54,
+	"t_gravel_d": 14 * 54,
+	"t_dirt_d": 15 * 54,
+	"t_snow_d": 16 * 54
+}
+
+var TILE_VARIATIONS = {
+	"t_grass_a": 4,
+	"t_sand_a": 4,
+	"t_gravel_a": 4,
+	"t_dirt_a": 4,
+	"t_snow_a": 4,
+	
+	"t_grass_d": 4,
+	"t_sand_d": 4,
+	"t_gravel_d": 4,
+	"t_dirt_d": 4,
+	"t_snow_d": 4
+}
+
+var TILE_COLLISIONS = [
+	"t_gravel_a",
+	"t_gravel_d"
 ]
+
+var TILE_LAYERS = {
+	"a": "d_alive",
+	"d": "d_dead"
+}
+
+var TILE_SCENE = preload("res://Scenes/Environment/Tile.tscn")
 
 var ENVIRONMENT_SCENES = [
 	preload("res://Scenes/Environment/Objects/OakTree1.tscn"),
@@ -26,6 +73,10 @@ var ENVIRONMENT_SCENES = [
 	preload("res://Scenes/Environment/Objects/Bush.tscn"),
 	preload("res://Scenes/Environment/Objects/OakTree2.tscn")
 ]
+
+# ================================
+# Objects
+# ================================
 
 var POWERUP_SCENES = [
 	preload("res://Scenes/Powerups/Coin.tscn"),
@@ -40,14 +91,21 @@ var INTERACTABLE_SCENES = [
 	preload("res://Scenes/Interactables/Altar.tscn")
 ]
 
+# ================================
+# Dimensions
+# ================================
+
 var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
 
-const DIMENSION_STRINGS = {1: "Alive", 2: "Dead"}
+const DIMENSION_NAMES = {1: "d_alive", 2: "d_dead"}
 const DIMENSION_ALIVE = 1; const DIMENSION_DEAD = 2
 const NUM_DIMENSIONS = 2
-const DIMENSION_NAMES = ["d_alive", "d_dead"]
 
 var SPAWNABLE_ENEMIES = [0]
+
+# ================================
+# Items
+# ================================
 
 const ITEM_NAMES = [
 	"i_test1",
@@ -70,6 +128,10 @@ const ITEM_STACK_SIZES = {
 }
 
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")
+
+# ================================
+# Util
+# ================================
 
 func logB(x, b):
 	var e = 0

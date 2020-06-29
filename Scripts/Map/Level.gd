@@ -28,7 +28,7 @@ func _ready():
 	setSpawn()
 	
 func spawnAll():
-	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, def.TILE_SCENES[def.logB(currentDimensionID, 2)], 2)
+	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, [def.TILE_SCENE], 2, Vector2(), def.TILE_NAMES)
 	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 2, Vector2(0, 1))
 	spawnObjects(currentDimension.get_node("Powerups"), $Powerups, def.POWERUP_SCENES)
 	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
@@ -46,7 +46,7 @@ func loadDimensions():
 	for i in def.NUM_DIMENSIONS:
 		var dimension = availableDimensions & (1 << i)
 		if dimension != 0:
-			dimensions.append(load(str("res://Scenes/Levels/" + levelName + "/Dimensions/" + def.DIMENSION_STRINGS[dimension] + ".tscn")))
+			dimensions.append(load(str("res://Scenes/Levels/" + levelName + "/Dimensions/" + def.DIMENSION_NAMES[dimension] + ".tscn")))
 
 func loadPlayer():
 	player = def.PLAYER_SCENE.instance()
@@ -67,7 +67,7 @@ func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position * 2
 
-func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()):
+func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2(), names = null):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
@@ -79,7 +79,12 @@ func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2()
 		scale = Vector2(scalar, scalar)
 		pos = spawnMap.map_to_world(objects[i] + offset) * scale
 		
-		spawn(pos, objectParent, scenes[objectID], scale)
+		if names == null:
+			spawn(pos, objectParent, scenes[objectID], scale)
+		else:
+			var obj = spawn(pos, objectParent, scenes[0], scale)
+			obj.setType(names[def.DIMENSION_NAMES[currentDimensionID]][objectID])
+			obj.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
 
