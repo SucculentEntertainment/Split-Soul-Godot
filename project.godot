@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Death is not the end"
+config/name="Split Soul"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
