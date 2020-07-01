@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/GUI/Inventory/Inventory.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.141176, 0.168627, 0.223529, 0.74902 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="Inventory" type="Panel"]
 anchor_left = 1.0
@@ -10,6 +17,7 @@ anchor_bottom = 0.5
 margin_left = -420.0
 margin_top = -360.0
 margin_bottom = 360.0
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,3 +42,18 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MouseItem" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="Control" parent="MouseItem"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Amount" type="Label" parent="MouseItem"]
+margin_right = 40.0
+margin_bottom = 14.0
