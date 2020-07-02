@@ -10,6 +10,8 @@ export (int) var numSlots
 export (Vector2) var margins
 
 var slots = []
+var mouseItem = false
+var clickedSlot = null
 
 func _ready():
 	$Label.text = title
@@ -21,11 +23,7 @@ func _ready():
 		var slot = slotScene.instance()
 		$Slots.add_child(slot)
 		slots.append(slot)
-
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
-			if visible: toggle()
+		slot.connect("slotClicked", self, "_onSlotClicked")
 
 func givePlayerReference(player):
 	self.player = player
@@ -37,6 +35,26 @@ func toggle():
 	else:
 		visible = true
 		player.disableIn = true
+
+# ================================
+# Events
+# ================================
+
+func _input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_ESCAPE:
+			if visible: toggle()
+	
+	if event is InputEventMouseMotion:
+		$MouseItem.rect_position = event.position
+	
+	if event is InputEventMouseButton:
+		if clickedSlot != null:
+			if event.pressed and event.button_index == BUTTON_LEFT:
+				pass
+
+func _onSlotClicked(slot):
+	clickedSlot = slot
 
 # ================================
 # Inventory functions

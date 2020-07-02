@@ -1,5 +1,7 @@
 extends Control
 
+signal slotClicked(slot)
+
 onready var def = get_node("/root/Definitions")
 
 export (String) var item = ""
@@ -8,7 +10,10 @@ export (Vector2) var itemMargin
 export (int) var itemScale
 
 func _ready():
-	pass
+	connect("pressed", self, "_onPressed")
+
+func _onPressed():
+	emit_signal("slotClicked", self)
 
 func resetItem():
 	item = ""
@@ -23,6 +28,10 @@ func updateItem(item, amount):
 	
 	var itemObject = def.ITEM_SCENE.instance()
 	itemObject.setType(item, def)
+	
+	for c in $Item.get_children():
+		$Item.remove_child(c)
+		c.queue_free()
 	
 	$Item.add_child(itemObject)
 	itemObject.set_position(itemMargin)
