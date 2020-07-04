@@ -11,7 +11,7 @@ export (Vector2) var margins
 
 var slots = []
 var mouseItem = false
-var clickedSlot = null
+var mouseOutside = false
 
 func _ready():
 	$Label.text = title
@@ -23,6 +23,9 @@ func _ready():
 		var slot = slotScene.instance()
 		$Slots.add_child(slot)
 		slots.append(slot)
+	
+	connect("mouse_exited", self, "_onMouseExit")
+	connect("mouse_entered", self, "_onMouseEnter")
 
 func givePlayerReference(player):
 	self.player = player
@@ -49,6 +52,12 @@ func getHoveredSlot():
 	
 	return clickedSlot
 
+func _onMouseEnter():
+	mouseOutside = false
+
+func _onMouseExit():
+	mouseOutside = true
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
@@ -70,6 +79,10 @@ func _input(event):
 					$MouseItem.hide()
 					$MouseItem.resetType()
 					mouseItem = false
+				elif mouseOutside:
+					pass
+					#Spawn ItemStack here
+					#Spawn mechanics needed first
 		
 		if event.pressed and event.button_index == BUTTON_RIGHT:
 			var slot = getHoveredSlot()
