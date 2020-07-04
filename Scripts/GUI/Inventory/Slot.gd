@@ -31,9 +31,9 @@ func updateItem(item, amount):
 		return
 	
 	var itemObject = def.ITEM_SCENE.instance()
-	itemObject.setType(item, def)
-	
 	$Item.add_child(itemObject)
+	
+	itemObject.setType(item)
 	itemObject.set_position(itemMargin)
 	itemObject.rect_scale = (itemObject.get_rect().size - (2 * itemMargin)) / itemObject.get_rect().size
 	

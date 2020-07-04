@@ -6,7 +6,7 @@ export (String) var item
 export (int) var amount
 
 func _ready():
-	if item == -1 or amount == 0: return
+	if item == "" or amount == 0: return
 	
 	var itemObject = def.ITEM_SCENE.instance()
 	itemObject.setType(item)

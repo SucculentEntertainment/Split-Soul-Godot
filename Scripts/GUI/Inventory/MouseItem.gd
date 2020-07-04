@@ -19,8 +19,8 @@ func setType(itemName, amount):
 	self.amount = amount
 	
 	var item = def.ITEM_SCENE.instance()
-	item.setType(itemName, def)
 	$Item.add_child(item)
+	item.setType(itemName)
 	
 	if amount != 1:
 		$Amount.text = str(amount)

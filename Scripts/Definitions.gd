@@ -112,8 +112,13 @@ const ITEM_NAMES = [
 	"i_test2"
 ]
 
-const ITEM_FRAMES = {
+const ITEM_START_FRAMES = {
 	"i_test1": 0,
+	"i_test2": 1
+}
+
+const ITEM_NUM_FRAMES = {
+	"i_test1": 2,
 	"i_test2": 1
 }
 
