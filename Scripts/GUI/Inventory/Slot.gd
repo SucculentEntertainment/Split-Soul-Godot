@@ -1,37 +1,37 @@
 extends Control
 
-signal slotClicked(slot)
-
 onready var def = get_node("/root/Definitions")
 
-export (String) var item = ""
-export (int) var amount = 0
+var item = ""
+var amount = 0
+
 export (Vector2) var itemMargin
 export (int) var itemScale
 
 func _ready():
-	connect("pressed", self, "_onPressed")
-
-func _onPressed():
-	emit_signal("slotClicked", self)
+	pass
 
 func resetItem():
 	item = ""
 	amount = 0
-
-func updateItem(item, amount):
-	self.item = item
-	self.amount = amount
-	if item == "" or amount <= 0:
-		resetItem()
-		return
 	
-	var itemObject = def.ITEM_SCENE.instance()
-	itemObject.setType(item, def)
+	$Label.text = ""
 	
 	for c in $Item.get_children():
 		$Item.remove_child(c)
 		c.queue_free()
+
+func updateItem(item, amount):
+	resetItem()
+	
+	self.item = item
+	self.amount = amount
+	
+	if item == "" or amount <= 0:
+		return
+	
+	var itemObject = def.ITEM_SCENE.instance()
+	itemObject.setType(item, def)
 	
 	$Item.add_child(itemObject)
 	itemObject.set_position(itemMargin)
@@ -41,3 +41,9 @@ func updateItem(item, amount):
 		$Label.text = str(amount)
 	else:
 		$Label.text = ""
+
+func isEmpty():
+	if item == "" or amount <= 0:
+		return true
+	else: 
+		return false

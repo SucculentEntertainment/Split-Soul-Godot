@@ -23,7 +23,6 @@ func _ready():
 		var slot = slotScene.instance()
 		$Slots.add_child(slot)
 		slots.append(slot)
-		slot.connect("slotClicked", self, "_onSlotClicked")
 
 func givePlayerReference(player):
 	self.player = player
@@ -40,21 +39,56 @@ func toggle():
 # Events
 # ================================
 
+func getHoveredSlot():
+	var clickedSlot = null
+	
+	for slot in slots:
+		if slot.is_hovered():
+			clickedSlot = slot
+			break
+	
+	return clickedSlot
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.scancode == KEY_ESCAPE:
 			if visible: toggle()
 	
-	if event is InputEventMouseMotion:
-		$MouseItem.rect_position = event.position
-	
 	if event is InputEventMouseButton:
-		if clickedSlot != null:
-			if event.pressed and event.button_index == BUTTON_LEFT:
-				pass
-
-func _onSlotClicked(slot):
-	clickedSlot = slot
+		if event.pressed and event.button_index == BUTTON_LEFT:
+			var slot = getHoveredSlot()
+			
+			if !mouseItem:
+				if slot != null and !slot.isEmpty():
+					$MouseItem.setType(slot.item, slot.amount)
+					$MouseItem.show()
+					slot.resetItem()
+					mouseItem = true
+			elif mouseItem:
+				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
+					slot.updateItem($MouseItem.itemName, slot.amount + $MouseItem.amount)
+					$MouseItem.hide()
+					$MouseItem.resetType()
+					mouseItem = false
+		
+		if event.pressed and event.button_index == BUTTON_RIGHT:
+			var slot = getHoveredSlot()
+			
+			if !mouseItem:
+				if slot != null and !slot.isEmpty():
+					$MouseItem.setType(slot.item, ceil(slot.amount / 2))
+					$MouseItem.show()
+					slot.updateItem(slot.item, slot.amount - $MouseItem.amount)
+					mouseItem = true
+			elif mouseItem:
+				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
+					slot.updateItem($MouseItem.itemName, slot.amount + 1)
+					$MouseItem.setType($MouseItem.itemName, $MouseItem.amount - 1)
+					
+					if $MouseItem.amount <= 0:
+						$MouseItem.hide()
+						$MouseItem.resetType()
+						mouseItem = false
 
 # ================================
 # Inventory functions
@@ -102,7 +136,7 @@ func insertItem(itemName, amount):
 		return -1
 	
 	for a in amounts.size():
-		slots[a].updateItem(itemName, amounts[a])
+		slots[a].updateItem(itemName, amounts[a] + slots[a].amount)
 	
 	return 0
 	
