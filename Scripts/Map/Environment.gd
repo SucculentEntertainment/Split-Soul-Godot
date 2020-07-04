@@ -19,10 +19,9 @@ func _ready():
 	$AnimationPlayer.playback_speed = rng.randf_range(animSpeedMin, animSpeedMax)
 
 func changeDimension(dimension):
-	if def.DIMENSION_NAMES.has(layer):
-		if dimension & int(pow(2, def.DIMENSION_NAMES.find(layer))) != 0:
-			show()
-			if hasCollision: $CollisionShape2D.disabled = false
-		else:
-			hide()
-			$CollisionShape2D.disabled = true
+	if dimension & int(pow(2, def.DIMENSION_NAMES.values().find(layer))) != 0:
+		show()
+		if hasCollision: $CollisionShape2D.disabled = false
+	else:
+		hide()
+		$CollisionShape2D.disabled = true

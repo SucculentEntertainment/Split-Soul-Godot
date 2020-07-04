@@ -1,0 +1,14 @@
+[
+	{
+		"name": "i_test1",
+		"stackSize": 64,
+		"startFrame": 0,
+		"numFrames": 1
+	},
+	{
+		"name": "i_test2",
+		"stackSize": 256,
+		"startFrame": 1,
+		"numFrames": 1
+	}
+]

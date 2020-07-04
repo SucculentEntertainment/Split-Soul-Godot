@@ -1,8 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/GUI/AmountDisplay.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Items/Soulpoint.png" type="Texture" id=2]
-
+[ext_resource path="res://Sprites/Powerups/Soulpoint.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -57,7 +56,7 @@ __meta__ = {
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="Amount" type="Label" parent="."]

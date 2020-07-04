@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/GUI/Inventory/Item.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Items/Items.png" type="Texture" id=2]
 
 [node name="Item" type="Control"]
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+hframes = 2
+
+[node name="Tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true

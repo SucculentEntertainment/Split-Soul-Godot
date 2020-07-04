@@ -15,8 +15,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Death is not the end"
-run/main_scene="res://Scenes/Main.tscn"
+config/name="Split Soul"
+run/main_scene="res://Scenes/BootSplash.tscn"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [autoload]
@@ -29,7 +31,6 @@ PlayerVars="*res://Scripts/PlayerVars.gd"
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
-window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
