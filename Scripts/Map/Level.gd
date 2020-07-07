@@ -84,7 +84,9 @@ func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 		stringID = type
 		if tiles: stringID = "t_tile"
 		
-		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles)
+		var offset = (pos * scale) - pos
+		
+		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles, offset)
 		obj.setType(type)
 		obj.changeDimension(currentDimensionID)
 	

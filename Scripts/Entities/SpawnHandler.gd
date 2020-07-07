@@ -37,7 +37,7 @@ func posToCoords(pos):
 # Spawn
 # ================================
 
-func spawn(eName, coords, scale = Vector2(1, 1), tile = false):
+func spawn(eName, coords, scale = Vector2(1, 1), tile = false, offset = Vector2()):
 	var obj = def.SPAWNABLE_SCENES[eName].instance()
 	if obj == null: return
 	
@@ -46,6 +46,6 @@ func spawn(eName, coords, scale = Vector2(1, 1), tile = false):
 	
 	parent.add_child(obj)
 	
-	obj.position = coordsToPos(coords * scale)
+	obj.position = coordsToPos(coords + offset)
 	obj.scale = scale
 	return obj
