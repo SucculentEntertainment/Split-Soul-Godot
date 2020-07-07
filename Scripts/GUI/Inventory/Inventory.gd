@@ -4,6 +4,7 @@ onready var def = get_node("/root/Definitions")
 
 var slotScene = preload("res://Scenes/GUI/Inventory/Slot.tscn")
 var player = null
+var level = null
 
 export (String) var title = "Inventory"
 export (int) var numSlots
@@ -80,9 +81,12 @@ func _input(event):
 					$MouseItem.resetType()
 					mouseItem = false
 				elif mouseOutside:
-					pass
-					#Spawn ItemStack here
-					#Spawn mechanics needed first
+					if level == null:
+						level = player.get_parent()
+					
+					var obj = level.spawn(player.get_position(), level.get_node("Powerups"), def.ITEM_STACK_SCENE)
+					obj.setType($MouseItem.itemName, $MouseItem.amount)
+					print(obj.position)
 		
 		if event.pressed and event.button_index == BUTTON_RIGHT:
 			var slot = getHoveredSlot()

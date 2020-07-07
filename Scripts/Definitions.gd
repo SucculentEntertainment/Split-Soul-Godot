@@ -133,6 +133,7 @@ const ITEM_STACK_SIZES = {
 }
 
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")
+var ITEM_STACK_SCENE = preload("res://Scenes/Powerups/ItemStack.tscn")
 
 # ================================
 # Util
