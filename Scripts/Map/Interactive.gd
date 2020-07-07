@@ -69,6 +69,9 @@ func changeDimension(dimension):
 		$CollisionShape2D.disabled = true
 		$Interaction/CollisionShape2D.disabled = true
 
+func setType(_type):
+	pass
+
 # ================================
 # Interaction
 # ================================

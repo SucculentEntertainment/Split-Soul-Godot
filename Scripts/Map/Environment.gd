@@ -18,6 +18,9 @@ func _ready():
 	$AnimationPlayer.seek(rng.randf_range(0.0, $AnimationPlayer.current_animation_length))
 	$AnimationPlayer.playback_speed = rng.randf_range(animSpeedMin, animSpeedMax)
 
+func setType(_type):
+	pass
+
 func changeDimension(dimension):
 	if dimension & int(pow(2, def.DIMENSION_NAMES.values().find(layer))) != 0:
 		show()

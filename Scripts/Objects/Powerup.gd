@@ -28,3 +28,6 @@ func changeDimension(dimension):
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;
+
+func setType(_type):
+	pass

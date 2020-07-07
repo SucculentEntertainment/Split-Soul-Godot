@@ -7,7 +7,6 @@
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Enemies/SlimeAlive.png" type="Texture" id=7]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
 height = 8.0
@@ -256,43 +255,43 @@ useMovementCooldown = true
 closeRange = 7
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -3 )
+position = Vector2( 4, 4 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 vframes = 4
 hframes = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 4, 7 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 4 )]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = -8.0
-margin_bottom = -8.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = -4.0
+margin_bottom = -4.0
 rect_scale = Vector2( 0.025, 0.025 )
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
-visible = false
+position = Vector2( 4, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alerter"]
 shape = SubResource( 2 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2( 0, -1 )
+position = Vector2( 4, 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
+position = Vector2( 4, 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 rotation = 1.5708
@@ -303,7 +302,7 @@ one_shot = true
 
 [node name="Alert" type="Sprite" parent="."]
 visible = false
-position = Vector2( 0, -11 )
+position = Vector2( 4, -7 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 
