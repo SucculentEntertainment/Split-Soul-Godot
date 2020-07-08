@@ -117,22 +117,24 @@ var STRING_IDS = {
 }
 
 var SPAWNABLE_SCENES = {
-	"t_tile": preload("res://Scenes/Environment/Tile.tscn"),
+	"t_tile": preload("res://Scenes/Entities/Tile.tscn"),
 	
-	"o_oakTree1": preload("res://Scenes/Environment/Objects/OakTree1.tscn"),
-	"o_pineTree": preload("res://Scenes/Environment/Objects/PineTree.tscn"),
-	"o_birchTree": preload("res://Scenes/Environment/Objects/BirchTree.tscn"),
-	"o_bush": preload("res://Scenes/Environment/Objects/Bush.tscn"),
-	"o_oakTree2": preload("res://Scenes/Environment/Objects/OakTree2.tscn"),
+	"o_oakTree1": preload("res://Scenes/Entities/Objects/OakTree1.tscn"),
+	"o_pineTree": preload("res://Scenes/Entities/Objects/PineTree.tscn"),
+	"o_birchTree": preload("res://Scenes/Entities/Objects/BirchTree.tscn"),
+	"o_bush": preload("res://Scenes/Entities/Objects/Bush.tscn"),
+	"o_oakTree2": preload("res://Scenes/Entities/Objects/OakTree2.tscn"),
 	
 	"e_slime": preload("res://Scenes/Entities/Enemies/Slime.tscn"),
 	
-	"n_altar": preload("res://Scenes/Interactables/Altar.tscn"),
+	"n_altar": preload("res://Scenes/Entities/Interactables/Altar.tscn"),
 	
-	"p_coin": preload("res://Scenes/Powerups/Coin.tscn"),
-	"p_soulPoint": preload("res://Scenes/Powerups/SoulPoint.tscn"),
-	"p_itemStack": preload("res://Scenes/Powerups/ItemStack.tscn")
+	"p_coin": preload("res://Scenes/Entities/Powerups/Coin.tscn"),
+	"p_soulPoint": preload("res://Scenes/Entities/Powerups/SoulPoint.tscn"),
+	"p_itemStack": preload("res://Scenes/Entities/Powerups/ItemStack.tscn")
 }
+
+var TILE_SCALE = Vector2(2, 2)
 
 # ================================
 # Dimensions

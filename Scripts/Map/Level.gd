@@ -28,7 +28,7 @@ func _ready():
 	setSpawn()
 	
 func spawnAll():
-	spawnObjects(currentDimension.get_node("Tiles"), Vector2(2, 2))
+	spawnObjects(currentDimension.get_node("Tiles"))
 	spawnObjects(currentDimension.get_node("Environment"))
 	spawnObjects(currentDimension.get_node("Powerups"))
 	spawnObjects(currentDimension.get_node("Enemies"))

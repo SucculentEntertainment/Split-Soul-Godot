@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Map/Interactive.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Interactive/AltarBroken.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/GUI/EBtn.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Sprites/Interactive/Altar.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/GUI/EBtn.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Interactive/Altar.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Interactive/AltarBroken.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 1 )
@@ -14,11 +14,11 @@ extents = Vector2( 8, 1 )
 radius = 12.0
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=5]
@@ -51,13 +51,15 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 interactableName = "Altar"
 layer = 3
-textures = [ ExtResource( 2 ), ExtResource( 6 ) ]
+textures = [ ExtResource( 6 ), ExtResource( 5 ) ]
 canInteract = 2
 cooldown = 10
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -7 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( -8, -8 )
 hframes = 16
 frame = 15
 
@@ -80,7 +82,7 @@ z_index = 2
 frames = SubResource( 5 )
 playing = true
 
-[node name="CooldownBar" parent="." instance=ExtResource( 5 )]
+[node name="CooldownBar" parent="." instance=ExtResource( 4 )]
 visible = false
 margin_left = -16.0
 margin_top = -16.0
@@ -100,7 +102,7 @@ anims/Idle = SubResource( 6 )
 
 [node name="Light2D" type="Light2D" parent="."]
 visible = false
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 texture_scale = 0.1
 color = Color( 1, 0.960784, 0, 1 )
 energy = 0.5

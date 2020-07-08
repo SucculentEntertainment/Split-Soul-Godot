@@ -255,43 +255,41 @@ useMovementCooldown = true
 closeRange = 7
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 4, 4 )
+position = Vector2( 0, -3 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
+centered = false
+offset = Vector2( -8, -8 )
 vframes = 4
 hframes = 34
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, 7 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 4 )]
-margin_left = -4.0
-margin_top = -4.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = -8.0
+margin_bottom = -8.0
 rect_scale = Vector2( 0.025, 0.025 )
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
-position = Vector2( 4, 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alerter"]
 shape = SubResource( 2 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2( 4, 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2( 4, 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 rotation = 1.5708
@@ -302,7 +300,7 @@ one_shot = true
 
 [node name="Alert" type="Sprite" parent="."]
 visible = false
-position = Vector2( 4, -7 )
+position = Vector2( 0, -12 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 

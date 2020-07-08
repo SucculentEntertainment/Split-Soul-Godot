@@ -15,22 +15,26 @@ func getTileSize():
 	var dimensions = get_parent().get_node("Dimension").get_children()
 	var cellSize = dimensions[0].get_node("Tiles").cell_size
 	
-	tileSize = cellSize * dimensions[0].scale
+	tileSize = cellSize
 
 # ================================
 # Coord Conversion
 # ================================
 
-func coordsToPos(coords):
+func coordsToPos(coords, tile = false):
 	if tileSize == Vector2(): getTileSize()
 	
-	var pos = coords * tileSize
+	var pos
+	if tile: pos = coords * (tileSize * 2)
+	else: pos = coords * tileSize
 	return pos
 
-func posToCoords(pos):
+func posToCoords(pos, tile = false):
 	if tileSize == Vector2(): getTileSize()
 	
-	var coords = pos / (tileSize * 2)
+	var coords
+	if tile: coords = pos / (tileSize * 2)
+	else: coords = pos / tileSize
 	return coords
 
 # ================================
@@ -45,7 +49,8 @@ func spawn(eName, coords, scale = Vector2(1, 1), tile = false, offset = Vector2(
 	if tile: parent = get_parent().get_node("Tiles")
 	
 	parent.add_child(obj)
+	var textureOffset = posToCoords(obj.get_node("Sprite").offset * Vector2(-1, -1) * obj.get_node("Sprite").scale, tile)
 	
-	obj.position = coordsToPos(coords + offset)
+	obj.position = coordsToPos(coords + offset + textureOffset, tile)
 	obj.scale = scale
 	return obj

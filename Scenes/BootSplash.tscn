@@ -40,6 +40,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+skipLogo = true
 
 [node name="Logo" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )

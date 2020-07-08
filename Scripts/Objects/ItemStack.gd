@@ -11,10 +11,6 @@ func _ready():
 func resetItem():
 	itemName = ""
 	amount = 0
-	
-	for c in $Item.get_children():
-		$Item.remove_child(c)
-		c.queue_free()
 
 func setType(itemName, amount):
 	resetItem()
@@ -26,9 +22,8 @@ func setType(itemName, amount):
 		queue_free()
 		return
 	
-	var item = def.ITEM_SCENE.instance()
-	$Item.add_child(item)
-	item.setType(itemName)
+	$Tween.interpolate_property($Sprite, "frame", def.ITEM_START_FRAMES[itemName], def.ITEM_START_FRAMES[itemName] + (def.ITEM_NUM_FRAMES[itemName] - 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1)
+	$Tween.start()
 
 func changeDimension(dimension):
 	pass
