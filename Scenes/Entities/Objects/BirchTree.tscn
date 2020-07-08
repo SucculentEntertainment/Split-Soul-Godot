@@ -16,10 +16,9 @@ layer = "d_alive"
 hasCollision = true
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -15 )
+position = Vector2( -16, -31 )
 texture = ExtResource( 2 )
 centered = false
-offset = Vector2( -16, -16 )
 vframes = 5
 hframes = 4
 frame = 8

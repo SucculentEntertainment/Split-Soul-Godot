@@ -255,11 +255,10 @@ useMovementCooldown = true
 closeRange = 7
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -3 )
+position = Vector2( -4, -7 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 centered = false
-offset = Vector2( -8, -8 )
 vframes = 4
 hframes = 34
 
