@@ -110,5 +110,40 @@ func parseCommand(rawCommand):
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid item: " + command[1] + " or amount: " + command[2] + "[/color]\n"
 	
+	elif command[0] == "/spawn":
+		if command.size() != 6:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			var object = command[1].split(":", false)
+			
+			if def.SPAWNABLE_SCENES.keys().find(object[0]) == -1:
+				chatlog.bbcode_text += "[color=#FF001D]Inavlid entity: " + command[1] + "[/color]\n"
+			elif not command[2].is_valid_integer() and command[2] != ".":
+				chatlog.bbcode_text += "[color=#FF001D]Invalid X coordinate: " + command[2] + "[/color]\n"
+			elif not command[3].is_valid_integer() and command[3] != ".":
+				chatlog.bbcode_text += "[color=#FF001D]Invalid Y coordinate: " + command[3] + "[/color]\n"
+			elif not command[4].is_valid_integer() and command[4] != ".":
+				chatlog.bbcode_text += "[color=#FF001D]Invalid X scale: " + command[4] + "[/color]\n"
+			elif not command[5].is_valid_integer() and command[5] != ".":
+				chatlog.bbcode_text += "[color=#FF001D]Invalid Y scale: " + command[5] + "[/color]\n"
+			else:
+				var spawnHelper = player.get_parent().get_node("SpawnHelper")
+				var args = []
+				
+				args.append(command[2])
+				args.append(command[3])
+				args.append(command[4])
+				args.append(command[5])
+				
+				if args[0] == ".": args[0] = spawnHelper.posToCoords(player.get_position()).x
+				if args[1] == ".": args[1] = spawnHelper.posToCoords(player.get_position()).y
+				if args[2] == ".": args[2] = 1
+				if args[3] == ".": args[3] = 1
+				
+				var obj = spawnHelper.spawn(object[0], Vector2(int(args[0]), int(args[1])), Vector2(int(args[2]), int(args[3])), false, player.get_parent().currentDimensionID)
+				if object.size() > 1: obj.setType(object[1])
+				
+				chatlog.bbcode_text += "Spawned " + command[1] + " at pos: (" + str(args[0]) + ", " + str(args[1]) + ") with scale (" + str(args[2]) + "," + str(args[3]) +")\n"
+	
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

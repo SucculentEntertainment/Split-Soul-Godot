@@ -79,6 +79,9 @@ func changeDimension(dimension):
 		hide()
 		$CollisionShape2D.disabled = true;
 
+func setType(_type):
+	pass
+
 func updateInterest():
 	var bodies = $Alerter.get_overlapping_bodies()
 	for body in bodies:

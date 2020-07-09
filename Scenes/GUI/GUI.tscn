@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Powerups/Soulpoint.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/Powerups/Coin.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/GUI/DialogBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/GUI/Inventory/Inventory.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/GUI/Debug.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -127,6 +128,10 @@ margin_left = 752.0
 margin_top = 392.0
 margin_right = 760.0
 margin_bottom = 408.32
+
+[node name="Debug" parent="." instance=ExtResource( 10 )]
+visible = false
+mouse_filter = 2
 
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 visible = false

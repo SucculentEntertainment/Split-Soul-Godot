@@ -112,10 +112,12 @@ func attackEnd():
 # ================================
 
 func itemAction(item):
-	if item.itemName == "Coin":
+	if item.id == "p_coin":
 		vars.coins += 1
-	elif item.itemName == "SoulPoint":
+	elif item.id == "p_soulPoint":
 		vars.soulpoints += 1
+	elif item.id == "p_itemStack":
+		gui.get_node("Inventory").insertItem(item.itemName, item.amount)
 	
 	gui.updateValues(maxHealth)
 
@@ -151,6 +153,8 @@ func getInput():
 		state = ATTACK
 	if Input.is_action_just_pressed("ctrl_inventory"):
 		if gui != null: gui.get_node("Inventory").toggle()
+	if Input.is_action_just_pressed("debug_toggle"):
+		if gui != null: gui.get_node("Debug").toggle()
 
 func enableGlow():
 	$Light2D.show()

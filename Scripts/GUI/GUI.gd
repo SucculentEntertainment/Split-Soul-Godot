@@ -19,6 +19,7 @@ func givePlayerReference(player):
 	self.player = player
 	$Console.givePlayerReference(player)
 	$Inventory.givePlayerReference(player)
+	$Debug.givePlayerReference(player)
 
 func updateValues(maxHealth):
 	$HealthBar.changeHealth(vars.health, maxHealth)

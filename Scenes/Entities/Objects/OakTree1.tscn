@@ -1,8 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Sprites/Environment/Vegetation.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Map/Environment.gd" type="Script" id=2]
-
+[ext_resource path="res://Scripts/Map/Environment.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Environment/Vegetation.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 1 )
@@ -25,14 +24,15 @@ tracks/0/keys = {
 }
 
 [node name="OakTree1" type="StaticBody2D"]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 objectName = "OakTree1"
 layer = "d_alive"
 hasCollision = true
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -15 )
-texture = ExtResource( 1 )
+position = Vector2( -16, -31 )
+texture = ExtResource( 2 )
+centered = false
 vframes = 5
 hframes = 4
 frame = 1

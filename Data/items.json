@@ -3,7 +3,7 @@
 		"name": "i_test1",
 		"stackSize": 64,
 		"startFrame": 0,
-		"numFrames": 1
+		"numFrames": 2
 	},
 	{
 		"name": "i_test2",

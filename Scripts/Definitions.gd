@@ -64,32 +64,77 @@ var TILE_LAYERS = {
 	"d": "d_dead"
 }
 
-var TILE_SCENE = preload("res://Scenes/Environment/Tile.tscn")
-
-var ENVIRONMENT_SCENES = [
-	preload("res://Scenes/Environment/Objects/OakTree1.tscn"),
-	preload("res://Scenes/Environment/Objects/PineTree.tscn"),
-	preload("res://Scenes/Environment/Objects/BirchTree.tscn"),
-	preload("res://Scenes/Environment/Objects/Bush.tscn"),
-	preload("res://Scenes/Environment/Objects/OakTree2.tscn")
-]
-
 # ================================
 # Objects
 # ================================
 
-var POWERUP_SCENES = [
-	preload("res://Scenes/Powerups/Coin.tscn"),
-	preload("res://Scenes/Powerups/SoulPoint.tscn")
-]
+var STRING_IDS = {
+	"Tiles":
+	{
+		"d_alive": 
+		{
+			0: "t_grass_a",
+			1: "t_sand_a",
+			2: "t_gravel_a",
+			3: "t_dirt_a",
+			4: "t_snow_a"
+		},
+		
+		"d_dead": 
+		{
+			0: "t_grass_d",
+			1: "t_sand_d",
+			2: "t_gravel_d",
+			3: "t_dirt_d",
+			4: "t_snow_d"
+		}
+	},
+	
+	"Environment":
+	{
+		0: "o_oakTree1",
+		1: "o_pineTree",
+		2: "o_birchTree",
+		3: "o_bush",
+		4: "o_oakTree2"
+	},
+	
+	"Powerups":
+	{
+		0: "p_coin",
+		1: "p_soulPoint"
+	},
+	
+	"Enemies":
+	{
+		0: "e_slime"
+	},
+	
+	"Interactables":
+	{
+		0: "n_altar"
+	}
+}
 
-var ENEMY_SCENES = [
-	preload("res://Scenes/Entities/Enemies/Slime.tscn")
-]
+var SPAWNABLE_SCENES = {
+	"t_tile": preload("res://Scenes/Entities/Tile.tscn"),
+	
+	"o_oakTree1": preload("res://Scenes/Entities/Objects/OakTree1.tscn"),
+	"o_pineTree": preload("res://Scenes/Entities/Objects/PineTree.tscn"),
+	"o_birchTree": preload("res://Scenes/Entities/Objects/BirchTree.tscn"),
+	"o_bush": preload("res://Scenes/Entities/Objects/Bush.tscn"),
+	"o_oakTree2": preload("res://Scenes/Entities/Objects/OakTree2.tscn"),
+	
+	"e_slime": preload("res://Scenes/Entities/Enemies/Slime.tscn"),
+	
+	"n_altar": preload("res://Scenes/Entities/Interactables/Altar.tscn"),
+	
+	"p_coin": preload("res://Scenes/Entities/Powerups/Coin.tscn"),
+	"p_soulPoint": preload("res://Scenes/Entities/Powerups/SoulPoint.tscn"),
+	"p_itemStack": preload("res://Scenes/Entities/Powerups/ItemStack.tscn")
+}
 
-var INTERACTABLE_SCENES = [
-	preload("res://Scenes/Interactables/Altar.tscn")
-]
+var TILE_SCALE = Vector2(2, 2)
 
 # ================================
 # Dimensions
@@ -101,7 +146,7 @@ const DIMENSION_NAMES = {1: "d_alive", 2: "d_dead"}
 const DIMENSION_ALIVE = 1; const DIMENSION_DEAD = 2
 const NUM_DIMENSIONS = 2
 
-var SPAWNABLE_ENEMIES = [0]
+var SPAWNABLE_ENEMIES = ["e_slime"]
 
 # ================================
 # Items

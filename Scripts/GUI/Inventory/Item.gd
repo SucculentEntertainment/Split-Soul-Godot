@@ -2,9 +2,6 @@ extends Control
 
 onready var def = get_node("/root/Definitions")
 
-export (bool) var animated
-export (int) var numFrames
-
 func _ready():
 	pass
 

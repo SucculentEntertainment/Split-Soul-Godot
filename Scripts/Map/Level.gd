@@ -28,11 +28,11 @@ func _ready():
 	setSpawn()
 	
 func spawnAll():
-	spawnObjects(currentDimension.get_node("Tiles"), $Tiles, [def.TILE_SCENE], 2, Vector2(), def.TILE_NAMES)
-	spawnObjects(currentDimension.get_node("Environment"), $Environment, def.ENVIRONMENT_SCENES, 2, Vector2(0, 1))
-	spawnObjects(currentDimension.get_node("Powerups"), $Powerups, def.POWERUP_SCENES)
-	spawnObjects(currentDimension.get_node("Enemies"), $Enemies, def.ENEMY_SCENES)
-	spawnObjects(currentDimension.get_node("Interactables"), $Interactables, def.INTERACTABLE_SCENES)
+	spawnObjects(currentDimension.get_node("Tiles"))
+	spawnObjects(currentDimension.get_node("Environment"))
+	spawnObjects(currentDimension.get_node("Powerups"))
+	spawnObjects(currentDimension.get_node("Enemies"))
+	spawnObjects(currentDimension.get_node("Interactables"))
 	
 	spawnEnemies()
 
@@ -57,7 +57,6 @@ func connectSignals():
 
 func setBoundary():
 	player.setBoundaries((currentDimension.get_node("Tiles").get_used_rect().end - Vector2(1, 1)) * 16 * currentDimension.scale * 2)
-	
 
 # ================================
 # Spawns
@@ -67,24 +66,26 @@ func setSpawn():
 	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
 	player.position = currentDimension.get_node("Spawn").position * 2
 
-func spawnObjects(spawnMap, objectParent, scenes, scalar = 1, offset = Vector2(), names = null):
+func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
 		var objectID = spawnMap.get_cellv(objects[i])
+		var pos = objects[i]
+		var tiles = false
 		
-		var pos = Vector2()
-		var scale = Vector2()
+		var category = spawnMap.name
+		if category == "Tiles": tiles = true
 		
-		scale = Vector2(scalar, scalar)
-		pos = spawnMap.map_to_world(objects[i] + offset) * scale
+		var stringID = def.STRING_IDS[category]
+		if tiles: stringID = stringID[def.DIMENSION_NAMES[currentDimensionID]]
+		var type = stringID[objectID]
 		
-		if names == null:
-			spawn(pos, objectParent, scenes[objectID], scale)
-		else:
-			var obj = spawn(pos, objectParent, scenes[0], scale)
-			obj.setType(names[def.DIMENSION_NAMES[currentDimensionID]][objectID])
-			obj.changeDimension(currentDimensionID)
+		stringID = type
+		if tiles: stringID = "t_tile"
+		
+		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles, currentDimensionID)
+		obj.setType(type)
 	
 	spawnMap.clear()
 
@@ -104,28 +105,7 @@ func spawnEnemies():
 			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
 			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
 		
-		var pos = currentDimension.get_node("Spawnable").map_to_world(tile)
-		spawn(pos, $Enemies, def.ENEMY_SCENES[enemyType])
-
-func spawn(pos, parent, scene, scale = Vector2(1, 1)):
-	var object = scene.instance()
-	parent.add_child(object)
-	
-	var offset = Vector2()
-	
-	var sprite = object.get_node("Sprite")
-	var textureSize = Vector2()
-	
-	textureSize.x = sprite.texture.get_size().x / sprite.hframes * scale.x
-	textureSize.y = sprite.texture.get_size().y / sprite.vframes * scale.y
-	
-	offset.x = textureSize.x / 2
-	offset.y = textureSize.y / 2
-	
-	object.position = pos + offset
-	object.scale = scale
-	object.changeDimension(currentDimensionID)
-	return object
+		$SpawnHelper.spawn(enemyType, tile, Vector2(1, 1), false, currentDimensionID)
 
 # ================================
 # Actions
@@ -166,7 +146,4 @@ func changeDimension(dimension):
 	currentDimension.get_node("Spawnable").hide()
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
-	for e in $Environment.get_children(): e.changeDimension(dimension)
-	for p in $Powerups.get_children(): p.changeDimension(dimension)
-	for e in $Enemies.get_children(): e.changeDimension(dimension)
-	for s in $Interactables.get_children(): s.changeDimension(dimension)
+	for e in $Entities.get_children(): e.changeDimension(dimension)
