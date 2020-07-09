@@ -84,9 +84,8 @@ func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 		stringID = type
 		if tiles: stringID = "t_tile"
 		
-		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles)
+		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles, currentDimensionID)
 		obj.setType(type)
-		obj.changeDimension(currentDimensionID)
 	
 	spawnMap.clear()
 
@@ -106,7 +105,7 @@ func spawnEnemies():
 			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
 			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
 		
-		$SpawnHelper.spawn(enemyType, tile)
+		$SpawnHelper.spawn(enemyType, tile, Vector2(1, 1), false, currentDimensionID)
 
 # ================================
 # Actions

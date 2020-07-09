@@ -15,6 +15,7 @@ numEnemies = [ 10, 20, 30 ]
 scale = Vector2( 2, 2 )
 
 [node name="Tiles" type="Node2D" parent="."]
+scale = Vector2( 2, 2 )
 
 [node name="Entities" type="YSort" parent="."]
 scale = Vector2( 2, 2 )

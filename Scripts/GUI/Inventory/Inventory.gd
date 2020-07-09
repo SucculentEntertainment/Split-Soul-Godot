@@ -35,6 +35,13 @@ func toggle():
 	if visible:
 		visible = false
 		player.disableIn = false
+		
+		if mouseItem:
+			insertItem($MouseItem.itemName, $MouseItem.amount)
+			$MouseItem.hide()
+			$MouseItem.resetType()
+			mouseItem = false
+		
 	else:
 		visible = true
 		player.disableIn = true
@@ -60,8 +67,11 @@ func _onMouseExit():
 	mouseOutside = true
 
 func _input(event):
+	if Input.is_action_just_pressed("ctrl_inventory"):
+		if visible: toggle()
+	
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
+		if (event.pressed and event.scancode == KEY_ESCAPE):
 			if visible: toggle()
 	
 	if event is InputEventMouseButton:
@@ -71,22 +81,43 @@ func _input(event):
 			if !mouseItem:
 				if slot != null and !slot.isEmpty():
 					$MouseItem.setType(slot.item, slot.amount)
+					
 					$MouseItem.show()
 					slot.resetItem()
+					
 					mouseItem = true
+					
 			elif mouseItem:
 				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
-					slot.updateItem($MouseItem.itemName, slot.amount + $MouseItem.amount)
-					$MouseItem.hide()
-					$MouseItem.resetType()
-					mouseItem = false
+					if $MouseItem.amount + slot.amount > def.ITEM_STACK_SIZES[$MouseItem.itemName]:
+						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount + slot.amount - def.ITEM_STACK_SIZES[$MouseItem.itemName])
+						slot.updateItem($MouseItem.itemName, def.ITEM_STACK_SIZES[$MouseItem.itemName])
+						
+						if $MouseItem.amount <= 0:
+							$MouseItem.hide()
+							$MouseItem.resetType()
+							
+							mouseItem = false
+					
+					else:
+						slot.updateItem($MouseItem.itemName, slot.amount + $MouseItem.amount)
+					
+						$MouseItem.hide()
+						$MouseItem.resetType()
+					
+						mouseItem = false
+					
 				elif mouseOutside:
 					if level == null:
 						level = player.get_parent()
 					
-					var obj = level.spawn(player.get_position(), level.get_node("Powerups"), def.ITEM_STACK_SCENE)
+					var spawnHelper = level.get_node("SpawnHelper")
+					var obj = spawnHelper.spawn("p_itemStack", spawnHelper.posToCoords(player.get_position()), Vector2(0.25, 0.25))
+					
 					obj.setType($MouseItem.itemName, $MouseItem.amount)
-					print(obj.position)
+					$MouseItem.hide()
+					$MouseItem.resetType()
+					mouseItem = false
 		
 		if event.pressed and event.button_index == BUTTON_RIGHT:
 			var slot = getHoveredSlot()
@@ -95,11 +126,30 @@ func _input(event):
 				if slot != null and !slot.isEmpty():
 					$MouseItem.setType(slot.item, ceil(slot.amount / 2))
 					$MouseItem.show()
+					
 					slot.updateItem(slot.item, slot.amount - $MouseItem.amount)
+					
 					mouseItem = true
+					
 			elif mouseItem:
 				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
-					slot.updateItem($MouseItem.itemName, slot.amount + 1)
+					if slot.amount + 1 <= def.ITEM_STACK_SIZES[$MouseItem.itemName]:
+						slot.updateItem($MouseItem.itemName, slot.amount + 1)
+						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount - 1)
+						
+						if $MouseItem.amount <= 0:
+							$MouseItem.hide()
+							$MouseItem.resetType()
+							mouseItem = false
+				
+				elif mouseOutside:
+					if level == null:
+						level = player.get_parent()
+					
+					var spawnHelper = level.get_node("SpawnHelper")
+					var obj = spawnHelper.spawn("p_itemStack", spawnHelper.posToCoords(player.get_position()), Vector2(0.25, 0.25))
+					
+					obj.setType($MouseItem.itemName, 1)
 					$MouseItem.setType($MouseItem.itemName, $MouseItem.amount - 1)
 					
 					if $MouseItem.amount <= 0:

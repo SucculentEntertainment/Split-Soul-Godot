@@ -2,7 +2,7 @@ extends Node2D
 
 onready var def = get_node("/root/Definitions")
 
-export (String) var itemName
+export (String) var id
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, Texture) var textures
 

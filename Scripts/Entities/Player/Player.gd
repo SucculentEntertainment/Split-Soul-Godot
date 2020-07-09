@@ -112,10 +112,12 @@ func attackEnd():
 # ================================
 
 func itemAction(item):
-	if item.itemName == "Coin":
+	if item.id == "p_coin":
 		vars.coins += 1
-	elif item.itemName == "SoulPoint":
+	elif item.id == "p_soulPoint":
 		vars.soulpoints += 1
+	elif item.id == "p_itemStack":
+		gui.get_node("Inventory").insertItem(item.itemName, item.amount)
 	
 	gui.updateValues(maxHealth)
 

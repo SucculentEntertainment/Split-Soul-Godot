@@ -114,7 +114,9 @@ func parseCommand(rawCommand):
 		if command.size() != 6:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if def.SPAWNABLE_SCENES.keys().find(command[1]) == -1:
+			var object = command[1].split(":", false)
+			
+			if def.SPAWNABLE_SCENES.keys().find(object[0]) == -1:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid entity: " + command[1] + "[/color]\n"
 			elif not command[2].is_valid_integer() and command[2] != ".":
 				chatlog.bbcode_text += "[color=#FF001D]Invalid X coordinate: " + command[2] + "[/color]\n"
@@ -138,7 +140,9 @@ func parseCommand(rawCommand):
 				if args[2] == ".": args[2] = 1
 				if args[3] == ".": args[3] = 1
 				
-				spawnHelper.spawn(command[1], Vector2(int(args[0]), int(args[1])), Vector2(int(args[2]), int(args[3])))
+				var obj = spawnHelper.spawn(object[0], Vector2(int(args[0]), int(args[1])), Vector2(int(args[2]), int(args[3])), false, player.get_parent().currentDimensionID)
+				if object.size() > 1: obj.setType(object[1])
+				
 				chatlog.bbcode_text += "Spawned " + command[1] + " at pos: (" + str(args[0]) + ", " + str(args[1]) + ") with scale (" + str(args[2]) + "," + str(args[3]) +")\n"
 	
 	else:

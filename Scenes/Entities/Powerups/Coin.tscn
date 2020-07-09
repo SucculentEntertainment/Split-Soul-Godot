@@ -26,7 +26,7 @@ tracks/0/keys = {
 [node name="Coin" type="Area2D"]
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
-itemName = "Coin"
+id = "p_coin"
 layer = 1
 textures = [ ExtResource( 2 ) ]
 
