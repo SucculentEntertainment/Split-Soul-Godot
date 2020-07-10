@@ -177,7 +177,7 @@ func _onReceiveDamage(damage):
 
 func die():
 	vars.dead = true
-	changeDimension(def.DIMENSION_DEAD)
+	changeDimension("d_dead")
 	vars.health = maxHealth
 	gui.updateValues(maxHealth)
 	

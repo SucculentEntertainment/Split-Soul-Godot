@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/House.png-f70c04f3d20b05daefc8c69dbe10ad96.stex"
+path="res://.import/GroundAlive.png-155782643d6e1cf704cd68a68be80199.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Interactive/House.png"
-dest_files=[ "res://.import/House.png-f70c04f3d20b05daefc8c69dbe10ad96.stex" ]
+source_file="res://Sprites/Entities/Environment/GroundAlive.png"
+dest_files=[ "res://.import/GroundAlive.png-155782643d6e1cf704cd68a68be80199.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

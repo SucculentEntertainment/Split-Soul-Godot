@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Altar.png-a94994269c4f6673be5a14a3329dae95.stex"
+path="res://.import/Altar.png-e73585b7af332d85ca7deda5efb64f46.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Interactive/Altar.png"
-dest_files=[ "res://.import/Altar.png-a94994269c4f6673be5a14a3329dae95.stex" ]
+source_file="res://Sprites/Entities/Interactive/Altar.png"
+dest_files=[ "res://.import/Altar.png-e73585b7af332d85ca7deda5efb64f46.stex" ]
 
 [params]
 

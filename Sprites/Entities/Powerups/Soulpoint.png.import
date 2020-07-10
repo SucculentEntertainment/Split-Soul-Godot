@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Soulpoint.png-9a29f1fc0531c882156efc24b371fc26.stex"
+path="res://.import/Soulpoint.png-66e1a31386533bce0a50a4747f295e9d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Powerups/Soulpoint.png"
-dest_files=[ "res://.import/Soulpoint.png-9a29f1fc0531c882156efc24b371fc26.stex" ]
+source_file="res://Sprites/Entities/Powerups/Soulpoint.png"
+dest_files=[ "res://.import/Soulpoint.png-66e1a31386533bce0a50a4747f295e9d.stex" ]
 
 [params]
 

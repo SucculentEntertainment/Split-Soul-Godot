@@ -6,12 +6,13 @@ onready var vars = get_node("/root/PlayerVars")
 export (int, FLAGS, "Alive", "Dead") var availableDimensions
 export (String) var levelName
 export (Array, int) var numEnemies
+export (Array, String) var spawnableEnemies
 
 var dimensions = []
 var spawnedDimensions = []
 var currentDimension = null
 var prevDimension = null
-var currentDimensionID = 0
+var currentDimensionID = ""
 
 var player = null
 var rng = RandomNumberGenerator.new()
@@ -78,7 +79,7 @@ func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 		if category == "Tiles": tiles = true
 		
 		var stringID = def.STRING_IDS[category]
-		if tiles: stringID = stringID[def.DIMENSION_NAMES[currentDimensionID]]
+		if tiles: stringID = stringID[currentDimensionID]
 		var type = stringID[objectID]
 		
 		stringID = type
@@ -97,7 +98,7 @@ func spawnEnemies():
 	
 	for i in numEnemies[vars.difficulty]:
 		rng.randomize()
-		var enemyType = def.SPAWNABLE_ENEMIES[rng.randi_range(0, def.SPAWNABLE_ENEMIES.size() - 1)]
+		var enemyType = spawnableEnemies[rng.randi_range(0, spawnableEnemies.size() - 1)]
 		
 		rng.randomize()
 		var tile = null
@@ -112,22 +113,20 @@ func spawnEnemies():
 # ================================
 
 func changeDimension(dimension):
-	dimension = int(dimension)
-	
 	if dimensions.size() == 0:
 		print("No Dimensions Loaded")
 		return
 	
 	if currentDimension == null:
-		currentDimensionID = def.DIMENSION_ALIVE
-		currentDimension = dimensions[def.logB(def.DIMENSION_ALIVE, 2)].instance()
+		currentDimensionID = "d_alive"
+		currentDimension = dimensions[def.logB(def.DIMENSIONS.keys()[def.DIMENSIONS.find("d_alive")], 2)].instance()
 		$Dimension.add_child(currentDimension)
 		setBoundary()
 	
 	if availableDimensions & dimension != 0:
 		prevDimension = currentDimension
 		currentDimensionID = dimension
-		currentDimension = dimensions[def.logB(dimension, 2)].instance()
+		currentDimension = dimensions[def.logB(def.DIMENSIONS.keys()[def.DIMENSIONS.find(dimension)], 2)].instance()
 		
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
