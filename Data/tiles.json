@@ -16,74 +16,73 @@
 	[
 		{
 			"id": "t_grass_a",
-			"dimID": 0,
 			"startFrame": 0,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_sand_a",
-			"dimID": 1,
 			"startFrame": 54,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_gravel_a",
-			"dimID": 2,
 			"startFrame": 108,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_dirt_a",
-			"dimID": 3,
 			"startFrame": 162,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_snow_a",
-			"dimID": 4,
 			"startFrame": 216,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_grass_d",
-			"dimID": 0,
 			"startFrame": 270,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_sand_d",
-			"dimID": 1,
 			"startFrame": 324,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_gravel_d",
-			"dimID": 2,
 			"startFrame": 378,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_dirt_d",
-			"dimID": 3,
 			"startFrame": 432,
 			"numFrames": 1,
 			"variations": 4,
+			"hasCollision": false
 		},
 		{
 			"id": "t_snow_d",
-			"dimID": 4,
 			"startFrame": 486,
 			"numFrames": 1,
 			"variations": 4,
-		},
-		
+			"hasCollision": false
+		}
 	]
 }

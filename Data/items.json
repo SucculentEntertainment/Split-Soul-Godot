@@ -1,12 +1,16 @@
 [
 	{
-		"name": "i_test1",
+		"id": "i_test1",
+		"name": "Test Item 1",
+		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
 		"startFrame": 0,
 		"numFrames": 2
 	},
 	{
-		"name": "i_test2",
+		"id": "i_test2",
+		"name": "Test Item 2",
+		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
 		"startFrame": 1,
 		"numFrames": 1

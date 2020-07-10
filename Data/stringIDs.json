@@ -1,0 +1,47 @@
+{
+  "Tiles":
+	{
+		"d_alive": 
+		{
+			"0": "t_grass_a",
+			"1": "t_sand_a",
+			"2": "t_gravel_a",
+			"3": "t_dirt_a",
+			"4": "t_snow_a"
+		},
+		
+		"d_dead": 
+		{
+			"0": "t_grass_d",
+			"1": "t_sand_d",
+			"2": "t_gravel_d",
+			"3": "t_dirt_d",
+			"4": "t_snow_d"
+		}
+	},
+	
+	"Environment":
+	{
+		"0": "o_oakTree1",
+		"1": "o_pineTree",
+		"2": "o_birchTree",
+		"3": "o_bush",
+		"4": "o_oakTree2"
+	},
+	
+	"Powerups":
+	{
+		"0": "p_coin",
+		"1": "p_soulPoint"
+	},
+	
+	"Enemies":
+	{
+		"0": "e_slime"
+	},
+	
+	"Interactables":
+	{
+		"0": "n_altar"
+	}
+}
