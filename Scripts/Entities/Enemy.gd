@@ -68,7 +68,7 @@ func _ready():
 # ================================
 
 func changeDimension(dimension):
-	if dimension & layer != 0:
+	if def.DIMENSIONS.keys()[def.DIMENSIONS.find(dimension)] & layer != 0:
 		show()
 		$CollisionShape2D.disabled = false;
 		

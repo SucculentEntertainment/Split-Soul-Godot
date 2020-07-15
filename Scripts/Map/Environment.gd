@@ -22,7 +22,7 @@ func setType(_type):
 	pass
 
 func changeDimension(dimension):
-	if dimension & int(pow(2, def.DIMENSION_NAMES.values().find(layer))) != 0:
+	if def.DIMENSIONS.keys()[def.DIMENSION.find(dimension)] & def.DIMENSIONS.keys()[def.DIMENSION.find(layer)] != 0:
 		show()
 		if hasCollision: $CollisionShape2D.disabled = false
 	else:

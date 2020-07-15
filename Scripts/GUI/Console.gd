@@ -56,8 +56,8 @@ func parseCommand(rawCommand):
 		if command.size() != 2:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if def.DIMENSION_NAMES.has(command[1]):
-				player.changeDimension(pow(2, def.DIMENSION_NAMES.find(command[1])))
+			if def.DIMENSION.has(command[1]):
+				player.changeDimension(command[1])
 				chatlog.bbcode_text += "Changed Dimension to: " + command[1] + "\n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Invalid dimension: " + command[1] + "[/color]\n"
