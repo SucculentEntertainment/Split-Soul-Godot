@@ -1,10 +1,9 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scripts/Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Entities/Player/Camera.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Player/PlayerAlive.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/PlayerDead.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Entities/Player/Player.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 1 )
@@ -494,7 +493,7 @@ transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 speed = 4000
-textures = [ ExtResource( 3 ), ExtResource( 5 ) ]
+dimensionOffsets = [ 0, 76 ]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -11 )
@@ -508,11 +507,13 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -16, -29 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 centered = false
 vframes = 24
 hframes = 8
 frame = 96
+region_enabled = true
+region_rect = Rect2( 0, 0, 256, 768 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

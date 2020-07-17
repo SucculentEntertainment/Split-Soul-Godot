@@ -9,7 +9,7 @@ signal updateGUI(health, coins)
 
 export (int) var speed = 20000
 export (int) var maxHealth = 100
-export (Array, Texture) var textures
+export (Array, int) var dimensionOffsets
 
 var damage = 2
 
@@ -134,11 +134,10 @@ func changeDimension(dimension):
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
 	
-	if int(dimension) & 2 != 0: enableGlow()
+	if dimension == "d_dead": enableGlow()
 	else: disableGlow()
 	
-	if textures.size() > def.logB(dimension, 2):
-		$Sprite.texture = textures[def.logB(dimension, 2)]
+	$Sprite.region_rect.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	
 	transition.get_node("AnimationPlayer").play("Open")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")

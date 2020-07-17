@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Slime.png-8d7c3e35c994baa725d417583525531c.stex"
+path="res://.import/FireSlime.png-71ed00c632fdcf077baca86da4572a66.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Enemies/Slime.png"
-dest_files=[ "res://.import/Slime.png-8d7c3e35c994baa725d417583525531c.stex" ]
+source_file="res://Sprites/Entities/Enemies/FireSlime.png"
+dest_files=[ "res://.import/FireSlime.png-71ed00c632fdcf077baca86da4572a66.stex" ]
 
 [params]
 

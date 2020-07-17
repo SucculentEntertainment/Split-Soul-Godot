@@ -21,7 +21,12 @@ var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
 # ================================
 
 const DIMENSIONS = {1: "d_alive", 2: "d_dead"}
-var SPAWNABLE_ENEMIES = ["e_slime"]
+
+func getDimensionLayer(dimension):
+	return DIMENSIONS.keys()[DIMENSIONS.values().find(dimension)]
+
+func getDimensionIndex(dimension):
+	return DIMENSIONS.values().find(dimension)
 
 # ================================
 # Util
@@ -38,12 +43,3 @@ func _ready():
 	
 	file.open("res://Data/items.json", file.READ)
 	ITEM_DATA = parse_json(file.get_as_text())
-
-func logB(x, b):
-	var e = 0
-	var ans = pow(b, e)
-	while true:
-		ans = pow(b, e)
-		if ans == x:
-			return e
-		e += 1

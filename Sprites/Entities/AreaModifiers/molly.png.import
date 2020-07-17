@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AltarBroken.png-c0e23e3e86e436f212f72061a2ecafbf.stex"
+path="res://.import/molly.png-64d93537ba6ae3cf9ae923275780dbfb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Interactive/AltarBroken.png"
-dest_files=[ "res://.import/AltarBroken.png-c0e23e3e86e436f212f72061a2ecafbf.stex" ]
+source_file="res://Sprites/Entities/AreaModifiers/molly.png"
+dest_files=[ "res://.import/molly.png-64d93537ba6ae3cf9ae923275780dbfb.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -30,7 +30,7 @@ func setType(tileName):
 		$Sprite.frame += rng.randi_range(0, variations - 1)
 
 func changeDimension(dimension):
-	if dimension & int(pow(2, def.DIMENSION_NAMES.values().find(layer))) != 0:
+	if dimension == layer:
 		show()
 		if hasCollision: $CollisionShape2D.disabled = false
 	else:

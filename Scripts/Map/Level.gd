@@ -119,14 +119,14 @@ func changeDimension(dimension):
 	
 	if currentDimension == null:
 		currentDimensionID = "d_alive"
-		currentDimension = dimensions[def.logB(def.DIMENSIONS.keys()[def.DIMENSIONS.find("d_alive")], 2)].instance()
+		currentDimension = dimensions[def.getDimensionIndex(currentDimensionID)].instance()
 		$Dimension.add_child(currentDimension)
 		setBoundary()
 	
 	if availableDimensions & dimension != 0:
 		prevDimension = currentDimension
 		currentDimensionID = dimension
-		currentDimension = dimensions[def.logB(def.DIMENSIONS.keys()[def.DIMENSIONS.find(dimension)], 2)].instance()
+		currentDimension = dimensions[def.getDimensionIndex(dimension)].instance()
 		
 		$Dimension.add_child(currentDimension)
 		prevDimension.queue_free()
