@@ -4,7 +4,7 @@ onready var def = get_node("/root/Definitions")
 
 export (String) var id
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, Texture) var textures
+export (Array, int) var dimensionOffsets
 
 func _ready():
 	$AnimationPlayer.play("Idle")
@@ -19,12 +19,11 @@ func _onPickup(area):
 			queue_free()
 
 func changeDimension(dimension):
-	if dimension & layer != 0:
+	if def.getDimensionLayer(dimension) & layer != 0:
 		show()
 		$CollisionShape2D.disabled = false;
 		
-		if textures.size() > def.logB(dimension, 2):
-			$Sprite.texture = textures[def.logB(dimension, 2)]
+		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;

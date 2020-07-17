@@ -1,15 +1,16 @@
 [gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Powerups/Soulpoint.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Entities/Powerups/Soulpoint.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/GUI/AmountDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/GUI/Console.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sprites/Powerups/Coin.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Entities/Powerups/Coin.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/GUI/DialogBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/GUI/Inventory/Inventory.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/GUI/Debug.tscn" type="PackedScene" id=10]
+
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )

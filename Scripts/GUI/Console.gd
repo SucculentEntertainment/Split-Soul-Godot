@@ -56,8 +56,8 @@ func parseCommand(rawCommand):
 		if command.size() != 2:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if def.DIMENSION_NAMES.has(command[1]):
-				player.changeDimension(pow(2, def.DIMENSION_NAMES.find(command[1])))
+			if def.DIMENSIONS.values().has(command[1]):
+				player.changeDimension(command[1])
 				chatlog.bbcode_text += "Changed Dimension to: " + command[1] + "\n"
 			else:
 				chatlog.bbcode_text += "[color=#FF001D]Invalid dimension: " + command[1] + "[/color]\n"
@@ -100,7 +100,7 @@ func parseCommand(rawCommand):
 		if command.size() != 3:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if command[2].is_valid_integer() and def.ITEM_NAMES.find(command[1]) != -1:
+			if command[2].is_valid_integer() and def.ITEM_DATA.keys().find(command[1]) != -1:
 				var returnVal = get_parent().get_node("Inventory").insertItem(command[1], int(command[2]))
 				
 				if returnVal == -1:
@@ -144,6 +144,42 @@ func parseCommand(rawCommand):
 				if object.size() > 1: obj.setType(object[1])
 				
 				chatlog.bbcode_text += "Spawned " + command[1] + " at pos: (" + str(args[0]) + ", " + str(args[1]) + ") with scale (" + str(args[2]) + "," + str(args[3]) +")\n"
+	
+	elif command[0] == "/tp":
+		if command.size() != 3:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[2].is_valid_integer() and command[1].is_valid_integer():
+				player.position = player.get_parent().get_node("SpawnHelper").coordsToPos(Vector2(command[1], command[2]))
+				chatlog.bbcode_text += "Teleported player to: (" + command[1] + ", " + command[2] + ")\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Invalid Position: (" + command[1] + ", " + command[2] + ")[/color]\n"
+	
+	elif command[0] == "/god":
+		if command.size() != 2:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[1] == "on":
+				player.invincibility = true
+				chatlog.bbcode_text += "Enabled god mode\n"
+			elif command[1] == "off":
+				player.invincibility = false
+				chatlog.bbcode_text += "Disabled god mode\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Invalid option: " + command[1] + "[/color]\n"
+	
+	elif command[0] == "/noclip":
+		if command.size() != 2:
+			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
+		else:
+			if command[1] == "on":
+				player.get_node("CollisionShape2D").disabled = true
+				chatlog.bbcode_text += "Enabled noclip\n"
+			elif command[1] == "off":
+				player.get_node("CollisionShape2D").disabled = false
+				chatlog.bbcode_text += "Disabled noclip\n"
+			else:
+				chatlog.bbcode_text += "[color=#FF001D]Invalid option: " + command[1] + "[/color]\n"
 	
 	else:
 		chatlog.bbcode_text += "[color=#FF001D]Command not found[/color]\n"

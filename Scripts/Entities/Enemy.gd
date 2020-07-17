@@ -14,7 +14,7 @@ export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
-export (Array, Texture) var textures
+export (Array, int) var dimensionOffsets
 
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
@@ -68,13 +68,10 @@ func _ready():
 # ================================
 
 func changeDimension(dimension):
-	if dimension & layer != 0:
+	if def.getDimensionLayer(dimension) & layer != 0:
 		show()
 		$CollisionShape2D.disabled = false;
-		
-		if textures.size() > def.logB(dimension, 2):
-			$Sprite.texture = textures[def.logB(dimension, 2)]
-			pass
+		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;

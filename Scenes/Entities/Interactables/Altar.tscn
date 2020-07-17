@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Map/Interactive.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/GUI/EBtn.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/Interactive/Altar.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Interactive/AltarBroken.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Entities/Interactive/Altar.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 1 )
@@ -51,7 +50,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 interactableName = "Altar"
 layer = 3
-textures = [ ExtResource( 6 ), ExtResource( 5 ) ]
+dimensionOffsets = [ 0, 16 ]
 canInteract = 2
 cooldown = 10
 
@@ -61,6 +60,8 @@ texture = ExtResource( 5 )
 centered = false
 hframes = 16
 frame = 15
+region_enabled = true
+region_rect = Rect2( 0, 0, 256, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

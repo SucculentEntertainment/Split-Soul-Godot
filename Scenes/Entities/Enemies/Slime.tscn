@@ -1,11 +1,10 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://Sprites/Enemies/SlimeDead.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Entities/Enemies/Slime.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Enemies/SlimeAlive.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -249,7 +248,7 @@ critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 maxHealth = 10
 speed = 4000
 layer = 3
-textures = [ ExtResource( 7 ), ExtResource( 1 ) ]
+dimensionOffsets = [ 0, 64 ]
 canSpawn = true
 useMovementCooldown = true
 closeRange = 7
@@ -257,10 +256,12 @@ closeRange = 7
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4, -7 )
 scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 7 )
+texture = ExtResource( 1 )
 centered = false
 vframes = 4
 hframes = 34
+region_enabled = true
+region_rect = Rect2( 0, 0, 544, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
