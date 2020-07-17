@@ -63,7 +63,7 @@ func spawn():
 	var spawnID = spawnTable[rng.randi_range(0, 99)]
 	
 	var spawnHelper = level.get_node("SpawnHelper")
-	spawnHelper.spawn(spawnID, spawnHelper.posToCoords(global_position / level.get_node("Tiles").scale), Vector2(1, 1), "", "d_alive")
+	spawnHelper.spawn(spawnID, spawnHelper.posToCoords(global_position / level.get_node("Tiles").scale), Vector2(1, 1), "", level.currentDimensionID)
 	
 	onCooldown = true
 	$Timer.start()

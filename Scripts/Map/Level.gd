@@ -90,3 +90,4 @@ func changeDimension(dimension):
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
 	for e in $Entities.get_children(): e.changeDimension(dimension)
+	for g in $Triggers.get_children(): g.changeDimension(dimension)

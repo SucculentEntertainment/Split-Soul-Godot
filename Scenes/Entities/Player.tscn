@@ -493,7 +493,7 @@ transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 speed = 4000
-dimensionOffsets = [ 0, 76 ]
+dimensionOffsets = [ 0, 768 ]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -11 )
