@@ -9,8 +9,14 @@ func _ready():
 func toggle():
 	if visible:
 		hide()
+		
+		for t in player.get_parent().get_node("Triggers").get_children():
+			t.get_node("Sprite").hide()
 	else:
 		show()
+		
+		for t in player.get_parent().get_node("Triggers").get_children():
+			t.get_node("Sprite").show()
 
 func givePlayerReference(player):
 	self.player = player

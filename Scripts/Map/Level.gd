@@ -3,13 +3,9 @@ extends Node2D
 onready var def = get_node("/root/Definitions")
 onready var vars = get_node("/root/PlayerVars")
 
-export (int, FLAGS, "Alive", "Dead") var availableDimensions
-export (String) var levelName
-export (Array, int) var numEnemies
-export (Array, String) var spawnableEnemies
+export (String) var levelID
 
 var currentDimensionID = ""
-
 var player = null
 var rng = RandomNumberGenerator.new()
 
@@ -27,12 +23,13 @@ func _ready():
 	spawnAll()
 
 func spawnAll():
-	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Tiles"))
-	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Environment"))
-	#spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Triggers"))
-	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Interactive"))
-	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Powerups"))
-	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Enemies"))
+	for map in $SpawnMaps.get_children():
+		spawnObjects(map.get_node("Tiles"), map.name)
+		spawnObjects(map.get_node("Environment"), map.name)
+		spawnObjects(map.get_node("Triggers"), map.name)
+		spawnObjects(map.get_node("Interactive"), map.name)
+		spawnObjects(map.get_node("Powerups"), map.name)
+		spawnObjects(map.get_node("Enemies"), map.name)
 	
 	$SpawnMaps.hide()
 
@@ -59,44 +56,29 @@ func setBoundary():
 func setSpawn():
 	player.position = $Spawn.position * 2
 
-func spawnObjects(spawnMap, scale = Vector2(1, 1)):
+func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
 	
 	for i in objects.size():
 		var objectID = spawnMap.get_cellv(objects[i])
 		var pos = objects[i]
-		var tiles = false
+		var special = ""
 		
 		var category = spawnMap.name
-		if category == "Tiles": tiles = true
+		if category == "Tiles" or category == "Triggers": special = category
 		
 		var stringID = def.STRING_IDS[category]
-		if tiles: stringID = stringID[currentDimensionID]
+		if special == "Tiles": stringID = stringID[dimension]
 		var type = stringID[str(objectID)]
 		
 		stringID = type
-		if tiles: stringID = "t_tile"
+		if special == "Tiles": stringID = "t_tile"
 		
-		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles, currentDimensionID)
-		obj.setType(type)
-
-func spawnEnemies():
-	var spawnedOn = []
-	var tiles = get_node("Spawnable").get_used_cells()
-	
-	if tiles.size() <= 0: return
-	
-	for i in numEnemies[vars.difficulty]:
-		rng.randomize()
-		var enemyType = spawnableEnemies[rng.randi_range(0, spawnableEnemies.size() - 1)]
+		var obj = $SpawnHelper.spawn(stringID, pos, scale, special)
+		if special != "Triggers": obj.setType(type)
+		else: obj.initialize(self, player, dimension)
 		
-		rng.randomize()
-		var tile = null
-		while spawnedOn.find(tile) == -1:
-			tile = tiles[rng.randi_range(0, tiles.size() - 1)]
-			if  spawnedOn.find(tile) == -1: spawnedOn.append(tile)
-		
-		$SpawnHelper.spawn(enemyType, tile, Vector2(1, 1), false, currentDimensionID)
+		obj.changeDimension(currentDimensionID)
 
 # ================================
 # Actions

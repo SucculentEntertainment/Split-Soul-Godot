@@ -1,0 +1,14 @@
+{
+    "l_test":
+    {
+        "name": "Test",
+        "description": "A level used for testing in the development process",
+        "spawns":
+        [
+            {
+                "id": "e_slime",
+                "chance": 100
+            }
+        ]
+    }
+}

@@ -12,14 +12,15 @@
 
 [node name="Test" type="YSort"]
 script = ExtResource( 1 )
-availableDimensions = 3
-levelName = "Test"
-numEnemies = [ 10, 20, 30 ]
+levelID = "l_test"
 
 [node name="SpawnHelper" parent="." instance=ExtResource( 2 )]
 
 [node name="Spawn" type="Position2D" parent="."]
-position = Vector2( 424.2, 73.1667 )
+position = Vector2( 424, 72 )
+__meta__ = {
+"_gizmo_extents_": 32.0
+}
 
 [node name="SpawnMaps" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
@@ -46,7 +47,7 @@ tile_set = ExtResource( 8 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1
-tile_data = PoolIntArray( 65559, 0, 0, 589870, 0, 0, 655398, 0, 0, 720903, 0, 0, 1179718, 0, 0, 1179727, 1, 0, 1507388, 0, 0, 1769546, 0, 0, 1900595, 0, 0, 2228237, 0, 0, 2359356, 0, 0, 2424863, 0, 0, 2424878, 0, 0, 2555975, 0, 0 )
+tile_data = PoolIntArray( 65559, 0, 0, 589870, 0, 0, 655398, 0, 0, 720903, 0, 0, 1179718, 0, 0, 1507388, 0, 0, 1769546, 0, 0, 1900595, 0, 0, 2228237, 0, 0, 2359356, 0, 0, 2424863, 0, 0, 2424878, 0, 0, 2555975, 0, 0 )
 
 [node name="Interactive" type="TileMap" parent="SpawnMaps/d_alive"]
 tile_set = ExtResource( 5 )
@@ -90,7 +91,7 @@ tile_set = ExtResource( 8 )
 cell_size = Vector2( 16, 16 )
 cell_quadrant_size = 4
 format = 1
-tile_data = PoolIntArray( 65559, 0, 0, 589870, 0, 0, 655398, 0, 0, 720903, 0, 0, 1179718, 0, 0, 1179727, 1, 0, 1507388, 0, 0, 1769546, 0, 0, 1900595, 0, 0, 2228237, 0, 0, 2359356, 0, 0, 2424863, 0, 0, 2424878, 0, 0, 2555975, 0, 0 )
+tile_data = PoolIntArray( 262213, 0, 0, 655434, 0, 0, 786441, 0, 0, 786473, 0, 0, 1245246, 0, 0, 1441798, 0, 0, 1835081, 0, 0, 2359312, 0, 0, 2424882, 0, 0, 2818077, 0, 0 )
 
 [node name="Interactive" type="TileMap" parent="SpawnMaps/d_dead"]
 tile_set = ExtResource( 5 )
@@ -112,6 +113,9 @@ cell_quadrant_size = 4
 format = 1
 
 [node name="Tiles" type="Node2D" parent="."]
+scale = Vector2( 2, 2 )
+
+[node name="Triggers" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
 [node name="Entities" type="YSort" parent="."]
