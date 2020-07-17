@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PlayerAlive.png-2bd9c2e55050abcaab0c1f832b7eb5a2.stex"
+path="res://.import/Trigger.png-52a8f21a2d9e4dc3754c731721bad781.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/PlayerAlive.png"
-dest_files=[ "res://.import/PlayerAlive.png-2bd9c2e55050abcaab0c1f832b7eb5a2.stex" ]
+source_file="res://Sprites/Entities/Trigger.png"
+dest_files=[ "res://.import/Trigger.png-52a8f21a2d9e4dc3754c731721bad781.stex" ]
 
 [params]
 

@@ -71,7 +71,7 @@ func changeDimension(dimension):
 	if def.getDimensionLayer(dimension) & layer != 0:
 		show()
 		$CollisionShape2D.disabled = false;
-		$Sprite.region_rect.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	else:
 		hide()
 		$CollisionShape2D.disabled = true;

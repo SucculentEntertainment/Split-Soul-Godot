@@ -1,88 +1,98 @@
 {
 	"layers":
-	[
+	{
+		"a":
 		{
-			"id": "a",
 			"layer": "d_alive"
 		},
+		
+		"d":
 		{
-			"id": "d",
 			"layer": "d_dead"
 		}
 		
-	],
+	},
 	
 	"tiles":
-	[
+	{
+		"t_grass_a":
 		{
-			"id": "t_grass_a",
 			"startFrame": 0,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_sand_a":
 		{
-			"id": "t_sand_a",
 			"startFrame": 54,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_gravel_a":
 		{
-			"id": "t_gravel_a",
 			"startFrame": 108,
 			"numFrames": 1,
 			"variations": 4,
-			"hasCollision": false
+			"hasCollision": true
 		},
+		
+		"t_dirt_a":
 		{
-			"id": "t_dirt_a",
 			"startFrame": 162,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_snow_a":
 		{
-			"id": "t_snow_a",
 			"startFrame": 216,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_grass_d":
 		{
-			"id": "t_grass_d",
 			"startFrame": 270,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_sand_d":
 		{
-			"id": "t_sand_d",
 			"startFrame": 324,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_gravel_d":
 		{
-			"id": "t_gravel_d",
 			"startFrame": 378,
 			"numFrames": 1,
 			"variations": 4,
-			"hasCollision": false
+			"hasCollision": true
 		},
+		
+		"t_dirt_d":
 		{
-			"id": "t_dirt_d",
 			"startFrame": 432,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		},
+		
+		"t_snow_d":
 		{
-			"id": "t_snow_d",
 			"startFrame": 486,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
 		}
-	]
+	}
 }

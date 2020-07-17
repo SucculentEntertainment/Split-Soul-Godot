@@ -6,7 +6,7 @@ const id = "p_itemStack"
 var itemName = ""
 var amount = 0
 
-var armed = true
+var armed = false
 
 func _ready():
 	connect("area_entered", self, "_onPickup")
@@ -46,7 +46,7 @@ func setType(itemName, amount):
 		queue_free()
 		return
 	
-	$Tween.interpolate_property($Sprite, "frame", def.ITEM_START_FRAMES[itemName], def.ITEM_START_FRAMES[itemName] + (def.ITEM_NUM_FRAMES[itemName] - 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1)
+	$Tween.interpolate_property($Sprite, "frame", def.ITEM_DATA[itemName].startFrame, def.ITEM_DATA[itemName].startFrame + (def.ITEM_DATA[itemName].numFrames - 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1)
 	$Tween.start()
 
 func changeDimension(dimension):

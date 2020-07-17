@@ -137,7 +137,7 @@ func changeDimension(dimension):
 	if dimension == "d_dead": enableGlow()
 	else: disableGlow()
 	
-	$Sprite.region_rect.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+	$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	
 	transition.get_node("AnimationPlayer").play("Open")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")

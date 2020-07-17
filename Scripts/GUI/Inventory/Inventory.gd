@@ -89,9 +89,9 @@ func _input(event):
 					
 			elif mouseItem:
 				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
-					if $MouseItem.amount + slot.amount > def.ITEM_STACK_SIZES[$MouseItem.itemName]:
-						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount + slot.amount - def.ITEM_STACK_SIZES[$MouseItem.itemName])
-						slot.updateItem($MouseItem.itemName, def.ITEM_STACK_SIZES[$MouseItem.itemName])
+					if $MouseItem.amount + slot.amount > def.ITEM_DATA[$MouseItem.itemName].stackSize:
+						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount + slot.amount - def.ITEM_DATA[$MouseItem.itemName].stackSize)
+						slot.updateItem($MouseItem.itemName, def.ITEM_DATA[$MouseItem.itemName].stackSize)
 						
 						if $MouseItem.amount <= 0:
 							$MouseItem.hide()
@@ -112,9 +112,10 @@ func _input(event):
 						level = player.get_parent()
 					
 					var spawnHelper = level.get_node("SpawnHelper")
-					var obj = spawnHelper.spawn("p_itemStack", spawnHelper.posToCoords(player.get_position()), Vector2(0.25, 0.25))
+					var obj = spawnHelper.spawn("p_itemStack", spawnHelper.posToCoords(player.get_position() / level.get_node("Tiles").scale), Vector2(0.25, 0.25))
 					
 					obj.setType($MouseItem.itemName, $MouseItem.amount)
+					
 					$MouseItem.hide()
 					$MouseItem.resetType()
 					mouseItem = false
@@ -133,7 +134,7 @@ func _input(event):
 					
 			elif mouseItem:
 				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
-					if slot.amount + 1 <= def.ITEM_STACK_SIZES[$MouseItem.itemName]:
+					if slot.amount + 1 <= def.ITEM_DATA[$MouseItem.itemName].stackSize:
 						slot.updateItem($MouseItem.itemName, slot.amount + 1)
 						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount - 1)
 						
@@ -174,7 +175,7 @@ func divideAmounts(item, amount, slots):
 	var amounts = []
 	
 	for s in slots:
-		var freeAmount = def.ITEM_STACK_SIZES[item] - s.amount
+		var freeAmount = def.ITEM_DATA[item].stackSize - s.amount
 		
 		if amount > freeAmount:
 			amounts.push_back(freeAmount)

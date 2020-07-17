@@ -17,11 +17,11 @@ func _ready():
 func setType(tileName):
 	self.tileName = tileName
 	
-	variations = def.TILE_VARIATIONS[tileName]
-	hasCollision = def.TILE_COLLISIONS.has(tileName)
+	variations = def.TILE_DATA["tiles"][tileName].variations
+	hasCollision = def.TILE_DATA["tiles"][tileName].hasCollision
 	
-	layer = def.TILE_LAYERS[tileName.substr(tileName.length() - 1, 1)]
-	$Sprite.frame = def.TILE_FRAMES[tileName]
+	layer = def.TILE_DATA["layers"][tileName.substr(tileName.length() - 1, 1)].layer
+	$Sprite.frame = def.TILE_DATA["tiles"][tileName].startFrame
 	
 	$CollisionShape2D.disabled = !hasCollision
 	

@@ -15,11 +15,11 @@ func _ready():
 	loadLevel("Test")
 
 func loadLevel(levelName):
-	var levelScene = load(str("res://Scenes/Levels/" + levelName + "/" + levelName + ".tscn"))
+	var levelScene = load(str("res://Scenes/Levels/" + levelName + ".tscn"))
 	level = levelScene.instance()
 	$Level.add_child(level)
 	
-	level.changeDimension(def.DIMENSION_ALIVE)
+	level.changeDimension("d_alive")
 	level.initPlayer($CanvasLayer/GUI)
 
 func destroyLevel():

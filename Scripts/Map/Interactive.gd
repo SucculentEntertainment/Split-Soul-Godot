@@ -55,7 +55,7 @@ func changeDimension(dimension):
 			$Interaction/CollisionShape2D.disabled = true
 			$Light2D.hide()
 		
-		$Sprite.region_rect.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 		
 		var bodies = $Interaction.get_overlapping_bodies()
 		for body in bodies:
@@ -96,5 +96,5 @@ func interact(player):
 		$Timer.start()
 		
 		if interactableName == "Altar":
-			player.changeDimension(def.DIMENSION_ALIVE)
+			player.changeDimension("d_alive")
 			vars.dead = false

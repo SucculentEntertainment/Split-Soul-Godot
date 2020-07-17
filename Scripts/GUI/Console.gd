@@ -56,7 +56,7 @@ func parseCommand(rawCommand):
 		if command.size() != 2:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if def.DIMENSION.has(command[1]):
+			if def.DIMENSIONS.values().has(command[1]):
 				player.changeDimension(command[1])
 				chatlog.bbcode_text += "Changed Dimension to: " + command[1] + "\n"
 			else:
@@ -100,7 +100,7 @@ func parseCommand(rawCommand):
 		if command.size() != 3:
 			chatlog.bbcode_text += "[color=#FF001D]Invalid arguments[/color]\n"
 		else:
-			if command[2].is_valid_integer() and def.ITEM_NAMES.find(command[1]) != -1:
+			if command[2].is_valid_integer() and def.ITEM_DATA.keys().find(command[1]) != -1:
 				var returnVal = get_parent().get_node("Inventory").insertItem(command[1], int(command[2]))
 				
 				if returnVal == -1:

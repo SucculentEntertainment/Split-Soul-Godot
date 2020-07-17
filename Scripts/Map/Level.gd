@@ -8,10 +8,6 @@ export (String) var levelName
 export (Array, int) var numEnemies
 export (Array, String) var spawnableEnemies
 
-var dimensions = []
-var spawnedDimensions = []
-var currentDimension = null
-var prevDimension = null
 var currentDimensionID = ""
 
 var player = null
@@ -22,32 +18,29 @@ var rng = RandomNumberGenerator.new()
 # ================================
 
 func _ready():
-	loadDimensions()
 	loadPlayer()
-	
 	connectSignals()
+	
+	if currentDimensionID == "": changeDimension("d_alive")
+	
 	setSpawn()
-	
+	spawnAll()
+
 func spawnAll():
-	spawnObjects(currentDimension.get_node("Tiles"))
-	spawnObjects(currentDimension.get_node("Environment"))
-	spawnObjects(currentDimension.get_node("Powerups"))
-	spawnObjects(currentDimension.get_node("Enemies"))
-	spawnObjects(currentDimension.get_node("Interactables"))
+	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Tiles"))
+	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Environment"))
+	#spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Triggers"))
+	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Interactive"))
+	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Powerups"))
+	spawnObjects(get_node("SpawnMaps/" + currentDimensionID + "/Enemies"))
 	
-	spawnEnemies()
+	$SpawnMaps.hide()
 
 func initPlayer(gui):
 	if player != null:
 		vars.initHealth(player.maxHealth)
 		player.initGUI(gui)
 		gui.player = player
-
-func loadDimensions():
-	for i in def.NUM_DIMENSIONS:
-		var dimension = availableDimensions & (1 << i)
-		if dimension != 0:
-			dimensions.append(load(str("res://Scenes/Levels/" + levelName + "/Dimensions/" + def.DIMENSION_NAMES[dimension] + ".tscn")))
 
 func loadPlayer():
 	player = def.PLAYER_SCENE.instance()
@@ -57,15 +50,14 @@ func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
 
 func setBoundary():
-	player.setBoundaries((currentDimension.get_node("Tiles").get_used_rect().end - Vector2(1, 1)) * 16 * currentDimension.scale * 2)
+	player.setBoundaries($SpawnHelper.coordsToPos((get_node("SpawnMaps/" + currentDimensionID + "/Tiles").get_used_rect().end - Vector2(1, 1))) * 2)
 
 # ================================
 # Spawns
 # ================================
 
 func setSpawn():
-	if currentDimension == null: changeDimension(def.DIMENSION_ALIVE)
-	player.position = currentDimension.get_node("Spawn").position * 2
+	player.position = $Spawn.position * 2
 
 func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
@@ -80,19 +72,17 @@ func spawnObjects(spawnMap, scale = Vector2(1, 1)):
 		
 		var stringID = def.STRING_IDS[category]
 		if tiles: stringID = stringID[currentDimensionID]
-		var type = stringID[objectID]
+		var type = stringID[str(objectID)]
 		
 		stringID = type
 		if tiles: stringID = "t_tile"
 		
 		var obj = $SpawnHelper.spawn(stringID, pos, scale, tiles, currentDimensionID)
 		obj.setType(type)
-	
-	spawnMap.clear()
 
 func spawnEnemies():
 	var spawnedOn = []
-	var tiles = currentDimension.get_node("Spawnable").get_used_cells()
+	var tiles = get_node("Spawnable").get_used_cells()
 	
 	if tiles.size() <= 0: return
 	
@@ -113,36 +103,8 @@ func spawnEnemies():
 # ================================
 
 func changeDimension(dimension):
-	if dimensions.size() == 0:
-		print("No Dimensions Loaded")
-		return
-	
-	if currentDimension == null:
-		currentDimensionID = "d_alive"
-		currentDimension = dimensions[def.getDimensionIndex(currentDimensionID)].instance()
-		$Dimension.add_child(currentDimension)
-		setBoundary()
-	
-	if availableDimensions & dimension != 0:
-		prevDimension = currentDimension
-		currentDimensionID = dimension
-		currentDimension = dimensions[def.getDimensionIndex(dimension)].instance()
-		
-		$Dimension.add_child(currentDimension)
-		prevDimension.queue_free()
-		setBoundary()
-		
-		if spawnedDimensions.find(currentDimensionID) == -1:
-			spawnedDimensions.append(currentDimensionID)
-			spawnAll()
-		
-	# Hide SpawnMaps
-	currentDimension.get_node("Tiles").hide()
-	currentDimension.get_node("Environment").hide()
-	currentDimension.get_node("Powerups").hide()
-	currentDimension.get_node("Enemies").hide()
-	currentDimension.get_node("Interactables").hide()
-	currentDimension.get_node("Spawnable").hide()
+	currentDimensionID = dimension
+	setBoundary()
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
 	for e in $Entities.get_children(): e.changeDimension(dimension)

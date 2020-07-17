@@ -40,8 +40,14 @@
 		"0": "e_slime"
 	},
 	
-	"Interactables":
+	"Interactive":
 	{
 		"0": "n_altar"
+	},
+	
+	"Triggers":
+	{
+		"0": "g_spawn",
+		"1": "g_levelChange"	
 	}
 }
