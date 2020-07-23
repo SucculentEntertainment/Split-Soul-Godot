@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Map/Level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/SpawnHelper.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Resources/TileSets/Environment.tres" type="TileSet" id=7]
 [ext_resource path="res://Resources/TileSets/Triggers.tres" type="TileSet" id=8]
 [ext_resource path="res://Resources/TileSets/Enemies.tres" type="TileSet" id=9]
+[ext_resource path="res://Scenes/Entities/Projectiles/FireBall.tscn" type="PackedScene" id=10]
 
 [node name="Test" type="YSort"]
 script = ExtResource( 1 )
@@ -71,6 +72,7 @@ format = 1
 tile_data = PoolIntArray( 983066, 0, 0, 1114147, 0, 0, 1179666, 0, 0, 1310759, 0, 0, 1441839, 0, 0, 1507363, 0, 0, 1572889, 0, 0, 1572907, 0, 0, 1835026, 0, 0, 1835040, 0, 0 )
 
 [node name="d_dead" type="Node2D" parent="SpawnMaps"]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Tiles" type="TileMap" parent="SpawnMaps/d_dead"]
@@ -120,3 +122,6 @@ scale = Vector2( 2, 2 )
 
 [node name="Entities" type="YSort" parent="."]
 scale = Vector2( 2, 2 )
+
+[node name="FireBall" parent="." instance=ExtResource( 10 )]
+position = Vector2( 504, 328 )
