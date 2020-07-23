@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fireball.png-7c18f2224d146f4ca146887a72e4b150.stex"
+path="res://.import/Scroll.png-413e88e775cb0c1498490bbe4aa59609.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Projectiles/fireball.png"
-dest_files=[ "res://.import/fireball.png-7c18f2224d146f4ca146887a72e4b150.stex" ]
+source_file="res://Sprites/GUI/Scroll.png"
+dest_files=[ "res://.import/Scroll.png-413e88e775cb0c1498490bbe4aa59609.stex" ]
 
 [params]
 

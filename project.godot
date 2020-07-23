@@ -26,6 +26,10 @@ config/icon="res://Logos/Split Soul/Icon_v1.png"
 Definitions="*res://Scripts/Definitions.gd"
 PlayerVars="*res://Scripts/PlayerVars.gd"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=false
+
 [display]
 
 window/size/width=1280
@@ -89,6 +93,11 @@ debug_toggle={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Environment"
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
+quality/filters/msaa=4
 environment/default_environment="res://default_env.tres"

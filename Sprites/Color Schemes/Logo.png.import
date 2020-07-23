@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fireball.png-7c18f2224d146f4ca146887a72e4b150.stex"
+path="res://.import/Logo.png-df72b43fdd5a0cfd2672b292096eacbd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Projectiles/fireball.png"
-dest_files=[ "res://.import/fireball.png-7c18f2224d146f4ca146887a72e4b150.stex" ]
+source_file="res://Sprites/Color Schemes/Logo.png"
+dest_files=[ "res://.import/Logo.png-df72b43fdd5a0cfd2672b292096eacbd.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

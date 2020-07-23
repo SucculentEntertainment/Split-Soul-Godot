@@ -9,6 +9,8 @@ var STRING_IDS = {}
 var ITEM_DATA = {}
 var LEVEL_DATA = {}
 
+var LOADING_SCREEN_MESSAGES = {}
+
 # ================================
 # Scenes
 # ================================
@@ -67,3 +69,6 @@ func _ready():
 	
 	file.open("res://Data/levels.json", file.READ)
 	LEVEL_DATA = parse_json(file.get_as_text())
+	
+	file.open("res://Data/loadingScreenMessages.json", file.READ)
+	LOADING_SCREEN_MESSAGES = parse_json(file.get_as_text())
