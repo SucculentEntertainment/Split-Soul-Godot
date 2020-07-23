@@ -10,10 +10,14 @@ func start(variant, level, gui):
 	$TransitionShader/AnimationPlayer.play("Open")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
 	
+	yield(get_tree().create_timer(2.0), "timeout")
+	
 	level.loadLevel()
 	
 	level.initPlayer(gui)
 	level.changeDimension(variant)
+	
+	yield(get_tree().create_timer(2.0), "timeout")
 	
 	$TransitionShader/AnimationPlayer.play("Close")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
