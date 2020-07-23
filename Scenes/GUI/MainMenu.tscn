@@ -21,7 +21,7 @@ custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/scroll_speed = 0.003
+shader_param/scroll_speed = 0.001
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
@@ -60,7 +60,7 @@ animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 4.0
 } ]
 
 [node name="MainMenu" type="Control"]
@@ -98,7 +98,7 @@ anchor_bottom = 1.0
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 11 )
-frame = 1
+frame = 6
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]
