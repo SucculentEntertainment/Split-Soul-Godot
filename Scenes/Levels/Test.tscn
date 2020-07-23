@@ -71,7 +71,6 @@ format = 1
 tile_data = PoolIntArray( 983066, 0, 0, 1114147, 0, 0, 1179666, 0, 0, 1310759, 0, 0, 1441839, 0, 0, 1507363, 0, 0, 1572889, 0, 0, 1572907, 0, 0, 1835026, 0, 0, 1835040, 0, 0 )
 
 [node name="d_dead" type="Node2D" parent="SpawnMaps"]
-visible = false
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Tiles" type="TileMap" parent="SpawnMaps/d_dead"]
