@@ -16,6 +16,7 @@ var LEVEL_DATA = {}
 var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")
 var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
+var LOADING_SCREEN_SCENE = preload("res://Scenes/GUI/LoadingScreen.tscn")
 
 var SPAWNABLE_SCENES = {
 	"t_tile": preload("res://Scenes/Entities/Tile.tscn"),

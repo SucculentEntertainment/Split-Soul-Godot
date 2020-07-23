@@ -5,7 +5,7 @@ onready var vars = get_node("/root/PlayerVars")
 
 export (String) var levelID
 
-var currentDimensionID = ""
+var currentDimensionID = "d_alive"
 var player = null
 var rng = RandomNumberGenerator.new()
 
@@ -14,22 +14,19 @@ var rng = RandomNumberGenerator.new()
 # ================================
 
 func _ready():
+	pass
+
+func loadLevel():
 	loadPlayer()
-	connectSignals()
-	
-	if currentDimensionID == "": changeDimension("d_alive")
-	
 	setSpawn()
+	
 	spawnAll()
 
 func spawnAll():
 	for map in $SpawnMaps.get_children():
-		spawnObjects(map.get_node("Tiles"), map.name)
-		spawnObjects(map.get_node("Environment"), map.name)
-		spawnObjects(map.get_node("Triggers"), map.name)
-		spawnObjects(map.get_node("Interactive"), map.name)
-		spawnObjects(map.get_node("Powerups"), map.name)
-		spawnObjects(map.get_node("Enemies"), map.name)
+		for spawnMap in map.get_children():
+			spawnObjects(spawnMap, map.name)
+			yield(get_tree().create_timer(0.01), "timeout")
 	
 	$SpawnMaps.hide()
 
@@ -42,6 +39,7 @@ func initPlayer(gui):
 func loadPlayer():
 	player = def.PLAYER_SCENE.instance()
 	add_child(player)
+	connectSignals()
 
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")

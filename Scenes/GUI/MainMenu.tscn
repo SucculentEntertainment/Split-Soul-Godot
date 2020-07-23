@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Sprites/GUI/MainMenuBackground.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Entities/Player/Player.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/GUI/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -66,11 +68,15 @@ position = Vector2( -1.29236, 0 )
 frames = SubResource( 1 )
 centered = false
 
+[node name="BlurShader" parent="." instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Player" type="AnimatedSprite" parent="."]
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 10 )
-frame = 5
+frame = 2
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]
@@ -164,3 +170,5 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TransitionShader" parent="." instance=ExtResource( 5 )]
