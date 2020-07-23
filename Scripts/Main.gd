@@ -19,8 +19,11 @@ func loadLevel(levelName):
 	level = levelScene.instance()
 	$Level.add_child(level)
 	
-	level.changeDimension("d_alive")
-	level.initPlayer($CanvasLayer/GUI)
+	$CanvasLayer/LoadingScreen.start("d_alive", level, $CanvasLayer/GUI)
+	yield($CanvasLayer/LoadingScreen, "loadingFinished")
+	
+	$TransitionShader/AnimationPlayer.play("Open")
+	yield($TransitionShader/AnimationPlayer, "animation_finished")
 
 func destroyLevel():
 	if level != null: level.queue_free()
