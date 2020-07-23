@@ -37,12 +37,12 @@ func posToCoords(pos):
 # Spawn
 # ================================
 
-func spawn(eName, coords, scale = Vector2(1, 1), tile = false, currentDimensionID = ""):
+func spawn(eName, coords, scale = Vector2(1, 1), special = "", currentDimensionID = ""):
 	var obj = def.SPAWNABLE_SCENES[eName].instance()
 	if obj == null: return
 	
 	var parent = get_parent().get_node("Entities")
-	if tile: parent = get_parent().get_node("Tiles")
+	if special != "": parent = get_parent().get_node(special)
 	
 	parent.add_child(obj)
 	var textureOffset = posToCoords(obj.get_node("Sprite").position * Vector2(-1, -1) * scale)

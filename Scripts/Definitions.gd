@@ -7,6 +7,7 @@ extends Node
 var TILE_DATA = {}
 var STRING_IDS = {}
 var ITEM_DATA = {}
+var LEVEL_DATA = {}
 
 # ================================
 # Scenes
@@ -15,6 +16,7 @@ var ITEM_DATA = {}
 var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")
 var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
+var LOADING_SCREEN_SCENE = preload("res://Scenes/GUI/LoadingScreen.tscn")
 
 var SPAWNABLE_SCENES = {
 	"t_tile": preload("res://Scenes/Entities/Tile.tscn"),
@@ -31,7 +33,9 @@ var SPAWNABLE_SCENES = {
 	
 	"p_coin": preload("res://Scenes/Entities/Powerups/Coin.tscn"),
 	"p_soulPoint": preload("res://Scenes/Entities/Powerups/SoulPoint.tscn"),
-	"p_itemStack": preload("res://Scenes/Entities/Powerups/ItemStack.tscn")
+	"p_itemStack": preload("res://Scenes/Entities/Powerups/ItemStack.tscn"),
+	
+	"g_spawn": preload("res://Scenes/Entities/Triggers/SpawnTrigger.tscn")
 }
 
 # ================================
@@ -61,3 +65,6 @@ func _ready():
 	
 	file.open("res://Data/items.json", file.READ)
 	ITEM_DATA = parse_json(file.get_as_text())
+	
+	file.open("res://Data/levels.json", file.READ)
+	LEVEL_DATA = parse_json(file.get_as_text())

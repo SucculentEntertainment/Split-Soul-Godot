@@ -57,7 +57,7 @@
 		
 		"t_grass_d":
 		{
-			"startFrame": 270,
+			"startFrame": 648,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
@@ -65,7 +65,7 @@
 		
 		"t_sand_d":
 		{
-			"startFrame": 324,
+			"startFrame": 702,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
@@ -73,7 +73,7 @@
 		
 		"t_gravel_d":
 		{
-			"startFrame": 378,
+			"startFrame": 756,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": true
@@ -81,7 +81,7 @@
 		
 		"t_dirt_d":
 		{
-			"startFrame": 432,
+			"startFrame": 810,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false
@@ -89,7 +89,7 @@
 		
 		"t_snow_d":
 		{
-			"startFrame": 486,
+			"startFrame": 864,
 			"numFrames": 1,
 			"variations": 4,
 			"hasCollision": false

@@ -19,18 +19,23 @@ config/name="Split Soul"
 run/main_scene="res://Scenes/BootSplash.tscn"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.png"
+config/icon="res://Logos/Split Soul/Icon_v1.png"
 
 [autoload]
 
 Definitions="*res://Scripts/Definitions.gd"
 PlayerVars="*res://Scripts/PlayerVars.gd"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=false
+
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
+window/vsync/use_vsync=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -89,6 +94,11 @@ debug_toggle={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Environment"
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [rendering]
 
+quality/filters/msaa=4
 environment/default_environment="res://default_env.tres"

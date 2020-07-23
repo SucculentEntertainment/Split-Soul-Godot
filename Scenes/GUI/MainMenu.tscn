@@ -1,0 +1,174 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Sprites/GUI/MainMenuBackground.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Entities/Player/Player.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/GUI/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 96, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 160, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 192, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 224, 128, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Backdrop" type="AnimatedSprite" parent="."]
+position = Vector2( -1.29236, 0 )
+frames = SubResource( 1 )
+centered = false
+
+[node name="BlurShader" parent="." instance=ExtResource( 6 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Player" type="AnimatedSprite" parent="."]
+position = Vector2( 640, 360 )
+scale = Vector2( 8, 8 )
+frames = SubResource( 10 )
+frame = 2
+playing = true
+
+[node name="UI" type="GridContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -576.5
+margin_top = -232.0
+margin_right = 576.5
+margin_bottom = -19.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="UI"]
+margin_right = 381.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Continue"
+align = 0
+
+[node name="NewGame" type="Button" parent="UI"]
+margin_left = 385.0
+margin_right = 766.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "New Game"
+align = 0
+
+[node name="LoadGame" type="Button" parent="UI"]
+margin_left = 770.0
+margin_right = 1151.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Load Game"
+align = 0
+
+[node name="Options" type="Button" parent="UI"]
+margin_top = 108.0
+margin_right = 381.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Options"
+align = 0
+
+[node name="Credits" type="Button" parent="UI"]
+margin_left = 385.0
+margin_top = 108.0
+margin_right = 766.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Credits"
+align = 0
+
+[node name="Exit" type="Button" parent="UI"]
+margin_left = 770.0
+margin_top = 108.0
+margin_right = 1151.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Exit"
+align = 0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -420.864
+margin_top = 87.4081
+margin_right = -210.864
+margin_bottom = 119.408
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Split Soul"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TransitionShader" parent="." instance=ExtResource( 5 )]

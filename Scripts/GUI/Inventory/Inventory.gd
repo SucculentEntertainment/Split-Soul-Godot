@@ -50,6 +50,17 @@ func toggle():
 # Events
 # ================================
 
+func _process(_delta):
+	var slot = getHoveredSlot()
+	
+	if slot != null and slot.item != "":
+		$Tooltip.show()
+		
+		$Tooltip/Title.text = def.ITEM_DATA[slot.item].name
+		$Tooltip/Description.text = def.ITEM_DATA[slot.item].description
+	else:
+		$Tooltip.hide()
+
 func getHoveredSlot():
 	var clickedSlot = null
 	

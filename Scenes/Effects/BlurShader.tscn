@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blur_amount : hint_range(0, 5);
+
+void fragment() {
+	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/blur_amount = 0.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "FadeInFast"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "FadeOutFast"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 3.0, 0.0 ]
+}
+
+[node name="BlurShader" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 3 )
+anims/FadeInFast = SubResource( 4 )
+anims/FadeOut = SubResource( 5 )
+anims/FadeOutFast = SubResource( 6 )
