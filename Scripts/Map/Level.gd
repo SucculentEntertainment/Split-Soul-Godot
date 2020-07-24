@@ -52,7 +52,7 @@ func setBoundary():
 # ================================
 
 func setSpawn():
-	player.position = $Spawn.position * 2
+	player.position = $Spawn.position
 
 func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
@@ -66,7 +66,6 @@ func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 		if category == "Tiles" or category == "Triggers": special = category
 		
 		var stringID = def.STRING_IDS[category]
-		if special == "Tiles": stringID = stringID[dimension]
 		var type = stringID[str(objectID)]
 		
 		stringID = type
