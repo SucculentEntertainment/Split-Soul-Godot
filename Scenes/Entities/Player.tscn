@@ -500,7 +500,7 @@ position = Vector2( 0, -11 )
 current = true
 zoom = Vector2( 0.25, 0.25 )
 limit_left = 0
-limit_top = 0
+limit_top = -100
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 2 )
@@ -511,7 +511,7 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 24
 hframes = 8
-frame = 96
+frame = 37
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 768 )
 

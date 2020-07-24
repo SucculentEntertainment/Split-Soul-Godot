@@ -1,58 +1,66 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Sprites/GUI/MainMenuBackground.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/GUI/Scroll.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Entities/Player/Player.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/GUI/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform float scroll_speed;
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 128, 32, 32 )
+void fragment(){
+    vec2 shifteduv = UV;
+    shifteduv .y += TIME * scroll_speed;
+    vec4 color = texture(TEXTURE, shifteduv);
+    COLOR = color;
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/scroll_speed = 0.001
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 32, 128, 32, 32 )
+region = Rect2( 0, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 128, 32, 32 )
+region = Rect2( 32, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 96, 128, 32, 32 )
+region = Rect2( 64, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 128, 32, 32 )
+region = Rect2( 96, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 160, 128, 32, 32 )
+region = Rect2( 128, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 192, 128, 32, 32 )
+region = Rect2( 160, 128, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
+region = Rect2( 192, 128, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
 region = Rect2( 224, 128, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=10]
+[sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 4.0
 } ]
 
 [node name="MainMenu" type="Control"]
@@ -63,10 +71,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Backdrop" type="AnimatedSprite" parent="."]
-position = Vector2( -1.29236, 0 )
-frames = SubResource( 1 )
-centered = false
+[node name="Backdrop" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Backdrop"]
+material = SubResource( 2 )
+margin_right = 80.0
+margin_bottom = 12800.0
+rect_scale = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlurShader" parent="." instance=ExtResource( 6 )]
 anchor_right = 1.0
@@ -75,8 +97,8 @@ anchor_bottom = 1.0
 [node name="Player" type="AnimatedSprite" parent="."]
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
-frames = SubResource( 10 )
-frame = 2
+frames = SubResource( 11 )
+frame = 6
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GroundAlive.png-155782643d6e1cf704cd68a68be80199.stex"
+path="res://.import/Scroll.png-413e88e775cb0c1498490bbe4aa59609.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Entities/Environment/GroundAlive.png"
-dest_files=[ "res://.import/GroundAlive.png-155782643d6e1cf704cd68a68be80199.stex" ]
+source_file="res://Sprites/GUI/Scroll.png"
+dest_files=[ "res://.import/Scroll.png-413e88e775cb0c1498490bbe4aa59609.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
