@@ -3,13 +3,13 @@
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Entities/Projectiles/fireball.png" type="Texture" id=3]
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0.686275, 0, 0.682353, 0.69043, 0.367035, 0.0269699, 0.635294 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 4.0
 flag_disable_z = true
@@ -24,10 +24,9 @@ linear_accel = 1.0
 radial_accel = 1.0
 tangential_accel = 1.0
 damping = 1.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "Creation"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -89,8 +88,7 @@ tracks/4/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Destruction"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -152,8 +150,7 @@ tracks/4/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Travel"
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -226,7 +223,7 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 8
-frame = 13
+frame = 8
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )
@@ -236,12 +233,12 @@ color = Color( 1, 0.615686, 0, 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -8.5 )
-process_material = SubResource( 6 )
+process_material = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Creation = SubResource( 1 )
-anims/Destruction = SubResource( 2 )
-anims/Travel = SubResource( 3 )
+anims/Creation = SubResource( 4 )
+anims/Destruction = SubResource( 5 )
+anims/Travel = SubResource( 6 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 

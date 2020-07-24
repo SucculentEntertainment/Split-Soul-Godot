@@ -17,82 +17,1563 @@
 	{
 		"t_grass_a":
 		{
-			"startFrame": 0,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 0
 		},
-		
+		"t_grassAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 1
+		},
+		"t_grassAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 2
+		},
+		"t_grassAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 3
+		},
+		"t_grassSand1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 4
+		},
+		"t_grassSand2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 5
+		},
+		"t_grassSand3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 6
+		},
+		"t_grassSand4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 7
+		},
+		"t_grassSand5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 8
+		},
+		"t_grassSand6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 9
+		},
+		"t_grassSand7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 10
+		},
+		"t_grassSand8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 11
+		},
+		"t_grassSnow1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 12
+		},
+		"t_grassSnow2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 13
+		},
+		"t_grassSnow3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 14
+		},
+		"t_grassSnow4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 15
+		},
+		"t_grassSnow5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 16
+		},
+		"t_grassSnow6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 17
+		},
+		"t_grassSnow7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 18
+		},
+		"t_grassSnow8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 19
+		},
+		"t_grassDirt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 20
+		},
+		"t_grassDirt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 21
+		},
+		"t_grassDirt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 22
+		},
+		"t_grassDirt4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 23
+		},
+		"t_grassDirt5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 24
+		},
+		"t_grassDirt6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 25
+		},
+		"t_grassDirt7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 26
+		},
+		"t_grassDirt8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 27
+		},
+		"t_grassGravel1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 28
+		},
+		"t_grassGravel2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 29
+		},
+		"t_grassGravel3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 30
+		},
+		"t_grassGravel4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 31
+		},
+		"t_grassGravel5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 32
+		},
+		"t_grassGravel6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 33
+		},
+		"t_grassGravel7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 34
+		},
+		"t_grassGravel8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 35
+		},
 		"t_sand_a":
 		{
-			"startFrame": 54,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 44
 		},
-		
+		"t_sandAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 45
+		},
+		"t_sandAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 46
+		},
+		"t_sandAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 47
+		},
+		"t_sandSand1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 48
+		},
+		"t_sandSand2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 49
+		},
+		"t_sandSand3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 50
+		},
+		"t_sandSand4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 51
+		},
+		"t_sandSand5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 52
+		},
+		"t_sandSand6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 53
+		},
+		"t_sandSand7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 54
+		},
+		"t_sandSand8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 55
+		},
+		"t_sandSnow1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 56
+		},
+		"t_sandSnow2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 57
+		},
+		"t_sandSnow3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 58
+		},
+		"t_sandSnow4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 59
+		},
+		"t_sandSnow5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 60
+		},
+		"t_sandSnow6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 61
+		},
+		"t_sandSnow7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 62
+		},
+		"t_sandSnow8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 63
+		},
+		"t_sandDirt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 64
+		},
+		"t_sandDirt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 65
+		},
+		"t_sandDirt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 66
+		},
+		"t_sandDirt4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 67
+		},
+		"t_sandDirt5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 68
+		},
+		"t_sandDirt6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 69
+		},
+		"t_sandDirt7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 70
+		},
+		"t_sandDirt8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 71
+		},
+		"t_sandGravel1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 72
+		},
+		"t_sandGravel2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 73
+		},
+		"t_sandGravel3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 74
+		},
+		"t_sandGravel4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 75
+		},
+		"t_sandGravel5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 76
+		},
+		"t_sandGravel6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 77
+		},
+		"t_sandGravel7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 78
+		},
+		"t_sandGravel8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 79
+		},
 		"t_gravel_a":
 		{
-			"startFrame": 108,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": true
+			"hasCollision": true,
+			"startFrame": 88
 		},
-		
+		"t_gravelAlt1_a":
+		{
+			"hasCollision": true,
+			"startFrame": 89
+		},
+		"t_gravelAlt2_a":
+		{
+			"hasCollision": true,
+			"startFrame": 90
+		},
+		"t_gravelAlt3_a":
+		{
+			"hasCollision": true,
+			"startFrame": 91
+		},
 		"t_dirt_a":
 		{
-			"startFrame": 162,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 132
 		},
-		
+		"t_dirtAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 133
+		},
+		"t_dirtAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 134
+		},
+		"t_dirtAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 135
+		},
+		"t_dirtSand1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 136
+		},
+		"t_dirtSand2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 137
+		},
+		"t_dirtSand3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 138
+		},
+		"t_dirtSand4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 139
+		},
+		"t_dirtSand5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 140
+		},
+		"t_dirtSand6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 141
+		},
+		"t_dirtSand7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 142
+		},
+		"t_dirtSand8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 143
+		},
+		"t_dirtSnow1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 144
+		},
+		"t_dirtSnow2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 145
+		},
+		"t_dirtSnow3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 146
+		},
+		"t_dirtSnow4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 147
+		},
+		"t_dirtSnow5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 148
+		},
+		"t_dirtSnow6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 149
+		},
+		"t_dirtSnow7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 150
+		},
+		"t_dirtSnow8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 151
+		},
+		"t_dirtDirt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 152
+		},
+		"t_dirtDirt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 153
+		},
+		"t_dirtDirt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 154
+		},
+		"t_dirtDirt4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 155
+		},
+		"t_dirtDirt5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 156
+		},
+		"t_dirtDirt6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 157
+		},
+		"t_dirtDirt7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 158
+		},
+		"t_dirtDirt8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 159
+		},
+		"t_dirtGravel1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 160
+		},
+		"t_dirtGravel2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 161
+		},
+		"t_dirtGravel3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 162
+		},
+		"t_dirtGravel4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 163
+		},
+		"t_dirtGravel5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 164
+		},
+		"t_dirtGravel6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 165
+		},
+		"t_dirtGravel7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 166
+		},
+		"t_dirtGravel8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 167
+		},
 		"t_snow_a":
 		{
-			"startFrame": 216,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 176
 		},
-		
+		"t_snowAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 177
+		},
+		"t_snowAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 178
+		},
+		"t_snowAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 179
+		},
+		"t_snowSand1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 180
+		},
+		"t_snowSand2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 181
+		},
+		"t_snowSand3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 182
+		},
+		"t_snowSand4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 183
+		},
+		"t_snowSand5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 184
+		},
+		"t_snowSand6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 185
+		},
+		"t_snowSand7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 186
+		},
+		"t_snowSand8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 187
+		},
+		"t_snowSnow1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 188
+		},
+		"t_snowSnow2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 189
+		},
+		"t_snowSnow3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 190
+		},
+		"t_snowSnow4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 191
+		},
+		"t_snowSnow5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 192
+		},
+		"t_snowSnow6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 193
+		},
+		"t_snowSnow7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 194
+		},
+		"t_snowSnow8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 195
+		},
+		"t_snowDirt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 196
+		},
+		"t_snowDirt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 197
+		},
+		"t_snowDirt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 198
+		},
+		"t_snowDirt4_a":
+		{
+			"hasCollision": false,
+			"startFrame": 199
+		},
+		"t_snowDirt5_a":
+		{
+			"hasCollision": false,
+			"startFrame": 200
+		},
+		"t_snowDirt6_a":
+		{
+			"hasCollision": false,
+			"startFrame": 201
+		},
+		"t_snowDirt7_a":
+		{
+			"hasCollision": false,
+			"startFrame": 202
+		},
+		"t_snowDirt8_a":
+		{
+			"hasCollision": false,
+			"startFrame": 203
+		},
+		"t_woodOak_a":
+		{
+			"hasCollision": false,
+			"startFrame": 220
+		},
+		"t_woodOakAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 221
+		},
+		"t_woodOakAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 222
+		},
+		"t_woodOakAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 223
+		},
+		"t_woodSpruce_a":
+		{
+			"hasCollision": false,
+			"startFrame": 224
+		},
+		"t_woodSpruceAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 225
+		},
+		"t_woodSpruceAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 226
+		},
+		"t_woodSpruceAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 227
+		},
+		"t_woodBirch_a":
+		{
+			"hasCollision": false,
+			"startFrame": 228
+		},
+		"t_woodBirchAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 229
+		},
+		"t_woodBirchAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 230
+		},
+		"t_woodBirchAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 231
+		},
+		"t_woodJungle_a":
+		{
+			"hasCollision": false,
+			"startFrame": 232
+		},
+		"t_woodJungleAlt1_a":
+		{
+			"hasCollision": false,
+			"startFrame": 233
+		},
+		"t_woodJungleAlt2_a":
+		{
+			"hasCollision": false,
+			"startFrame": 234
+		},
+		"t_woodJungleAlt3_a":
+		{
+			"hasCollision": false,
+			"startFrame": 235
+		},
 		"t_grass_d":
 		{
-			"startFrame": 648,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 264
 		},
-		
+		"t_grassAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 265
+		},
+		"t_grassAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 266
+		},
+		"t_grassAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 267
+		},
+		"t_grassSand1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 268
+		},
+		"t_grassSand2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 269
+		},
+		"t_grassSand3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 270
+		},
+		"t_grassSand4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 271
+		},
+		"t_grassSand5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 272
+		},
+		"t_grassSand6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 273
+		},
+		"t_grassSand7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 274
+		},
+		"t_grassSand8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 275
+		},
+		"t_grassSnow1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 276
+		},
+		"t_grassSnow2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 277
+		},
+		"t_grassSnow3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 278
+		},
+		"t_grassSnow4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 279
+		},
+		"t_grassSnow5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 280
+		},
+		"t_grassSnow6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 281
+		},
+		"t_grassSnow7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 282
+		},
+		"t_grassSnow8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 283
+		},
+		"t_grassDirt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 284
+		},
+		"t_grassDirt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 285
+		},
+		"t_grassDirt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 286
+		},
+		"t_grassDirt4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 287
+		},
+		"t_grassDirt5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 288
+		},
+		"t_grassDirt6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 289
+		},
+		"t_grassDirt7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 290
+		},
+		"t_grassDirt8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 291
+		},
+		"t_grassGravel1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 292
+		},
+		"t_grassGravel2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 293
+		},
+		"t_grassGravel3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 294
+		},
+		"t_grassGravel4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 295
+		},
+		"t_grassGravel5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 296
+		},
+		"t_grassGravel6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 297
+		},
+		"t_grassGravel7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 298
+		},
+		"t_grassGravel8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 299
+		},
 		"t_sand_d":
 		{
-			"startFrame": 702,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 308
 		},
-		
+		"t_sandAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 39
+		},
+		"t_sandAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 310
+		},
+		"t_sandAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 311
+		},
+		"t_sandSand1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 312
+		},
+		"t_sandSand2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 313
+		},
+		"t_sandSand3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 314
+		},
+		"t_sandSand4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 315
+		},
+		"t_sandSand5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 316
+		},
+		"t_sandSand6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 317
+		},
+		"t_sandSand7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 318
+		},
+		"t_sandSand8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 319
+		},
+		"t_sandSnow1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 320
+		},
+		"t_sandSnow2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 321
+		},
+		"t_sandSnow3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 322
+		},
+		"t_sandSnow4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 323
+		},
+		"t_sandSnow5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 324
+		},
+		"t_sandSnow6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 325
+		},
+		"t_sandSnow7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 326
+		},
+		"t_sandSnow8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 327
+		},
+		"t_sandDirt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 328
+		},
+		"t_sandDirt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 329
+		},
+		"t_sandDirt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 330
+		},
+		"t_sandDirt4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 331
+		},
+		"t_sandDirt5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 332
+		},
+		"t_sandDirt6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 333
+		},
+		"t_sandDirt7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 334
+		},
+		"t_sandDirt8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 335
+		},
+		"t_sandGravel1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 336
+		},
+		"t_sandGravel2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 337
+		},
+		"t_sandGravel3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 338
+		},
+		"t_sandGravel4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 339
+		},
+		"t_sandGravel5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 340
+		},
+		"t_sandGravel6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 341
+		},
+		"t_sandGravel7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 342
+		},
+		"t_sandGravel8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 343
+		},
 		"t_gravel_d":
 		{
-			"startFrame": 756,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": true
+			"hasCollision": true,
+			"startFrame": 352
 		},
-		
+		"t_gravelAlt1_d":
+		{
+			"hasCollision": true,
+			"startFrame": 353
+		},
+		"t_gravelAlt2_d":
+		{
+			"hasCollision": true,
+			"startFrame": 354
+		},
+		"t_gravelAlt3_d":
+		{
+			"hasCollision": true,
+			"startFrame": 355
+		},
 		"t_dirt_d":
 		{
-			"startFrame": 810,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 396
 		},
-		
+		"t_dirtAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 397
+		},
+		"t_dirtAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 398
+		},
+		"t_dirtAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 399
+		},
+		"t_dirtSand1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 400
+		},
+		"t_dirtSand2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 401
+		},
+		"t_dirtSand3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 402
+		},
+		"t_dirtSand4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 403
+		},
+		"t_dirtSand5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 404
+		},
+		"t_dirtSand6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 405
+		},
+		"t_dirtSand7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 406
+		},
+		"t_dirtSand8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 407
+		},
+		"t_dirtSnow1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 408
+		},
+		"t_dirtSnow2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 49
+		},
+		"t_dirtSnow3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 410
+		},
+		"t_dirtSnow4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 411
+		},
+		"t_dirtSnow5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 412
+		},
+		"t_dirtSnow6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 413
+		},
+		"t_dirtSnow7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 414
+		},
+		"t_dirtSnow8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 415
+		},
+		"t_dirtDirt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 416
+		},
+		"t_dirtDirt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 417
+		},
+		"t_dirtDirt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 418
+		},
+		"t_dirtDirt4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 419
+		},
+		"t_dirtDirt5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 420
+		},
+		"t_dirtDirt6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 421
+		},
+		"t_dirtDirt7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 422
+		},
+		"t_dirtDirt8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 423
+		},
+		"t_dirtGravel1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 424
+		},
+		"t_dirtGravel2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 425
+		},
+		"t_dirtGravel3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 426
+		},
+		"t_dirtGravel4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 427
+		},
+		"t_dirtGravel5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 428
+		},
+		"t_dirtGravel6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 429
+		},
+		"t_dirtGravel7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 430
+		},
+		"t_dirtGravel8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 431
+		},
 		"t_snow_d":
 		{
-			"startFrame": 864,
-			"numFrames": 1,
-			"variations": 4,
-			"hasCollision": false
+			"hasCollision": false,
+			"startFrame": 440
+		},
+		"t_snowAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 441
+		},
+		"t_snowAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 442
+		},
+		"t_snowAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 443
+		},
+		"t_snowSand1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 444
+		},
+		"t_snowSand2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 445
+		},
+		"t_snowSand3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 446
+		},
+		"t_snowSand4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 447
+		},
+		"t_snowSand5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 448
+		},
+		"t_snowSand6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 449
+		},
+		"t_snowSand7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 450
+		},
+		"t_snowSand8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 451
+		},
+		"t_snowSnow1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 452
+		},
+		"t_snowSnow2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 453
+		},
+		"t_snowSnow3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 454
+		},
+		"t_snowSnow4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 455
+		},
+		"t_snowSnow5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 456
+		},
+		"t_snowSnow6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 457
+		},
+		"t_snowSnow7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 458
+		},
+		"t_snowSnow8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 459
+		},
+		"t_snowDirt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 460
+		},
+		"t_snowDirt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 461
+		},
+		"t_snowDirt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 462
+		},
+		"t_snowDirt4_d":
+		{
+			"hasCollision": false,
+			"startFrame": 463
+		},
+		"t_snowDirt5_d":
+		{
+			"hasCollision": false,
+			"startFrame": 464
+		},
+		"t_snowDirt6_d":
+		{
+			"hasCollision": false,
+			"startFrame": 465
+		},
+		"t_snowDirt7_d":
+		{
+			"hasCollision": false,
+			"startFrame": 466
+		},
+		"t_snowDirt8_d":
+		{
+			"hasCollision": false,
+			"startFrame": 467
+		},
+		"t_woodOak_d":
+		{
+			"hasCollision": false,
+			"startFrame": 484
+		},
+		"t_woodOakAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 485
+		},
+		"t_woodOakAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 486
+		},
+		"t_woodOakAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 487
+		},
+		"t_woodSpruce_d":
+		{
+			"hasCollision": false,
+			"startFrame": 488
+		},
+		"t_woodSpruceAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 489
+		},
+		"t_woodSpruceAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 490
+		},
+		"t_woodSpruceAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 491
+		},
+		"t_woodBirch_d":
+		{
+			"hasCollision": false,
+			"startFrame": 492
+		},
+		"t_woodBirchAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 493
+		},
+		"t_woodBirchAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 494
+		},
+		"t_woodBirchAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 495
+		},
+		"t_woodJungle_d":
+		{
+			"hasCollision": false,
+			"startFrame": 496
+		},
+		"t_woodJungleAlt1_d":
+		{
+			"hasCollision": false,
+			"startFrame": 497
+		},
+		"t_woodJungleAlt2_d":
+		{
+			"hasCollision": false,
+			"startFrame": 498
+		},
+		"t_woodJungleAlt3_d":
+		{
+			"hasCollision": false,
+			"startFrame": 499
 		}
 	}
 }
