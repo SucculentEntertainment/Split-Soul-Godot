@@ -6,8 +6,12 @@
         "spawns":
         [
             {
+                "id": "none",
+                "chance": 30
+            },
+            {
                 "id": "e_slime",
-                "chance": 100
+                "chance": 70
             }
         ]
     }
