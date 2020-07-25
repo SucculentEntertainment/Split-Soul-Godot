@@ -14,5 +14,26 @@
                 "chance": 70
             }
         ]
+    },
+
+    "l_testHouse":
+    {
+        "name": "TestHouse",
+        "description": "A level used for testing interior of houses and level change triggers",
+        "spawns":
+        [
+            {
+                "id": "none",
+                "chance": 100
+            }
+        ],
+        
+        "levelChanges":
+        [
+            "backToPrev",
+            "backToPrev",
+            "backToPrev",
+            "backToPrev"
+        ]
     }
 }
