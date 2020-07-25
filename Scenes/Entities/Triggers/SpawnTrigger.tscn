@@ -8,7 +8,7 @@
 [node name="SpawnTrigger" type="Position2D"]
 script = ExtResource( 1 )
 __meta__ = {
-"_gizmo_extents_": 16.0
+"_gizmo_extents_": 8.0
 }
 threshold = 300.0
 cooldown = 1.0
