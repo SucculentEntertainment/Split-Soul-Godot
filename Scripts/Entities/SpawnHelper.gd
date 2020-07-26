@@ -3,6 +3,7 @@ extends Node
 onready var def = get_node("/root/Definitions")
 
 var tileSize = Vector2()
+var tileScale = Vector2()
 
 # ================================
 # Util
@@ -15,6 +16,7 @@ func getTileSize():
 	var dimensions = get_parent().get_node("SpawnMaps").get_children()
 	var cellSize = dimensions[0].get_node("Tiles").cell_size
 	
+	tileScale = get_parent().get_node("Tiles").scale
 	tileSize = cellSize
 
 # ================================
@@ -30,7 +32,7 @@ func coordsToPos(coords):
 func posToCoords(pos):
 	if tileSize == Vector2(): getTileSize()
 	
-	var coords = pos / tileSize
+	var coords = pos / tileSize / tileScale
 	return coords
 
 # ================================
