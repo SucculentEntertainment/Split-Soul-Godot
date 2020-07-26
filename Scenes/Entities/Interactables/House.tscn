@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Sprites/Entities/Interactive/House.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Entities/Triggers/LevelChangeTrigger.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Entities/Interactables/House.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 4 ]
+}
+
+[node name="House" type="StaticBody2D"]
+script = ExtResource( 4 )
+objectName = "n_house"
+layer = 3
+hasCollision = true
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -23 )
+texture = ExtResource( 1 )
+hframes = 5
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="d_alive" parent="Triggers" instance=ExtResource( 2 )]
+needsInteract = true
+targetLevel = "l_testHouse"
+layer = "d_alive"
+
+[node name="d_dead" parent="Triggers" instance=ExtResource( 2 )]
+needsInteract = true
+targetLevel = "l_testHouse"
+layer = "d_dead"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+position = Vector2( 0, -21 )
+scale = Vector2( 0.062, 0.062 )
+
+[node name="RightWindow" type="Light2D" parent="Lights"]
+position = Vector2( 161.29, 225.806 )
+texture = ExtResource( 3 )
+color = Color( 1, 1, 0.784314, 1 )
+
+[node name="LeftWindow" type="Light2D" parent="Lights"]
+position = Vector2( -161.29, 225.806 )
+texture = ExtResource( 3 )
+color = Color( 1, 1, 0.784314, 1 )
+
+[node name="TopWindow" type="Light2D" parent="Lights"]
+texture = ExtResource( 3 )
+color = Color( 1, 1, 0.784314, 1 )

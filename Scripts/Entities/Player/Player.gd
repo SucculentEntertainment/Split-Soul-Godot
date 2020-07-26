@@ -59,10 +59,6 @@ func _physics_process(delta):
 			ATTACK:
 				attack(delta)
 
-func setBoundaries(boundaries):
-	$Camera2D.limit_right = boundaries.x
-	$Camera2D.limit_bottom = boundaries.y
-
 # ================================
 # Movement
 # ================================

@@ -10,7 +10,7 @@ export (int, FLAGS, "Alive", "Dead") var canInteract
 export (int) var cooldown
 
 var onCooldown = false
-var currentDimension = 0
+var currentDimension = ""
 
 # ================================
 # Util

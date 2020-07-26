@@ -64,7 +64,7 @@ func spawn():
 	
 	if spawnID != "none":
 		var spawnHelper = level.get_node("SpawnHelper")
-		spawnHelper.spawn(spawnID, spawnHelper.posToCoords(global_position / level.get_node("Tiles").scale), Vector2(1, 1), "", level.currentDimensionID)
+		spawnHelper.spawn(spawnID, spawnHelper.posToCoords(position / level.get_node("Tiles").scale), Vector2(1, 1), "", level.currentDimensionID)
 	
 	onCooldown = true
 	$Timer.start()
