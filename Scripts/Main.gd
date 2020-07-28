@@ -18,9 +18,9 @@ var locked = false
 
 func _ready():
 	vars.difficulty = difficulty
-	loadLevel("l_test", "d_alive")
+	loadLevel("l_test", "d_alive", false, true)
 
-func loadLevel(levelID, dimension, wentBack = false):
+func loadLevel(levelID, dimension, wentBack = false, firstLoad = false):
 	if locked: return
 	
 	yield(get_tree().create_timer(0.1), "timeout")
@@ -39,7 +39,7 @@ func loadLevel(levelID, dimension, wentBack = false):
 	level.prevLevel = prevLevel
 	level.gui = $CanvasLayer/GUI
 	
-	$CanvasLayer/LoadingScreen.loadLevel(dimension, level, prevLevel, $CanvasLayer/GUI)
+	$CanvasLayer/LoadingScreen.loadLevel(dimension, level, prevLevel, $CanvasLayer/GUI, firstLoad)
 	yield($CanvasLayer/LoadingScreen, "loadingFinished")
 	
 	$TransitionShader/AnimationPlayer.play("Open")

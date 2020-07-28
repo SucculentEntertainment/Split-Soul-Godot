@@ -6,7 +6,7 @@ onready var def = get_node("/root/Definitions")
 var rng = RandomNumberGenerator.new()
 var loading = false
 
-func loadLevel(variant, level, prevLevel, gui):
+func loadLevel(variant, level, prevLevel, gui, firstLoad = false):
 	if loading: return
 	
 	loading = true
@@ -27,9 +27,7 @@ func loadLevel(variant, level, prevLevel, gui):
 		prevLevel.unload()
 		prevLevel.queue_free()
 	
-	level.loadLevel()
-	
-	level.initPlayer(gui)
+	level.loadLevel(firstLoad)
 	level.changeDimension(variant)
 	
 	yield(get_tree().create_timer(2.0), "timeout")

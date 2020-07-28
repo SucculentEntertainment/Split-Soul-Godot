@@ -25,7 +25,7 @@ var gui = null
 func _ready():
 	pass
 
-func loadLevel():
+func loadLevel(resetHealth = false):
 	if prevLevel != null:
 		player = prevLevel.player
 		prevLevel.remove_child(player)
@@ -36,7 +36,7 @@ func loadLevel():
 		prevLevelID = prevLevel.levelID
 		currentDimensionID = prevLevel.currentDimensionID
 	
-	loadPlayer()
+	loadPlayer(resetHealth)
 	setSpawn()
 	
 	spawnAll()
@@ -52,20 +52,21 @@ func spawnAll():
 	
 	$SpawnMaps.hide()
 
-func initPlayer(gui):
+func initPlayer(gui, resetHealth = false):
 	if player != null:
-		vars.initHealth(player.maxHealth)
+		if resetHealth:
+			vars.initHealth(player.maxHealth)
 		player.initGUI(gui)
 		gui.player = player
 
-func loadPlayer():
+func loadPlayer(resetHealth = false):
 	if player == null:
 		player = def.PLAYER_SCENE.instance()
 	
 	add_child(player)
 	connectSignals()
 	
-	initPlayer(gui)
+	initPlayer(gui, resetHealth)
 
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
