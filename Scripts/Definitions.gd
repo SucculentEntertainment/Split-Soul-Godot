@@ -4,6 +4,8 @@ extends Node
 # Data
 # ================================
 
+var SETTINGS = {}
+
 var TILE_DATA = {}
 var STRING_IDS = {}
 var ITEM_DATA = {}

@@ -28,7 +28,7 @@ __meta__ = {
 [node name="SpawnHelper" parent="." instance=ExtResource( 8 )]
 
 [node name="Spawn" type="Position2D" parent="."]
-position = Vector2( 128, 128 )
+position = Vector2( 128, 248 )
 __meta__ = {
 "_gizmo_extents_": 32.0
 }

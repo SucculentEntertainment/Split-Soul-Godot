@@ -30,6 +30,9 @@ func loadLevel():
 		player = prevLevel.player
 		prevLevel.remove_child(player)
 		
+		if wentBack:
+			player.global_position = get_parent().get_parent().lastPositions[levelID]
+		
 		prevLevelID = prevLevel.levelID
 		currentDimensionID = prevLevel.currentDimensionID
 	
@@ -100,8 +103,11 @@ func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 		if stringID == "g_levelChange":
 			var targetLevel = def.LEVEL_DATA[levelID].levelChanges[levelChangeCount]
 			if targetLevel == "backToPrev":
-				wentBack = true
+				obj.wentBack = true
 				targetLevel = prevLevelID
+				
+				if targetLevel == "":
+					print("Error: No Level to go back to")
 			
 			obj.targetLevel = targetLevel
 			levelChangeCount += 1
