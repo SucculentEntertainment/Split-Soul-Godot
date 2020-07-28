@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Entities/Interactables/House.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 1 )
+extents = Vector2( 16, 5.5 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Idle"
@@ -37,6 +37,7 @@ hframes = 5
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4.5 )
 shape = SubResource( 1 )
 
 [node name="Triggers" type="Node2D" parent="."]

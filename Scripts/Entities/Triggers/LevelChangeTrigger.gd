@@ -5,13 +5,18 @@ onready var def = get_node("/root/Definitions")
 export (bool) var needsInteract = false
 export (String) var targetLevel = ""
 export (String) var layer = ""
+
+var level = null
+
 var triggered = false
+var wentBack = false
 
 func _ready():
 	$Interaction.connect("body_entered", self, "_onEntered")
 	$Interaction.connect("body_exited", self, "_onExited")
 
-func initialize(_level, _player, layer):
+func initialize(level, _player, layer):
+	self.level = level
 	self.layer = layer
 
 func changeDimension(dimension):
@@ -44,4 +49,4 @@ func interact(player):
 	if triggered: return
 	
 	triggered = true
-	player.get_parent().emit_signal("changeLevel", targetLevel, layer)
+	player.get_parent().emit_signal("changeLevel", targetLevel, layer, wentBack)

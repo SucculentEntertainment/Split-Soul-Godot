@@ -33,7 +33,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
+position = Vector2( -8, -8 )
 texture = ExtResource( 1 )
+centered = false
 hframes = 2
 frame = 1
 
@@ -42,5 +44,4 @@ visible = false
 position = Vector2( 0, -16 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 4 )
-frame = 1
 playing = true

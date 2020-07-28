@@ -50,7 +50,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 interactableName = "n_altar"
 layer = 3
-dimensionOffsets = [ 0, 1 ]
+dimensionOffsets = [ 0, 16 ]
 canInteract = 2
 cooldown = 30
 

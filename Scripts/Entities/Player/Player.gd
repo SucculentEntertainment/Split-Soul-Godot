@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var vars = get_node("/root/PlayerVars")
+onready var def = get_node("/root/Definitions")
 
 signal changeDimension(dimension)
 
@@ -13,8 +14,6 @@ export (Array, int) var dimensionOffsets
 
 var damage = 2
 
-onready var def = get_node("/root/Definitions")
-
 var interact = null
 var disableIn = false
 
@@ -25,6 +24,8 @@ var prevDir = Vector2()
 
 var dir = Vector2()
 var vel = Vector2()
+
+var prevPos = Vector2()
 
 var invincibility = false
 
@@ -69,6 +70,7 @@ func getMoveInput():
 	dir = dir.normalized()
 
 func move(delta):
+	prevPos = global_position
 	prevDir = dir
 	getMoveInput()
 	

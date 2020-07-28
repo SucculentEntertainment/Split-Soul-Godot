@@ -20,8 +20,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( -8, -8 )
 texture = ExtResource( 2 )
+centered = false
 hframes = 2
 
 [node name="Timer" type="Timer" parent="."]

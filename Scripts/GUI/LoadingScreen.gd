@@ -6,7 +6,7 @@ onready var def = get_node("/root/Definitions")
 var rng = RandomNumberGenerator.new()
 var loading = false
 
-func start(variant, level, gui):
+func loadLevel(variant, level, prevLevel, gui):
 	if loading: return
 	
 	loading = true
@@ -22,6 +22,10 @@ func start(variant, level, gui):
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
 	
 	yield(get_tree().create_timer(2.0), "timeout")
+	
+	if prevLevel != null:
+		prevLevel.unload()
+		prevLevel.queue_free()
 	
 	level.loadLevel()
 	

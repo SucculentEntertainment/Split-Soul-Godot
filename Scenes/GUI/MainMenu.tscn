@@ -98,7 +98,7 @@ anchor_bottom = 1.0
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 11 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]
