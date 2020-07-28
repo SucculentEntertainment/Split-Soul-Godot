@@ -18,7 +18,7 @@ radius = 2.0
 height = 4.0
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 1.5
+radius = 1.75
 height = 4.0
 
 [sub_resource type="Animation" id=5]
@@ -277,6 +277,7 @@ damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alerter"]
 shape = SubResource( 2 )
