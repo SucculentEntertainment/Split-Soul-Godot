@@ -10,7 +10,7 @@ export (int, FLAGS, "Alive", "Dead") var canInteract
 export (int) var cooldown
 
 var onCooldown = false
-var currentDimension = 0
+var currentDimension = ""
 
 # ================================
 # Util
@@ -95,6 +95,6 @@ func interact(player):
 		$CooldownBar.changeHealth($Timer.wait_time, $Timer.wait_time)
 		$Timer.start()
 		
-		if interactableName == "Altar":
+		if interactableName == "n_altar":
 			player.changeDimension("d_alive")
 			vars.dead = false

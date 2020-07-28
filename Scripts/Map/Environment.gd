@@ -4,7 +4,7 @@ onready var def = get_node("/root/Definitions")
 var rng = RandomNumberGenerator.new()
 
 export (String) var objectName
-export (String) var layer
+export (int, FLAGS, "d_alive", "d_dead") var layer
 export (bool) var hasCollision
 
 var animSpeedMin = 0.8
@@ -22,7 +22,7 @@ func setType(_type):
 	pass
 
 func changeDimension(dimension):
-	if dimension == layer:
+	if def.getDimensionLayer(dimension) & layer != 0:
 		show()
 		if hasCollision: $CollisionShape2D.disabled = false
 	else:

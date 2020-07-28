@@ -1,24 +1,47 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sprites/Entities/Trigger.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Triggers/LevelChangeTrigger.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/GUI/EBtn.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
 [node name="LevelChangeTrigger" type="Position2D"]
 script = ExtResource( 2 )
-__meta__ = {
-"_gizmo_extents_": 8.0
-}
 
-[node name="Trigger" type="Area2D" parent="."]
+[node name="Interaction" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.25, 0.25 )
+visible = false
+position = Vector2( -8, -8 )
 texture = ExtResource( 1 )
+centered = false
 hframes = 2
 frame = 1
+
+[node name="E" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -16 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 4 )
+playing = true

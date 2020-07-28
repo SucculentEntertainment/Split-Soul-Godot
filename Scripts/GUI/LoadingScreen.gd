@@ -4,8 +4,13 @@ signal loadingFinished
 onready var def = get_node("/root/Definitions")
 
 var rng = RandomNumberGenerator.new()
+var loading = false
 
-func start(variant, level, gui):
+func loadLevel(variant, level, prevLevel, gui):
+	if loading: return
+	
+	loading = true
+	
 	rng.randomize()
 	var i = rng.randi_range(0, def.LOADING_SCREEN_MESSAGES.size() - 1)
 	$VBoxContainer/Label.text = def.LOADING_SCREEN_MESSAGES[i]
@@ -18,6 +23,10 @@ func start(variant, level, gui):
 	
 	yield(get_tree().create_timer(2.0), "timeout")
 	
+	if prevLevel != null:
+		prevLevel.unload()
+		prevLevel.queue_free()
+	
 	level.loadLevel()
 	
 	level.initPlayer(gui)
@@ -29,4 +38,5 @@ func start(variant, level, gui):
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
 	
 	hide()
+	loading = false
 	emit_signal("loadingFinished")

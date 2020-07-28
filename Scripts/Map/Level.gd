@@ -3,11 +3,20 @@ extends Node2D
 onready var def = get_node("/root/Definitions")
 onready var vars = get_node("/root/PlayerVars")
 
+signal changeLevel(level)
+
 export (String) var levelID
+
+var prevLevel = null
+var prevLevelID = ""
+
+var wentBack = false
 
 var currentDimensionID = "d_alive"
 var player = null
 var rng = RandomNumberGenerator.new()
+
+var gui = null
 
 # ================================
 # Util
@@ -17,6 +26,16 @@ func _ready():
 	pass
 
 func loadLevel():
+	if prevLevel != null:
+		player = prevLevel.player
+		prevLevel.remove_child(player)
+		
+		if wentBack:
+			player.global_position = get_parent().get_parent().lastPositions[levelID]
+		
+		prevLevelID = prevLevel.levelID
+		currentDimensionID = prevLevel.currentDimensionID
+	
 	loadPlayer()
 	setSpawn()
 	
@@ -24,6 +43,9 @@ func loadLevel():
 
 func spawnAll():
 	for map in $SpawnMaps.get_children():
+		if get_parent().get_parent().prevLoaded.has(levelID):
+			map.get_node("Enemies").clear()
+		
 		for spawnMap in map.get_children():
 			spawnObjects(spawnMap, map.name)
 			yield(get_tree().create_timer(0.01), "timeout")
@@ -37,25 +59,28 @@ func initPlayer(gui):
 		gui.player = player
 
 func loadPlayer():
-	player = def.PLAYER_SCENE.instance()
+	if player == null:
+		player = def.PLAYER_SCENE.instance()
+	
 	add_child(player)
 	connectSignals()
+	
+	initPlayer(gui)
 
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
-
-func setBoundary():
-	player.setBoundaries($SpawnHelper.coordsToPos((get_node("SpawnMaps/" + currentDimensionID + "/Tiles").get_used_rect().end - Vector2(1, 1))) * 2)
 
 # ================================
 # Spawns
 # ================================
 
 func setSpawn():
-	player.position = $Spawn.position
+	if !wentBack:
+		player.position = $Spawn.position / 2
 
 func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
+	var levelChangeCount = 0
 	
 	for i in objects.size():
 		var objectID = spawnMap.get_cellv(objects[i])
@@ -75,6 +100,18 @@ func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 		if special != "Triggers": obj.setType(type)
 		else: obj.initialize(self, player, dimension)
 		
+		if stringID == "g_levelChange":
+			var targetLevel = def.LEVEL_DATA[levelID].levelChanges[levelChangeCount]
+			if targetLevel == "backToPrev":
+				obj.wentBack = true
+				targetLevel = prevLevelID
+				
+				if targetLevel == "":
+					print("Error: No Level to go back to")
+			
+			obj.targetLevel = targetLevel
+			levelChangeCount += 1
+		
 		obj.changeDimension(currentDimensionID)
 
 # ================================
@@ -83,8 +120,10 @@ func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 
 func changeDimension(dimension):
 	currentDimensionID = dimension
-	setBoundary()
 	
 	for t in $Tiles.get_children(): t.changeDimension(dimension)
 	for e in $Entities.get_children(): e.changeDimension(dimension)
 	for g in $Triggers.get_children(): g.changeDimension(dimension)
+
+func unload():
+	for e in $Entities.get_children(): e.queue_free()
