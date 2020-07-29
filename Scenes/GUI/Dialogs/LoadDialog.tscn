@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
+
+[node name="LoadDialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -350.0
+margin_right = 250.0
+margin_bottom = 350.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 468.0
+margin_bottom = 32.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 1 )
+text = "Load Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Savenames" type="ScrollContainer" parent="Panel/VBoxContainer"]
+margin_top = 36.0
+margin_right = 468.0
+margin_bottom = 642.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/VBoxContainer/Savenames"]
+margin_right = 468.0
+margin_bottom = 606.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Navigation" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 646.0
+margin_right = 468.0
+margin_bottom = 668.0
+
+[node name="Cancel" type="Button" parent="Panel/VBoxContainer/Navigation"]
+margin_right = 232.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Cancel"
+
+[node name="Load" type="Button" parent="Panel/VBoxContainer/Navigation"]
+margin_left = 236.0
+margin_right = 468.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Load"

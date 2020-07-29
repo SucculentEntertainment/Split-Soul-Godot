@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/GUI/QuickMenu.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
 
 [node name="QuickMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1152.0
-margin_bottom = -556.0
+margin_right = -1148.0
+margin_bottom = -546.0
 rect_scale = Vector2( 2, 2 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,54 +40,54 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
-margin_right = 96.0
-margin_bottom = 20.0
+margin_right = 100.0
+margin_bottom = 22.0
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 96.0
-margin_bottom = 28.0
+margin_top = 26.0
+margin_right = 100.0
+margin_bottom = 30.0
 
 [node name="Save" type="Button" parent="VBoxContainer"]
-margin_top = 32.0
-margin_right = 96.0
-margin_bottom = 52.0
+margin_top = 34.0
+margin_right = 100.0
+margin_bottom = 56.0
 text = "Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Load" type="Button" parent="VBoxContainer"]
-margin_top = 56.0
-margin_right = 96.0
-margin_bottom = 76.0
+margin_top = 60.0
+margin_right = 100.0
+margin_bottom = 82.0
 text = "Load"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 80.0
-margin_right = 96.0
-margin_bottom = 84.0
+margin_top = 86.0
+margin_right = 100.0
+margin_bottom = 90.0
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
-margin_top = 88.0
-margin_right = 96.0
-margin_bottom = 108.0
+margin_top = 94.0
+margin_right = 100.0
+margin_bottom = 116.0
 text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 112.0
-margin_right = 96.0
-margin_bottom = 132.0
+margin_top = 120.0
+margin_right = 100.0
+margin_bottom = 142.0
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false

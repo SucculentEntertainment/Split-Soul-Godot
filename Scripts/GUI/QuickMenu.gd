@@ -3,8 +3,11 @@ extends Control
 signal exitToMenu
 
 var savedPos = Vector2()
+var gui = null
 
 func _ready():
+	gui = get_parent()
+	
 	$VBoxContainer/Continue.connect("button_down", self, "_onContinue")
 	$VBoxContainer/Save.connect("button_down", self, "_onSave")
 	$VBoxContainer/Load.connect("button_down", self, "_onLoad")
@@ -35,8 +38,21 @@ func _onSettings():
 
 func _onExit():
 	if savedPos != get_parent().player.global_position:
-		var sel = get_parent().notSavedDialog()
-		print(sel)
+		var diag = gui.get_node("NotSavedDialog")
+		diag.toggle()
+		
+		yield(diag, "selected")
+		var sel = diag.selection
+		
+		diag.toggle()
+		
+		match sel:
+			"cancel":
+				return
+			"yes":
+				_onSave()
+			"no":
+				pass
 	
 	get_tree().paused = false
 	emit_signal("exitToMenu")
