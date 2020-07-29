@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -8,11 +8,10 @@ uniform float blur_amount : hint_range(0, 5);
 void fragment() {
 	COLOR = textureLod(SCREEN_TEXTURE, SCREEN_UV, blur_amount);
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/blur_amount = 0.0
+shader_param/blur_amount = 3.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "FadeIn"
@@ -43,6 +42,22 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 3.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "FadeInInstant"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -76,6 +91,22 @@ tracks/0/keys = {
 "values": [ 3.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "FadeOutInstant"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:material:shader_param/blur_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [node name="BlurShader" type="Control"]
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,5 +125,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeIn = SubResource( 3 )
 anims/FadeInFast = SubResource( 4 )
+anims/FadeInInstant = SubResource( 7 )
 anims/FadeOut = SubResource( 5 )
 anims/FadeOutFast = SubResource( 6 )
+anims/FadeOutInstant = SubResource( 8 )

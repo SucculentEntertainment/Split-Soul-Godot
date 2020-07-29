@@ -17,6 +17,8 @@ var locked = false
 # ================================
 
 func _ready():
+	$CanvasLayer/GUI/QuickMenu.connect("exitToMenu", self, "_onExit")
+	
 	vars.difficulty = difficulty
 	loadLevel("l_test", "d_alive", false, true)
 
@@ -58,4 +60,14 @@ func _onLevelChange(level, dimension, wentBack):
 	loadLevel(level, dimension, wentBack)
 
 func destroyLevel():
-	if level != null: level.queue_free()
+	if prevLevel != null: prevLevel.queue_free()
+
+func _onExit():
+	$TransitionShader/AnimationPlayer.play("Close")
+	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	
+	prevLevel.unload()
+	destroyLevel()
+	
+	get_tree().change_scene("res://Scenes/GUI/MainMenu.tscn")
+	queue_free()

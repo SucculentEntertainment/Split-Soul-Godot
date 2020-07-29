@@ -3,7 +3,7 @@ extends Control
 onready var def = get_node("/root/Definitions")
 
 func _ready():
-	$BlurShader/AnimationPlayer.play("FadeInFast")
+	$BlurShader/AnimationPlayer.play("FadeInInstant")
 	$TransitionShader/AnimationPlayer.play("Open")
 	
 	$UI/Continue.connect("button_down", self, "_onContinue")

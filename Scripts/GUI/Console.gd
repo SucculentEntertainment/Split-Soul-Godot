@@ -14,11 +14,6 @@ var player = null
 func _ready():
 	input.connect("text_entered", self, "text_entered")
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
-			if visible: toggle()
-
 func givePlayerReference(player):
 	self.player = player
 

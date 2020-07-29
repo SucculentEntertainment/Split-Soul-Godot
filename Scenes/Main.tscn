@@ -11,6 +11,15 @@ script = ExtResource( 2 )
 
 [node name="Level" type="Node2D" parent="."]
 
+[node name="RetroShader" parent="." instance=ExtResource( 5 )]
+enableCurve = true
+curveIntensity = 2.0
+zoomLevel = 1.1
+enableChromaShift = true
+greenShift = 1.0
+blueShift = -1.0
+numScanlines = 150.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 1 )]
@@ -19,13 +28,3 @@ script = ExtResource( 2 )
 visible = false
 
 [node name="TransitionShader" parent="." instance=ExtResource( 3 )]
-
-[node name="RetroShader" parent="." instance=ExtResource( 5 )]
-enableCurve = true
-curveIntensity = 2.0
-zoomLevel = 1.1
-enableChromaShift = true
-greenShift = 1.0
-blueShift = -1.0
-enableScanlines = true
-numScanlines = 150.0

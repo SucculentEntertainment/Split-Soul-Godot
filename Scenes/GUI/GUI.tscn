@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Entities/Powerups/Soulpoint.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Scenes/GUI/DialogBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/GUI/Inventory/Inventory.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/GUI/Debug.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/GUI/QuickMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/GUI/Dialogs/NotSavedDialog.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -87,6 +90,7 @@ animations = [ {
 } ]
 
 [node name="GUI" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -133,8 +137,35 @@ margin_bottom = 384.32
 [node name="Debug" parent="." instance=ExtResource( 10 )]
 visible = false
 
+[node name="Inventory" parent="." instance=ExtResource( 9 )]
+visible = false
+
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 visible = false
 
-[node name="Inventory" parent="." instance=ExtResource( 9 )]
+[node name="BlurShader" parent="." instance=ExtResource( 12 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="QuickMenu" parent="." instance=ExtResource( 11 )]
 visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -136.0
+margin_top = -176.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="NotSavedDialog" parent="." instance=ExtResource( 13 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -56.0
+margin_right = 224.0
+margin_bottom = 56.0

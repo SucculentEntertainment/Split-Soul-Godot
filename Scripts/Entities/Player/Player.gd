@@ -35,6 +35,8 @@ enum {
 }
 
 var state = MOVE
+var isInGUI = false
+var currGUI = ""
 
 # ================================
 # Utility
@@ -52,10 +54,11 @@ func initGUI(gui):
 	gui.updateValues(maxHealth)
 
 func _physics_process(delta):
+	getInput()
+	
 	if !disableIn: 
 		match state:
 			MOVE:
-				getInput()
 				move(delta)
 			ATTACK:
 				attack(delta)
@@ -143,15 +146,41 @@ func changeDimension(dimension):
 
 func getInput():
 	if Input.is_action_just_pressed("ctrl_interact"):
-		if interact != null: interact.interact(self)
-	if Input.is_action_just_pressed("ctrl_console"):
-		if gui != null: gui.get_node("Console").toggle()
+		if interact != null and !disableIn: interact.interact(self)
+	
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
-		state = ATTACK
+		if !disableIn: state = ATTACK
+	
+	if Input.is_action_just_pressed("ctrl_console"):
+		if gui != null:
+			gui.get_node("Console").toggle()
+			isInGUI = true
+			currGUI = "console"
+		
 	if Input.is_action_just_pressed("ctrl_inventory"):
-		if gui != null: gui.get_node("Inventory").toggle()
+		if gui != null:
+			gui.get_node("Inventory").toggle()
+			isInGUI = true
+			currGUI = "inventory"
+			
 	if Input.is_action_just_pressed("debug_toggle"):
-		if gui != null: gui.get_node("Debug").toggle()
+		if gui != null:
+			gui.get_node("Debug").toggle()
+			
+	if Input.is_action_just_pressed("ui_cancel"):
+		if gui != null:
+			if isInGUI:
+				match currGUI:
+					"console":
+						gui.get_node("Console").toggle()
+					"inventory":
+						gui.get_node("Inventory").toggle()
+				
+				isInGUI = false
+			else:
+				gui.get_node("QuickMenu").toggle()
+				disableIn = !disableIn
+				get_tree().paused = disableIn
 
 func enableGlow():
 	$Light2D.show()
