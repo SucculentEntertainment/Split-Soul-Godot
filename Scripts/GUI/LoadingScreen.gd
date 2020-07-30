@@ -21,7 +21,7 @@ func loadLevel(variant, level, prevLevel, gui, firstLoad = false):
 	$TransitionShader/AnimationPlayer.play("Open")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
 	
-	yield(get_tree().create_timer(2.0), "timeout")
+	#yield(get_tree().create_timer(2.0), "timeout")
 	
 	if prevLevel != null:
 		prevLevel.unload()
@@ -30,7 +30,7 @@ func loadLevel(variant, level, prevLevel, gui, firstLoad = false):
 	level.loadLevel(firstLoad)
 	level.changeDimension(variant)
 	
-	yield(get_tree().create_timer(2.0), "timeout")
+	#yield(get_tree().create_timer(2.0), "timeout")
 	
 	$TransitionShader/AnimationPlayer.play("Close")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")

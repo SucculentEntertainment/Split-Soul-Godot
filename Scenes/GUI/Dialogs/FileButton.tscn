@@ -1,0 +1,95 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/GUI/Dialogs/FileButton.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=3]
+[ext_resource path="res://Sprites/GUI/Checkmark.png" type="Texture" id=4]
+
+[node name="FileButton" type="Button"]
+margin_right = 400.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 336, 64 )
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Data" type="VBoxContainer" parent="Content"]
+margin_right = 384.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Content/Data"]
+margin_right = 384.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "SaveName"
+
+[node name="Timestamp" type="HBoxContainer" parent="Content/Data"]
+margin_top = 36.0
+margin_right = 384.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Content/Data/Timestamp"]
+margin_right = 143.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "Last Edited: "
+
+[node name="Timestamp" type="Label" parent="Content/Data/Timestamp"]
+margin_left = 147.0
+margin_right = 384.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0.6, 0.6, 0.6, 1 )
+text = "30.07.2020 12:20"
+
+[node name="SelectIndicator" type="HBoxContainer" parent="Content"]
+visible = false
+margin_left = 328.0
+margin_right = 384.0
+margin_bottom = 52.0
+alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="Content/SelectIndicator"]
+margin_right = 4.0
+margin_bottom = 52.0
+
+[node name="TextureRect" type="TextureRect" parent="Content/SelectIndicator"]
+margin_left = 8.0
+margin_right = 56.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 48, 48 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1

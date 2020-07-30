@@ -16,6 +16,7 @@ var damage = 2
 
 var interact = null
 var disableIn = false
+var disableAllIn = false
 
 var gui = null
 
@@ -145,28 +146,29 @@ func changeDimension(dimension):
 	transition.queue_free()
 
 func getInput():
-	if Input.is_action_just_pressed("ctrl_interact"):
-		if interact != null and !disableIn: interact.interact(self)
-	
-	if Input.is_action_just_pressed("ctrl_attack_primary"):
-		if !disableIn: state = ATTACK
-	
-	if Input.is_action_just_pressed("ctrl_console"):
-		if gui != null:
-			gui.get_node("Console").toggle()
-			isInGUI = true
-			currGUI = "console"
+	if !disableAllIn:
+		if Input.is_action_just_pressed("ctrl_interact"):
+			if interact != null and !disableIn: interact.interact(self)
 		
-	if Input.is_action_just_pressed("ctrl_inventory"):
-		if gui != null:
-			gui.get_node("Inventory").toggle()
-			isInGUI = true
-			currGUI = "inventory"
+		if Input.is_action_just_pressed("ctrl_attack_primary"):
+			if !disableIn: state = ATTACK
+		
+		if Input.is_action_just_pressed("ctrl_console"):
+			if gui != null:
+				gui.get_node("Console").toggle()
+				isInGUI = true
+				currGUI = "console"
 			
-	if Input.is_action_just_pressed("debug_toggle"):
-		if gui != null:
-			gui.get_node("Debug").toggle()
-			
+		if Input.is_action_just_pressed("ctrl_inventory"):
+			if gui != null:
+				gui.get_node("Inventory").toggle()
+				isInGUI = true
+				currGUI = "inventory"
+				
+		if Input.is_action_just_pressed("debug_toggle"):
+			if gui != null:
+				gui.get_node("Debug").toggle()
+	
 	if Input.is_action_just_pressed("ui_cancel"):
 		if gui != null:
 			if isInGUI:
@@ -180,6 +182,7 @@ func getInput():
 			else:
 				gui.get_node("QuickMenu").toggle()
 				disableIn = !disableIn
+				disableAllIn = disableIn
 				get_tree().paused = disableIn
 
 func enableGlow():

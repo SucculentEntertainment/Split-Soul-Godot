@@ -62,6 +62,12 @@ func _onLevelChange(level, dimension, wentBack):
 func destroyLevel():
 	if prevLevel != null: prevLevel.queue_free()
 
+func saveGame(file):
+	print("Saving")
+
+func loadGame(file):
+	print("Loading")
+
 func _onExit():
 	$TransitionShader/AnimationPlayer.play("Close")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")

@@ -1,6 +1,7 @@
 extends Control
 
 signal exitToMenu
+signal saveFinished
 
 var savedPos = Vector2()
 var gui = null
@@ -13,6 +14,10 @@ func _ready():
 	$VBoxContainer/Load.connect("button_down", self, "_onLoad")
 	$VBoxContainer/Settings.connect("button_down", self, "_onSettings")
 	$VBoxContainer/Exit.connect("button_down", self, "_onExit")
+
+func _input(event):
+	if Input.is_action_just_pressed("ui_cancel"):
+		_onContinue()
 
 func toggle():
 	if visible:
@@ -28,17 +33,28 @@ func _onContinue():
 	Input.action_release("ui_cancel")
 
 func _onSave():
-	pass
+	var diag = gui.get_node("Dialogs/SaveDialog")
+	diag.init(gui)
+	diag.toggle()
+	
+	savedPos = get_parent().player.global_position
+	
+	yield(diag, "finished")
+	emit_signal("saveFinished")
 
 func _onLoad():
-	pass
+	var diag = gui.get_node("Dialogs/LoadDialog")
+	diag.init(gui)
+	diag.toggle()
+	
+	yield(diag, "finished")
 
 func _onSettings():
 	pass
 
 func _onExit():
 	if savedPos != get_parent().player.global_position:
-		var diag = gui.get_node("NotSavedDialog")
+		var diag = gui.get_node("Dialogs/NotSavedDialog")
 		diag.toggle()
 		
 		yield(diag, "selected")
@@ -51,6 +67,7 @@ func _onExit():
 				return
 			"yes":
 				_onSave()
+				yield(self, "saveFinished")
 			"no":
 				pass
 	
