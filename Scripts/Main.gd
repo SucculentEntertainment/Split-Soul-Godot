@@ -91,6 +91,10 @@ func destroyLevel():
 		prevLevel.unload()
 		prevLevel.queue_free()
 		prevLevel = null
+	
+	$CanvasLayer/GUI.player = null
+	$CanvasLayer/GUI/Inventory.resetInventory()
+	vars.resetVars()
 
 func saveGame(file):
 	var level = prevLevel
@@ -130,10 +134,6 @@ func saveGame(file):
 	emit_signal("saveComplete")
 
 func loadGame(file):
-	if prevLevel != null:
-		prevLevel.unload()
-		destroyLevel()
-	
 	vars.difficulty = file.get_var()
 	
 	var levelID = file.get_var()
@@ -144,6 +144,8 @@ func loadGame(file):
 	$Loading/LoadingScreen.start(dimension)
 	yield($Loading/LoadingScreen, "startedLoading")
 	loading = true
+	
+	destroyLevel()
 	
 	prevLoaded = file.get_var()
 	lastPositions = file.get_var()
@@ -188,3 +190,11 @@ func _onExit():
 	var mainMenu = load("res://Scenes/GUI/MainMenu.tscn").instance()
 	$Menu.add_child(mainMenu)
 	mainMenu.connect("menuClosed", self, "_onMenuExit")
+
+func newGame():
+	destroyLevel()
+	prevLoaded = []
+	lastPositions = {}
+	entities = {}
+	
+	loadLevel("l_test", "d_alive", false, true)

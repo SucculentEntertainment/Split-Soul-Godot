@@ -212,3 +212,14 @@ func insertItem(itemName, amount):
 	
 	return 0
 	
+
+func resetInventory():
+	for s in slots:
+		s.queue_free()
+	
+	slots = []
+	
+	for i in numSlots:
+		var slot = slotScene.instance()
+		$Slots.add_child(slot)
+		slots.append(slot)

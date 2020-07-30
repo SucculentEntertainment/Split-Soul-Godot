@@ -33,7 +33,6 @@ func loadLevel(prevLoaded, entities, resetHealth = false):
 	setSpawn()
 	
 	var spawnEntities = !(prevLoaded.has(levelID))
-	print(spawnEntities)
 	spawnAll(spawnEntities)
 	
 	if !spawnEntities:
