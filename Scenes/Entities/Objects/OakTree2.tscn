@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [node name="OakTree2" type="StaticBody2D"]
 script = ExtResource( 1 )
-objectName = "OakTree2"
+id = "o_oakTree2"
 layer = 1
 hasCollision = true
 

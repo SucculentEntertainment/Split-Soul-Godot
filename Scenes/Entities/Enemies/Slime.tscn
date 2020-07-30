@@ -239,7 +239,7 @@ transitions = [ "Idle", "Move", SubResource( 25 ), "Move", "Idle", SubResource( 
 
 [node name="EnemySlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
-enemyName = "Slime"
+id = "e_slime"
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )

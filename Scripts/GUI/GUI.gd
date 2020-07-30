@@ -6,7 +6,7 @@ var player
 var isInDialog = false
 
 func _ready():
-	pass
+	$BlurShader/AnimationPlayer.play("FadeOutInstant")
 
 func _input(_event):
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
