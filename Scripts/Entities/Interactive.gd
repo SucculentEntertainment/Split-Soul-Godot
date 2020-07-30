@@ -3,7 +3,7 @@ extends StaticBody2D
 onready var def = get_node("/root/Definitions")
 onready var vars = get_node("/root/PlayerVars")
 
-export (String) var interactableName
+export (String) var id
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, int) var dimensionOffsets
 export (int, FLAGS, "Alive", "Dead") var canInteract
@@ -11,6 +11,8 @@ export (int) var cooldown
 
 var onCooldown = false
 var currentDimension = ""
+
+var health = -1
 
 # ================================
 # Util
@@ -95,6 +97,6 @@ func interact(player):
 		$CooldownBar.changeHealth($Timer.wait_time, $Timer.wait_time)
 		$Timer.start()
 		
-		if interactableName == "n_altar":
+		if id == "n_altar":
 			player.changeDimension("d_alive")
 			vars.dead = false

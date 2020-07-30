@@ -48,7 +48,7 @@ tracks/0/keys = {
 
 [node name="Altar" type="StaticBody2D"]
 script = ExtResource( 1 )
-interactableName = "n_altar"
+id = "n_altar"
 layer = 3
 dimensionOffsets = [ 0, 16 ]
 canInteract = 2

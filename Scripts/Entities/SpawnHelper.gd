@@ -38,6 +38,8 @@ func posToCoords(pos):
 # ================================
 
 func spawn(eName, coords, scale = Vector2(1, 1), special = "", currentDimensionID = ""):
+	if eName == "": return
+	
 	var obj = def.SPAWNABLE_SCENES[eName].instance()
 	if obj == null: return
 	

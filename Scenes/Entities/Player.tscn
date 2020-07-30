@@ -491,6 +491,7 @@ transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
 [node name="Player" type="KinematicBody2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 speed = 2000
 dimensionOffsets = [ 0, 768 ]

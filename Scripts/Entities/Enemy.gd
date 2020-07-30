@@ -4,7 +4,7 @@ onready var def = get_node("/root/Definitions")
 
 var rng = RandomNumberGenerator.new()
 
-export (String) var enemyName
+export (String) var id
 
 export (Color) var healthy
 export (Color) var damaged
@@ -23,7 +23,7 @@ export (bool) var canLongRange
 export (int) var closeRange
 export (int) var longRange
 
-var health
+var health = 0
 
 var damageCooldown = false
 var movementCooldown = false

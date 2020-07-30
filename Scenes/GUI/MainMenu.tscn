@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Sprites/GUI/Scroll.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/GUI/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -17,7 +18,6 @@ void fragment(){
     vec4 color = texture(TEXTURE, shifteduv);
     COLOR = color;
 }"
-custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
@@ -98,7 +98,7 @@ anchor_bottom = 1.0
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 11 )
-frame = 7
+frame = 4
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]
@@ -192,5 +192,8 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LoadDialog" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="TransitionShader" parent="." instance=ExtResource( 5 )]

@@ -7,9 +7,7 @@ signal changeLevel(level)
 
 export (String) var levelID
 
-var prevLevel = null
 var prevLevelID = ""
-
 var wentBack = false
 
 var currentDimensionID = "d_alive"
@@ -25,47 +23,56 @@ var gui = null
 func _ready():
 	pass
 
-func loadLevel():
-	if prevLevel != null:
-		player = prevLevel.player
-		prevLevel.remove_child(player)
-		
+func loadLevel(prevLoaded, entities, resetHealth = false):
+	loadPlayer(resetHealth)
+	
+	if prevLevelID != "":
 		if wentBack:
 			player.global_position = get_parent().get_parent().lastPositions[levelID]
-		
-		prevLevelID = prevLevel.levelID
-		currentDimensionID = prevLevel.currentDimensionID
 	
-	loadPlayer()
 	setSpawn()
 	
-	spawnAll()
+	var spawnEntities = !(prevLoaded.has(levelID))
+	print(spawnEntities)
+	spawnAll(spawnEntities)
+	
+	if !spawnEntities:
+		for e in entities[levelID]:
+			var obj = $SpawnHelper.spawn(e.id, Vector2())
+			obj.global_position = e.pos
+			obj.health = e.health
+			
+			if obj.health > 0: obj.receiveDamage(0)
 
-func spawnAll():
+func spawnAll(spawnEntities):
 	for map in $SpawnMaps.get_children():
-		if get_parent().get_parent().prevLoaded.has(levelID):
-			map.get_node("Enemies").clear()
-		
 		for spawnMap in map.get_children():
-			spawnObjects(spawnMap, map.name)
+			spawnObjects(spawnMap, map.name, spawnEntities)
 			yield(get_tree().create_timer(0.01), "timeout")
 	
 	$SpawnMaps.hide()
 
-func initPlayer(gui):
+func initPlayer(gui, resetHealth = false):
 	if player != null:
-		vars.initHealth(player.maxHealth)
+		if resetHealth:
+			vars.initHealth(player.maxHealth)
 		player.initGUI(gui)
 		gui.player = player
+		
+		player.disableIn = false
+		player.disableAllIn = false
+		
+		if gui.get_node("QuickMenu").visible:
+			gui.get_node("QuickMenu")._onContinue()
 
-func loadPlayer():
+func loadPlayer(resetHealth = false):
 	if player == null:
 		player = def.PLAYER_SCENE.instance()
 	
 	add_child(player)
 	connectSignals()
 	
-	initPlayer(gui)
+	initPlayer(gui, resetHealth)
 
 func connectSignals():
 	player.connect("changeDimension", self, "changeDimension")
@@ -78,7 +85,7 @@ func setSpawn():
 	if !wentBack:
 		player.position = $Spawn.position / 2
 
-func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
+func spawnObjects(spawnMap, dimension, spawnEntities, scale = Vector2(1, 1)):
 	var objects = spawnMap.get_used_cells()
 	var levelChangeCount = 0
 	
@@ -89,6 +96,9 @@ func spawnObjects(spawnMap, dimension, scale = Vector2(1, 1)):
 		
 		var category = spawnMap.name
 		if category == "Tiles" or category == "Triggers": special = category
+		
+		if special == "" and !spawnEntities:
+			return
 		
 		var stringID = def.STRING_IDS[category]
 		var type = stringID[str(objectID)]
