@@ -3,7 +3,7 @@ extends Control
 signal exitToMenu
 signal saveFinished
 
-var savedPos = Vector2()
+var savedTime = OS.get_datetime()
 var gui = null
 
 func _ready():
@@ -34,17 +34,18 @@ func _onContinue():
 
 func _onSave():
 	var diag = gui.get_node("Dialogs/SaveDialog")
-	diag.init(gui)
+	diag.init(gui.get_parent().get_parent())
 	diag.toggle()
 	
-	savedPos = get_parent().player.global_position
-	
 	yield(diag, "finished")
+	if diag.saved:
+		savedTime = OS.get_datetime()
+	
 	emit_signal("saveFinished")
 
 func _onLoad():
 	var diag = gui.get_node("Dialogs/LoadDialog")
-	diag.init(gui)
+	diag.init(gui.get_parent().get_parent())
 	diag.toggle()
 	
 	yield(diag, "finished")
@@ -53,7 +54,7 @@ func _onSettings():
 	pass
 
 func _onExit():
-	if savedPos != get_parent().player.global_position:
+	if savedTime.minute != OS.get_datetime().minute:
 		var diag = gui.get_node("Dialogs/NotSavedDialog")
 		diag.toggle()
 		

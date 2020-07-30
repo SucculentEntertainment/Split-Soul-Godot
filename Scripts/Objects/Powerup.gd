@@ -6,6 +6,8 @@ export (String) var id
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, int) var dimensionOffsets
 
+var health = -1
+
 func _ready():
 	$AnimationPlayer.play("Idle")
 	connect("area_entered", self, "_onPickup")

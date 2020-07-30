@@ -1,6 +1,6 @@
 extends Node
 
-var health
+var health = 0
 var coins = 0
 var soulpoints = 0
 var dead = false

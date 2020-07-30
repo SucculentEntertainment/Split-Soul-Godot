@@ -24,7 +24,11 @@ numScanlines = 150.0
 
 [node name="GUI" parent="CanvasLayer" instance=ExtResource( 1 )]
 
-[node name="LoadingScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
+[node name="TransitionShader" parent="." instance=ExtResource( 3 )]
+
+[node name="Loading" type="CanvasLayer" parent="."]
+
+[node name="LoadingScreen" parent="Loading" instance=ExtResource( 4 )]
 visible = false
 
-[node name="TransitionShader" parent="." instance=ExtResource( 3 )]
+[node name="Menu" type="CanvasLayer" parent="."]

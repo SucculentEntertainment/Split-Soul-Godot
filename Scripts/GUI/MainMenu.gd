@@ -1,6 +1,9 @@
 extends Control
 
+signal menuClosed
+
 onready var def = get_node("/root/Definitions")
+onready var main = get_parent().get_parent()
 
 func _ready():
 	$BlurShader/AnimationPlayer.play("FadeInInstant")
@@ -14,30 +17,29 @@ func _ready():
 	$UI/Exit.connect("button_down", self, "_onExit")
 
 func _onContinue():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	quitMenu()
 
 func _onNewGame():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
-	
-	get_tree().change_scene("res://Scenes/Main.tscn")
-	queue_free()
+	main.loadLevel("l_test", "d_alive", false, true)
+	quitMenu()
 
 func _onLoadGame():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	$LoadDialog.init(main)
+	$LoadDialog.toggle()
+	
+	yield($LoadDialog, "finished")
+	quitMenu()
 
 func _onOptions():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	pass
 
 func _onCredits():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	pass
 
 func _onExit():
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
-	
 	get_tree().quit()
+
+func quitMenu():
+	$BlurShader/AnimationPlayer.play("FadeOutInstant")
+	yield($BlurShader/AnimationPlayer, "animation_finished")
+	emit_signal("menuClosed")

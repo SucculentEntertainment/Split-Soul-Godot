@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
 [ext_resource path="res://Scripts/GUI/Dialogs/SaveDialog.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GUI/LoadingAnim.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=5]
 
 [node name="SaveDialog" type="Control"]
 anchor_right = 1.0
@@ -109,13 +108,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Save"
 
-[node name="BlurShader" parent="." instance=ExtResource( 5 )]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="LoadingAnim" parent="." instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 640, 360 )
 scale = Vector2( 2, 2 )
-frame = 1
+frame = 13

@@ -155,10 +155,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -68.0
-margin_top = -88.0
-margin_right = 68.0
-margin_bottom = 88.0
+margin_left = -106.0
+margin_top = -126.0
+margin_right = 106.0
+margin_bottom = 126.0
 
 [node name="Dialogs" type="Control" parent="."]
 anchor_right = 1.0

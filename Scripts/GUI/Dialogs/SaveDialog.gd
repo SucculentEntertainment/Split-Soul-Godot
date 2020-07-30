@@ -8,23 +8,20 @@ var dir = Directory.new()
 var file = File.new()
 var fileButtonScene = load("res://Scenes/GUI/Dialogs/FileButton.tscn")
 
-var gui = null
 var selection = ""
-
 var buttons = []
 
+var main = null
+var saved = false
+
 func _ready():
-	$BlurShader/AnimationPlayer.play("FadeOutInstant")
-	
 	$Panel/Content/Navigation/Cancel.connect("button_down", self, "toggle")
 	$Panel/Content/Navigation/Action.connect("button_down", self, "_onAction")
 
-func init(gui):
-	self.gui = gui
+func init(main):
+	self.main = main
 
 func loadSaves():
-	$BlurShader/AnimationPlayer.play("FadeInFast")
-	yield($BlurShader/AnimationPlayer, "animation_finished")
 	$LoadingAnim.show()
 	
 	for b in buttons:
@@ -61,23 +58,41 @@ func loadSaves():
 	
 	dir.list_dir_end()
 	
-	$BlurShader/AnimationPlayer.play("FadeOutFast")
 	$LoadingAnim.hide()
-	yield($BlurShader/AnimationPlayer, "animation_finished")
 
 func saveGame(name):
+	$Panel/Content/Navigation/Action.disabled = true
+	$Panel/Content/Navigation/Cancel.disabled = true
+	$LoadingAnim.show()
+	
 	file.open("user://saves/" + name + ".sss", File.WRITE)
 	file.store_var(OS.get_datetime())
 	
-	gui.get_parent().get_parent().saveGame(file) #GUI -> CanvasLayer -> Main -> saveGame()
+	main.saveGame(file)
+	yield(main, "saveComplete")
+	saved = true
+	
+	$LoadingAnim.hide()
+	$Panel/Content/Navigation/Action.disabled = false
+	$Panel/Content/Navigation/Cancel.disabled = false
 	
 	file.close()
 	toggle()
 
 func loadGame(name):
-	file.open("user://saves/" + name + ".sss", File.READ)
+	$Panel/Content/Navigation/Action.disabled = true
+	$Panel/Content/Navigation/Cancel.disabled = true
+	$LoadingAnim.show()
 	
-	gui.get_parent().get_parent().loadGame(file) #GUI -> CanvasLayer -> Main -> loadGame()
+	file.open("user://saves/" + name + ".sss", File.READ)
+	file.get_var()
+	
+	main.loadGame(file)
+	yield(main, "loadComplete")
+	
+	$LoadingAnim.hide()
+	$Panel/Content/Navigation/Action.disabled = false
+	$Panel/Content/Navigation/Cancel.disabled = false
 	
 	file.close()
 	toggle()
@@ -111,7 +126,9 @@ func toggle():
 	if visible:
 		hide()
 		mouse_filter = MOUSE_FILTER_IGNORE
+		
 		emit_signal("finished")
+		saved = false
 	else:
 		show()
 		mouse_filter = MOUSE_FILTER_STOP

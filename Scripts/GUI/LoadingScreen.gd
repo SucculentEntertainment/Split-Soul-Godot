@@ -1,40 +1,28 @@
 extends Control
 
-signal loadingFinished
+signal startedLoading
+
 onready var def = get_node("/root/Definitions")
-
+onready var transition = get_parent().get_parent().get_node("TransitionShader/AnimationPlayer")
 var rng = RandomNumberGenerator.new()
-var loading = false
 
-func loadLevel(variant, level, prevLevel, gui, firstLoad = false):
-	if loading: return
-	
-	loading = true
-	
+func start(variant):
 	rng.randomize()
 	var i = rng.randi_range(0, def.LOADING_SCREEN_MESSAGES.size() - 1)
 	$VBoxContainer/Label.text = def.LOADING_SCREEN_MESSAGES[i]
 	
+	transition.play("Close")
+	yield(transition, "animation_finished")
+	
 	show()
 	$AnimationPlayer.play(variant)
 	
-	$TransitionShader/AnimationPlayer.play("Open")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
-	
 	#yield(get_tree().create_timer(2.0), "timeout")
-	
-	if prevLevel != null:
-		prevLevel.unload()
-		prevLevel.queue_free()
-	
-	level.loadLevel(firstLoad)
-	level.changeDimension(variant)
-	
-	#yield(get_tree().create_timer(2.0), "timeout")
-	
-	$TransitionShader/AnimationPlayer.play("Close")
-	yield($TransitionShader/AnimationPlayer, "animation_finished")
+	emit_signal("startedLoading")
+
+func end():
+	yield(get_tree().create_timer(2.0), "timeout")
 	
 	hide()
-	loading = false
-	emit_signal("loadingFinished")
+	transition.play("Open")
+	yield(transition, "animation_finished")

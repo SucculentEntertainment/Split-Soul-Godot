@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/GUI/QuickMenu.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
+[ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=3]
 
 [node name="QuickMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1148.0
-margin_bottom = -546.0
+margin_right = -1068.0
+margin_bottom = -468.0
+rect_min_size = Vector2( 212, 252 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
@@ -39,54 +41,59 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
-margin_right = 100.0
-margin_bottom = 22.0
+margin_right = 180.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 3 )
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 26.0
-margin_right = 100.0
-margin_bottom = 30.0
+margin_top = 42.0
+margin_right = 180.0
+margin_bottom = 46.0
 
 [node name="Save" type="Button" parent="VBoxContainer"]
-margin_top = 34.0
-margin_right = 100.0
-margin_bottom = 56.0
+margin_top = 50.0
+margin_right = 180.0
+margin_bottom = 88.0
+custom_fonts/font = ExtResource( 3 )
 text = "Save"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Load" type="Button" parent="VBoxContainer"]
-margin_top = 60.0
-margin_right = 100.0
-margin_bottom = 82.0
+margin_top = 92.0
+margin_right = 180.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 3 )
 text = "Load"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 86.0
-margin_right = 100.0
-margin_bottom = 90.0
+margin_top = 134.0
+margin_right = 180.0
+margin_bottom = 138.0
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
-margin_top = 94.0
-margin_right = 100.0
-margin_bottom = 116.0
+margin_top = 142.0
+margin_right = 180.0
+margin_bottom = 180.0
+custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 120.0
-margin_right = 100.0
-margin_bottom = 142.0
+margin_top = 184.0
+margin_right = 180.0
+margin_bottom = 222.0
+custom_fonts/font = ExtResource( 3 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
