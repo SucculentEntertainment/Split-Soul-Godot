@@ -90,4 +90,4 @@ text = "Load"
 visible = false
 position = Vector2( 640, 360 )
 scale = Vector2( 2, 2 )
-frame = 9
+frame = 3
