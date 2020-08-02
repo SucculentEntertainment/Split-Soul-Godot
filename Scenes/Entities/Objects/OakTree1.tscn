@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Map/Environment.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Entities/Environment/Vegetation.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 1 )
 
@@ -26,8 +25,8 @@ tracks/0/keys = {
 
 [node name="OakTree1" type="StaticBody2D"]
 script = ExtResource( 1 )
-objectName = "OakTree1"
-layer = "d_alive"
+id = "o_oakTree1"
+layer = 1
 hasCollision = true
 
 [node name="Sprite" type="Sprite" parent="."]

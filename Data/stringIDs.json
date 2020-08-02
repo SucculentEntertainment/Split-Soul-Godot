@@ -337,7 +337,8 @@
 	
 	"Interactive":
 	{
-		"0": "n_altar"
+		"0": "n_altar",
+		"1": "n_house"
 	},
 	
 	"Triggers":

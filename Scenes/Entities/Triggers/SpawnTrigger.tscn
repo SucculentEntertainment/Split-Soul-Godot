@@ -8,7 +8,7 @@
 [node name="SpawnTrigger" type="Position2D"]
 script = ExtResource( 1 )
 __meta__ = {
-"_gizmo_extents_": 16.0
+"_gizmo_extents_": 8.0
 }
 threshold = 300.0
 cooldown = 1.0
@@ -20,8 +20,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-scale = Vector2( 0.25, 0.25 )
+position = Vector2( -8, -8 )
 texture = ExtResource( 2 )
+centered = false
 hframes = 2
 
 [node name="Timer" type="Timer" parent="."]

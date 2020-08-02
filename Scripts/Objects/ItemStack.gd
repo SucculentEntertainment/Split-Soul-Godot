@@ -6,6 +6,8 @@ const id = "p_itemStack"
 var itemName = ""
 var amount = 0
 
+var health = -1 
+
 var armed = false
 
 func _ready():

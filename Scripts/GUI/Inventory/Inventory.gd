@@ -78,13 +78,6 @@ func _onMouseExit():
 	mouseOutside = true
 
 func _input(event):
-	if Input.is_action_just_pressed("ctrl_inventory"):
-		if visible: toggle()
-	
-	if event is InputEventKey:
-		if (event.pressed and event.scancode == KEY_ESCAPE):
-			if visible: toggle()
-	
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			var slot = getHoveredSlot()
@@ -219,3 +212,14 @@ func insertItem(itemName, amount):
 	
 	return 0
 	
+
+func resetInventory():
+	for s in slots:
+		s.queue_free()
+	
+	slots = []
+	
+	for i in numSlots:
+		var slot = slotScene.instance()
+		$Slots.add_child(slot)
+		slots.append(slot)
