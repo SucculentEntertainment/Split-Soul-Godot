@@ -13,6 +13,7 @@ var buttons = []
 
 var main = null
 var saved = false
+var loaded = false
 
 func _ready():
 	$Panel/Content/Navigation/Cancel.connect("button_down", self, "toggle")
@@ -89,6 +90,7 @@ func loadGame(name):
 	
 	main.loadGame(file)
 	yield(main, "loadComplete")
+	loaded = true
 	
 	$LoadingAnim.hide()
 	$Panel/Content/Navigation/Action.disabled = false
@@ -128,7 +130,9 @@ func toggle():
 		mouse_filter = MOUSE_FILTER_IGNORE
 		
 		emit_signal("finished")
+		yield(get_tree().create_timer(0.1), "timeout")
 		saved = false
+		loaded = false
 	else:
 		show()
 		mouse_filter = MOUSE_FILTER_STOP

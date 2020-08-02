@@ -15,22 +15,34 @@ func _ready():
 	$VBoxContainer/Settings.connect("button_down", self, "_onSettings")
 	$VBoxContainer/Exit.connect("button_down", self, "_onExit")
 
-func _input(event):
-	if Input.is_action_just_pressed("ui_cancel"):
-		_onContinue()
+func _input(_event):
+	if Input.is_action_just_pressed("ui_cancel") and visible:
+		toggle()
 
 func toggle():
 	if visible:
 		hide()
+		get_tree().paused = false
+		
+		yield(get_tree().create_timer(0.1), "timeout")
+		
+		if gui.player != null:
+			gui.player.disableIn = false
+			gui.player.disableAllIn = false
+		
 		get_parent().get_node("BlurShader/AnimationPlayer").play("FadeOutFast")
 	else:
 		show()
+		get_tree().paused = true
+		
+		if gui.player != null:
+			gui.player.disableIn = true
+			gui.player.disableAllIn = true
+		
 		get_parent().get_node("BlurShader/AnimationPlayer").play("FadeInFast")
 
 func _onContinue():
-	Input.action_press("ui_cancel")
-	yield(get_tree().create_timer(0.01), "timeout")
-	Input.action_release("ui_cancel")
+	toggle()
 
 func _onSave():
 	var diag = gui.get_node("Dialogs/SaveDialog")
@@ -49,6 +61,7 @@ func _onLoad():
 	diag.toggle()
 	
 	yield(diag, "finished")
+	get_tree().paused = false
 
 func _onSettings():
 	pass
@@ -72,5 +85,5 @@ func _onExit():
 			"no":
 				pass
 	
-	get_tree().paused = false
+	toggle()
 	emit_signal("exitToMenu")

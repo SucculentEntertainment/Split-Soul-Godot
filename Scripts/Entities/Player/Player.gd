@@ -168,22 +168,20 @@ func getInput():
 		if Input.is_action_just_pressed("debug_toggle"):
 			if gui != null:
 				gui.get_node("Debug").toggle()
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		if gui != null:
-			if isInGUI:
-				match currGUI:
-					"console":
-						gui.get_node("Console").toggle()
-					"inventory":
-						gui.get_node("Inventory").toggle()
-				
-				isInGUI = false
-			else:
-				gui.get_node("QuickMenu").toggle()
-				disableIn = !disableIn
-				disableAllIn = disableIn
-				get_tree().paused = disableIn
+		
+		if Input.is_action_just_pressed("ui_cancel"):
+			if gui != null:
+				if isInGUI:
+					match currGUI:
+						"console":
+							gui.get_node("Console").toggle()
+						"inventory":
+							gui.get_node("Inventory").toggle()
+					
+					isInGUI = false
+				else:
+					gui.get_node("QuickMenu").toggle()
+					yield(get_tree().create_timer(0.1), "timeout")
 
 func enableGlow():
 	$Light2D.show()

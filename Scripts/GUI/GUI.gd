@@ -1,7 +1,7 @@
 extends Control
 
 onready var vars = get_node("/root/PlayerVars")
-var player
+var player = null
 
 var isInDialog = false
 
