@@ -12,6 +12,7 @@ var saves = {}
 
 func _ready():
 	$BlurShader/AnimationPlayer.play("FadeInInstant")
+	yield($BlurShader/AnimationPlayer, "animation_finished")
 	$TransitionShader/AnimationPlayer.play("Open")
 	
 	$UI/Continue.connect("button_down", self, "_onContinue")
@@ -80,6 +81,7 @@ func _onExit():
 	get_tree().quit()
 
 func quitMenu():
+	$TransitionShader/AnimationPlayer.play("Close")
 	$BlurShader/AnimationPlayer.play("FadeOutInstant")
 	yield($BlurShader/AnimationPlayer, "animation_finished")
 	emit_signal("menuClosed")

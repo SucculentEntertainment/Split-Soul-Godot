@@ -153,16 +153,16 @@ func getInput():
 		if Input.is_action_just_pressed("ctrl_attack_primary"):
 			if !disableIn: state = ATTACK
 		
-		if Input.is_action_just_pressed("ctrl_console"):
+		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
 			if gui != null:
 				gui.get_node("Console").toggle()
-				isInGUI = true
+				isInGUI = !isInGUI
 				currGUI = "console"
 			
-		if Input.is_action_just_pressed("ctrl_inventory"):
+		if Input.is_action_just_pressed("ctrl_inventory") and (!isInGUI or (isInGUI and currGUI == "inventory")):
 			if gui != null:
 				gui.get_node("Inventory").toggle()
-				isInGUI = true
+				isInGUI = !isInGUI
 				currGUI = "inventory"
 				
 		if Input.is_action_just_pressed("debug_toggle"):
