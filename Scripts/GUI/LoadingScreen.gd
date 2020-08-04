@@ -14,14 +14,17 @@ func start(variant):
 	transition.play("Close")
 	yield(transition, "animation_finished")
 	
+	if variant == null:
+		variant = "d_alive"
+	
 	show()
 	$AnimationPlayer.play(variant)
 	
-	#yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	emit_signal("startedLoading")
 
 func end():
-	yield(get_tree().create_timer(2.0), "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	
 	hide()
 	transition.play("Open")
