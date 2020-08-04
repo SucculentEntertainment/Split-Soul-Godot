@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var vars = get_node("/root/PlayerVars")
+onready var def = get_node("/root/Definitions")
 
 signal changeDimension(dimension)
 
@@ -13,10 +14,9 @@ export (Array, int) var dimensionOffsets
 
 var damage = 2
 
-onready var def = get_node("/root/Definitions")
-
 var interact = null
 var disableIn = false
+var disableAllIn = false
 
 var gui = null
 
@@ -26,6 +26,8 @@ var prevDir = Vector2()
 var dir = Vector2()
 var vel = Vector2()
 
+var prevPos = Vector2()
+
 var invincibility = false
 
 enum {
@@ -34,6 +36,8 @@ enum {
 }
 
 var state = MOVE
+var isInGUI = false
+var currGUI = ""
 
 # ================================
 # Utility
@@ -51,17 +55,14 @@ func initGUI(gui):
 	gui.updateValues(maxHealth)
 
 func _physics_process(delta):
+	getInput()
+	
 	if !disableIn: 
 		match state:
 			MOVE:
-				getInput()
 				move(delta)
 			ATTACK:
 				attack(delta)
-
-func setBoundaries(boundaries):
-	$Camera2D.limit_right = boundaries.x
-	$Camera2D.limit_bottom = boundaries.y
 
 # ================================
 # Movement
@@ -73,6 +74,7 @@ func getMoveInput():
 	dir = dir.normalized()
 
 func move(delta):
+	prevPos = global_position
 	prevDir = dir
 	getMoveInput()
 	
@@ -144,16 +146,42 @@ func changeDimension(dimension):
 	transition.queue_free()
 
 func getInput():
-	if Input.is_action_just_pressed("ctrl_interact"):
-		if interact != null: interact.interact(self)
-	if Input.is_action_just_pressed("ctrl_console"):
-		if gui != null: gui.get_node("Console").toggle()
-	if Input.is_action_just_pressed("ctrl_attack_primary"):
-		state = ATTACK
-	if Input.is_action_just_pressed("ctrl_inventory"):
-		if gui != null: gui.get_node("Inventory").toggle()
-	if Input.is_action_just_pressed("debug_toggle"):
-		if gui != null: gui.get_node("Debug").toggle()
+	if !disableAllIn:
+		if Input.is_action_just_pressed("ctrl_interact"):
+			if interact != null and !disableIn: interact.interact(self)
+		
+		if Input.is_action_just_pressed("ctrl_attack_primary"):
+			if !disableIn: state = ATTACK
+		
+		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
+			if gui != null:
+				gui.get_node("Console").toggle()
+				isInGUI = !isInGUI
+				currGUI = "console"
+			
+		if Input.is_action_just_pressed("ctrl_inventory") and (!isInGUI or (isInGUI and currGUI == "inventory")):
+			if gui != null:
+				gui.get_node("Inventory").toggle()
+				isInGUI = !isInGUI
+				currGUI = "inventory"
+				
+		if Input.is_action_just_pressed("debug_toggle"):
+			if gui != null:
+				gui.get_node("Debug").toggle()
+		
+		if Input.is_action_just_pressed("ui_cancel"):
+			if gui != null:
+				if isInGUI:
+					match currGUI:
+						"console":
+							gui.get_node("Console").toggle()
+						"inventory":
+							gui.get_node("Inventory").toggle()
+					
+					isInGUI = false
+				else:
+					gui.get_node("QuickMenu").toggle()
+					yield(get_tree().create_timer(0.1), "timeout")
 
 func enableGlow():
 	$Light2D.show()

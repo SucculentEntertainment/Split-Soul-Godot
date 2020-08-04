@@ -29,6 +29,7 @@ PlayerVars="*res://Scripts/PlayerVars.gd"
 [debug]
 
 gdscript/warnings/shadowed_variable=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

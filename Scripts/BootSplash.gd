@@ -10,5 +10,5 @@ func _ready():
 	$TransitionShader/AnimationPlayer.play("Close")
 	yield($TransitionShader/AnimationPlayer, "animation_finished")
 	
-	get_tree().change_scene("res://Scenes/GUI/MainMenu.tscn")
+	get_tree().change_scene("res://Scenes/Main.tscn")
 	queue_free()
