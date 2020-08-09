@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=1]
+[ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Scripts/GUI/Settings.gd" type="Script" id=6]
+
+[node name="Settings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Content"]
+margin_right = 1248.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "Settings"
+
+[node name="Tabs" type="TabContainer" parent="Content"]
+margin_top = 37.0
+margin_right = 1248.0
+margin_bottom = 688.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game" type="ScrollContainer" parent="Content/Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 35.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Elements" type="VBoxContainer" parent="Content/Tabs/Game"]
+margin_right = 1240.0
+margin_bottom = 612.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="ScrollContainer" parent="Content/Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 35.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Elements" type="VBoxContainer" parent="Content/Tabs/Video"]
+margin_right = 1240.0
+margin_bottom = 612.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="ScrollContainer" parent="Content/Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 35.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Elements" type="VBoxContainer" parent="Content/Tabs/Audio"]
+margin_right = 1240.0
+margin_bottom = 612.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="ScrollContainer" parent="Content/Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 35.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Elements" type="VBoxContainer" parent="Content/Tabs/Controls"]
+margin_right = 1240.0
+margin_bottom = 612.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

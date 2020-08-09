@@ -1,0 +1,122 @@
+[
+    [
+        {
+            "type": "menu",
+            "text": "Difficulty",
+            "entries":
+            [
+                "Easy",
+                "Normal",
+                "Hard"
+            ]
+        },
+        {
+            "type": "toggle",
+            "text": "Succ Mode"
+        }
+    ],
+    [
+        {
+            "type": "toggle",
+            "text": "Fullscreen"
+        },
+        {
+            "type": "seperator",
+            "text": "Retro Mode"
+        },
+        {
+            "type": "toggle",
+            "text": "Enabled"
+        },
+        {
+            "type": "toggle",
+            "text": "Curvature"
+        },
+        {
+            "type": "slider",
+            "text": "Curve Intensity",
+            "minVal": 0,
+            "maxVal": 9,
+            "step": 0.1
+        },
+        {
+            "type": "slider",
+            "text": "Zoom Level",
+            "minVal": 1,
+            "maxVal": 2,
+            "step": 0.01
+        },
+        {
+            "type": "toggle",
+            "text": "Chroma Shift"
+        },
+        {
+            "type": "slider",
+            "text": "Red Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1
+        },
+        {
+            "type": "slider",
+            "text": "Green Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1
+        },
+        {
+            "type": "slider",
+            "text": "Blue Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1
+        },
+        {
+            "type": "toggle",
+            "text": "Scanlines"
+        },
+        {
+            "type": "slider",
+            "text": "Scanline Amount",
+            "minVal": 8,
+            "maxVal": 256,
+            "step": 1
+        }
+    ],
+    [
+        {
+            "type": "slider",
+            "text": "Master Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1
+        },
+        {
+            "type": "slider",
+            "text": "Sound Effect Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1
+        },
+        {
+            "type": "slider",
+            "text": "Music Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1
+        },
+        {
+            "type": "slider",
+            "text": "Dialog Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1
+        }
+    ],
+    [
+        {
+            "type": "seperator",
+            "text": "Coming Soon"
+        }
+    ]
+]
