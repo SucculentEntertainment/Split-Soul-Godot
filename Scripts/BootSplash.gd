@@ -1,8 +1,11 @@
 extends ColorRect
 
+onready var def = get_node("/root/Definitions")
 export (bool) var skipLogo = false
 
 func _ready():
+	OS.window_fullscreen = def.CONFIG.get_value("video", "fullscreen")
+	
 	if !skipLogo:
 		$AnimationPlayer.play("BootAnim")
 		yield($AnimationPlayer, "animation_finished")

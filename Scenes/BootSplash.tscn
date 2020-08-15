@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Logos/Succulent/Succulent_Logo_TypeRight_TextOnly.png" type="Texture" id=1]
 [ext_resource path="res://Logos/Succulent/Succulent_Icon.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/BootSplash.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/GUI/Settings.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "BootAnim"
@@ -63,3 +64,6 @@ __meta__ = {
 anims/BootAnim = SubResource( 1 )
 
 [node name="TransitionShader" parent="." instance=ExtResource( 4 )]
+
+[node name="Settings" parent="." instance=ExtResource( 5 )]
+visible = false
