@@ -22,7 +22,6 @@ func init(categoryName, text, minVal, maxVal, stepSize, key):
 	$Content/Slider.step = stepSize
 	
 	$Content/Slider.value = def.CONFIG.get_value(category, key)
-	print(category + " " + key + " " + str(def.CONFIG.get_value(category, key)))
 
 func _onSliderChanged(value):
 	if programChanged:
