@@ -66,7 +66,10 @@ func _onLoad():
 	get_tree().paused = false
 
 func _onSettings():
-	pass
+	var diag = gui.get_node("Dialogs/Settings")
+	diag.toggle()
+	
+	yield(diag, "finished")
 
 func _onExit():
 	if savedTime.minute != OS.get_datetime().minute:

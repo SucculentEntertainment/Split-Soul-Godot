@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/GUI/UI Elements/SettingsOptionToggle.gd" type="Script" id=2]
+
+[node name="SettingsOptionToggle" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1080.0
+margin_bottom = -670.0
+rect_min_size = Vector2( 200, 50 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 16.0
+margin_right = 94.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+text = "Succ mode"
+
+[node name="Switch" type="CheckButton" parent="HBoxContainer"]
+margin_left = 98.0
+margin_right = 192.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

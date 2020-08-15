@@ -42,7 +42,7 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Panel/Content"]
 margin_right = 468.0
-margin_bottom = 32.0
+margin_bottom = 33.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 text = "Load Game"
@@ -51,9 +51,9 @@ __meta__ = {
 }
 
 [node name="Savenames" type="ScrollContainer" parent="Panel/Content"]
-margin_top = 36.0
+margin_top = 37.0
 margin_right = 468.0
-margin_bottom = 642.0
+margin_bottom = 624.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -62,18 +62,19 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Content/Savenames"]
 margin_right = 468.0
-margin_bottom = 606.0
+margin_bottom = 587.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Navigation" type="HBoxContainer" parent="Panel/Content"]
-margin_top = 646.0
+margin_top = 628.0
 margin_right = 468.0
 margin_bottom = 668.0
+rect_min_size = Vector2( 0, 40 )
 
 [node name="Cancel" type="Button" parent="Panel/Content/Navigation"]
 margin_right = 232.0
-margin_bottom = 22.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Cancel"
@@ -81,7 +82,7 @@ text = "Cancel"
 [node name="Action" type="Button" parent="Panel/Content/Navigation"]
 margin_left = 236.0
 margin_right = 468.0
-margin_bottom = 22.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Load"
@@ -90,4 +91,4 @@ text = "Load"
 visible = false
 position = Vector2( 640, 360 )
 scale = Vector2( 2, 2 )
-frame = 3
+frame = 13
