@@ -18,7 +18,7 @@ func _ready():
 	$UI/Continue.connect("button_down", self, "_onContinue")
 	$UI/NewGame.connect("button_down", self, "_onNewGame")
 	$UI/LoadGame.connect("button_down", self, "_onLoadGame")
-	$UI/Options.connect("button_down", self, "_onOptions")
+	$UI/Settings.connect("button_down", self, "_onSettings")
 	$UI/Credits.connect("button_down", self, "_onCredits")
 	$UI/Exit.connect("button_down", self, "_onExit")
 	
@@ -71,8 +71,14 @@ func _onLoadGame():
 	yield($LoadDialog, "finished")
 	if $LoadDialog.loaded: quitMenu()
 
-func _onOptions():
-	pass
+func _onSettings():
+	var settings = get_parent().get_parent().get_node("CanvasLayer/GUI/Dialogs/Settings")
+	var child = def.moveNode(settings, self)
+	
+	settings.toggle()
+	yield(settings, "finished")
+	
+	def.moveNode(child, get_parent().get_parent().get_node("CanvasLayer/GUI/Dialogs"))
 
 func _onCredits():
 	pass
