@@ -71,8 +71,8 @@
         {
             "type": "slider",
             "text": "Red Shift",
-            "minVal": -1000,
-            "maxVal": 1000,
+            "minVal": -10,
+            "maxVal": 10,
             "step": 1,
             "default": 0,
             "key": "retroModeChromaRed"
@@ -80,8 +80,8 @@
         {
             "type": "slider",
             "text": "Green Shift",
-            "minVal": -1000,
-            "maxVal": 1000,
+            "minVal": -10,
+            "maxVal": 10,
             "step": 1,
             "default": 1,
             "key": "retroModeChromaGreen"
@@ -89,8 +89,8 @@
         {
             "type": "slider",
             "text": "Blue Shift",
-            "minVal": -1000,
-            "maxVal": 1000,
+            "minVal": -10,
+            "maxVal": 10,
             "step": 1,
             "default": -1,
             "key": "retroModeChromaBlue"
