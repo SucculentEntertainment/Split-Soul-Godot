@@ -10,4 +10,4 @@ script = ExtResource( 3 )
 [node name="FireBall" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 36.268, 12.9089 )
+position = Vector2( -40.2636, 36.8826 )

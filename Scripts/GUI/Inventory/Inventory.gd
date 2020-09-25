@@ -93,22 +93,19 @@ func _input(event):
 					
 			elif mouseItem:
 				if slot != null and (slot.item == $MouseItem.itemName or slot.isEmpty()):
+					var newAmount = slot.amount + $MouseItem.amount
+					
 					if $MouseItem.amount + slot.amount > def.ITEM_DATA[$MouseItem.itemName].stackSize:
 						$MouseItem.setType($MouseItem.itemName, $MouseItem.amount + slot.amount - def.ITEM_DATA[$MouseItem.itemName].stackSize)
-						slot.updateItem($MouseItem.itemName, def.ITEM_DATA[$MouseItem.itemName].stackSize)
-						
-						if $MouseItem.amount <= 0:
-							$MouseItem.hide()
-							$MouseItem.resetType()
-							
-							mouseItem = false
+						newAmount = def.ITEM_DATA[$MouseItem.itemName].stackSize
+					else: $MouseItem.amount = 0
 					
-					else:
-						slot.updateItem($MouseItem.itemName, slot.amount + $MouseItem.amount)
+					slot.updateItem($MouseItem.itemName, newAmount)
 					
+					if $MouseItem.amount <= 0:
 						$MouseItem.hide()
 						$MouseItem.resetType()
-					
+						
 						mouseItem = false
 					
 				elif mouseOutside:

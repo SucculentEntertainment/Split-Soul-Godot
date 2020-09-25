@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Entities/Powerups/Soulpoint.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GUI/Dialogs/SaveDialog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/GUI/Settings.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/GUI/Hotbar.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -129,6 +130,8 @@ margin_top = 32.0
 margin_right = -1000.0
 margin_bottom = -656.0
 icon = SubResource( 17 )
+
+[node name="Hotbar" parent="." instance=ExtResource( 17 )]
 
 [node name="Console" parent="." instance=ExtResource( 6 )]
 visible = false

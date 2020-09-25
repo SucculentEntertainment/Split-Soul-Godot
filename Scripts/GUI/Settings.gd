@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 extends Control
 
 signal finished
@@ -54,9 +53,6 @@ func _ready():
 					e.init(categoryName, d.text, d.key)
 		
 		i += 1
-=======
-extends Node
-var config = ConfigFile.new()
 
 func toggle():
 	if visible:
