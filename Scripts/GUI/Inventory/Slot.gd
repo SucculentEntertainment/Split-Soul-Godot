@@ -22,6 +22,7 @@ func resetItem():
 		c.queue_free()
 
 func updateItem(item, amount):
+	if item == null or amount == null: return
 	resetItem()
 	
 	self.item = item
