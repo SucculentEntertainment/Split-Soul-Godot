@@ -62,7 +62,7 @@ tracks/3/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "BootAnimAlt"
 length = 4.0
 tracks/0/type = "value"
@@ -150,7 +150,7 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "BootAnimAltDark"
 length = 4.0
 tracks/0/type = "value"
@@ -226,8 +226,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "BootAnimDark"
+[sub_resource type="Animation" id=4]
 length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Icon:rect_position")
@@ -274,7 +273,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-forceAlt = true
 darkMode = true
 altLogo = ExtResource( 6 )
 darkModeText = ExtResource( 8 )
@@ -314,9 +312,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BootAnim = SubResource( 1 )
-anims/BootAnimAlt = SubResource( 3 )
-anims/BootAnimAltDark = SubResource( 4 )
-anims/BootAnimDark = SubResource( 2 )
+anims/BootAnimAlt = SubResource( 2 )
+anims/BootAnimAltDark = SubResource( 3 )
+anims/BootAnimDark = SubResource( 4 )
 
 [node name="TransitionShader" parent="." instance=ExtResource( 4 )]
 

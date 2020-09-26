@@ -57,6 +57,7 @@ __meta__ = {
 margin_top = 640.0
 margin_right = 424.0
 margin_bottom = 720.0
+mouse_filter = 2
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

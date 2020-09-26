@@ -2,6 +2,7 @@
 	"i_test1":
 	{
 		"name": "Test Item 1",
+		"type": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
 		"startFrame": 0,
@@ -11,6 +12,7 @@
 	"i_test2":
 	{
 		"name": "Test Item 2",
+		"type": "testing2",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
 		"startFrame": 1,

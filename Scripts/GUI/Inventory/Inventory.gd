@@ -11,6 +11,7 @@ export (int) var numSlots
 export (Vector2) var margins
 
 var slots = []
+var hotbar = []
 var mouseItem = false
 var mouseOutside = false
 
@@ -24,6 +25,9 @@ func _ready():
 		var slot = slotScene.instance()
 		$MainPanel/Slots.add_child(slot)
 		slots.append(slot)
+	
+	for slot in $Hotbar/Slots.get_children():
+		hotbar.append(slot)
 	
 	$MainPanel.connect("mouse_exited", self, "_onMouseExit")
 	$MainPanel.connect("mouse_entered", self, "_onMouseEnter")
@@ -67,6 +71,11 @@ func getHoveredSlot():
 	var clickedSlot = null
 	
 	for slot in slots:
+		if slot.is_hovered():
+			clickedSlot = slot
+			break
+	
+	for slot in hotbar:
 		if slot.is_hovered():
 			clickedSlot = slot
 			break

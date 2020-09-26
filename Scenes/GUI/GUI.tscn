@@ -108,6 +108,7 @@ margin_left = 32.0
 margin_top = 656.0
 margin_right = 32.0
 margin_bottom = 656.0
+mouse_filter = 1
 healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
@@ -118,6 +119,7 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = -1172.0
 margin_bottom = -656.0
+mouse_filter = 1
 icon = SubResource( 7 )
 
 [node name="SoulPoints" parent="." instance=ExtResource( 5 )]
@@ -125,6 +127,7 @@ margin_left = 200.0
 margin_top = 32.0
 margin_right = -1000.0
 margin_bottom = -656.0
+mouse_filter = 1
 icon = SubResource( 16 )
 
 [node name="Console" parent="." instance=ExtResource( 6 )]
@@ -133,6 +136,7 @@ margin_left = 728.0
 margin_top = 368.0
 margin_right = 736.0
 margin_bottom = 384.32
+mouse_filter = 1
 
 [node name="Debug" parent="." instance=ExtResource( 10 )]
 visible = false
@@ -141,6 +145,7 @@ visible = false
 
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 visible = false
+mouse_filter = 1
 
 [node name="BlurShader" parent="." instance=ExtResource( 12 )]
 anchor_right = 1.0
