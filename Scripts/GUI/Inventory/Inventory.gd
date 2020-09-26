@@ -15,25 +15,27 @@ var mouseItem = false
 var mouseOutside = false
 
 func _ready():
-	$Label.text = title
+	$MainPanel/Label.text = title
 	
-	$Label.set_position(margins)
-	$Slots.set_position(Vector2(0, $Label.get_minimum_size().y + margins.y) + margins)
+	$MainPanel/Label.set_position(margins)
+	$MainPanel/Slots.set_position(Vector2(0, $MainPanel/Label.get_minimum_size().y + margins.y) + margins)
 	
 	for i in numSlots:
 		var slot = slotScene.instance()
-		$Slots.add_child(slot)
+		$MainPanel/Slots.add_child(slot)
 		slots.append(slot)
 	
-	connect("mouse_exited", self, "_onMouseExit")
-	connect("mouse_entered", self, "_onMouseEnter")
+	$MainPanel.connect("mouse_exited", self, "_onMouseExit")
+	$MainPanel.connect("mouse_entered", self, "_onMouseEnter")
+	$Hotbar.connect("mouse_exited", self, "_onMouseExit")
+	$Hotbar.connect("mouse_entered", self, "_onMouseEnter")
 
 func givePlayerReference(player):
 	self.player = player
 
 func toggle():
-	if visible:
-		visible = false
+	if $MainPanel.visible:
+		$MainPanel.visible = false
 		player.disableIn = false
 		
 		if mouseItem:
@@ -43,7 +45,7 @@ func toggle():
 			mouseItem = false
 		
 	else:
-		visible = true
+		$MainPanel.visible = true
 		player.disableIn = true
 
 # ================================
@@ -54,12 +56,12 @@ func _process(_delta):
 	var slot = getHoveredSlot()
 	
 	if slot != null and slot.item != "":
-		$Tooltip.show()
+		$MainPanel/Tooltip.show()
 		
-		$Tooltip/Title.text = def.ITEM_DATA[slot.item].name
-		$Tooltip/Description.text = def.ITEM_DATA[slot.item].description
+		$MainPanel/Tooltip/Title.text = def.ITEM_DATA[slot.item].name
+		$MainPanel/Tooltip/Description.text = def.ITEM_DATA[slot.item].description
 	else:
-		$Tooltip.hide()
+		$MainPanel/Tooltip.hide()
 
 func getHoveredSlot():
 	var clickedSlot = null
@@ -189,5 +191,5 @@ func resetInventory():
 	
 	for i in numSlots:
 		var slot = slotScene.instance()
-		$Slots.add_child(slot)
+		$MainPanel/Slots.add_child(slot)
 		slots.append(slot)

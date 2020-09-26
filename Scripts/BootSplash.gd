@@ -5,20 +5,17 @@ export (bool) var skipLogo = false
 export (bool) var forceAlt = false
 export (bool) var darkMode = false
 
-export (Texture) var altIcon
 export (Texture) var altLogo
-
-export (Color)   var darkModeBG
 export (Texture) var darkModeText
 export (Texture) var darkModeAltLogo
 
 var rng = RandomNumberGenerator.new()
+var anim = "BootAnim"
 
 func _ready():
 	OS.window_fullscreen = def.CONFIG.get_value("video", "fullscreen")
 	
 	if darkMode:
-		color = darkModeBG
 		$Logo.texture = darkModeText
 		altLogo = darkModeAltLogo
 	
@@ -28,10 +25,12 @@ func _ready():
 	
 	if a == 32 or forceAlt:
 		$Logo.texture = altLogo
-		$Icon.texture = altIcon
+		anim = "BootAnimAlt"
+	
+	if darkMode: anim += "Dark"
 	
 	if !skipLogo:
-		$AnimationPlayer.play("BootAnim")
+		$AnimationPlayer.play(anim)
 		yield($AnimationPlayer, "animation_finished")
 	
 	$TransitionShader/AnimationPlayer.play("Close")

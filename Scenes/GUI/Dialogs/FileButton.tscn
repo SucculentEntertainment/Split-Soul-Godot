@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scripts/GUI/Dialogs/FileButton.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=3]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=3]
 [ext_resource path="res://Sprites/GUI/Checkmark.png" type="Texture" id=4]
+
 
 [node name="FileButton" type="Button"]
 margin_right = 400.0

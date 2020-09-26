@@ -1,8 +1,8 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Entities/Powerups/Soulpoint.png" type="Texture" id=2]
-[ext_resource path="res://Resources/Fonts/Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/GUI/AmountDisplay.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/GUI/Console.tscn" type="PackedScene" id=6]
@@ -16,78 +16,74 @@
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GUI/Dialogs/SaveDialog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/GUI/Settings.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/GUI/Hotbar.tscn" type="PackedScene" id=17]
 
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 3 )
-
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 7 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 7 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 7 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
 } ]
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
 region = Rect2( 112, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="SpriteFrames" id=16]
 animations = [ {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 8.0
@@ -99,7 +95,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 1 )
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -122,16 +118,14 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = -1172.0
 margin_bottom = -656.0
-icon = SubResource( 8 )
+icon = SubResource( 7 )
 
 [node name="SoulPoints" parent="." instance=ExtResource( 5 )]
 margin_left = 200.0
 margin_top = 32.0
 margin_right = -1000.0
 margin_bottom = -656.0
-icon = SubResource( 17 )
-
-[node name="Hotbar" parent="." instance=ExtResource( 17 )]
+icon = SubResource( 16 )
 
 [node name="Console" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -144,7 +138,6 @@ margin_bottom = 384.32
 visible = false
 
 [node name="Inventory" parent="." instance=ExtResource( 9 )]
-visible = false
 
 [node name="DialogBox" parent="." instance=ExtResource( 8 )]
 visible = false

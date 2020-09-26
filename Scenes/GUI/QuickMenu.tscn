@@ -1,22 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/GUI/QuickMenu.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=2]
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.192157, 0.180392, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.572549, 0.0666667, 0.12549, 1 )
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [node name="QuickMenu" type="Control"]
 anchor_right = 1.0
@@ -36,7 +28,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 1.52588e-05
-margin_bottom = 16.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 212, 268 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -59,23 +51,23 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 margin_right = 180.0
-margin_bottom = 33.0
+margin_bottom = 41.0
 custom_fonts/font = ExtResource( 3 )
 text = "Split Soul"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 37.0
+margin_top = 45.0
 margin_right = 180.0
-margin_bottom = 41.0
+margin_bottom = 49.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Continue" type="Button" parent="VBoxContainer"]
-margin_top = 45.0
+margin_top = 53.0
 margin_right = 180.0
-margin_bottom = 78.0
+margin_bottom = 94.0
 custom_fonts/font = ExtResource( 3 )
 text = "Continue"
 __meta__ = {
@@ -83,14 +75,14 @@ __meta__ = {
 }
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 82.0
+margin_top = 98.0
 margin_right = 180.0
-margin_bottom = 86.0
+margin_bottom = 102.0
 
 [node name="Save" type="Button" parent="VBoxContainer"]
-margin_top = 90.0
+margin_top = 106.0
 margin_right = 180.0
-margin_bottom = 123.0
+margin_bottom = 147.0
 custom_fonts/font = ExtResource( 3 )
 text = "Save"
 __meta__ = {
@@ -98,9 +90,9 @@ __meta__ = {
 }
 
 [node name="Load" type="Button" parent="VBoxContainer"]
-margin_top = 127.0
+margin_top = 151.0
 margin_right = 180.0
-margin_bottom = 160.0
+margin_bottom = 192.0
 custom_fonts/font = ExtResource( 3 )
 text = "Load"
 __meta__ = {
@@ -108,14 +100,14 @@ __meta__ = {
 }
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
-margin_top = 164.0
+margin_top = 196.0
 margin_right = 180.0
-margin_bottom = 168.0
+margin_bottom = 200.0
 
 [node name="Settings" type="Button" parent="VBoxContainer"]
-margin_top = 172.0
+margin_top = 204.0
 margin_right = 180.0
-margin_bottom = 205.0
+margin_bottom = 245.0
 custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 __meta__ = {
@@ -123,11 +115,11 @@ __meta__ = {
 }
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 209.0
+margin_top = 249.0
 margin_right = 180.0
-margin_bottom = 242.0
+margin_bottom = 282.0
 custom_styles/hover = SubResource( 1 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/normal = SubResource( 2 )
 custom_fonts/font = ExtResource( 3 )
 text = "Exit"
 __meta__ = {

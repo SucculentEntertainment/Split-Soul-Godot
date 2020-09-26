@@ -7,7 +7,8 @@
 [ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=9]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=9]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;

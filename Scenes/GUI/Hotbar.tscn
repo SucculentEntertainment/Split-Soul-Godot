@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=1]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/GUI/Inventory/Slot.tscn" type="PackedScene" id=2]
 
 [node name="Hotbar" type="Control"]
