@@ -15,6 +15,12 @@
         },
         {
             "type": "toggle",
+            "text": "Dark Mode",
+            "default": false,
+            "key": "darkMode"
+        },
+        {
+            "type": "toggle",
             "text": "Succ Mode",
             "default": false,
             "key": "succMode"

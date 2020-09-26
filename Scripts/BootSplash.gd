@@ -3,7 +3,7 @@ extends ColorRect
 onready var def = get_node("/root/Definitions")
 export (bool) var skipLogo = false
 export (bool) var forceAlt = false
-export (bool) var darkMode = false
+export (bool) var forceDarkMode = false
 
 export (Texture) var altLogo
 export (Texture) var darkModeText
@@ -11,9 +11,13 @@ export (Texture) var darkModeAltLogo
 
 var rng = RandomNumberGenerator.new()
 var anim = "BootAnim"
+var darkMode = false
 
 func _ready():
 	OS.window_fullscreen = def.CONFIG.get_value("video", "fullscreen")
+	darkMode = def.CONFIG.get_value("game", "darkMode")
+	
+	if forceDarkMode: darkMode = true
 	
 	if darkMode:
 		$Logo.texture = darkModeText
