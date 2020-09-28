@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/succ.wav-7561df5fe479b07d50db5657a73594e5.sample"
+
+[deps]
+
+source_file="res://Sounds/succ.wav"
+dest_files=[ "res://.import/succ.wav-7561df5fe479b07d50db5657a73594e5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

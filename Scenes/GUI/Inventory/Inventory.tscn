@@ -30,7 +30,7 @@ anchor_bottom = 0.5
 margin_left = -424.0
 margin_top = -360.0
 margin_bottom = 360.0
-mouse_filter = 1
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
