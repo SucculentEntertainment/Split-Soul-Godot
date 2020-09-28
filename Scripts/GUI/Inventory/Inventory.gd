@@ -94,9 +94,9 @@ func putSlot(slot, amount):
 	if amount + slot.amount > def.ITEM_DATA[$MouseItem.itemName].stackSize:
 		$MouseItem.updateItem($MouseItem.itemName, $MouseItem.amount + slot.amount - def.ITEM_DATA[$MouseItem.itemName].stackSize)
 		newAmount = def.ITEM_DATA[$MouseItem.itemName].stackSize
-	else: $MouseItem.updateItem($MouseItem.itemName, $MouseItem.amount - amount)
-	
-	slot.updateItem(itemName, newAmount)
+	elif slot.updateItem(itemName, newAmount) != -1:
+		$MouseItem.updateItem($MouseItem.itemName, $MouseItem.amount - amount)
+
 
 func _onMouseEnter():
 	mouseOutside = false
