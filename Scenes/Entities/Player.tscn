@@ -515,6 +515,8 @@ frame = 37
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 768 )
 
+[node name="Weapon" type="Node2D" parent="."]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )

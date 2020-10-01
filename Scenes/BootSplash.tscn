@@ -323,7 +323,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-forceAlt = true
 altLogo = ExtResource( 6 )
 darkModeText = ExtResource( 8 )
 darkModeAltLogo = ExtResource( 9 )
