@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Succulent.ogg-3e3c29e7efa1c4a517156fba7d43a61a.oggstr"
+
+[deps]
+
+source_file="res://Sounds/Succulent.ogg"
+dest_files=[ "res://.import/Succulent.ogg-3e3c29e7efa1c4a517156fba7d43a61a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

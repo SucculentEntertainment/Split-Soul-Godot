@@ -15,7 +15,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 centered = false
-hframes = 2
+hframes = 10
 
 [node name="Tween" type="Tween" parent="."]
 repeat = true
