@@ -76,7 +76,7 @@ tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 96, 103 ]
 }
@@ -142,8 +142,8 @@ tracks/4/loop_wrap = false
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.39 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 120, 127 ]
 }
@@ -209,8 +209,8 @@ tracks/4/loop_wrap = false
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.375 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 112, 119 ]
 }
@@ -276,8 +276,8 @@ tracks/4/loop_wrap = false
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.375 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 104, 111 ]
 }
@@ -511,9 +511,11 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 24
 hframes = 8
-frame = 37
+frame = 127
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 768 )
+
+[node name="Weapon" type="Node2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -529,11 +531,11 @@ shape = SubResource( 2 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -5.5 )
-rotation = 1.5708
+rotation = 3.14159
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Hitbox" type="Area2D" parent="HitboxPivot"]
-position = Vector2( 17, 0 )
+position = Vector2( 12, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/Hitbox"]
 position = Vector2( -9.53674e-07, 9.53674e-07 )

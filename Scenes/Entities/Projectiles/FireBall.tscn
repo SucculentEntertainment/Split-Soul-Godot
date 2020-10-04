@@ -231,16 +231,17 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 3
 hframes = 8
-frame = 8
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 2 )
 color = Color( 1, 0.615686, 0, 1 )
+energy = 0.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -8.5 )
+emitting = false
 process_material = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -252,6 +253,7 @@ anims/Travel = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -8.5 )
+scale = Vector2( 1e-05, 1e-05 )
 shape = SubResource( 7 )
 
 [node name="Timer" type="Timer" parent="."]

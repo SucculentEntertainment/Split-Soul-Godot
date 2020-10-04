@@ -61,3 +61,6 @@ func destroy(delta):
 
 func _onTimeout():
 	state = DESTROY
+
+func changeDimension(dimension):
+	pass

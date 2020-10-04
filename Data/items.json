@@ -17,5 +17,15 @@
 		"stackSize": 256,
 		"startFrame": 1,
 		"numFrames": 1
+	},
+	
+	"i_fireWand":
+	{
+		"name": "Fire Wand",
+		"type": "weapon",
+		"description": "A magic stick that shoots fireballs",
+		"stackSize": 1,
+		"startFrame": 2,
+		"numFrames": 8
 	}
 }
