@@ -36,18 +36,19 @@ __meta__ = {
 }
 
 [node name="Weapon" parent="Slots" instance=ExtResource( 2 )]
-typeFilter = "weapon"
+typeFilter = "ranged"
 
-[node name="AltWeapon" parent="Slots" instance=ExtResource( 2 )]
+[node name="Ranged" parent="Slots" instance=ExtResource( 2 )]
 margin_top = 36.0
 margin_bottom = 68.0
-typeFilter = "weapon"
-
-[node name="Shield" parent="Slots" instance=ExtResource( 2 )]
-margin_top = 72.0
-margin_bottom = 104.0
-typeFilter = "testing"
+typeFilter = "ranged"
 
 [node name="Potion" parent="Slots" instance=ExtResource( 2 )]
+margin_top = 72.0
+margin_bottom = 104.0
+typeFilter = "potion"
+
+[node name="Ammo" parent="Slots" instance=ExtResource( 2 )]
 margin_top = 108.0
 margin_bottom = 140.0
+typeFilter = "ammo"

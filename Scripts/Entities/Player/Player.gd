@@ -12,6 +12,11 @@ export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, int) var dimensionOffsets
 
+export (Texture) var aimCursor
+var cursorCounter = 0
+var cursorFrames = 2
+var useCustomCursor = false
+
 var damage = 2
 
 var interact = null
@@ -166,6 +171,14 @@ func changeDimension(dimension):
 	transition.queue_free()
 
 func getInput():
+	#Temporary Code
+	if hotbar.items[0] != "":
+		useCustomCursor = true
+		$CursorAnimation.play("Cursor")
+	else:
+		useCustomCursor = false
+		$CursorAnimation.stop()
+	
 	if !disableAllIn:
 		if Input.is_action_just_pressed("ctrl_interact"):
 			if interact != null and !disableIn: interact.interact(self)
@@ -242,3 +255,21 @@ func _onHealReceived(heal):
 	vars.health += heal
 	if vars.health > maxHealth: vars.health = maxHealth
 	gui.updateValues(maxHealth)
+
+# ================================
+# Cursor
+# ================================
+
+func advanceCursor():
+	if useCustomCursor:
+		cursorCounter += 1
+		if cursorCounter >= cursorFrames: cursorCounter = 0
+		
+		var cursorImg = Image.new()
+		var cursor = ImageTexture.new()
+		cursorImg.create(32, 32, false, Image.FORMAT_RGBA8)
+		cursorImg.blit_rect(aimCursor.get_data(), Rect2(32 * cursorCounter, 0, 32, 32), Vector2())
+		cursor.create_from_image(cursorImg)
+		
+		Input.set_custom_mouse_cursor(cursor, 0, Vector2(16, 16))
+	else: Input.set_custom_mouse_cursor(null)

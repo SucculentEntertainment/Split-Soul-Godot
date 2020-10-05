@@ -22,7 +22,7 @@
 	"i_fireWand":
 	{
 		"name": "Fire Wand",
-		"type": "weapon",
+		"type": "ranged",
 		"description": "A magic stick that shoots fireballs",
 		"stackSize": 1,
 		"startFrame": 2,
