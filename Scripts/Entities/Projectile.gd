@@ -5,19 +5,19 @@ export (int) var speed
 export (int) var lifetime
 
 enum {
+	UNINIT,
 	CREATE,
 	MOVE,
 	DESTROY,
 	DESPAWN
 }
 
-var state = CREATE
+var state = UNINIT
 var health = -1
 
 var dir = Vector2()
 var vel = Vector2()
 
-var initiated = false
 var animationEnd = false
 
 func _ready():
@@ -32,13 +32,12 @@ func init(dir):
 	$AnimationTree.set("parameters/Travel/blend_position", dir)
 	$AnimationTree.set("parameters/Destruction/blend_position", dir)
 	
-	initiated = true
+	state = CREATE
 
 func _physics_process(delta):
-	if !initiated:
-		return
-	
 	match state:
+		UNINIT:
+			return
 		CREATE:
 			create(delta)
 		MOVE:
@@ -59,6 +58,7 @@ func destroy(delta):
 	$AnimationTree.get("parameters/playback").travel("Destruction")
 
 func despawn(delta):
+	get_parent().remove_child(self)
 	queue_free()
 
 func _onTimeout():

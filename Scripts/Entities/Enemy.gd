@@ -184,6 +184,7 @@ func _onDamageTimeout():
 func changeType(id):
 	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
 	var obj = spawnHelper.spawn(id, position, scale, "", spawnHelper.get_parent().currentDimensionID, true)
+	get_parent().remove_child(self)
 	queue_free()
 
 # ================================
