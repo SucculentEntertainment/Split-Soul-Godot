@@ -181,6 +181,11 @@ func _onDamageTimeout():
 		if body != null and "Player" in body.name:
 			_onGiveDamage(area)
 
+func changeType(id):
+	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
+	var obj = spawnHelper.spawn(id, position, scale, "", spawnHelper.get_parent().currentDimensionID, true)
+	queue_free()
+
 # ================================
 # Damage
 # ================================

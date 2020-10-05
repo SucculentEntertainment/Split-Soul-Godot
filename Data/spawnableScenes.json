@@ -30,6 +30,10 @@
     {
         "id": "e_slime",
         "scene": "res://Scenes/Entities/Enemies/Slime.tscn"
+    },
+    {
+        "id": "e_fireSlime",
+        "scene": "res://Scenes/Entities/Enemies/FireSlime.tscn"
 	},
 	
 

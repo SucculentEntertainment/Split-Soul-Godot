@@ -332,7 +332,8 @@
 	
 	"Enemies":
 	{
-		"0": "e_slime"
+		"0": "e_slime",
+		"1": "e_fireSlime"
 	},
 	
 	"Interactive":

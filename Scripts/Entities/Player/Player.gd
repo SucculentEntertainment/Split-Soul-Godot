@@ -42,6 +42,8 @@ var currGUI = ""
 var inventory = null
 var hotbar = null
 
+var hasAttacked = false
+
 # ================================
 # Utility
 # ================================
@@ -110,18 +112,22 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	if hotbar.items[0] != "":
-		if $Weapon.get_child_count() == 0:
-			# Write SpawnHelper for this
-			var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
-			$Weapon.add_child(weapon)
+	if !hasAttacked:
+		if hotbar.items[0] != "":
+			if $Weapon.get_child_count() == 0:
+				# Write SpawnHelper for this
+				var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
+				$Weapon.add_child(weapon)
+			
+			$Weapon.get_children()[0].attack(self)
 		
-		$Weapon.get_children()[0].attack(self)
+		hasAttacked = true
 	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackEnd():
 	state = MOVE
+	hasAttacked = false
 
 # ================================
 # Items

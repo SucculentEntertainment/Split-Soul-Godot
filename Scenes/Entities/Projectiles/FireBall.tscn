@@ -5,13 +5,13 @@
 [ext_resource path="res://Sprites/Entities/Projectiles/fireball.png" type="Texture" id=3]
 [ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=4]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 radius = 3.0
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=2]
 radius = 0.01
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 resource_name = "Creation_down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -88,7 +88,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -164,7 +164,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "Creation_right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -241,7 +241,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=6]
 resource_name = "Creation_up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -318,7 +318,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "Destruction_down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -395,7 +395,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -471,7 +471,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=9]
 resource_name = "Destruction_right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -548,7 +548,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=10]
 resource_name = "Destruction_up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -625,7 +625,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=11]
 resource_name = "Travel_down"
 loop = true
 tracks/0/type = "value"
@@ -689,7 +689,7 @@ tracks/4/keys = {
 "values": [ 1.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=12]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -752,7 +752,7 @@ tracks/4/keys = {
 "values": [ 1.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=13]
 resource_name = "Travel_right"
 loop = true
 tracks/0/type = "value"
@@ -816,7 +816,7 @@ tracks/4/keys = {
 "values": [ 1.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=14]
 resource_name = "Travel_up"
 loop = true
 tracks/0/type = "value"
@@ -880,98 +880,98 @@ tracks/4/keys = {
 "values": [ 1.0, 1.0 ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=15]
 resource_name = "Uninitialized"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Creation_left"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Creation_up"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Creation_right"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Creation_down"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=22]
-blend_point_0/node = SubResource( 18 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=20]
+blend_point_0/node = SubResource( 16 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 19 )
+blend_point_1/node = SubResource( 17 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 20 )
+blend_point_2/node = SubResource( 18 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 21 )
+blend_point_3/node = SubResource( 19 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "Destruction_down"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "Destruction_left"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "Destruction_right"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "Destruction_up"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=27]
-blend_point_0/node = SubResource( 23 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=25]
+blend_point_0/node = SubResource( 21 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 24 )
+blend_point_1/node = SubResource( 22 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 25 )
+blend_point_2/node = SubResource( 23 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 26 )
+blend_point_3/node = SubResource( 24 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "Travel_left"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Travel_up"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "Travel_right"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Travel_down"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=32]
-blend_point_0/node = SubResource( 28 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=30]
+blend_point_0/node = SubResource( 26 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 29 )
+blend_point_1/node = SubResource( 27 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 30 )
+blend_point_2/node = SubResource( 28 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 31 )
+blend_point_3/node = SubResource( 29 )
 blend_point_3/pos = Vector2( 0, 1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "Uninitialized"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-
 [sub_resource type="AnimationNodeStateMachine" id=35]
-states/Creation/node = SubResource( 22 )
+states/Creation/node = SubResource( 20 )
 states/Creation/position = Vector2( 54, 55 )
-states/Destruction/node = SubResource( 27 )
+states/Destruction/node = SubResource( 25 )
 states/Destruction/position = Vector2( 448, 55 )
-states/Travel/node = SubResource( 32 )
+states/Travel/node = SubResource( 30 )
 states/Travel/position = Vector2( 243, 55 )
-states/Uninitialized/node = SubResource( 38 )
+states/Uninitialized/node = SubResource( 31 )
 states/Uninitialized/position = Vector2( -148.585, 55 )
-transitions = [ "Creation", "Travel", SubResource( 33 ), "Travel", "Destruction", SubResource( 34 ), "Uninitialized", "Creation", SubResource( 39 ) ]
+transitions = [ "Creation", "Travel", SubResource( 32 ), "Travel", "Destruction", SubResource( 33 ), "Uninitialized", "Creation", SubResource( 34 ) ]
 start_node = "Uninitialized"
 graph_offset = Vector2( -256.585, -23.3246 )
 
@@ -998,6 +998,7 @@ color = Color( 1, 0.615686, 0, 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -8.5 )
+amount = 16
 local_coords = false
 process_material = ExtResource( 4 )
 
@@ -1005,29 +1006,29 @@ process_material = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -7 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Creation_down = SubResource( 6 )
-anims/Creation_left = SubResource( 7 )
-anims/Creation_right = SubResource( 8 )
-anims/Creation_up = SubResource( 9 )
-anims/Destruction_down = SubResource( 10 )
-anims/Destruction_left = SubResource( 11 )
-anims/Destruction_right = SubResource( 12 )
-anims/Destruction_up = SubResource( 13 )
-anims/Travel_down = SubResource( 14 )
-anims/Travel_left = SubResource( 15 )
-anims/Travel_right = SubResource( 16 )
-anims/Travel_up = SubResource( 17 )
-anims/Uninitialized = SubResource( 37 )
+anims/Creation_down = SubResource( 3 )
+anims/Creation_left = SubResource( 4 )
+anims/Creation_right = SubResource( 5 )
+anims/Creation_up = SubResource( 6 )
+anims/Destruction_down = SubResource( 7 )
+anims/Destruction_left = SubResource( 8 )
+anims/Destruction_right = SubResource( 9 )
+anims/Destruction_up = SubResource( 10 )
+anims/Travel_down = SubResource( 11 )
+anims/Travel_left = SubResource( 12 )
+anims/Travel_right = SubResource( 13 )
+anims/Travel_up = SubResource( 14 )
+anims/Uninitialized = SubResource( 15 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 35 )

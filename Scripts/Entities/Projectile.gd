@@ -23,6 +23,8 @@ var animationEnd = false
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
+	
+	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
 func init(dir):
 	self.dir = dir
@@ -73,3 +75,8 @@ func destructionEnd():
 
 func changeDimension(dimension):
 	pass
+
+func _onBodyEntered(body):
+	if "EnemySlime" in body.name:
+		body.changeType("e_fireSlime")
+	state = DESTROY
