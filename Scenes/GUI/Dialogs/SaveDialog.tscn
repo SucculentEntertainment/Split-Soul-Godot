@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Resources/Themes/Dark1.tres" type="Theme" id=2]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=2]
 [ext_resource path="res://Scripts/GUI/Dialogs/SaveDialog.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/GUI/LoadingAnim.tscn" type="PackedScene" id=4]
 
@@ -42,7 +42,7 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Panel/Content"]
 margin_right = 468.0
-margin_bottom = 32.0
+margin_bottom = 41.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 text = "Save Game"
@@ -51,9 +51,9 @@ __meta__ = {
 }
 
 [node name="Savenames" type="ScrollContainer" parent="Panel/Content"]
-margin_top = 36.0
+margin_top = 45.0
 margin_right = 468.0
-margin_bottom = 612.0
+margin_bottom = 595.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -62,40 +62,40 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Content/Savenames"]
 margin_right = 468.0
-margin_bottom = 576.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextBox" type="HBoxContainer" parent="Panel/Content"]
-margin_top = 616.0
+margin_top = 599.0
 margin_right = 468.0
-margin_bottom = 642.0
+margin_bottom = 624.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LineEdit" type="LineEdit" parent="Panel/Content/TextBox"]
-margin_right = 420.0
-margin_bottom = 26.0
+margin_right = 431.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 max_length = 30
 
 [node name="Label" type="Label" parent="Panel/Content/TextBox"]
-margin_left = 424.0
-margin_top = 5.0
+margin_left = 435.0
 margin_right = 468.0
-margin_bottom = 21.0
+margin_bottom = 25.0
 text = ".sss"
 
 [node name="Navigation" type="HBoxContainer" parent="Panel/Content"]
-margin_top = 646.0
+margin_top = 628.0
 margin_right = 468.0
 margin_bottom = 668.0
+rect_min_size = Vector2( 0, 40 )
 
 [node name="Cancel" type="Button" parent="Panel/Content/Navigation"]
 margin_right = 232.0
-margin_bottom = 22.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Cancel"
@@ -103,7 +103,7 @@ text = "Cancel"
 [node name="Action" type="Button" parent="Panel/Content/Navigation"]
 margin_left = 236.0
 margin_right = 468.0
-margin_bottom = 22.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Save"
@@ -112,4 +112,4 @@ text = "Save"
 visible = false
 position = Vector2( 640, 360 )
 scale = Vector2( 2, 2 )
-frame = 13
+frame = 1

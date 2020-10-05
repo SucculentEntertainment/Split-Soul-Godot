@@ -64,5 +64,11 @@
     {
         "id": "g_levelChange",
         "scene": "res://Scenes/Entities/Triggers/LevelChangeTrigger.tscn"
+    },
+
+
+    {
+        "id": "r_fireBall",
+        "scene": "res://Scenes/Entities/Projectiles/FireBall.tscn"
     }
 ]
