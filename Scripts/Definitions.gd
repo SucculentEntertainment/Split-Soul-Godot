@@ -1,10 +1,13 @@
 extends Node
 
+signal settingsUpdateStart
+signal settingsUpdateStop
+
 # ================================
 # Data
 # ================================
 
-var SETTINGS = {}
+var CONFIG = ConfigFile.new()
 
 var TILE_DATA = {}
 var STRING_IDS = {}
@@ -62,3 +65,10 @@ func _ready():
 	
 	for scene in scenes:
 		SPAWNABLE_SCENES[scene.id] = load(scene.scene)
+
+func moveNode(src, dst):
+	src.get_parent().remove_child(src)
+	dst.add_child(src)
+	src.set_owner(dst)
+	
+	return src

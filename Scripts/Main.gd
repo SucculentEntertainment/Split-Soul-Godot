@@ -18,6 +18,7 @@ var locked = false
 var loading = false
 
 var entities = {}
+var settings = false
 
 # ================================
 # Util
@@ -29,6 +30,9 @@ func _ready():
 	var mainMenu = load("res://Scenes/GUI/MainMenu.tscn").instance()
 	$Menu.add_child(mainMenu)
 	mainMenu.connect("menuClosed", self, "_onMenuExit")
+	
+	def.connect("settingsUpdateStart", self, "toggleSettings")
+	def.connect("settingsUpdateStop", self, "toggleSettings")
 	
 	vars.difficulty = difficulty
 
@@ -198,3 +202,12 @@ func newGame():
 	entities = {}
 	
 	loadLevel("l_test", "d_alive", false, true)
+
+func toggleSettings():
+	settings = !settings
+
+func _process(_delta):
+	if !settings:
+		return
+	
+	OS.window_fullscreen = def.CONFIG.get_value("video", "fullscreen")

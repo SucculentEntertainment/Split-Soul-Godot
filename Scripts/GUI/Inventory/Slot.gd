@@ -7,6 +7,8 @@ var amount = 0
 
 export (Vector2) var itemMargin
 export (int) var itemScale
+export (String) var filter
+export (String) var typeFilter
 
 func _ready():
 	pass
@@ -22,6 +24,11 @@ func resetItem():
 		c.queue_free()
 
 func updateItem(item, amount):
+	if item == null or amount == null: return
+	
+	if item != filter and filter != "": return -1
+	if item != "" and def.ITEM_DATA[item].type != typeFilter and typeFilter != "": return -1
+	
 	resetItem()
 	
 	self.item = item

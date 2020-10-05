@@ -17,8 +17,9 @@ _global_script_class_icons={
 
 config/name="Split Soul"
 run/main_scene="res://Scenes/BootSplash.tscn"
+boot_splash/image="res://Logos/Succulent/Succulent_Icon_small.png"
 boot_splash/fullsize=false
-boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0.231373, 0.258824, 0.321569, 1 )
 config/icon="res://Logos/Split Soul/Icon_v1.png"
 
 [autoload]

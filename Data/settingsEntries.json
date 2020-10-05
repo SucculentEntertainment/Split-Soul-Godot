@@ -1,0 +1,166 @@
+[
+    [
+        "game",
+        {
+            "type": "menu",
+            "text": "Difficulty",
+            "entries":
+            [
+                "Easy",
+                "Normal",
+                "Hard"
+            ],
+            "default": "Normal",
+            "key": "difficulty"
+        },
+        {
+            "type": "toggle",
+            "text": "Dark Mode",
+            "default": false,
+            "key": "darkMode"
+        },
+        {
+            "type": "toggle",
+            "text": "Succ Mode",
+            "default": false,
+            "key": "succMode"
+        }
+    ],
+    [
+        "video",
+        {
+            "type": "toggle",
+            "text": "Fullscreen",
+            "default": true,
+            "key": "fullscreen"
+        },
+        {
+            "type": "seperator",
+            "text": "Retro Mode"
+        },
+        {
+            "type": "toggle",
+            "text": "Enabled",
+            "default": false,
+            "key": "retroMode"
+        },
+        {
+            "type": "toggle",
+            "text": "Curvature",
+            "default": true,
+            "key": "retroModeCurve"
+        },
+        {
+            "type": "slider",
+            "text": "Curve Intensity",
+            "minVal": 0,
+            "maxVal": 9,
+            "step": 0.1,
+            "default": 2.2,
+            "key": "retroModeCurveIntensity"
+        },
+        {
+            "type": "slider",
+            "text": "Zoom Level",
+            "minVal": 1,
+            "maxVal": 2,
+            "step": 0.01,
+            "default": 1.02,
+            "key": "retroModeZoomLevel"
+        },
+        {
+            "type": "toggle",
+            "text": "Chroma Shift",
+            "default": true,
+            "key": "retroModeChroma"
+        },
+        {
+            "type": "slider",
+            "text": "Red Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1,
+            "default": 0,
+            "key": "retroModeChromaRed"
+        },
+        {
+            "type": "slider",
+            "text": "Green Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1,
+            "default": 1,
+            "key": "retroModeChromaGreen"
+        },
+        {
+            "type": "slider",
+            "text": "Blue Shift",
+            "minVal": -10,
+            "maxVal": 10,
+            "step": 1,
+            "default": -1,
+            "key": "retroModeChromaBlue"
+        },
+        {
+            "type": "toggle",
+            "text": "Scanlines",
+            "default": true,
+            "key": "retroModeScanlines"
+        },
+        {
+            "type": "slider",
+            "text": "Scanline Amount",
+            "minVal": 8,
+            "maxVal": 256,
+            "step": 1,
+            "default": 128,
+            "key": "retroModeScanlinesAmount"
+        }
+    ],
+    [
+        "audio",
+        {
+            "type": "slider",
+            "text": "Master Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1,
+            "default": 100,
+            "key": "masterVolume"
+        },
+        {
+            "type": "slider",
+            "text": "Sound Effect Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1,
+            "default": 100,
+            "key": "sfxVolume"
+        },
+        {
+            "type": "slider",
+            "text": "Music Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1,
+            "default": 100,
+            "key": "musicVolume"
+        },
+        {
+            "type": "slider",
+            "text": "Dialog Volume",
+            "minVal": 0,
+            "maxVal": 100,
+            "step": 1,
+            "default": 100,
+            "key": "dialogVolume"
+        }
+    ],
+    [
+        "controls",
+        {
+            "type": "seperator",
+            "text": "Coming Soon"
+        }
+    ]
+]
