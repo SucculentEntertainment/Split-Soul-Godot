@@ -7,7 +7,8 @@ export (int) var lifetime
 enum {
 	CREATE,
 	MOVE,
-	DESTROY
+	DESTROY,
+	DESPAWN
 }
 
 var state = CREATE
@@ -17,6 +18,7 @@ var dir = Vector2()
 var vel = Vector2()
 
 var initiated = false
+var animationEnd = false
 
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
@@ -24,7 +26,9 @@ func _ready():
 
 func init(dir):
 	self.dir = dir
-	look_at((get_transform().origin + dir) * Vector2(-1, -1))
+	$AnimationTree.set("parameters/Creation/blend_position", dir)
+	$AnimationTree.set("parameters/Travel/blend_position", dir)
+	$AnimationTree.set("parameters/Destruction/blend_position", dir)
 	
 	initiated = true
 
@@ -39,28 +43,33 @@ func _physics_process(delta):
 			move(delta)
 		DESTROY:
 			destroy(delta)
+		DESPAWN:
+			despawn(delta)
 
 func create(delta):
-	$AnimationPlayer.play("Creation")
-	yield($AnimationPlayer, "animation_finished")
-	
-	state = MOVE
-	
-	$Timer.start()
-	$AnimationPlayer.play("Travel")
+	$AnimationTree.get("parameters/playback").travel("Creation")
 
 func move(delta):
 	vel = dir * speed * delta
 	vel = move_and_slide(vel)
 
 func destroy(delta):
-	$AnimationPlayer.play("Destruction")
-	yield($AnimationPlayer, "animation_finished")
-	
+	$AnimationTree.get("parameters/playback").travel("Destruction")
+
+func despawn(delta):
 	queue_free()
 
 func _onTimeout():
 	state = DESTROY
+
+func createEnd():
+	state = MOVE
+	
+	$Timer.start()
+	$AnimationTree.get("parameters/playback").travel("Travel")
+
+func destructionEnd():
+	state = DESPAWN
 
 func changeDimension(dimension):
 	pass
