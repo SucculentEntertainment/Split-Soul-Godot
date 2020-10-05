@@ -271,5 +271,5 @@ func advanceCursor():
 		cursorImg.blit_rect(aimCursor.get_data(), Rect2(64 * cursorCounter, 0, 64, 64), Vector2())
 		cursor.create_from_image(cursorImg)
 		
-		Input.set_custom_mouse_cursor(cursor, 0, Vector2(32, 32))
+		Input.set_custom_mouse_cursor(cursor, 0, Vector2(64, 64))
 	else: Input.set_custom_mouse_cursor(null)

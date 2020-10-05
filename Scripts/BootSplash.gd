@@ -33,7 +33,7 @@ func _ready():
 	var a = rng.randi_range(0, 100)
 	print(a)
 	
-	if a == 32 or forceAlt:
+	if a == 69 or forceAlt:
 		$Logo.texture = altLogo
 		$AudioStreamPlayer.stream = altSound
 		anim = "BootAnimAlt"

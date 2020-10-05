@@ -587,7 +587,7 @@ transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=37]
 resource_name = "Cursor"
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -712,4 +712,4 @@ parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
 
 [node name="CursorAnimation" type="AnimationPlayer" parent="."]
-anims/Cursor = SubResource( 38 )
+anims/Cursor = SubResource( 37 )
