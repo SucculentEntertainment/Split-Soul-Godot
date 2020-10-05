@@ -19,7 +19,7 @@ func _input(_event):
 	if Input.is_action_just_pressed("ui_cancel") and visible:
 		toggle()
 
-func toggle():
+func toggle(noBlur = false):
 	if visible:
 		hide()
 		get_tree().paused = false
@@ -30,7 +30,8 @@ func toggle():
 			gui.player.disableIn = false
 			gui.player.disableAllIn = false
 		
-		get_parent().get_node("BlurShader/AnimationPlayer").play("FadeOutFast")
+		if !noBlur:
+			get_parent().get_node("BlurShader/AnimationPlayer").play("FadeOutFast")
 	else:
 		show()
 		get_tree().paused = true
@@ -39,7 +40,8 @@ func toggle():
 			gui.player.disableIn = true
 			gui.player.disableAllIn = true
 		
-		get_parent().get_node("BlurShader/AnimationPlayer").play("FadeInFast")
+		if !noBlur:
+			get_parent().get_node("BlurShader/AnimationPlayer").play("FadeInFast")
 
 func _onContinue():
 	toggle()
@@ -64,7 +66,10 @@ func _onLoad():
 	get_tree().paused = false
 
 func _onSettings():
-	pass
+	var diag = gui.get_node("Dialogs/Settings")
+	diag.toggle()
+	
+	yield(diag, "finished")
 
 func _onExit():
 	if savedTime.minute != OS.get_datetime().minute:
@@ -85,5 +90,5 @@ func _onExit():
 			"no":
 				pass
 	
-	toggle()
+	toggle(true)
 	emit_signal("exitToMenu")

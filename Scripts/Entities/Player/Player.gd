@@ -39,6 +39,9 @@ var state = MOVE
 var isInGUI = false
 var currGUI = ""
 
+var inventory = null
+var hotbar = null
+
 # ================================
 # Utility
 # ================================
@@ -53,6 +56,9 @@ func initGUI(gui):
 	self.gui = gui
 	gui.givePlayerReference(self)
 	gui.updateValues(maxHealth)
+	
+	inventory = gui.get_node("Inventory")
+	hotbar = inventory.get_node("Hotbar")
 
 func _physics_process(delta):
 	getInput()
@@ -104,6 +110,14 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
+	if hotbar.items[0] != "":
+		if $Weapon.get_child_count() == 0:
+			# Write SpawnHelper for this
+			var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
+			$Weapon.add_child(weapon)
+		
+		$Weapon.get_children()[0].attack(self)
+	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackEnd():
@@ -153,16 +167,16 @@ func getInput():
 		if Input.is_action_just_pressed("ctrl_attack_primary"):
 			if !disableIn: state = ATTACK
 		
-		if Input.is_action_just_pressed("ctrl_console"):
+		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
 			if gui != null:
 				gui.get_node("Console").toggle()
-				isInGUI = true
+				isInGUI = !isInGUI
 				currGUI = "console"
 			
-		if Input.is_action_just_pressed("ctrl_inventory"):
+		if Input.is_action_just_pressed("ctrl_inventory") and (!isInGUI or (isInGUI and currGUI == "inventory")):
 			if gui != null:
 				gui.get_node("Inventory").toggle()
-				isInGUI = true
+				isInGUI = !isInGUI
 				currGUI = "inventory"
 				
 		if Input.is_action_just_pressed("debug_toggle"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Resources/Fonts/MenuFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Sprites/GUI/Scroll.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Scenes/Effects/TransitionShader.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Effects/BlurShader.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=9]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -66,6 +68,7 @@ animations = [ {
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 9 )
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -98,7 +101,6 @@ anchor_bottom = 1.0
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]
@@ -146,14 +148,14 @@ custom_fonts/font = ExtResource( 1 )
 text = "Load Game"
 align = 0
 
-[node name="Options" type="Button" parent="UI"]
+[node name="Settings" type="Button" parent="UI"]
 margin_top = 108.0
 margin_right = 381.0
 margin_bottom = 212.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 1 )
-text = "Options"
+text = "Settings"
 align = 0
 
 [node name="Credits" type="Button" parent="UI"]

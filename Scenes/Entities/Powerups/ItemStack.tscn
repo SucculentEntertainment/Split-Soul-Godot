@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 position = Vector2( -16, -16 )
 texture = ExtResource( 2 )
 centered = false
-hframes = 2
+hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

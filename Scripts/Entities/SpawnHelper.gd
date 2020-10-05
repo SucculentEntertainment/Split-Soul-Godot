@@ -37,7 +37,7 @@ func posToCoords(pos):
 # Spawn
 # ================================
 
-func spawn(eName, coords, scale = Vector2(1, 1), special = "", currentDimensionID = ""):
+func spawn(eName, coords, scale = Vector2(1, 1), special = "", currentDimensionID = "", usePos = false):
 	if eName == "": return
 	
 	var obj = def.SPAWNABLE_SCENES[eName].instance()
@@ -49,7 +49,8 @@ func spawn(eName, coords, scale = Vector2(1, 1), special = "", currentDimensionI
 	parent.add_child(obj)
 	var textureOffset = posToCoords(obj.get_node("Sprite").position * Vector2(-1, -1) * scale)
 	
-	obj.position = coordsToPos(coords + textureOffset)
+	if !usePos: obj.position = coordsToPos(coords + textureOffset)
+	else: obj.position = coords
 	obj.scale = scale
 	
 	if currentDimensionID != "": obj.changeDimension(currentDimensionID)
