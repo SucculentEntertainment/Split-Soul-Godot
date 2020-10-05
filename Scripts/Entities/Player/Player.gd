@@ -267,9 +267,9 @@ func advanceCursor():
 		
 		var cursorImg = Image.new()
 		var cursor = ImageTexture.new()
-		cursorImg.create(32, 32, false, Image.FORMAT_RGBA8)
-		cursorImg.blit_rect(aimCursor.get_data(), Rect2(32 * cursorCounter, 0, 32, 32), Vector2())
+		cursorImg.create(64, 64, false, Image.FORMAT_RGBA8)
+		cursorImg.blit_rect(aimCursor.get_data(), Rect2(64 * cursorCounter, 0, 64, 64), Vector2())
 		cursor.create_from_image(cursorImg)
 		
-		Input.set_custom_mouse_cursor(cursor, 0, Vector2(16, 16))
+		Input.set_custom_mouse_cursor(cursor, 0, Vector2(32, 32))
 	else: Input.set_custom_mouse_cursor(null)
