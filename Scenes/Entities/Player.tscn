@@ -1,9 +1,11 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Entities/Player/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Effects/Punchwave.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Entities/Player/Player.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/GUI/cursor.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 1 )
@@ -80,11 +82,34 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 96, 103 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Punchwave:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 6 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Punchwave:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "attack_left"
 length = 0.5
-step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath("HitboxPivot:rotation_degrees")
 tracks/0/interp = 1
@@ -146,6 +171,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 120, 127 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Punchwave:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 18, 23 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Punchwave:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -214,6 +263,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 112, 119 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Punchwave:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 12, 17 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Punchwave:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "attack_up"
@@ -280,6 +353,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 104, 111 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Punchwave:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = false
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 11 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Punchwave:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -490,11 +587,29 @@ transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
 
+[sub_resource type="Animation" id=37]
+resource_name = "Cursor"
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "advanceCursor"
+} ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 pause_mode = 2
 script = ExtResource( 1 )
 speed = 2000
 dimensionOffsets = [ 0, 768 ]
+aimCursor = ExtResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -11 )
@@ -511,11 +626,21 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 24
 hframes = 8
-frame = 96
+frame = 103
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 768 )
 
 [node name="Weapon" type="Node2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Punchwave" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -6.5 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+vframes = 4
+hframes = 6
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
@@ -540,6 +665,7 @@ position = Vector2( 17, 0 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/Hitbox"]
 position = Vector2( -9.53674e-07, 9.53674e-07 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="Interactions" type="Area2D" parent="."]
 position = Vector2( 0, -3.5 )
@@ -584,3 +710,6 @@ parameters/playback = SubResource( 36 )
 parameters/Attack/blend_position = Vector2( -0.0223518, 0.543103 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
+
+[node name="CursorAnimation" type="AnimationPlayer" parent="."]
+anims/Cursor = SubResource( 37 )

@@ -13,6 +13,7 @@ var onCooldown = false
 var currentDimension = ""
 
 var health = -1
+var state = 0
 
 # ================================
 # Util

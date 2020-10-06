@@ -197,6 +197,7 @@ func resetInventory():
 		s.queue_free()
 	
 	slots = []
+	$Hotbar.reset()
 	
 	for i in numSlots:
 		var slot = slotScene.instance()

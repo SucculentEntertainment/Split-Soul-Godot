@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Entities/Player/Weapons.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=2]
+[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
 
 [sub_resource type="AnimationNodeStateMachine" id=1]
 
@@ -14,8 +15,16 @@ itemName = "i_fireWand"
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0, -16 )
+amount = 16
 local_coords = false
 process_material = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, -16 )
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 3 )
+color = Color( 0.945098, 0.52549, 0.156863, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

@@ -12,6 +12,11 @@ export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, int) var dimensionOffsets
 
+export (Texture) var aimCursor
+var cursorCounter = 0
+var cursorFrames = 2
+var useCustomCursor = false
+
 var damage = 2
 
 var interact = null
@@ -41,6 +46,8 @@ var currGUI = ""
 
 var inventory = null
 var hotbar = null
+
+var hasAttacked = false
 
 # ================================
 # Utility
@@ -110,18 +117,22 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	if hotbar.items[0] != "":
-		if $Weapon.get_child_count() == 0:
-			# Write SpawnHelper for this
-			var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
-			$Weapon.add_child(weapon)
+	if !hasAttacked:
+		if hotbar.items[0] != "":
+			if $Weapon.get_child_count() == 0:
+				# Write SpawnHelper for this
+				var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
+				$Weapon.add_child(weapon)
+			
+			$Weapon.get_children()[0].attack(self)
 		
-		$Weapon.get_children()[0].attack(self)
+		hasAttacked = true
 	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackEnd():
 	state = MOVE
+	hasAttacked = false
 
 # ================================
 # Items
@@ -160,6 +171,14 @@ func changeDimension(dimension):
 	transition.queue_free()
 
 func getInput():
+	#Temporary Code
+	if hotbar.items[0] != "":
+		useCustomCursor = true
+		$CursorAnimation.play("Cursor")
+	else:
+		useCustomCursor = false
+		$CursorAnimation.stop()
+	
 	if !disableAllIn:
 		if Input.is_action_just_pressed("ctrl_interact"):
 			if interact != null and !disableIn: interact.interact(self)
@@ -236,3 +255,21 @@ func _onHealReceived(heal):
 	vars.health += heal
 	if vars.health > maxHealth: vars.health = maxHealth
 	gui.updateValues(maxHealth)
+
+# ================================
+# Cursor
+# ================================
+
+func advanceCursor():
+	if useCustomCursor:
+		cursorCounter += 1
+		if cursorCounter >= cursorFrames: cursorCounter = 0
+		
+		var cursorImg = Image.new()
+		var cursor = ImageTexture.new()
+		cursorImg.create(64, 64, false, Image.FORMAT_RGBA8)
+		cursorImg.blit_rect(aimCursor.get_data(), Rect2(64 * cursorCounter, 0, 64, 64), Vector2())
+		cursor.create_from_image(cursorImg)
+		
+		Input.set_custom_mouse_cursor(cursor, 0, Vector2(64, 64))
+	else: Input.set_custom_mouse_cursor(null)
