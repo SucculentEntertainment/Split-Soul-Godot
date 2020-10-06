@@ -7,6 +7,7 @@ var itemName = ""
 var amount = 0
 
 var health = -1 
+var state = 0
 
 var armed = false
 

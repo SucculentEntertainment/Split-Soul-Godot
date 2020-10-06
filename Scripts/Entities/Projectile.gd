@@ -5,62 +5,78 @@ export (int) var speed
 export (int) var lifetime
 
 enum {
+	UNINIT,
 	CREATE,
 	MOVE,
-	DESTROY
+	DESTROY,
+	DESPAWN
 }
 
-var state = CREATE
+var state = UNINIT
 var health = -1
 
 var dir = Vector2()
 var vel = Vector2()
 
-var initiated = false
+var animationEnd = false
 
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
+	
+	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
 func init(dir):
 	self.dir = dir
-	look_at((get_transform().origin + dir) * Vector2(-1, -1))
+	$AnimationTree.set("parameters/Creation/blend_position", dir)
+	$AnimationTree.set("parameters/Travel/blend_position", dir)
+	$AnimationTree.set("parameters/Destruction/blend_position", dir)
 	
-	initiated = true
+	state = CREATE
 
 func _physics_process(delta):
-	if !initiated:
-		return
-	
 	match state:
+		UNINIT:
+			return
 		CREATE:
 			create(delta)
 		MOVE:
 			move(delta)
 		DESTROY:
 			destroy(delta)
+		DESPAWN:
+			despawn(delta)
 
 func create(delta):
-	$AnimationPlayer.play("Creation")
-	yield($AnimationPlayer, "animation_finished")
-	
-	state = MOVE
-	
-	$Timer.start()
-	$AnimationPlayer.play("Travel")
+	$AnimationTree.get("parameters/playback").travel("Creation")
 
 func move(delta):
 	vel = dir * speed * delta
 	vel = move_and_slide(vel)
 
 func destroy(delta):
-	$AnimationPlayer.play("Destruction")
-	yield($AnimationPlayer, "animation_finished")
-	
+	$AnimationTree.get("parameters/playback").travel("Destruction")
+
+func despawn(delta):
+	get_parent().remove_child(self)
 	queue_free()
 
 func _onTimeout():
 	state = DESTROY
 
+func createEnd():
+	state = MOVE
+	
+	$Timer.start()
+	$AnimationTree.get("parameters/playback").travel("Travel")
+
+func destructionEnd():
+	state = DESPAWN
+
 func changeDimension(dimension):
 	pass
+
+func _onBodyEntered(body):
+	if "EnemySlime" in body.name:
+		body.changeType("e_fireSlime")
+	state = DESTROY

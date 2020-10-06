@@ -85,7 +85,8 @@ func _onLevelChange(level, dimension, wentBack):
 	entities[self.prevLevel.levelID] = []
 	
 	for e in self.prevLevel.get_node("Entities").get_children():
-		entities[self.prevLevel.levelID].append({"id": e.id, "pos": e.global_position, "health": e.health})
+		if "r_" in e.id: continue
+		entities[self.prevLevel.levelID].append({"id": e.id, "pos": e.global_position, "health": e.health, "scale": e.scale, "state": e.state})
 	
 	loadLevel(level, dimension, wentBack)
 	yield(self, "levelLoaded")
@@ -99,6 +100,10 @@ func destroyLevel():
 	$CanvasLayer/GUI.player = null
 	$CanvasLayer/GUI/Inventory.resetInventory()
 	vars.resetVars()
+
+# ================================
+# Save / Load
+# ================================
 
 func saveGame(file):
 	var level = prevLevel
@@ -117,7 +122,8 @@ func saveGame(file):
 	
 	entities[self.prevLevel.levelID] = []
 	for e in level.get_node("Entities").get_children():
-		entities[self.prevLevel.levelID].append({"id": e.id, "pos": e.global_position, "health": e.health})
+		if "r_" in e.id: continue
+		entities[self.prevLevel.levelID].append({"id": e.id, "pos": e.global_position, "health": e.health, "scale": e.scale, "state": e.state})
 	
 	file.store_var(entities)
 	
@@ -133,6 +139,7 @@ func saveGame(file):
 		inventory.append({"id": slot.item, "amount": slot.amount})
 	
 	file.store_var(inventory)
+	file.store_var($CanvasLayer/GUI/Inventory/Hotbar.saveItems())
 	
 	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("saveComplete")
@@ -176,12 +183,17 @@ func loadGame(file):
 	for slot in $CanvasLayer/GUI/Inventory.slots:
 		slot.updateItem(inventory[i].id, inventory[i].amount)
 		i += 1
+	$CanvasLayer/GUI/Inventory/Hotbar.loadItems(file.get_var())
 	
 	$Loading/LoadingScreen.end()
 	loading = false
 	
 	yield(get_tree().create_timer(0.1), "timeout")
 	emit_signal("loadComplete")
+
+# ================================
+# Events
+# ================================
 
 func _onMenuExit():
 	for menu in $Menu.get_children():
@@ -194,6 +206,10 @@ func _onExit():
 	var mainMenu = load("res://Scenes/GUI/MainMenu.tscn").instance()
 	$Menu.add_child(mainMenu)
 	mainMenu.connect("menuClosed", self, "_onMenuExit")
+
+# ================================
+# New Game
+# ================================
 
 func newGame():
 	destroyLevel()

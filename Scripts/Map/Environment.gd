@@ -12,6 +12,8 @@ var health = -1
 var animSpeedMin = 0.8
 var animSpeedMax = 1.2
 
+var state = 0
+
 func _ready():
 	rng.randomize()
 	$CollisionShape2D.disabled = !hasCollision

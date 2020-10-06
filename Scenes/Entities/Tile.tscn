@@ -14,7 +14,7 @@ position = Vector2( -8, -8 )
 texture = ExtResource( 2 )
 centered = false
 vframes = 12
-hframes = 44
+hframes = 52
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

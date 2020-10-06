@@ -39,7 +39,9 @@ func loadLevel(prevLoaded, entities, resetHealth = false):
 		for e in entities[levelID]:
 			var obj = $SpawnHelper.spawn(e.id, Vector2())
 			obj.global_position = e.pos
+			obj.scale = e.scale
 			obj.health = e.health
+			obj.state = e.state
 			
 			if obj.health > 0: obj.receiveDamage(0)
 
