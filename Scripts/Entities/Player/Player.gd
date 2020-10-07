@@ -55,10 +55,15 @@ enum {
 var state = MOVE
 var inputState = IN_MOVE
 var attackState = ATK_INIT
+
 var currGUI = ""
+var guiHover = false
+var fullGUIOpen = false
 
 var inventory = null
 var hotbar = null
+
+var currWeapon = ""
 
 # ================================
 # Utility
@@ -77,6 +82,9 @@ func initGUI(gui):
 	
 	inventory = gui.get_node("Inventory")
 	hotbar = inventory.get_node("Hotbar")
+	
+	hotbar.connect("mouse_entered", self, "_onGUIEnter")
+	hotbar.connect("mouse_exited", self, "_onGUIExited")
 
 func _physics_process(delta):
 	if inputState == IN_DISABLED: return
@@ -144,7 +152,7 @@ func attack(delta):
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackInit():
-	pass
+	$AnimationTree.get("parameters/attack/playback").travel("Init")
 
 func attackHold():
 	pass
@@ -154,8 +162,7 @@ func attackRelease():
 
 func attackEnd():
 	hasAttacked = false
-	state = MOVE
-	inputState = IN_MOVE
+	state = MOVE	inputState = IN_MOVE
 
 # ================================
 # Items
@@ -204,6 +211,9 @@ func disableGlow():
 # ================================
 
 func getInput():
+	if guiHover: inputState = IN_GUI
+	elif fullGUIOpen: inputState = IN_FULLGUI
+	
 	match inputState:
 		IN_DISABLED:
 			pass
@@ -215,6 +225,19 @@ func getInput():
 			fullGUIInput()
 		IN_GUI:
 			guiInput()
+
+func openGUI():
+	if Input.is_action_just_pressed("ctrl_console"):
+		currGUI = "Console"
+	if Input.is_action_just_pressed("ctrl_inventory"):
+		currGUI 	= "Inventory"
+	if Input.is_action_just_pressed("ui_cancel"):
+		currGUI = "QuickMenu"
+		
+	gui.get_node(currGUI).toggle()
+	inputState = IN_FULLGUI
+	fullGUIOpen = true
+	dir = Vector2()
 
 func oldInput():
 	#Temporary Code
@@ -238,24 +261,8 @@ func moveInput():
 		state = ATTACK
 		inputState = IN_ATTACK
 		dir = Vector2()
-		
-	if Input.is_action_just_pressed("ctrl_console"):
-		gui.get_node("Console").toggle()
-		inputState = IN_FULLGUI
-		currGUI = "Console"
-		dir = Vector2()
-		
-	if Input.is_action_just_pressed("ctrl_inventory"):
-		gui.get_node("Inventory").toggle()
-		inputState = IN_FULLGUI
-		currGUI = "Inventory"
-		dir = Vector2()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		gui.get_node("QuickMenu").toggle()
-		inputState = IN_FULLGUI
-		currGUI = "QuickMenu"
-		dir = Vector2()
+	openGUI()
 
 func attackInput():
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
@@ -269,9 +276,18 @@ func fullGUIInput():
 		gui.get_node(currGUI).toggle()
 		currGUI = ""
 		inputState = IN_MOVE
+		fullGUIOpen = false
 
 func guiInput():
-	pass
+	openGUI()
+
+func _onGUIEntered():
+	guiHover = true
+	inputState = IN_GUI
+
+func _onGUIExited():
+	guiHover = false
+	inputState = IN_MOVE
 
 # ================================
 # Damage

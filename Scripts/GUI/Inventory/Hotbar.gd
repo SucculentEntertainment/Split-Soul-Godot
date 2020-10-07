@@ -1,5 +1,7 @@
 extends Control
 
+signal slotChanged(slot, changedTo)
+
 var items = []
 
 func _ready():
