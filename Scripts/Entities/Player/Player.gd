@@ -34,6 +34,7 @@ var vel = Vector2()
 var prevPos = Vector2()
 
 var invincibility = false
+var hasAttacked = false
 
 enum {
 	MOVE,
@@ -46,8 +47,6 @@ var currGUI = ""
 
 var inventory = null
 var hotbar = null
-
-var hasAttacked = false
 
 # ================================
 # Utility
@@ -117,22 +116,23 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	if !hasAttacked:
-		if hotbar.items[0] != "":
-			if $Weapon.get_child_count() == 0:
-				# Write SpawnHelper for this
-				var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
-				$Weapon.add_child(weapon)
+	getInput()
+	if hasAttacked: return
+	
+	hasAttacked = true
+	if hotbar.items[0] != "":
+		if $Weapon.get_child_count() == 0:
+			# Write SpawnHelper for this
+			var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
+			$Weapon.add_child(weapon)
 			
-			$Weapon.get_children()[0].attack(self)
-		
-		hasAttacked = true
+		$Weapon.get_children()[0].attack(self)
 	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackEnd():
-	state = MOVE
 	hasAttacked = false
+	state = MOVE
 
 # ================================
 # Items
@@ -179,12 +179,20 @@ func getInput():
 		useCustomCursor = false
 		$CursorAnimation.stop()
 	
+	if state == ATTACK:
+		if Input.is_action_just_pressed("ctrl_attack_primary"):
+			if !disableIn:
+				hasAttacked = false
+		return
+	
 	if !disableAllIn:
 		if Input.is_action_just_pressed("ctrl_interact"):
 			if interact != null and !disableIn: interact.interact(self)
 		
 		if Input.is_action_just_pressed("ctrl_attack_primary"):
-			if !disableIn: state = ATTACK
+			if !disableIn:
+				hasAttacked = false
+				state = ATTACK
 		
 		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
 			if gui != null:
@@ -271,5 +279,5 @@ func advanceCursor():
 		cursorImg.blit_rect(aimCursor.get_data(), Rect2(64 * cursorCounter, 0, 64, 64), Vector2())
 		cursor.create_from_image(cursorImg)
 		
-		Input.set_custom_mouse_cursor(cursor, 0, Vector2(32, 32))
+		Input.set_custom_mouse_cursor(cursor, 0, Vector2(64, 64))
 	else: Input.set_custom_mouse_cursor(null)
