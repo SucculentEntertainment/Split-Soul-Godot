@@ -20,11 +20,9 @@ func givePlayerReference(player):
 func toggle():
 	if visible:
 		hide()
-		player.disableIn = false
 		input.grab_focus()
 	else:
 		show()
-		player.disableIn = true
 		input.release_focus()
 
 func sendCommand(command):

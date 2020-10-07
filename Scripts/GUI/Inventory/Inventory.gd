@@ -40,17 +40,14 @@ func givePlayerReference(player):
 func toggle():
 	if $MainPanel.visible:
 		$MainPanel.visible = false
-		player.disableIn = false
 		
 		if mouseItem:
 			insertItem($MouseItem.itemName, $MouseItem.amount)
 			$MouseItem.hide()
 			$MouseItem.resetType()
 			mouseItem = false
-		
 	else:
 		$MainPanel.visible = true
-		player.disableIn = true
 
 # ================================
 # Events

@@ -209,4 +209,5 @@ func die():
 	$AnimationTree.get("parameters/playback").travel("Death")
 
 func deadAnimEnd():
+	get_parent().remove_child(self)
 	queue_free()

@@ -15,30 +15,17 @@ func _ready():
 	$VBoxContainer/Settings.connect("button_down", self, "_onSettings")
 	$VBoxContainer/Exit.connect("button_down", self, "_onExit")
 
-func _input(_event):
-	if Input.is_action_just_pressed("ui_cancel") and visible:
-		toggle()
-
 func toggle(noBlur = false):
 	if visible:
 		hide()
 		get_tree().paused = false
-		
 		yield(get_tree().create_timer(0.1), "timeout")
-		
-		if gui.player != null:
-			gui.player.disableIn = false
-			gui.player.disableAllIn = false
 		
 		if !noBlur:
 			get_parent().get_node("BlurShader/AnimationPlayer").play("FadeOutFast")
 	else:
 		show()
 		get_tree().paused = true
-		
-		if gui.player != null:
-			gui.player.disableIn = true
-			gui.player.disableAllIn = true
 		
 		if !noBlur:
 			get_parent().get_node("BlurShader/AnimationPlayer").play("FadeInFast")

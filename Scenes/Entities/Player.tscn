@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Entities/Player/Camera.gd" type="Script" id=2]
@@ -499,28 +499,27 @@ tracks/0/keys = {
 "values": [ 40, 47 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=16]
-animation = "attack_left"
+[sub_resource type="AnimationNodeBlendSpace2D" id=38]
 
-[sub_resource type="AnimationNodeAnimation" id=17]
-animation = "attack_down"
+[sub_resource type="AnimationNodeBlendSpace2D" id=39]
 
-[sub_resource type="AnimationNodeAnimation" id=18]
-animation = "attack_right"
+[sub_resource type="AnimationNodeBlendSpace2D" id=40]
 
-[sub_resource type="AnimationNodeAnimation" id=19]
-animation = "attack_up"
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=20]
-blend_point_0/node = SubResource( 16 )
-blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 17 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 18 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 19 )
-blend_point_3/pos = Vector2( 0, -1 )
-blend_mode = 1
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachine" id=44]
+states/Hold/node = SubResource( 38 )
+states/Hold/position = Vector2( 434, 182 )
+states/Init/node = SubResource( 39 )
+states/Init/position = Vector2( 267, 73 )
+states/Release/node = SubResource( 40 )
+states/Release/position = Vector2( 616, 73 )
+transitions = [ "Init", "Hold", SubResource( 41 ), "Hold", "Release", SubResource( 42 ), "Release", "Init", SubResource( 43 ) ]
 
 [sub_resource type="AnimationNodeAnimation" id=21]
 animation = "idle_down"
@@ -572,21 +571,24 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
 [sub_resource type="AnimationNodeStateMachine" id=35]
-states/Attack/node = SubResource( 20 )
-states/Attack/position = Vector2( 138, 141 )
+states/Attack/node = SubResource( 44 )
+states/Attack/position = Vector2( 138, 149 )
 states/Idle/node = SubResource( 25 )
 states/Idle/position = Vector2( 138, 55 )
 states/Walk/node = SubResource( 30 )
 states/Walk/position = Vector2( 284, 55 )
-transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 32 ), "Idle", "Attack", SubResource( 33 ), "Attack", "Idle", SubResource( 34 ) ]
+transitions = [ "Idle", "Walk", SubResource( 31 ), "Walk", "Idle", SubResource( 32 ), "Idle", "Attack", SubResource( 46 ), "Attack", "Idle", SubResource( 47 ) ]
 start_node = "Idle"
+graph_offset = Vector2( -380, 3 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=36]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
 [sub_resource type="Animation" id=37]
 resource_name = "Cursor"
@@ -627,7 +629,7 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 24
 hframes = 8
-frame = 4
+frame = 1
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 768 )
 
@@ -708,7 +710,10 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
 parameters/playback = SubResource( 36 )
-parameters/Attack/blend_position = Vector2( -0.0223518, 0.543103 )
+parameters/Attack/playback = SubResource( 45 )
+parameters/Attack/Hold/blend_position = Vector2( 0, 0 )
+parameters/Attack/Init/blend_position = Vector2( 0, 0 )
+parameters/Attack/Release/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
 

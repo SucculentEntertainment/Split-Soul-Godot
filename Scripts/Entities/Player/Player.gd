@@ -20,9 +20,6 @@ var useCustomCursor = false
 var damage = 2
 
 var interact = null
-var disableIn = false
-var disableAllIn = false
-
 var gui = null
 
 var moving = false
@@ -41,8 +38,23 @@ enum {
 	ATTACK
 }
 
+enum {
+	IN_DISABLED,
+	IN_MOVE,
+	IN_ATTACK,
+	IN_FULLGUI,
+	IN_GUI
+}
+
+enum {
+	ATK_INIT,
+	ATK_HOLD,
+	ATK_RELEASE
+}
+
 var state = MOVE
-var isInGUI = false
+var inputState = IN_MOVE
+var attackState = ATK_INIT
 var currGUI = ""
 
 var inventory = null
@@ -67,28 +79,22 @@ func initGUI(gui):
 	hotbar = inventory.get_node("Hotbar")
 
 func _physics_process(delta):
+	if inputState == IN_DISABLED: return
 	getInput()
 	
-	if !disableIn: 
-		match state:
-			MOVE:
-				move(delta)
-			ATTACK:
-				attack(delta)
+	match state:
+		MOVE:
+			move(delta)
+		ATTACK:
+			attack(delta)
 
 # ================================
 # Movement
 # ================================
 
-func getMoveInput():
-	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
-	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
-	dir = dir.normalized()
-
 func move(delta):
 	prevPos = global_position
 	prevDir = dir
-	getMoveInput()
 	
 	if dir == Vector2(): vel = Vector2()
 	else: vel = dir * speed * delta
@@ -116,8 +122,15 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	getInput()
 	if hasAttacked: return
+	
+	match attackState:
+		ATK_INIT:
+			attackInit()
+		ATK_HOLD:
+			attackHold()
+		ATK_RELEASE:
+			attackRelease()
 	
 	hasAttacked = true
 	if hotbar.items[0] != "":
@@ -130,9 +143,19 @@ func attack(delta):
 	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
+func attackInit():
+	pass
+
+func attackHold():
+	pass
+
+func attackRelease():
+	pass
+
 func attackEnd():
 	hasAttacked = false
 	state = MOVE
+	inputState = IN_MOVE
 
 # ================================
 # Items
@@ -170,7 +193,30 @@ func changeDimension(dimension):
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
 	transition.queue_free()
 
+func enableGlow():
+	$Light2D.show()
+
+func disableGlow():
+	$Light2D.hide()
+
+# ================================
+# Input
+# ================================
+
 func getInput():
+	match inputState:
+		IN_DISABLED:
+			pass
+		IN_MOVE:
+			moveInput()
+		IN_ATTACK:
+			attackInput()
+		IN_FULLGUI:
+			fullGUIInput()
+		IN_GUI:
+			guiInput()
+
+func oldInput():
 	#Temporary Code
 	if hotbar.items[0] != "":
 		useCustomCursor = true
@@ -178,57 +224,54 @@ func getInput():
 	else:
 		useCustomCursor = false
 		$CursorAnimation.stop()
-	
-	if state == ATTACK:
-		if Input.is_action_just_pressed("ctrl_attack_primary"):
-			if !disableIn:
-				hasAttacked = false
-		return
-	
-	if !disableAllIn:
-		if Input.is_action_just_pressed("ctrl_interact"):
-			if interact != null and !disableIn: interact.interact(self)
-		
-		if Input.is_action_just_pressed("ctrl_attack_primary"):
-			if !disableIn:
-				hasAttacked = false
-				state = ATTACK
-		
-		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
-			if gui != null:
-				gui.get_node("Console").toggle()
-				isInGUI = !isInGUI
-				currGUI = "console"
-			
-		if Input.is_action_just_pressed("ctrl_inventory") and (!isInGUI or (isInGUI and currGUI == "inventory")):
-			if gui != null:
-				gui.get_node("Inventory").toggle()
-				isInGUI = !isInGUI
-				currGUI = "inventory"
-				
-		if Input.is_action_just_pressed("debug_toggle"):
-			if gui != null:
-				gui.get_node("Debug").toggle()
-		
-		if Input.is_action_just_pressed("ui_cancel"):
-			if gui != null:
-				if isInGUI:
-					match currGUI:
-						"console":
-							gui.get_node("Console").toggle()
-						"inventory":
-							gui.get_node("Inventory").toggle()
-					
-					isInGUI = false
-				else:
-					gui.get_node("QuickMenu").toggle()
-					yield(get_tree().create_timer(0.1), "timeout")
 
-func enableGlow():
-	$Light2D.show()
+func moveInput():
+	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
+	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
+	dir = dir.normalized()
+	
+	if Input.is_action_just_pressed("ctrl_interact"):
+		if interact != null: interact.interact(self)
+		
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		hasAttacked = false
+		state = ATTACK
+		inputState = IN_ATTACK
+		dir = Vector2()
+		
+	if Input.is_action_just_pressed("ctrl_console"):
+		gui.get_node("Console").toggle()
+		inputState = IN_FULLGUI
+		currGUI = "Console"
+		dir = Vector2()
+		
+	if Input.is_action_just_pressed("ctrl_inventory"):
+		gui.get_node("Inventory").toggle()
+		inputState = IN_FULLGUI
+		currGUI = "Inventory"
+		dir = Vector2()
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		gui.get_node("QuickMenu").toggle()
+		inputState = IN_FULLGUI
+		currGUI = "QuickMenu"
+		dir = Vector2()
 
-func disableGlow():
-	$Light2D.hide()
+func attackInput():
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		hasAttacked = false
+
+func fullGUIInput():
+	if (Input.is_action_just_pressed("ui_cancel") or
+	   (Input.is_action_just_pressed("ctrl_console") and currGUI == "Console") or
+	   (Input.is_action_just_pressed("ctrl_inventory") and currGUI == "Inventory")):
+		
+		gui.get_node(currGUI).toggle()
+		currGUI = ""
+		inputState = IN_MOVE
+
+func guiInput():
+	pass
 
 # ================================
 # Damage
