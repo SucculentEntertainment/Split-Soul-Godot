@@ -24,6 +24,9 @@ func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
 	
+	$Creation.connect("timeout", self, "_onCreated")
+	$Creation.start()
+	
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
 func init(dir):
@@ -46,6 +49,9 @@ func _physics_process(delta):
 			destroy(delta)
 		DESPAWN:
 			despawn(delta)
+
+func _onCreated():
+	$Hitbox/CollisionShape2D.disabled = false
 
 func create(delta):
 	$AnimationTree.get("parameters/playback").travel("Creation")

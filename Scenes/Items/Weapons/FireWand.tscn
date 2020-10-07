@@ -32,3 +32,7 @@ color = Color( 0.945098, 0.52549, 0.156863, 1 )
 tree_root = SubResource( 1 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 2 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
