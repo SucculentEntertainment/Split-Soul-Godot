@@ -565,7 +565,7 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 15
 hframes = 8
-frame = 5
+frame = 2
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 480 )
 
@@ -573,6 +573,7 @@ region_rect = Rect2( 0, 0, 256, 480 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Punchwave" type="Sprite" parent="."]
+visible = false
 position = Vector2( 0, -6.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )

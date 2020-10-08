@@ -167,7 +167,6 @@ func attackHold(anim):
 		return
 	
 	anim.travel("Hold")
-	print(wpn)
 	if wpn != null: wpn.charge(self)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) == false:
@@ -269,12 +268,15 @@ func getInput():
 			pass
 		IN_MOVE:
 			moveInput()
+			openGUI()
+			miscInput()
 		IN_ATTACK:
 			attackInput()
 		IN_FULLGUI:
 			fullGUIInput()
 		IN_GUI:
-			guiInput()
+			moveInput()
+			openGUI()
 
 func openGUI():
 	if Input.is_action_just_pressed("ctrl_console"):
@@ -287,8 +289,19 @@ func openGUI():
 	if currGUI == "": return
 	
 	gui.get_node(currGUI).toggle()
+	inputState = IN_FULLGUI
 	fullGUIOpen = true
 	dir = Vector2()
+
+func miscInput():
+	if Input.is_action_just_pressed("ctrl_interact"):
+		if interact != null: interact.interact(self)
+		
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		hasAttacked = false
+		state = ATTACK
+		inputState = IN_ATTACK
+		dir = Vector2()
 
 func moveInput():
 	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
@@ -298,17 +311,6 @@ func moveInput():
 	if dir != Vector2():
 		$DirectionTree.set("parameters/blend_position", dir)
 		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
-	
-	if Input.is_action_just_pressed("ctrl_interact"):
-		if interact != null: interact.interact(self)
-		
-	if Input.is_action_just_pressed("ctrl_attack_primary"):
-		hasAttacked = false
-		state = ATTACK
-		inputState = IN_ATTACK
-		dir = Vector2()
-	
-	openGUI()
 
 func attackInput():
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
@@ -325,12 +327,10 @@ func fullGUIInput():
 		else: inputState = IN_MOVE
 		fullGUIOpen = false
 
-func guiInput():
-	openGUI()
-
 func _onGUIEntered():
 	guiHover = true
-	inputState = IN_GUI
+	if fullGUIOpen: inputState = IN_FULLGUI
+	else: inputState = IN_GUI
 
 func _onGUIExited():
 	guiHover = false
