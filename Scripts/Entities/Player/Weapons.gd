@@ -1,6 +1,7 @@
 extends Node2D
 
 export (String) var itemName
+export (bool) var canHold
 
 var hasAttacked = false
 var isCharging = false
@@ -10,7 +11,7 @@ var obj = null
 func _ready():
 	$Cooldown.connect("timeout", self, "_onCooldown")
 
-func charge():
+func charge(player):
 	if isCharging: return
 	isCharging = true
 	
@@ -32,7 +33,9 @@ func attack(player):
 	
 	match itemName:
 		"i_fireWand":
-			obj.allowMovement = true
+			var dir = player.get_position().direction_to(get_global_mouse_position())
+			obj.changeDir(dir)
+			obj.enableMovement()
 
 func _onCooldown():
 	hasAttacked = false

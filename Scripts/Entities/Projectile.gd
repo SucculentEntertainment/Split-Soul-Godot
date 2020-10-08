@@ -26,8 +26,6 @@ func _ready():
 	$Timer.wait_time = lifetime
 	
 	$Creation.connect("timeout", self, "_onCreated")
-	$Creation.start()
-	
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
 func init(dir, allowMovement = true):
@@ -38,6 +36,17 @@ func init(dir, allowMovement = true):
 	
 	self.allowMovement = allowMovement
 	state = CREATE
+
+func changeDir(dir):
+	self.dir = dir
+	$AnimationTree.set("parameters/Creation/blend_position", dir)
+	$AnimationTree.set("parameters/Travel/blend_position", dir)
+	$AnimationTree.set("parameters/Destruction/blend_position", dir)
+
+func enableMovement():
+	allowMovement = true
+	$Timer.start()
+	$Creation.start()
 
 func _physics_process(delta):
 	match state:
@@ -76,7 +85,10 @@ func _onTimeout():
 func createEnd():
 	state = MOVE
 	
-	$Timer.start()
+	if allowMovement:
+		$Timer.start()
+		$Creation.start()
+	
 	$AnimationTree.get("parameters/playback").travel("Travel")
 
 func destructionEnd():

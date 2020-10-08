@@ -1,7 +1,5 @@
 extends Control
 
-signal slotChanged(id, item, amount)
-
 onready var def = get_node("/root/Definitions")
 
 var slotScene = preload("res://Scenes/GUI/Inventory/Slot.tscn")
@@ -90,7 +88,6 @@ func takeSlot(slot, amount):
 	$MouseItem.updateItem(slot.item, amount)
 	slot.updateItem(slot.item, slot.amount - amount)
 	mouseItem = true
-	emit_signal("slot_changed", slot.id, slot.item, slot.amount)
 
 func putSlot(slot, amount):
 	var newAmount = slot.amount + amount
@@ -101,8 +98,6 @@ func putSlot(slot, amount):
 		newAmount = def.ITEM_DATA[$MouseItem.itemName].stackSize
 	elif slot.updateItem(itemName, newAmount) != -1:
 		$MouseItem.updateItem($MouseItem.itemName, $MouseItem.amount - amount)
-	
-	emit_signal("slot_changed", slot.id, slot.item, slot.amount)
 
 func _onMouseEnter():
 	mouseOutside = false

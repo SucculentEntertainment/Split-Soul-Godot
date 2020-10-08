@@ -11,6 +11,9 @@ signal updateGUI(health, coins)
 export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, int) var dimensionOffsets
+export (Array, int) var directionOffsets
+
+export (int) var directionState = 0
 
 export (Texture) var aimCursor
 var cursorCounter = 0
@@ -32,6 +35,13 @@ var prevPos = Vector2()
 
 var invincibility = false
 var hasAttacked = false
+
+enum {
+	DOWN,
+	UP,
+	RIGHT,
+	LEFT
+}
 
 enum {
 	MOVE,
@@ -63,7 +73,9 @@ var fullGUIOpen = false
 var inventory = null
 var hotbar = null
 
-var currWeapon = ""
+var prevWeapon = "none"
+var currWeapon = "none"
+var currWeaponGroup = "none"
 var currDimension = "d_alive"
 var wpn = null
 
@@ -76,6 +88,8 @@ func _ready():
 	$AnimationTree.get("parameters/playback").start("Idle")
 	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
 	$HitboxPivot/Hitbox.connect("area_entered", self, "_onGiveDamage")
+	
+	$WeaponHelper.init($Weapon)
 
 func initGUI(gui):
 	self.gui = gui
@@ -85,14 +99,13 @@ func initGUI(gui):
 	inventory = gui.get_node("Inventory")
 	hotbar = inventory.get_node("Hotbar")
 	
-	hotbar.connect("mouse_entered", self, "_onGUIEnter")
+	hotbar.connect("mouse_entered", self, "_onGUIEntered")
 	hotbar.connect("mouse_exited", self, "_onGUIExited")
-
-	inventory.connect("slot_changed", self, "_onSlotChanged")
 
 func _physics_process(delta):
 	if inputState == IN_DISABLED: return
 	getInput()
+	updateWeapon()
 	
 	match state:
 		MOVE:
@@ -116,12 +129,11 @@ func move(delta):
 
 func changeAnimation():
 	if dir != Vector2():
-		$AnimationTree.set("parameters/Idle/blend_position", dir)
-		$AnimationTree.set("parameters/Walk/blend_position", dir)
-		$AnimationTree.set("parameters/Attack/blend_position", dir)
 		$AnimationTree.get("parameters/playback").travel("Walk")
+		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
 	else:
 		$AnimationTree.get("parameters/playback").travel("Idle")
+		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
 
 # ================================
 # Attack
@@ -134,7 +146,9 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	var anim = $AnimationTree.get("parameters/attack/" + currWeapon + "playback")
+	$AnimationTree.get("parameters/playback").travel("Attack")
+	$AnimationTree.get("parameters/Attack/playback").travel(currWeaponGroup)
+	var anim = $AnimationTree.get("parameters/Attack/" + currWeaponGroup + "/playback")
 	
 	match attackState:
 		ATK_INIT:
@@ -148,8 +162,13 @@ func attackInit(anim):
 	anim.travel("Init")
 
 func attackHold(anim):
+	if wpn != null and !wpn.canHold:
+		attackState = ATK_RELEASE
+		return
+	
 	anim.travel("Hold")
-	wpn.charge()
+	print(wpn)
+	if wpn != null: wpn.charge(self)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) == false:
 		attackState = ATK_RELEASE
@@ -159,15 +178,16 @@ func attackRelease(anim):
 	
 	if !hasAttacked:
 		hasAttacked = true
-		wpn.attack(self)
+		if wpn != null: wpn.attack(self)
 
 func attackInitDone():
 	attackState = ATK_HOLD
 
 func attackEnd():
 	hasAttacked = false
-	state = MOVE	
+	state = MOVE
 	inputState = IN_MOVE
+	attackState = ATK_INIT
 
 # ================================
 # Items
@@ -183,29 +203,30 @@ func itemAction(item):
 	
 	gui.updateValues(maxHealth)
 
-func _onSlotChanged(id, item, amount):
-	if((currDimension == "d_alive" and id != 0) or
-	   (currDimension == "d_dead" and id != 1)):
-		return
+func updateWeapon():
+	var slot = 0
 	
-	if id == 1:
+	if currDimension == "d_dead":
+		slot = 1
 		useCustomCursor = true
 		$CursorAnimation.play("Cursor")
 	else:
 		useCustomCursor = false
 		$CursorAnimation.stop()
 
-	if amount == 0 or item == "": currWeapon = ""
-	else: currWeapon = item
-			
-	if currWeapon != "":
-		$AnimationTree.get("parameters/Idle/playback").travel(def.ITEM_DATA[currWeapon].subType)
-		wpn = $WeaponHelper.set(currWeapon)
+	if inventory.hotbar[slot].amount == 0 or inventory.hotbar[slot].item == "": currWeapon = "none"
+	else: currWeapon = inventory.hotbar[slot].item
+	
+	if prevWeapon == currWeapon: return
+	prevWeapon = currWeapon
+	
+	if currWeapon != "none":
+		currWeaponGroup = def.ITEM_DATA[currWeapon].subType
+		wpn = $WeaponHelper.setWeapon(currWeapon)
 	else:
-		$AnimationTree.get("parameters/Idle/playback").travel("none")
+		currWeaponGroup = "none"
 		$WeaponHelper.delWeapon()
-	
-	
+		wpn = null
 
 # ================================
 # Actions
@@ -225,7 +246,7 @@ func changeDimension(dimension):
 	if dimension == "d_dead": enableGlow()
 	else: disableGlow()
 	
-	$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+	$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(dimension)] + directionOffsets[directionState]
 	
 	transition.get_node("AnimationPlayer").play("Open")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
@@ -243,9 +264,6 @@ func disableGlow():
 # ================================
 
 func getInput():
-	if guiHover: inputState = IN_GUI
-	elif fullGUIOpen: inputState = IN_FULLGUI
-	
 	match inputState:
 		IN_DISABLED:
 			pass
@@ -262,12 +280,13 @@ func openGUI():
 	if Input.is_action_just_pressed("ctrl_console"):
 		currGUI = "Console"
 	if Input.is_action_just_pressed("ctrl_inventory"):
-		currGUI 	= "Inventory"
+		currGUI = "Inventory"
 	if Input.is_action_just_pressed("ui_cancel"):
 		currGUI = "QuickMenu"
-		
+	
+	if currGUI == "": return
+	
 	gui.get_node(currGUI).toggle()
-	inputState = IN_FULLGUI
 	fullGUIOpen = true
 	dir = Vector2()
 
@@ -275,6 +294,10 @@ func moveInput():
 	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
 	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
 	dir = dir.normalized()
+	
+	if dir != Vector2():
+		$DirectionTree.set("parameters/blend_position", dir)
+		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
 	
 	if Input.is_action_just_pressed("ctrl_interact"):
 		if interact != null: interact.interact(self)
@@ -298,7 +321,8 @@ func fullGUIInput():
 		
 		gui.get_node(currGUI).toggle()
 		currGUI = ""
-		inputState = IN_MOVE
+		if guiHover: inputState = IN_GUI
+		else: inputState = IN_MOVE
 		fullGUIOpen = false
 
 func guiInput():
@@ -310,7 +334,8 @@ func _onGUIEntered():
 
 func _onGUIExited():
 	guiHover = false
-	inputState = IN_MOVE
+	if fullGUIOpen: inputState = IN_FULLGUI
+	else: inputState = IN_MOVE
 
 # ================================
 # Damage
