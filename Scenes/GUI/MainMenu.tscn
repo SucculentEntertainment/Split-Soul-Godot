@@ -9,7 +9,6 @@
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=9]
 
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 uniform float scroll_speed;
@@ -27,35 +26,35 @@ shader_param/scroll_speed = 0.001
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 0, 128, 32, 32 )
+region = Rect2( 0, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 32, 128, 32, 32 )
+region = Rect2( 32, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 3 )
-region = Rect2( 64, 128, 32, 32 )
+region = Rect2( 64, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 3 )
-region = Rect2( 96, 128, 32, 32 )
+region = Rect2( 96, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 3 )
-region = Rect2( 128, 128, 32, 32 )
+region = Rect2( 128, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
-region = Rect2( 160, 128, 32, 32 )
+region = Rect2( 160, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
-region = Rect2( 192, 128, 32, 32 )
+region = Rect2( 192, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 3 )
-region = Rect2( 224, 128, 32, 32 )
+region = Rect2( 224, 32, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
@@ -101,6 +100,7 @@ anchor_bottom = 1.0
 position = Vector2( 640, 360 )
 scale = Vector2( 8, 8 )
 frames = SubResource( 11 )
+frame = 2
 playing = true
 
 [node name="UI" type="GridContainer" parent="."]

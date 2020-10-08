@@ -60,9 +60,6 @@ func initPlayer(gui, resetHealth = false):
 		player.initGUI(gui)
 		gui.player = player
 		
-		player.disableIn = false
-		player.disableAllIn = false
-		
 		if gui.get_node("QuickMenu").visible:
 			gui.get_node("QuickMenu")._onContinue()
 

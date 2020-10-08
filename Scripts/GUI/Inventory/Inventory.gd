@@ -25,9 +25,14 @@ func _ready():
 		var slot = slotScene.instance()
 		$MainPanel/Slots.add_child(slot)
 		slots.append(slot)
+		slot.id = i + 4
+	
+	var i = 0
 	
 	for slot in $Hotbar/Slots.get_children():
 		hotbar.append(slot)
+		slot.id = i
+		i += 1
 	
 	$MainPanel.connect("mouse_exited", self, "_onMouseExit")
 	$MainPanel.connect("mouse_entered", self, "_onMouseEnter")
@@ -40,17 +45,14 @@ func givePlayerReference(player):
 func toggle():
 	if $MainPanel.visible:
 		$MainPanel.visible = false
-		player.disableIn = false
 		
 		if mouseItem:
 			insertItem($MouseItem.itemName, $MouseItem.amount)
 			$MouseItem.hide()
 			$MouseItem.resetType()
 			mouseItem = false
-		
 	else:
 		$MainPanel.visible = true
-		player.disableIn = true
 
 # ================================
 # Events
@@ -96,7 +98,6 @@ func putSlot(slot, amount):
 		newAmount = def.ITEM_DATA[$MouseItem.itemName].stackSize
 	elif slot.updateItem(itemName, newAmount) != -1:
 		$MouseItem.updateItem($MouseItem.itemName, $MouseItem.amount - amount)
-
 
 func _onMouseEnter():
 	mouseOutside = false
