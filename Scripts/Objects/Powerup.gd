@@ -7,6 +7,7 @@ export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, int) var dimensionOffsets
 
 var health = -1
+var state = 0
 
 func _ready():
 	$AnimationPlayer.play("Idle")

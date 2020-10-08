@@ -70,11 +70,11 @@ func _ready():
 func changeDimension(dimension):
 	if def.getDimensionLayer(dimension) & layer != 0:
 		show()
-		$CollisionShape2D.disabled = false;
+		$CollisionShape2D.set_deferred("disabled", false)
 		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
 	else:
 		hide()
-		$CollisionShape2D.disabled = true;
+		$CollisionShape2D.set_deferred("disabled", true)
 
 func setType(_type):
 	pass
@@ -181,6 +181,12 @@ func _onDamageTimeout():
 		if body != null and "Player" in body.name:
 			_onGiveDamage(area)
 
+func changeType(id):
+	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
+	var obj = spawnHelper.call_deferred("spawn", id, position, scale, "", spawnHelper.get_parent().currentDimensionID, true)
+	get_parent().remove_child(self)
+	queue_free()
+
 # ================================
 # Damage
 # ================================
@@ -203,4 +209,5 @@ func die():
 	$AnimationTree.get("parameters/playback").travel("Death")
 
 func deadAnimEnd():
+	get_parent().remove_child(self)
 	queue_free()
