@@ -131,9 +131,11 @@ func changeAnimation():
 	if dir != Vector2():
 		$AnimationTree.get("parameters/playback").travel("Walk")
 		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
+		if wpn != null: wpn.updateState("Walk")
 	else:
 		$AnimationTree.get("parameters/playback").travel("Idle")
 		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
+		if wpn != null: wpn.updateState("Idle")
 
 # ================================
 # Attack
@@ -160,6 +162,7 @@ func attack(delta):
 
 func attackInit(anim):
 	anim.travel("Init")
+	if wpn != null: wpn.updateState("ATK_Init")
 
 func attackHold(anim):
 	if wpn != null and !wpn.canHold:
@@ -311,6 +314,8 @@ func moveInput():
 	if dir != Vector2():
 		$DirectionTree.set("parameters/blend_position", dir)
 		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
+		$Punchwave.region_rect.position.y = directionState * 32
+		if wpn != null: wpn.updateDir(directionState)
 
 func attackInput():
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
