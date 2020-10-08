@@ -19,6 +19,7 @@ var dir = Vector2()
 var vel = Vector2()
 
 var animationEnd = false
+var allowMovement = true
 
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
@@ -29,12 +30,13 @@ func _ready():
 	
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
-func init(dir):
+func init(dir, allowMovement = true):
 	self.dir = dir
 	$AnimationTree.set("parameters/Creation/blend_position", dir)
 	$AnimationTree.set("parameters/Travel/blend_position", dir)
 	$AnimationTree.set("parameters/Destruction/blend_position", dir)
 	
+	self.allowMovement = allowMovement
 	state = CREATE
 
 func _physics_process(delta):
@@ -57,6 +59,7 @@ func create(delta):
 	$AnimationTree.get("parameters/playback").travel("Creation")
 
 func move(delta):
+	if !allowMovement: return
 	vel = dir * speed * delta
 	vel = move_and_slide(vel)
 

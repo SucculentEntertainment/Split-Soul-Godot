@@ -2,6 +2,7 @@ extends Control
 
 onready var def = get_node("/root/Definitions")
 
+var id = -1
 var item = ""
 var amount = 0
 

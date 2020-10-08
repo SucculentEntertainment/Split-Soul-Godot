@@ -3,6 +3,7 @@
 	{
 		"name": "Test Item 1",
 		"type": "testing",
+		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
 		"startFrame": 0,
@@ -12,7 +13,8 @@
 	"i_test2":
 	{
 		"name": "Test Item 2",
-		"type": "testing2",
+		"type": "testing",
+		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
 		"startFrame": 1,
@@ -23,6 +25,7 @@
 	{
 		"name": "Fire Wand",
 		"type": "ranged",
+		"subType": "wand",
 		"description": "A magic stick that shoots fireballs",
 		"stackSize": 1,
 		"startFrame": 2,
