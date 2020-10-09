@@ -170,41 +170,17 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 0.5, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
 "values": [ 80, 84 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Punchwave:frame")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
-tracks/1/loop_wrap = false
+tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ 0, 5 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Punchwave:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ true, false ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -222,7 +198,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.83 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 16, 23 ]
@@ -237,7 +213,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.83 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 7 ]
@@ -253,7 +229,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.83 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 48, 55 ]
@@ -268,7 +244,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.88 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 8, 15 ]
@@ -284,7 +260,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.88 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 56, 63 ]
@@ -558,12 +534,12 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 15
 hframes = 8
-frame = 1
+frame = 6
 region_enabled = true
-region_rect = Rect2( 0, 0, 256, 480 )
+region_rect = Rect2( 1024, 0, 256, 480 )
 
 [node name="Weapon" type="Node2D" parent="."]
-position = Vector2( 0, -6.41777 )
+position = Vector2( 0, -6.5 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="Punchwave" type="Sprite" parent="."]
