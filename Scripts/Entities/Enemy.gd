@@ -204,9 +204,18 @@ func _onGiveDamage(area):
 			damageCooldown = true
 			$Hitbox/Timer.start()
 
+func generateItems():
+	var items = []
+	
+	
+
 func die():
 	$CollisionShape2D.disabled = true
 	$AnimationTree.get("parameters/playback").travel("Death")
+	
+	# Spawn Item
+	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
+	
 
 func deadAnimEnd():
 	get_parent().remove_child(self)

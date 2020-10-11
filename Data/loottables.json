@@ -1,0 +1,20 @@
+[
+    "l_test":
+    {
+        "e_slime":
+        {
+            "numItems": 2,
+            "items":
+            [
+                {
+                    "id": "none",
+                    "chance": 20
+                },
+                {
+                    "id": "i_slimeDrop",
+                    "chance": 80
+                }
+            ]
+        }
+    }
+]

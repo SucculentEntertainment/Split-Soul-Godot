@@ -14,6 +14,8 @@ var STRING_IDS = {}
 var ITEM_DATA = {}
 var LEVEL_DATA = {}
 
+var LOOTTABLES = {}
+
 var LOADING_SCREEN_MESSAGES = {}
 
 # ================================
@@ -62,6 +64,9 @@ func _ready():
 	
 	file.open("res://Data/spawnableScenes.json", file.READ)
 	var scenes = parse_json(file.get_as_text())
+	
+	file.open("res://Data/loottables.json", file.READ)
+	LOOTTABLES = parse_json(file.get_as_text())
 	
 	for scene in scenes:
 		SPAWNABLE_SCENES[scene.id] = load(scene.scene)
