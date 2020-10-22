@@ -534,7 +534,7 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 15
 hframes = 8
-frame = 6
+frame = 4
 region_enabled = true
 region_rect = Rect2( 1024, 0, 256, 480 )
 

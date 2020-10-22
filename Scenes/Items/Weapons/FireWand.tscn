@@ -15,7 +15,7 @@ tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 0.97 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 24, 31 ]
@@ -267,18 +267,18 @@ directionOffsets = [ 0, 256, 512, 768 ]
 texture = ExtResource( 4 )
 vframes = 5
 hframes = 8
-frame = 7
+frame = 4
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 160 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -5.5, -5 )
+position = Vector2( -5.5, -6 )
 scale = Vector2( 0.5, 0.5 )
 local_coords = false
 process_material = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -5.5, -5 )
+position = Vector2( -5.5, -6 )
 scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 3 )
 color = Color( 0.945098, 0.52549, 0.156863, 1 )

@@ -28,6 +28,8 @@ var health = 0
 var damageCooldown = false
 var movementCooldown = false
 
+var spawnedLoot = false
+
 var player = null
 var dir = Vector2()
 var vel = Vector2()
@@ -215,7 +217,7 @@ func generateItems():
 	for item in def.LOOTTABLES[id].items:
 		if counter >= 100: break
 		
-		chances.push({"id": item.id, "min": counter, "max": counter + item.chance})
+		chances.append({"id": item.id, "min": counter, "max": counter + item.chance})
 		counter += item.chance
 	
 	for i in range(1, numItems):
@@ -228,21 +230,27 @@ func generateItems():
 				break
 		
 		if id == "": return null
-		items.push(id)
+		items.append(id)
+	
 	return items
 
 func die():
 	$CollisionShape2D.disabled = true
 	$AnimationTree.get("parameters/playback").travel("Death")
 	
+	if spawnedLoot == true: return
+	spawnedLoot = true
+	
 	# Spawn Item
 	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
 	
 	var items = generateItems()
-	if items == null: return
+	while items.empty(): items = generateItems()
 	
 	for i in items:
-		var obj = spawnHelper.spawn("p_itemStack", spawnHelper.posToCoords(position, Vector2(0.25, 0.25))
+		if i == "none": continue
+		
+		var obj = spawnHelper.spawn("p_itemStack", position, Vector2(0.25, 0.25), "", "", true)
 		obj.setType(i, 1)
 
 func deadAnimEnd():

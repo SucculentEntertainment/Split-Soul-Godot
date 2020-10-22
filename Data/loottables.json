@@ -1,4 +1,4 @@
-[
+{
     "e_slime":
     {
         "numItems": 2,
@@ -9,9 +9,9 @@
                 "chance": 20
             },
             {
-                "id": "i_slimeDrop",
+                "id": "i_test1",
                 "chance": 80
             }
         ]
     }
-]
+}
