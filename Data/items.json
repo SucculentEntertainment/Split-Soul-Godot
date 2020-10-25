@@ -30,5 +30,16 @@
 		"stackSize": 1,
 		"startFrame": 2,
 		"numFrames": 8
+	},
+	
+	"i_slimeTear":
+	{
+		"name": "Slime Tear",
+		"type": "loot",
+		"subType": "mob",
+		"description": "A tear that represents the sadness of the slime you just killed, you monster",
+		"stackSize": 20,
+		"startFrame": 10,
+		"numFrames": 1
 	}
 }
