@@ -6,8 +6,7 @@
 		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
-		"startFrame": 0,
-		"numFrames": 2
+		"numFrames": 1
 	},
 	
 	"i_test2":
@@ -17,7 +16,6 @@
 		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
-		"startFrame": 1,
 		"numFrames": 1
 	},
 	
@@ -28,7 +26,6 @@
 		"subType": "wand",
 		"description": "A magic stick that shoots fireballs",
 		"stackSize": 1,
-		"startFrame": 2,
 		"numFrames": 8
 	},
 	
@@ -37,9 +34,8 @@
 		"name": "Slime Tear",
 		"type": "loot",
 		"subType": "mob",
-		"description": "A tear that represents the sadness of the slime you just killed, you monster",
+		"description": "A tear that represents the sadness of the slime you just killed... You monster!",
 		"stackSize": 20,
-		"startFrame": 10,
-		"numFrames": 1
+		"numFrames": 7
 	}
 }

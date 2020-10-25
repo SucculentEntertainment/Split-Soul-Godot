@@ -15,6 +15,7 @@ var ITEM_DATA = {}
 var LEVEL_DATA = {}
 
 var LOOTTABLES = {}
+var ITEM_STARTFRAMES = {}
 
 var LOADING_SCREEN_MESSAGES = {}
 
@@ -68,6 +69,8 @@ func _ready():
 	file.open("res://Data/loottables.json", file.READ)
 	LOOTTABLES = parse_json(file.get_as_text())
 	
+	ITEM_STARTFRAMES = generateItemStartframes()
+	
 	for scene in scenes:
 		SPAWNABLE_SCENES[scene.id] = load(scene.scene)
 
@@ -77,3 +80,13 @@ func moveNode(src, dst):
 	src.set_owner(dst)
 	
 	return src
+
+func generateItemStartframes():
+	var startframes = {}
+	var counter = 0
+	
+	for key in ITEM_DATA.keys():
+		startframes[key] = counter
+		counter += ITEM_DATA[key].numFrames
+	
+	return startframes
