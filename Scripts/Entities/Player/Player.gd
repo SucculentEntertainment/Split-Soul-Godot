@@ -209,13 +209,14 @@ func itemAction(item):
 func updateWeapon():
 	var slot = 0
 	
-	if currDimension == "d_dead":
+	if currDimension == "d_dead" and !fullGUIOpen:
 		slot = 1
 		useCustomCursor = true
 		$CursorAnimation.play("Cursor")
 	else:
 		useCustomCursor = false
 		$CursorAnimation.stop()
+		advanceCursor()
 
 	if inventory.hotbar[slot].amount == 0 or inventory.hotbar[slot].item == "": currWeapon = "none"
 	else: currWeapon = inventory.hotbar[slot].item
