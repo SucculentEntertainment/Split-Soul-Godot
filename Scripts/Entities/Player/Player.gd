@@ -129,13 +129,13 @@ func move(delta):
 
 func changeAnimation():
 	if dir != Vector2():
+		if wpn != null: wpn.updateState("Walk")
 		$AnimationTree.get("parameters/playback").travel("Walk")
 		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
-		if wpn != null: wpn.updateState("Walk")
 	else:
+		if wpn != null: wpn.updateState("Idle")
 		$AnimationTree.get("parameters/playback").travel("Idle")
 		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
-		if wpn != null: wpn.updateState("Idle")
 
 # ================================
 # Attack
@@ -161,8 +161,8 @@ func attack(delta):
 			attackRelease(anim)
 
 func attackInit(anim):
-	anim.travel("Init")
 	if wpn != null: wpn.updateState("ATK_Init")
+	anim.travel("Init")
 
 func attackHold(anim):
 	if wpn != null and !wpn.canHold:
@@ -170,6 +170,7 @@ func attackHold(anim):
 		return
 	
 	anim.travel("Hold")
+	
 	if wpn != null: wpn.charge(self)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) == false:

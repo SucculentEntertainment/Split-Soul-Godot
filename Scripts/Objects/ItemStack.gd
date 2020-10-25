@@ -49,8 +49,7 @@ func setType(itemName, amount):
 		queue_free()
 		return
 	
-	$Tween.interpolate_property($Sprite, "frame", def.ITEM_DATA[itemName].startFrame, def.ITEM_DATA[itemName].startFrame + (def.ITEM_DATA[itemName].numFrames - 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1)
-	$Tween.start()
+	$Item.setType(itemName)
 
 func changeDimension(dimension):
 	pass

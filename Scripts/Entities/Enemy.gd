@@ -28,6 +28,8 @@ var health = 0
 var damageCooldown = false
 var movementCooldown = false
 
+var spawnedLoot = false
+
 var player = null
 var dir = Vector2()
 var vel = Vector2()
@@ -204,9 +206,52 @@ func _onGiveDamage(area):
 			damageCooldown = true
 			$Hitbox/Timer.start()
 
+func generateItems():
+	var chances = []
+	var items = []
+	var counter = 0
+	
+	var numItems = rng.randi_range(0, def.LOOTTABLES[id].numItems)
+	
+	
+	for item in def.LOOTTABLES[id].items:
+		if counter >= 100: break
+		
+		chances.append({"id": item.id, "min": counter, "max": counter + item.chance})
+		counter += item.chance
+	
+	for i in range(1, numItems):
+		var n = rng.randi_range(0, 100)
+		var id = ""
+		
+		for c in chances:
+			if n >= c.min and n < c.max:
+				id = c.id
+				break
+		
+		if id == "": return null
+		items.append(id)
+	
+	return items
+
 func die():
 	$CollisionShape2D.disabled = true
 	$AnimationTree.get("parameters/playback").travel("Death")
+	
+	if spawnedLoot == true: return
+	spawnedLoot = true
+	
+	# Spawn Item
+	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
+	
+	var items = generateItems()
+	while items.empty(): items = generateItems()
+	
+	for i in items:
+		if i == "none": continue
+		
+		var obj = spawnHelper.spawn("p_itemStack", position, Vector2(0.25, 0.25), "", "", true)
+		obj.setType(i, 1)
 
 func deadAnimEnd():
 	get_parent().remove_child(self)

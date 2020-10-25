@@ -318,11 +318,12 @@ tracks/3/keys = {
 [node name="BootSplash" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.898039, 0.913725, 0.941176, 1 )
+color = Color( 0.231373, 0.258824, 0.321569, 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+delayStart = true
 altLogo = ExtResource( 6 )
 darkModeText = ExtResource( 8 )
 darkModeAltLogo = ExtResource( 9 )
@@ -347,6 +348,7 @@ __meta__ = {
 }
 
 [node name="AltIcon" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 540.0
 margin_top = 260.0
