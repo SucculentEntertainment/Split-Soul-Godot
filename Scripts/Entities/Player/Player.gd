@@ -324,7 +324,6 @@ func attackInput():
 
 func fullGUIInput():
 	if (Input.is_action_just_pressed("ui_cancel") or
-	   (Input.is_action_just_pressed("ctrl_console") and currGUI == "Console") or
 	   (Input.is_action_just_pressed("ctrl_inventory") and currGUI == "Inventory")):
 		
 		gui.get_node(currGUI).toggle()
