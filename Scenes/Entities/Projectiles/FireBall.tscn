@@ -1007,6 +1007,7 @@ process_material = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -7 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -1038,3 +1039,7 @@ parameters/playback = SubResource( 36 )
 parameters/Creation/blend_position = Vector2( 0, 0 )
 parameters/Destruction/blend_position = Vector2( 0, 0 )
 parameters/Travel/blend_position = Vector2( 0, 0 )
+
+[node name="Creation" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

@@ -3,19 +3,19 @@
 	{
 		"name": "Test Item 1",
 		"type": "testing",
+		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
-		"startFrame": 0,
-		"numFrames": 2
+		"numFrames": 1
 	},
 	
 	"i_test2":
 	{
 		"name": "Test Item 2",
-		"type": "testing2",
+		"type": "testing",
+		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
-		"startFrame": 1,
 		"numFrames": 1
 	},
 	
@@ -23,9 +23,19 @@
 	{
 		"name": "Fire Wand",
 		"type": "ranged",
+		"subType": "wand",
 		"description": "A magic stick that shoots fireballs",
 		"stackSize": 1,
-		"startFrame": 2,
 		"numFrames": 8
+	},
+	
+	"i_slimeTear":
+	{
+		"name": "Slime Tear",
+		"type": "loot",
+		"subType": "mob",
+		"description": "A tear that represents the sadness of the slime you just killed... You monster!",
+		"stackSize": 20,
+		"numFrames": 7
 	}
 }

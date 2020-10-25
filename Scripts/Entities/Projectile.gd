@@ -19,20 +19,34 @@ var dir = Vector2()
 var vel = Vector2()
 
 var animationEnd = false
+var allowMovement = true
 
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
 	
+	$Creation.connect("timeout", self, "_onCreated")
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
-func init(dir):
+func init(dir, allowMovement = true):
 	self.dir = dir
 	$AnimationTree.set("parameters/Creation/blend_position", dir)
 	$AnimationTree.set("parameters/Travel/blend_position", dir)
 	$AnimationTree.set("parameters/Destruction/blend_position", dir)
 	
+	self.allowMovement = allowMovement
 	state = CREATE
+
+func changeDir(dir):
+	self.dir = dir
+	$AnimationTree.set("parameters/Creation/blend_position", dir)
+	$AnimationTree.set("parameters/Travel/blend_position", dir)
+	$AnimationTree.set("parameters/Destruction/blend_position", dir)
+
+func enableMovement():
+	allowMovement = true
+	$Timer.start()
+	$Creation.start()
 
 func _physics_process(delta):
 	match state:
@@ -47,10 +61,14 @@ func _physics_process(delta):
 		DESPAWN:
 			despawn(delta)
 
+func _onCreated():
+	$Hitbox/CollisionShape2D.disabled = false
+
 func create(delta):
 	$AnimationTree.get("parameters/playback").travel("Creation")
 
 func move(delta):
+	if !allowMovement: return
 	vel = dir * speed * delta
 	vel = move_and_slide(vel)
 
@@ -67,7 +85,10 @@ func _onTimeout():
 func createEnd():
 	state = MOVE
 	
-	$Timer.start()
+	if allowMovement:
+		$Timer.start()
+		$Creation.start()
+	
 	$AnimationTree.get("parameters/playback").travel("Travel")
 
 func destructionEnd():

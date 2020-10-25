@@ -1,34 +1,302 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Entities/Player/Weapons.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=2]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Items/Firewand.png" type="Texture" id=4]
 
-[sub_resource type="AnimationNodeStateMachine" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "attack_hold"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.97 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 24, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -4.5, -10 ), Vector2( -4.5, -9 ), Vector2( -4.5, -8 ), Vector2( -4.5, -9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -4.5, -10 ), Vector2( -4.5, -9 ), Vector2( -4.5, -8 ), Vector2( -4.5, -9 ) ]
+}
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="Animation" id=2]
+resource_name = "attack_init"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 16, 23 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5, 0.6, 0.7, 0.85, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -5.5, -6 ), Vector2( -5.5, -7 ), Vector2( -5.5, -9 ), Vector2( -5.5, -10 ), Vector2( -4.5, -9 ), Vector2( -4.5, -8 ), Vector2( -4.5, -9 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5, 0.6, 0.7, 0.85, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -5.5, -6 ), Vector2( -5.5, -7 ), Vector2( -5.5, -9 ), Vector2( -5.5, -10 ), Vector2( -4.5, -9 ), Vector2( -4.5, -8 ), Vector2( -4.5, -9 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack_release"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ 32, 36 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -4.5, -10 ), Vector2( -6.5, -5 ), Vector2( -5.5, -4 ), Vector2( -5.5, -3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -4.5, -10 ), Vector2( -6.5, -5 ), Vector2( -5.5, -4 ), Vector2( -5.5, -3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 7 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -5.5, -6 ), Vector2( -5.5, -5 ), Vector2( -5.5, -4 ), Vector2( -5.5, -5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -5.5, -6 ), Vector2( -5.5, -5 ), Vector2( -5.5, -4 ), Vector2( -5.5, -5 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 8, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Light2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "attack_hold"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "attack_init"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "attack_release"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/Hold/node = SubResource( 6 )
+states/Hold/position = Vector2( 329, 171 )
+states/Init/node = SubResource( 7 )
+states/Init/position = Vector2( 191, 77 )
+states/Release/node = SubResource( 8 )
+states/Release/position = Vector2( 474, 77 )
+transitions = [ "Init", "Hold", SubResource( 9 ), "Hold", "Release", SubResource( 10 ), "Release", "Init", SubResource( 11 ) ]
+start_node = "Init"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachine" id=19]
+states/Attack/node = SubResource( 12 )
+states/Attack/position = Vector2( 297, 168 )
+states/Idle/node = SubResource( 13 )
+states/Idle/position = Vector2( 297, 83 )
+states/Walk/node = SubResource( 14 )
+states/Walk/position = Vector2( 450, 83 )
+transitions = [ "Idle", "Walk", SubResource( 15 ), "Walk", "Idle", SubResource( 16 ), "Idle", "Attack", SubResource( 17 ), "Attack", "Idle", SubResource( 18 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [node name="FireWand" type="Node2D"]
 script = ExtResource( 1 )
 itemName = "i_fireWand"
+canHold = true
+directionOffsets = [ 0, 256, 512, 768 ]
 
 [node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+vframes = 5
+hframes = 8
+frame = 4
+region_enabled = true
+region_rect = Rect2( 0, 0, 256, 160 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0, -16 )
-amount = 16
+position = Vector2( -5.5, -6 )
+scale = Vector2( 0.5, 0.5 )
 local_coords = false
 process_material = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( -5.5, -6 )
 scale = Vector2( 0.025, 0.025 )
 texture = ExtResource( 3 )
 color = Color( 0.945098, 0.52549, 0.156863, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack_hold = SubResource( 1 )
+anims/attack_init = SubResource( 2 )
+anims/attack_release = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 1 )
+tree_root = SubResource( 19 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 2 )
+active = true
+parameters/playback = SubResource( 20 )
+parameters/Attack/playback = SubResource( 21 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true

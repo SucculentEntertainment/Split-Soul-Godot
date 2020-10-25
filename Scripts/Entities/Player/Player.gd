@@ -11,6 +11,9 @@ signal updateGUI(health, coins)
 export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, int) var dimensionOffsets
+export (Array, int) var directionOffsets
+
+export (int) var directionState = 0
 
 export (Texture) var aimCursor
 var cursorCounter = 0
@@ -20,9 +23,6 @@ var useCustomCursor = false
 var damage = 2
 
 var interact = null
-var disableIn = false
-var disableAllIn = false
-
 var gui = null
 
 var moving = false
@@ -34,20 +34,50 @@ var vel = Vector2()
 var prevPos = Vector2()
 
 var invincibility = false
+var hasAttacked = false
+
+enum {
+	DOWN,
+	UP,
+	RIGHT,
+	LEFT
+}
 
 enum {
 	MOVE,
 	ATTACK
 }
 
+enum {
+	IN_DISABLED,
+	IN_MOVE,
+	IN_ATTACK,
+	IN_FULLGUI,
+	IN_GUI
+}
+
+enum {
+	ATK_INIT,
+	ATK_HOLD,
+	ATK_RELEASE
+}
+
 var state = MOVE
-var isInGUI = false
+var inputState = IN_MOVE
+var attackState = ATK_INIT
+
 var currGUI = ""
+var guiHover = false
+var fullGUIOpen = false
 
 var inventory = null
 var hotbar = null
 
-var hasAttacked = false
+var prevWeapon = "none"
+var currWeapon = "none"
+var currWeaponGroup = "none"
+var currDimension = "d_alive"
+var wpn = null
 
 # ================================
 # Utility
@@ -58,6 +88,8 @@ func _ready():
 	$AnimationTree.get("parameters/playback").start("Idle")
 	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
 	$HitboxPivot/Hitbox.connect("area_entered", self, "_onGiveDamage")
+	
+	$WeaponHelper.init($Weapon)
 
 func initGUI(gui):
 	self.gui = gui
@@ -66,30 +98,28 @@ func initGUI(gui):
 	
 	inventory = gui.get_node("Inventory")
 	hotbar = inventory.get_node("Hotbar")
+	
+	hotbar.connect("mouse_entered", self, "_onGUIEntered")
+	hotbar.connect("mouse_exited", self, "_onGUIExited")
 
 func _physics_process(delta):
+	if inputState == IN_DISABLED: return
 	getInput()
+	updateWeapon()
 	
-	if !disableIn: 
-		match state:
-			MOVE:
-				move(delta)
-			ATTACK:
-				attack(delta)
+	match state:
+		MOVE:
+			move(delta)
+		ATTACK:
+			attack(delta)
 
 # ================================
 # Movement
 # ================================
 
-func getMoveInput():
-	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
-	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
-	dir = dir.normalized()
-
 func move(delta):
 	prevPos = global_position
 	prevDir = dir
-	getMoveInput()
 	
 	if dir == Vector2(): vel = Vector2()
 	else: vel = dir * speed * delta
@@ -99,12 +129,13 @@ func move(delta):
 
 func changeAnimation():
 	if dir != Vector2():
-		$AnimationTree.set("parameters/Idle/blend_position", dir)
-		$AnimationTree.set("parameters/Walk/blend_position", dir)
-		$AnimationTree.set("parameters/Attack/blend_position", dir)
+		if wpn != null: wpn.updateState("Walk")
 		$AnimationTree.get("parameters/playback").travel("Walk")
+		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
 	else:
+		if wpn != null: wpn.updateState("Idle")
 		$AnimationTree.get("parameters/playback").travel("Idle")
+		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
 
 # ================================
 # Attack
@@ -117,22 +148,49 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	if !hasAttacked:
-		if hotbar.items[0] != "":
-			if $Weapon.get_child_count() == 0:
-				# Write SpawnHelper for this
-				var weapon = load("res://Scenes/Items/Weapons/FireWand.tscn").instance()
-				$Weapon.add_child(weapon)
-			
-			$Weapon.get_children()[0].attack(self)
-		
-		hasAttacked = true
-	
 	$AnimationTree.get("parameters/playback").travel("Attack")
+	$AnimationTree.get("parameters/Attack/playback").travel(currWeaponGroup)
+	var anim = $AnimationTree.get("parameters/Attack/" + currWeaponGroup + "/playback")
+	
+	match attackState:
+		ATK_INIT:
+			attackInit(anim)
+		ATK_HOLD:
+			attackHold(anim)
+		ATK_RELEASE:
+			attackRelease(anim)
+
+func attackInit(anim):
+	if wpn != null: wpn.updateState("ATK_Init")
+	anim.travel("Init")
+
+func attackHold(anim):
+	if wpn != null and !wpn.canHold:
+		attackState = ATK_RELEASE
+		return
+	
+	anim.travel("Hold")
+	
+	if wpn != null: wpn.charge(self)
+
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) == false:
+		attackState = ATK_RELEASE
+
+func attackRelease(anim):
+	anim.travel("Release")
+	
+	if !hasAttacked:
+		hasAttacked = true
+		if wpn != null: wpn.attack(self)
+
+func attackInitDone():
+	attackState = ATK_HOLD
 
 func attackEnd():
-	state = MOVE
 	hasAttacked = false
+	state = MOVE
+	inputState = IN_MOVE
+	attackState = ATK_INIT
 
 # ================================
 # Items
@@ -148,11 +206,38 @@ func itemAction(item):
 	
 	gui.updateValues(maxHealth)
 
+func updateWeapon():
+	var slot = 0
+	
+	if currDimension == "d_dead":
+		slot = 1
+		useCustomCursor = true
+		$CursorAnimation.play("Cursor")
+	else:
+		useCustomCursor = false
+		$CursorAnimation.stop()
+
+	if inventory.hotbar[slot].amount == 0 or inventory.hotbar[slot].item == "": currWeapon = "none"
+	else: currWeapon = inventory.hotbar[slot].item
+	
+	if prevWeapon == currWeapon: return
+	prevWeapon = currWeapon
+	
+	if currWeapon != "none":
+		currWeaponGroup = def.ITEM_DATA[currWeapon].subType
+		wpn = $WeaponHelper.setWeapon(currWeapon)
+	else:
+		currWeaponGroup = "none"
+		$WeaponHelper.delWeapon()
+		wpn = null
+
 # ================================
 # Actions
 # ================================
 
 func changeDimension(dimension):
+	currDimension = dimension
+
 	var transition = def.TRANSITION_SCENE.instance()
 	add_child(transition)
 	transition.get_node("AnimationPlayer").play("Close")
@@ -164,63 +249,99 @@ func changeDimension(dimension):
 	if dimension == "d_dead": enableGlow()
 	else: disableGlow()
 	
-	$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+	$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(dimension)] + directionOffsets[directionState]
 	
 	transition.get_node("AnimationPlayer").play("Open")
 	yield(transition.get_node("AnimationPlayer"), "animation_finished")
+	transition.get_parent().remove_child(transition)
 	transition.queue_free()
-
-func getInput():
-	#Temporary Code
-	if hotbar.items[0] != "":
-		useCustomCursor = true
-		$CursorAnimation.play("Cursor")
-	else:
-		useCustomCursor = false
-		$CursorAnimation.stop()
-	
-	if !disableAllIn:
-		if Input.is_action_just_pressed("ctrl_interact"):
-			if interact != null and !disableIn: interact.interact(self)
-		
-		if Input.is_action_just_pressed("ctrl_attack_primary"):
-			if !disableIn: state = ATTACK
-		
-		if Input.is_action_just_pressed("ctrl_console") and !isInGUI:
-			if gui != null:
-				gui.get_node("Console").toggle()
-				isInGUI = !isInGUI
-				currGUI = "console"
-			
-		if Input.is_action_just_pressed("ctrl_inventory") and (!isInGUI or (isInGUI and currGUI == "inventory")):
-			if gui != null:
-				gui.get_node("Inventory").toggle()
-				isInGUI = !isInGUI
-				currGUI = "inventory"
-				
-		if Input.is_action_just_pressed("debug_toggle"):
-			if gui != null:
-				gui.get_node("Debug").toggle()
-		
-		if Input.is_action_just_pressed("ui_cancel"):
-			if gui != null:
-				if isInGUI:
-					match currGUI:
-						"console":
-							gui.get_node("Console").toggle()
-						"inventory":
-							gui.get_node("Inventory").toggle()
-					
-					isInGUI = false
-				else:
-					gui.get_node("QuickMenu").toggle()
-					yield(get_tree().create_timer(0.1), "timeout")
 
 func enableGlow():
 	$Light2D.show()
 
 func disableGlow():
 	$Light2D.hide()
+
+# ================================
+# Input
+# ================================
+
+func getInput():
+	match inputState:
+		IN_DISABLED:
+			pass
+		IN_MOVE:
+			moveInput()
+			openGUI()
+			miscInput()
+		IN_ATTACK:
+			attackInput()
+		IN_FULLGUI:
+			fullGUIInput()
+		IN_GUI:
+			moveInput()
+			openGUI()
+
+func openGUI():
+	if Input.is_action_just_pressed("ctrl_console"):
+		currGUI = "Console"
+	if Input.is_action_just_pressed("ctrl_inventory"):
+		currGUI = "Inventory"
+	if Input.is_action_just_pressed("ui_cancel"):
+		currGUI = "QuickMenu"
+	
+	if currGUI == "": return
+	
+	gui.get_node(currGUI).toggle()
+	inputState = IN_FULLGUI
+	fullGUIOpen = true
+	dir = Vector2()
+
+func miscInput():
+	if Input.is_action_just_pressed("ctrl_interact"):
+		if interact != null: interact.interact(self)
+		
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		hasAttacked = false
+		state = ATTACK
+		inputState = IN_ATTACK
+		dir = Vector2()
+
+func moveInput():
+	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
+	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
+	dir = dir.normalized()
+	
+	if dir != Vector2():
+		$DirectionTree.set("parameters/blend_position", dir)
+		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
+		$Punchwave.region_rect.position.y = directionState * 32
+		if wpn != null: wpn.updateDir(directionState)
+
+func attackInput():
+	if Input.is_action_just_pressed("ctrl_attack_primary"):
+		hasAttacked = false
+
+func fullGUIInput():
+	if (Input.is_action_just_pressed("ui_cancel") or
+	   (Input.is_action_just_pressed("ctrl_console") and currGUI == "Console") or
+	   (Input.is_action_just_pressed("ctrl_inventory") and currGUI == "Inventory")):
+		
+		gui.get_node(currGUI).toggle()
+		currGUI = ""
+		if guiHover: inputState = IN_GUI
+		else: inputState = IN_MOVE
+		fullGUIOpen = false
+
+func _onGUIEntered():
+	guiHover = true
+	if fullGUIOpen: inputState = IN_FULLGUI
+	else: inputState = IN_GUI
+
+func _onGUIExited():
+	guiHover = false
+	if fullGUIOpen: inputState = IN_FULLGUI
+	else: inputState = IN_MOVE
 
 # ================================
 # Damage
