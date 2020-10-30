@@ -1,7 +1,7 @@
 [
 	{
 		"id": "dia_firstEncounter",
-		"text": "Villager: Do you need help? We can get you rest and a bed if you want.",
+		"text": "Do you need help? We can get you rest and a bed if you want.",
 		"hasOptions": true,
 		"options": [
 			{
@@ -16,13 +16,33 @@
 	},
 	{
 		"id": "dia_helpNeeded",
-		"text": "Alright, follow me. The village is right ahead.",
+		"text": "Alright then, follow me. The village is right ahead.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_NPCUpfck1",
+		"text": "Hey, what's taking you so long?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_NPCUpfck2",
+		"text": "What are you so slow for?",
 		"hasOptions": false
 	},
 	{
 		"id": "dia_lonerForLife",
-		"text": "No, you have to be exhausted! Follow me, the village is right ahead."
-		"hasOptions" false
+		"text": "No, come on, you have to be exhausted! Follow me, the village is right ahead.",
+		"hasOptions": false
+	},
+	{	"id": "dia_welcomeTraveler",
+		"text": "Oi, Howzit. Welcome to <TOWNNAME>, traveler. What is your name?",
+		"hasOptions": true,
+		"options": []
 	},
 	{
+		"id": "dia_huhFRAGEZEICHEN",
+		"text": "So <PLAYERNAME>, what was your destination in this sorrow woods?",
+		"hasOptions": true,
+		"options"
+	}
 ]
