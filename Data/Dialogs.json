@@ -20,14 +20,28 @@
 		"hasOptions": false
 	},
 	{
-		"id": "dia_NPCUpfck1",
+		"id": "dia_beginningNPCUpfck1",
 		"text": "Hey, what's taking you so long?",
 		"hasOptions": false
 	},
 	{
-		"id": "dia_NPCUpfck2",
+		"id": "dia_beginningNPCUpfck2",
 		"text": "What are you so slow for?",
 		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck3",
+		"text": "Friggin' slow today, huh?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck4",
+		"text": "You tired already? Come on now!",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck5",
+		"text": "Walk faster soldier, will ya?"
 	},
 	{
 		"id": "dia_lonerForLife",
@@ -43,6 +57,35 @@
 		"id": "dia_huhFRAGEZEICHEN",
 		"text": "So <PLAYERNAME>, what was your destination in this sorrow woods?",
 		"hasOptions": true,
-		"options"
+		"options": [
+			{
+				"text": "I dunno.",
+				"dest": "dia_I_dunno"
+			},
+			{
+				"text": "I forgot.",
+				"dest": "dia_I_dunno"
+			}
+		]
+	},
+	{
+		"id": "dia_I_dunno",
+		"text": "Well...how come? I thought you got lost or somethin'.",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "I forgot everything...",
+				"dest": "dia_braindead"
+			},
+			{
+				"text": "I lost my mind...",
+				"dest": "dia_braindead"
+			}
+		]
+	},
+	{
+		"id": "dia_braindead",
+		"text": "Doesn't matter, we are near the village already. ",
+		"hasOptions": false
 	}
 ]
