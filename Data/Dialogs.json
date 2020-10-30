@@ -21,8 +21,7 @@
 	},
 	{
 		"id": "dia_lonerForLife",
-		"text": "No, you have to be exhausted! Follow me, the village is right ahead."
-		"hasOptions" false
-	},
-	{
+		"text": "No, you have to be exhausted! Follow me, the village is right ahead.",
+		"hasOptions": false
+	}
 ]
