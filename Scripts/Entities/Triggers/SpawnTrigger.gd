@@ -62,8 +62,9 @@ func spawn():
 	rng.randomize()
 	var spawnID = spawnTable[rng.randi_range(0, 99)]
 	
-	var spawnHelper = level.get_node("SpawnHelper")
-	spawnHelper.spawn(spawnID, spawnHelper.posToCoords(global_position / level.get_node("Tiles").scale), Vector2(1, 1), "", level.currentDimensionID)
+	if spawnID != "none":
+		var spawnHelper = level.get_node("SpawnHelper")
+		spawnHelper.spawn(spawnID, spawnHelper.posToCoords(position / level.get_node("Tiles").scale), Vector2(1, 1), "", level.currentDimensionID)
 	
 	onCooldown = true
 	$Timer.start()

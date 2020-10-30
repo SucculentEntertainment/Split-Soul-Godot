@@ -1,0 +1,83 @@
+[
+    {
+        "id": "t_tile",
+        "scene": "res://Scenes/Entities/Tile.tscn"
+	},
+	
+
+    {
+        "id": "o_oakTree1",
+        "scene": "res://Scenes/Entities/Objects/OakTree1.tscn"
+    },
+    {
+        "id": "o_pineTree",
+        "scene": "res://Scenes/Entities/Objects/PineTree.tscn"
+    },
+    {
+        "id": "o_birchTree",
+        "scene": "res://Scenes/Entities/Objects/BirchTree.tscn"
+    },
+    {
+        "id": "o_bush",
+        "scene": "res://Scenes/Entities/Objects/Bush.tscn"
+    },
+    {
+        "id": "o_oakTree2",
+        "scene": "res://Scenes/Entities/Objects/OakTree2.tscn"
+	},
+	
+
+    {
+        "id": "e_slime",
+        "scene": "res://Scenes/Entities/Enemies/Slime.tscn"
+    },
+    {
+        "id": "e_fireSlime",
+        "scene": "res://Scenes/Entities/Enemies/FireSlime.tscn"
+	},
+	
+
+    {
+        "id": "n_altar",
+        "scene": "res://Scenes/Entities/Interactables/Altar.tscn"
+    },
+    {
+        "id": "n_house",
+        "scene": "res://Scenes/Entities/Interactables/House.tscn"
+	},
+	
+
+    {
+        "id": "p_coin",
+        "scene": "res://Scenes/Entities/Powerups/Coin.tscn"
+    },
+    {
+        "id": "p_soulPoint",
+        "scene": "res://Scenes/Entities/Powerups/SoulPoint.tscn"
+	},
+    {
+        "id": "p_itemStack",
+        "scene": "res://Scenes/Entities/Powerups/ItemStack.tscn"
+	},
+	
+	
+    {
+        "id": "g_spawn",
+        "scene": "res://Scenes/Entities/Triggers/SpawnTrigger.tscn"
+    },
+    {
+        "id": "g_levelChange",
+        "scene": "res://Scenes/Entities/Triggers/LevelChangeTrigger.tscn"
+    },
+
+
+    {
+        "id": "r_fireBall",
+        "scene": "res://Scenes/Entities/Projectiles/FireBall.tscn"
+    },
+    
+    {
+        "id": "i_fireWand",
+        "scene": "res://Scenes/Items/Weapons/FireWand.tscn"
+    }
+]

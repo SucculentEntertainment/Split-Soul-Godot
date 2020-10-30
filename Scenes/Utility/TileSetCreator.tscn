@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/TileSetCreator.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Entities/Environment/Ground.png" type="Texture" id=2]
+
+[node name="TileSetCreator" type="Node2D"]
+script = ExtResource( 1 )
+tileSize = Vector2( 16, 16 )
+texture = ExtResource( 2 )

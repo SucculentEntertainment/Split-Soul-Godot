@@ -1,13 +1,23 @@
 extends Node
 
+signal settingsUpdateStart
+signal settingsUpdateStop
+
 # ================================
 # Data
 # ================================
+
+var CONFIG = ConfigFile.new()
 
 var TILE_DATA = {}
 var STRING_IDS = {}
 var ITEM_DATA = {}
 var LEVEL_DATA = {}
+
+var LOOTTABLES = {}
+var ITEM_STARTFRAMES = {}
+
+var LOADING_SCREEN_MESSAGES = {}
 
 # ================================
 # Scenes
@@ -17,25 +27,7 @@ var PLAYER_SCENE = preload("res://Scenes/Entities/Player.tscn")
 var ITEM_SCENE = preload("res://Scenes/GUI/Inventory/Item.tscn")
 var TRANSITION_SCENE = preload("res://Scenes/Effects/TransitionShader.tscn")
 
-var SPAWNABLE_SCENES = {
-	"t_tile": preload("res://Scenes/Entities/Tile.tscn"),
-	
-	"o_oakTree1": preload("res://Scenes/Entities/Objects/OakTree1.tscn"),
-	"o_pineTree": preload("res://Scenes/Entities/Objects/PineTree.tscn"),
-	"o_birchTree": preload("res://Scenes/Entities/Objects/BirchTree.tscn"),
-	"o_bush": preload("res://Scenes/Entities/Objects/Bush.tscn"),
-	"o_oakTree2": preload("res://Scenes/Entities/Objects/OakTree2.tscn"),
-	
-	"e_slime": preload("res://Scenes/Entities/Enemies/Slime.tscn"),
-	
-	"n_altar": preload("res://Scenes/Entities/Interactables/Altar.tscn"),
-	
-	"p_coin": preload("res://Scenes/Entities/Powerups/Coin.tscn"),
-	"p_soulPoint": preload("res://Scenes/Entities/Powerups/SoulPoint.tscn"),
-	"p_itemStack": preload("res://Scenes/Entities/Powerups/ItemStack.tscn"),
-	
-	"g_spawn": preload("res://Scenes/Entities/Triggers/SpawnTrigger.tscn")
-}
+var SPAWNABLE_SCENES = {}
 
 # ================================
 # Dimensions
@@ -67,3 +59,34 @@ func _ready():
 	
 	file.open("res://Data/levels.json", file.READ)
 	LEVEL_DATA = parse_json(file.get_as_text())
+	
+	file.open("res://Data/loadingScreenMessages.json", file.READ)
+	LOADING_SCREEN_MESSAGES = parse_json(file.get_as_text())
+	
+	file.open("res://Data/spawnableScenes.json", file.READ)
+	var scenes = parse_json(file.get_as_text())
+	
+	file.open("res://Data/loottables.json", file.READ)
+	LOOTTABLES = parse_json(file.get_as_text())
+	
+	ITEM_STARTFRAMES = generateItemStartframes()
+	
+	for scene in scenes:
+		SPAWNABLE_SCENES[scene.id] = load(scene.scene)
+
+func moveNode(src, dst):
+	src.get_parent().remove_child(src)
+	dst.add_child(src)
+	src.set_owner(dst)
+	
+	return src
+
+func generateItemStartframes():
+	var startframes = {}
+	var counter = 0
+	
+	for key in ITEM_DATA.keys():
+		startframes[key] = counter
+		counter += ITEM_DATA[key].numFrames
+	
+	return startframes

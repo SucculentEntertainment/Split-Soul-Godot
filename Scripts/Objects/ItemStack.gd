@@ -6,6 +6,9 @@ const id = "p_itemStack"
 var itemName = ""
 var amount = 0
 
+var health = -1 
+var state = 0
+
 var armed = false
 
 func _ready():
@@ -27,10 +30,12 @@ func _onPickup(area):
 func _onAreaExit(area):
 	if "Interactions" in area.name:
 		$Timer.stop()
-		_onArm()
+		armed = true
 
 func _onArm():
 	armed = true
+	for a in get_overlapping_areas():
+		_onPickup(a)
 
 func resetItem():
 	itemName = ""
@@ -46,8 +51,7 @@ func setType(itemName, amount):
 		queue_free()
 		return
 	
-	$Tween.interpolate_property($Sprite, "frame", def.ITEM_DATA[itemName].startFrame, def.ITEM_DATA[itemName].startFrame + (def.ITEM_DATA[itemName].numFrames - 1), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 1)
-	$Tween.start()
+	$Item.setType(itemName)
 
 func changeDimension(dimension):
 	pass

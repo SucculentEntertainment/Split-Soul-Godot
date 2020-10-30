@@ -1,0 +1,290 @@
+[
+    {
+        "id": "t_grass_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassSand_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassSnow_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassDirt_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassGravel_a",
+        "variations": 8,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sand_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandGrass_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandSnow_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandDirt_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandGravel_a",
+        "variations": 8,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_gravel_a",
+        "variations": 4,
+        "animated": false,
+        "collision": true
+    },
+    {
+        "id": "t_dirt_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtSand_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtSnow_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtGrass_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtGravel_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snow_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowSand_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowDirt_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowGrass_a",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodOak_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodSpruce_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodBirch_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodJungle_a",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grass_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassSand_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassSnow_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassDirt_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_grassGravel_d",
+        "variations": 8,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sand_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandGrass_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandSnow_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandDirt_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_sandGravel_d",
+        "variations": 8,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_gravel_d",
+        "variations": 4,
+        "animated": false,
+        "collision": true
+    },
+    {
+        "id": "t_dirt_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtSand_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtSnow_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtGrass_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_dirtGravel_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snow_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowSand_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowDirt_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_snowGrass_d",
+        "variations": 12,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodOak_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodSpruce_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodBirch_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    },
+    {
+        "id": "t_woodJungle_d",
+        "variations": 4,
+        "animated": false,
+        "collision": false
+    }
+]

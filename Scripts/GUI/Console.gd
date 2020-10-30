@@ -14,22 +14,15 @@ var player = null
 func _ready():
 	input.connect("text_entered", self, "text_entered")
 
-func _input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ESCAPE:
-			if visible: toggle()
-
 func givePlayerReference(player):
 	self.player = player
 
 func toggle():
 	if visible:
 		hide()
-		player.disableIn = false
 		input.grab_focus()
 	else:
 		show()
-		player.disableIn = true
 		input.release_focus()
 
 func sendCommand(command):
@@ -118,13 +111,13 @@ func parseCommand(rawCommand):
 			
 			if def.SPAWNABLE_SCENES.keys().find(object[0]) == -1:
 				chatlog.bbcode_text += "[color=#FF001D]Inavlid entity: " + command[1] + "[/color]\n"
-			elif not command[2].is_valid_integer() and command[2] != ".":
+			elif not command[2].is_valid_float() and command[2] != ".":
 				chatlog.bbcode_text += "[color=#FF001D]Invalid X coordinate: " + command[2] + "[/color]\n"
-			elif not command[3].is_valid_integer() and command[3] != ".":
+			elif not command[3].is_valid_float() and command[3] != ".":
 				chatlog.bbcode_text += "[color=#FF001D]Invalid Y coordinate: " + command[3] + "[/color]\n"
-			elif not command[4].is_valid_integer() and command[4] != ".":
+			elif not command[4].is_valid_float() and command[4] != ".":
 				chatlog.bbcode_text += "[color=#FF001D]Invalid X scale: " + command[4] + "[/color]\n"
-			elif not command[5].is_valid_integer() and command[5] != ".":
+			elif not command[5].is_valid_float() and command[5] != ".":
 				chatlog.bbcode_text += "[color=#FF001D]Invalid Y scale: " + command[5] + "[/color]\n"
 			else:
 				var spawnHelper = player.get_parent().get_node("SpawnHelper")

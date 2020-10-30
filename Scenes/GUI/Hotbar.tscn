@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Themes/Dark.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/GUI/Inventory/Slot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/GUI/Inventory/Hotbar.gd" type="Script" id=3]
+
+[node name="Hotbar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -120.0
+margin_right = 96.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slots" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = -104.0
+margin_right = 32.0
+rect_scale = Vector2( 2, 2 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon" parent="Slots" instance=ExtResource( 2 )]
+typeFilter = "ranged"
+
+[node name="Ranged" parent="Slots" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_bottom = 68.0
+typeFilter = "ranged"
+
+[node name="Potion" parent="Slots" instance=ExtResource( 2 )]
+margin_top = 72.0
+margin_bottom = 104.0
+typeFilter = "potion"
+
+[node name="Ammo" parent="Slots" instance=ExtResource( 2 )]
+margin_top = 108.0
+margin_bottom = 140.0
+typeFilter = "ammo"

@@ -22,5 +22,6 @@ func givePlayerReference(player):
 	self.player = player
 	spawnHelper = player.get_parent().get_node("SpawnHelper")
 
-func _process(delta):
-	$PlayerPos.text = str(player.get_position()) + "\n" + str(spawnHelper.posToCoords(player.get_position()))
+func _process(_delta):
+	if player != null and visible:
+		$PlayerPos.text = str(player.get_position()) + "\n" + str(spawnHelper.posToCoords(player.get_position()))

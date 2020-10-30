@@ -12,8 +12,9 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		set_global_position(event.position)
 
-func setType(itemName, amount):
+func updateItem(itemName, amount):
 	resetType()
+	if amount <= 0: return
 	
 	self.itemName = itemName
 	self.amount = amount
@@ -24,8 +25,12 @@ func setType(itemName, amount):
 	
 	if amount != 1:
 		$Amount.text = str(amount)
+	
+	show()
 
 func resetType():
+	hide()
+	
 	itemName = ""
 	amount = 0
 	
