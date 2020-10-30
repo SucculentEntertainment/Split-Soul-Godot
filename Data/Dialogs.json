@@ -1,0 +1,28 @@
+[
+	{
+		"id": "dia_firstEncounter",
+		"text": "Villager: Do you need help? We can get you rest and a bed if you want.",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Please, help me!",
+				"dest": "dia_helpNeeded"
+			},
+			{
+				"text": "No that's fine.",
+				"dest": "dia_lonerForLife"
+			}
+		]
+	},
+	{
+		"id": "dia_helpNeeded",
+		"text": "Alright, follow me. The village is right ahead.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_lonerForLife",
+		"text": "No, you have to be exhausted! Follow me, the village is right ahead."
+		"hasOptions" false
+	},
+	{
+]
