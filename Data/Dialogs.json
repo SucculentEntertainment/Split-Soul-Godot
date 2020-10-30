@@ -85,7 +85,17 @@
 	},
 	{
 		"id": "dia_braindead",
-		"text": "Doesn't matter, we are near the village already. ",
+		"text": "Doesn't matter, we are gonna find out after a you got better. ",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_friendlyFemaleVillager",
+		"text": "We have an extra bed, it is upstairs. If you need anything, call for me.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_friendlyFemaleVillagerAnswer",
+		"text": "Thanks, i'll gladly use that.",
 		"hasOptions": false
 	}
 ]
