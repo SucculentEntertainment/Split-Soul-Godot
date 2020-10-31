@@ -91,11 +91,62 @@
 	{
 		"id": "dia_friendlyFemaleVillager",
 		"text": "We have an extra bed, it is upstairs. If you need anything, call for me.",
-		"hasOptions": false
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Thanks, I really appreciate it.",
+				"dest": "dia_friendlyFemaleVillagerAnswer"
+			}
+		]
 	},
 	{
 		"id": "dia_friendlyFemaleVillagerAnswer",
-		"text": "Thanks, i'll gladly use that.",
+		"text": "Sure dude.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight",
+		"text": "What is all this noise?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight2",
+		"text": "I'd rather take my sword.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight3",
+		"text": "What happened? Where is everybody?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight4",
+		"text": "What are they doing?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight5",
+		"text": "What in the world happened?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_witchAppearance1",
+		"text": "What is you? Shouldn't thee be cursed?",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Where did you come from?",
+				"dest": "dia_witchAppearance2"
+			},
+			{
+				"text": "Who are you?",
+				"dest": "dia_witchAppearance2"
+			}
+		]
+	},
+	{
+		"id": "dia_witchAppearance2",
+		"text": "Dosn't it matter anyway. Die you little shit! Transmortalem!!!",
 		"hasOptions": false
 	}
 ]
