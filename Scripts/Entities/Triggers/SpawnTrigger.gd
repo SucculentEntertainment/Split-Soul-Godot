@@ -2,8 +2,7 @@ extends Position2D
 
 onready var def = get_node("/root/Definitions")
 
-export (float) var threshold
-export (float) var cooldown
+var threshold = 0
 
 var enabled = true
 var initialized = false
@@ -21,7 +20,6 @@ var onCooldown = false
 # ================================
 
 func _ready():
-	$Timer.wait_time = cooldown
 	$Timer.connect("timeout", self, "_onTimeout")
 
 func initialize(level, player, layer):
@@ -30,7 +28,11 @@ func initialize(level, player, layer):
 	self.layer = layer
 	
 	createSpawnTable(level.levelID)
+	$Timer.wait_time = def.LEVEL_DATA[level.levelID].spawnCooldown
+	threshold = def.LEVEL_DATA[level.levelID].spawnThreshold
 	
+	$Timer.start()
+	onCooldown = true
 	initialized = true
 
 func createSpawnTable(levelID):
@@ -52,7 +54,7 @@ func _process(_delta):
 	if !initialized: return
 	if !enabled: return
 	
-	if position.distance_to(player.get_position() / level.get_node("Tiles").scale) <= threshold:
+	if position.distance_to(player.get_position()) / level.get_node("SpawnMaps/d_alive/Tiles").cell_size.x <= threshold:
 		spawn()
 
 func spawn():
