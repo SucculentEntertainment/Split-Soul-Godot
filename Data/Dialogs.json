@@ -78,7 +78,7 @@
 				"dest": "dia_braindead"
 			},
 			{
-				"text": "I lost my mind...",
+				"text": "I lost my memory...",
 				"dest": "dia_braindead"
 			}
 		]
@@ -105,7 +105,7 @@
 		"hasOptions": false
 	},
 	{
-		"id": "dia_monologueNight",
+		"id": "dia_monologueNight1",
 		"text": "What is all this noise?",
 		"hasOptions": false
 	},
@@ -146,7 +146,72 @@
 	},
 	{
 		"id": "dia_witchAppearance2",
-		"text": "Dosn't it matter anyway. Die you little shit!",
+		"text": "Dosn't it matter anyway. Go t'hell ya lil' shit!",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter1",
+		"text": "Wanna fight me?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter2",
+		"text": "Where did she go?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter3",
+		"text": "Anybody here?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter4",
+		"text": "What is this old altar doing here?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter5",
+		"text": "Woooooo...",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal1",
+		"text": "What happened?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal2",
+		"text": "Everythings so colorful...",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal3",
+		"text": "",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_randomTraveler1",
+		"text": "Ughh, do you 'ave a potion? Please, 'elp me!",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Sorry I have none",
+				"dest": "dia_cursedTraveler"
+			},
+			{
+				"text": "It's dangerous to go alone, take this",
+				"dest": "dia_blessedTraveler"
+			}
+		]
+	},
+	{
+		"id": "dia_cursedTraveler",
+		"text": "Why you...<attacks>",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_blessedTraveler",
+		"text": "Thanks, you saved my life. <gives u present>",
 		"hasOptions": false
 	}
 ]
