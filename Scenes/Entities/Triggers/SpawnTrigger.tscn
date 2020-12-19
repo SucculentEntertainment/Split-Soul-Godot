@@ -10,8 +10,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_gizmo_extents_": 8.0
 }
-threshold = 300.0
-cooldown = 1.0
 
 [node name="Clearance" type="Area2D" parent="."]
 

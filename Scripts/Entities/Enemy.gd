@@ -130,6 +130,8 @@ func idle(delta):
 # ================================
 
 func targetPlayer(delta):
+	if player == null: return
+	
 	$AnimationTree.get("parameters/playback").travel("Move")
 	
 	if !canLongRange:

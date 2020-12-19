@@ -3,7 +3,8 @@
 [ext_resource path="res://Scripts/Entities/Player/Weapons.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=2]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Items/Firewand.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Items/HoldingItems.png" type="Texture" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_hold"
@@ -267,7 +268,7 @@ directionOffsets = [ 0, 256, 512, 768 ]
 texture = ExtResource( 4 )
 vframes = 5
 hframes = 8
-frame = 4
+frame = 2
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 160 )
 
@@ -293,7 +294,6 @@ anims/walk = SubResource( 5 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 19 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 20 )
 parameters/Attack/playback = SubResource( 21 )
 

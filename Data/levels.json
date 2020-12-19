@@ -13,7 +13,15 @@
                 "id": "e_slime",
                 "chance": 70
             }
-        ]
+        ],
+
+        "levelChanges":
+        [
+            
+        ],
+
+        "spawnCooldown": 2,
+        "spawnThreshold": 10
     },
 
     "l_testHouse":
@@ -34,6 +42,9 @@
             "backToPrev",
             "backToPrev",
             "backToPrev"
-        ]
+        ],
+
+        "spawnCooldown": 2,
+        "spawnThreshold": 10
     }
 }

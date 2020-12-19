@@ -8,6 +8,8 @@ signal changeDimension(dimension)
 signal initGUI(maxHealth)
 signal updateGUI(health, coins)
 
+export (bool) var debugIgnoreWeapon = false
+
 export (int) var speed = 20000
 export (int) var maxHealth = 100
 export (Array, int) var dimensionOffsets
@@ -77,7 +79,6 @@ var prevWeapon = "none"
 var currWeapon = "none"
 var currWeaponGroup = "none"
 var currDimension = "d_alive"
-var wpn = null
 
 # ================================
 # Utility
@@ -88,8 +89,6 @@ func _ready():
 	$AnimationTree.get("parameters/playback").start("Idle")
 	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
 	$HitboxPivot/Hitbox.connect("area_entered", self, "_onGiveDamage")
-	
-	$WeaponHelper.init($Weapon)
 
 func initGUI(gui):
 	self.gui = gui
@@ -105,7 +104,7 @@ func initGUI(gui):
 func _physics_process(delta):
 	if inputState == IN_DISABLED: return
 	getInput()
-	updateWeapon()
+	if !debugIgnoreWeapon: updateWeapon()
 	
 	match state:
 		MOVE:
@@ -129,11 +128,9 @@ func move(delta):
 
 func changeAnimation():
 	if dir != Vector2():
-		if wpn != null: wpn.updateState("Walk")
 		$AnimationTree.get("parameters/playback").travel("Walk")
 		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
 	else:
-		if wpn != null: wpn.updateState("Idle")
 		$AnimationTree.get("parameters/playback").travel("Idle")
 		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
 
@@ -161,17 +158,16 @@ func attack(delta):
 			attackRelease(anim)
 
 func attackInit(anim):
-	if wpn != null: wpn.updateState("ATK_Init")
 	anim.travel("Init")
 
 func attackHold(anim):
-	if wpn != null and !wpn.canHold:
+	if !$Weapon.canCharge:
 		attackState = ATK_RELEASE
 		return
 	
 	anim.travel("Hold")
 	
-	if wpn != null: wpn.charge(self)
+	if currWeapon != "none": $Weapon.charge(self)
 
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) == false:
 		attackState = ATK_RELEASE
@@ -181,7 +177,7 @@ func attackRelease(anim):
 	
 	if !hasAttacked:
 		hasAttacked = true
-		if wpn != null: wpn.attack(self)
+		if currWeapon != "none": $Weapon.attack(self)
 
 func attackInitDone():
 	attackState = ATK_HOLD
@@ -224,13 +220,9 @@ func updateWeapon():
 	if prevWeapon == currWeapon: return
 	prevWeapon = currWeapon
 	
-	if currWeapon != "none":
-		currWeaponGroup = def.ITEM_DATA[currWeapon].subType
-		wpn = $WeaponHelper.setWeapon(currWeapon)
-	else:
-		currWeaponGroup = "none"
-		$WeaponHelper.delWeapon()
-		wpn = null
+	if currWeapon != "none": currWeaponGroup = def.ITEM_DATA[currWeapon].subType
+	else: currWeaponGroup = "none"
+	$WeaponHelper.setWeapon(currWeapon)
 
 # ================================
 # Actions
@@ -317,7 +309,7 @@ func moveInput():
 		$DirectionTree.set("parameters/blend_position", dir)
 		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
 		$Punchwave.region_rect.position.y = directionState * 32
-		if wpn != null: wpn.updateDir(directionState)
+		$WeaponHelper.changeDir(directionState)
 
 func attackInput():
 	if Input.is_action_just_pressed("ctrl_attack_primary"):
