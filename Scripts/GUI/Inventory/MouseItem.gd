@@ -29,6 +29,8 @@ func updateItem(itemName, amount):
 	show()
 
 func resetType():
+	hide()
+	
 	itemName = ""
 	amount = 0
 	
@@ -37,5 +39,3 @@ func resetType():
 	for c in $Item.get_children():
 		$Item.remove_child(c)
 		c.queue_free()
-	
-	hide()

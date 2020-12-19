@@ -1,9 +1,7 @@
 extends Node2D
 
 export (String) var itemName
-export (bool) var canHold
-
-export (Array, int) var directionOffsets
+export (bool) var canCharge
 
 var hasAttacked = false
 var isCharging = false
@@ -13,21 +11,12 @@ var obj = null
 func _ready():
 	$Cooldown.connect("timeout", self, "_onCooldown")
 
-func updateState(state):
-	if "ATK_" in state:
-		$AnimationTree.get("parameters/playback").travel("Attack")
-		$AnimationTree.get("parameters/Attack/playback").travel(state.substr(4))
-	else:
-		$AnimationTree.get("parameters/playback").travel(state)
-
-func updateDir(dir):
-	$Sprite.region_rect.position.x = directionOffsets[dir]
-
 func charge(player):
+	if !visible: return
+	if !canCharge: return
 	if isCharging: return
-	isCharging = true
 	
-	updateState("ATK_Hold")
+	isCharging = true
 	
 	match itemName:
 		"i_fireWand":
@@ -36,12 +25,10 @@ func charge(player):
 			
 			obj = spawnHelper.spawn("r_fireBall", player.get_position(), Vector2(0.5, 0.5), "", player.get_parent().currentDimensionID, true)
 			obj.init(dir, false)
-		
 
 func attack(player):
+	if !visible: return
 	if hasAttacked: return
-	
-	updateState("ATK_Release")
 	
 	isCharging = false
 	hasAttacked = true

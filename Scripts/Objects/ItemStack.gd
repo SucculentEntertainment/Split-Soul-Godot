@@ -30,10 +30,12 @@ func _onPickup(area):
 func _onAreaExit(area):
 	if "Interactions" in area.name:
 		$Timer.stop()
-		_onArm()
+		armed = true
 
 func _onArm():
 	armed = true
+	for a in get_overlapping_areas():
+		_onPickup(a)
 
 func resetItem():
 	itemName = ""

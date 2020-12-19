@@ -1,0 +1,217 @@
+[
+	{
+		"id": "dia_firstEncounter",
+		"text": "Do you need help? We can get you rest and a bed if you want.",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Please, help me!",
+				"dest": "dia_helpNeeded"
+			},
+			{
+				"text": "No that's fine.",
+				"dest": "dia_lonerForLife"
+			}
+		]
+	},
+	{
+		"id": "dia_helpNeeded",
+		"text": "Alright then, follow me. The village is right ahead.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck1",
+		"text": "Hey, what's taking you so long?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck2",
+		"text": "What are you so slow for?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck3",
+		"text": "Friggin' slow today, huh?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck4",
+		"text": "You tired already? Come on now!",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_beginningNPCUpfck5",
+		"text": "Walk faster soldier, will ya?"
+	},
+	{
+		"id": "dia_lonerForLife",
+		"text": "No, come on, you have to be exhausted! Follow me, the village is right ahead.",
+		"hasOptions": false
+	},
+	{	"id": "dia_welcomeTraveler",
+		"text": "Oi, Howzit. Welcome to <TOWNNAME>, traveler. What is your name?",
+		"hasOptions": true,
+		"options": []
+	},
+	{
+		"id": "dia_huhFRAGEZEICHEN",
+		"text": "So <PLAYERNAME>, what was your destination in this sorrow woods?",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "I dunno.",
+				"dest": "dia_I_dunno"
+			},
+			{
+				"text": "I forgot.",
+				"dest": "dia_I_dunno"
+			}
+		]
+	},
+	{
+		"id": "dia_I_dunno",
+		"text": "Well...how come? I thought you got lost or somethin'.",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "I forgot everything...",
+				"dest": "dia_braindead"
+			},
+			{
+				"text": "I lost my memory...",
+				"dest": "dia_braindead"
+			}
+		]
+	},
+	{
+		"id": "dia_braindead",
+		"text": "Doesn't matter, we are gonna find out after you get better.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_friendlyFemaleVillager",
+		"text": "We have an extra bed, it is upstairs. If you need anything, call for me.",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Thanks, I really appreciate it.",
+				"dest": "dia_friendlyFemaleVillagerAnswer"
+			}
+		]
+	},
+	{
+		"id": "dia_friendlyFemaleVillagerAnswer",
+		"text": "Sure dude.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight1",
+		"text": "What is all this noise?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight2",
+		"text": "I'd rather take my sword.",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight3",
+		"text": "What happened? Where is everybody?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight4",
+		"text": "What are they doing?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_monologueNight5",
+		"text": "What in the world happened?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_witchAppearance1",
+		"text": "What is you? Shouldn't thee be cursed?",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Where did you come from?",
+				"dest": "dia_witchAppearance2"
+			},
+			{
+				"text": "Who are you?",
+				"dest": "dia_witchAppearance2"
+			}
+		]
+	},
+	{
+		"id": "dia_witchAppearance2",
+		"text": "Dosn't it matter anyway. Go t'hell ya lil' shit!",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter1",
+		"text": "Wanna fight me?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter2",
+		"text": "Where did she go?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter3",
+		"text": "Anybody here?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter4",
+		"text": "What is this old altar doing here?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_deathEncounter5",
+		"text": "Woooooo...",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal1",
+		"text": "What happened?",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal2",
+		"text": "Everythings so colorful...",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_backToNormal3",
+		"text": "",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_randomTraveler1",
+		"text": "Ughh, do you 'ave a potion? Please, 'elp me!",
+		"hasOptions": true,
+		"options": [
+			{
+				"text": "Sorry I have none",
+				"dest": "dia_cursedTraveler"
+			},
+			{
+				"text": "It's dangerous to go alone, take this",
+				"dest": "dia_blessedTraveler"
+			}
+		]
+	},
+	{
+		"id": "dia_cursedTraveler",
+		"text": "Why you...<attacks>",
+		"hasOptions": false
+	},
+	{
+		"id": "dia_blessedTraveler",
+		"text": "Thanks, you saved my life. <gives u present>",
+		"hasOptions": false
+	}
+]

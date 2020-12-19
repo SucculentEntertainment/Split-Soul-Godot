@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Firewand.png-3b65b82da0d79e235899f3487bd5312e.stex"
+path="res://.import/HoldingItems.png-6afd1f88c707ed3c95d23e1d5f3d318a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Items/Firewand.png"
-dest_files=[ "res://.import/Firewand.png-3b65b82da0d79e235899f3487bd5312e.stex" ]
+source_file="res://Sprites/Items/HoldingItems.png"
+dest_files=[ "res://.import/HoldingItems.png-6afd1f88c707ed3c95d23e1d5f3d318a.stex" ]
 
 [params]
 
