@@ -27,12 +27,7 @@ func changeDir(dir):
 
 func setFx():
 	if item == "none" or !def.ITEM_DATA[item].canHold: return
-	
-	var xOff = def.ITEM_DATA[item].offsets["fx_x"]
-	var yOff = def.ITEM_DATA[item].offsets["fx_y"]
-	
 	wpnFx.setEffects(def.ITEM_DATA[item].light, def.ITEM_DATA[item].particles, def.ITEM_DATA[item].lightColor, load(def.ITEM_DATA[item].particleResource))
-	wpnFx.dirOffset = [Vector2(xOff, yOff), Vector2(-xOff, yOff), Vector2(-xOff, yOff), Vector2(xOff, yOff)]
 
 func setOffsets():
 	if item == "none" or item == "":

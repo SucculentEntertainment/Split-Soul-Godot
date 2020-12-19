@@ -35,9 +35,7 @@
 		"canCharge": true,
 		"offsets": {
 			"dir": 256,
-			"type": 0,
-			"fx_x": -5.5,
-			"fx_y": -4.5
+			"type": 0
 		},
 
 		"light": true,
