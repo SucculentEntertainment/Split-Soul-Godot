@@ -6,7 +6,8 @@
 		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 64,
-		"numFrames": 1
+		"numFrames": 1,
+		"canHold": false
 	},
 	
 	"i_test2":
@@ -16,7 +17,8 @@
 		"subType": "testing",
 		"description": "One of the rare items used for Inventory Testing",
 		"stackSize": 256,
-		"numFrames": 1
+		"numFrames": 1,
+		"canHold": false
 	},
 	
 	"i_fireWand":
@@ -26,7 +28,22 @@
 		"subType": "wand",
 		"description": "A magic stick that shoots fireballs",
 		"stackSize": 1,
-		"numFrames": 8
+		"numFrames": 8,
+		"canHold": true,
+
+		"cooldown": 1,
+		"canCharge": true,
+		"offsets": {
+			"dir": 256,
+			"type": 0,
+			"fx_x": -5.5,
+			"fx_y": -4.5
+		},
+
+		"light": true,
+		"particles": true,
+		"lightColor": "#F18628",
+		"particleResource": "res://Resources/Particles/Fire.tres"
 	},
 	
 	"i_slimeTear":
@@ -36,6 +53,7 @@
 		"subType": "mob",
 		"description": "A tear that represents the sadness of the slime you just killed... You monster!",
 		"stackSize": 20,
-		"numFrames": 7
+		"numFrames": 7,
+		"canHold": false
 	}
 }

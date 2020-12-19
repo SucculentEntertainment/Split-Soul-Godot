@@ -1,26 +1,54 @@
 extends Node
 
 onready var def = get_node("/root/Definitions")
-var wpnNode = null
+export (int) var dir = 0
+export (String) var item = ""
+
+var wpn = null
+var wpnSpr = null
+var wpnCool = null
+var wpnFx = null
 
 func _ready():
-	pass
-
-func init(weaponNode):
-	wpnNode = weaponNode
+	wpn = get_parent().get_node("Weapon")
+	wpnSpr = get_parent().get_node("Weapon/WeaponSprite")
+	wpnCool = get_parent().get_node("Weapon/Cooldown")
+	wpnFx = wpn.get_node("Effects")
 
 func setWeapon(weapon):
-	if wpnNode == null: return
-	delWeapon()
+	item = weapon
 	
-	var wpn = def.SPAWNABLE_SCENES[weapon].instance()
-	wpnNode.add_child(wpn)
-	
-	return wpn
+	setFx()
+	setOffsets()
 
-func delWeapon():
-	if wpnNode == null: return
+func changeDir(dir):
+	self.dir = dir
+	setOffsets()
+
+func setFx():
+	if item == "none" or !def.ITEM_DATA[item].canHold: return
 	
-	for w in wpnNode.get_children():
-		wpnNode.remove_child(w)
-		w.queue_free()
+	var xOff = def.ITEM_DATA[item].offsets["fx_x"]
+	var yOff = def.ITEM_DATA[item].offsets["fx_y"]
+	
+	wpnFx.setEffects(def.ITEM_DATA[item].light, def.ITEM_DATA[item].particles, def.ITEM_DATA[item].lightColor, load(def.ITEM_DATA[item].particleResource))
+	wpnFx.dirOffset = [Vector2(xOff, yOff), Vector2(-xOff, yOff), Vector2(-xOff, yOff), Vector2(xOff, yOff)]
+
+func setOffsets():
+	if item == "none" or item == "":
+		wpn.hide()
+		wpn.canCharge = true
+		return
+
+	if !def.ITEM_DATA[item].canHold:
+		wpn.hide()
+		return
+
+	wpn.show()
+	wpnSpr.region_rect.size = Vector2(def.ITEM_DATA[item].offsets["dir"], 160)
+	wpnSpr.region_rect.position = Vector2(dir * def.ITEM_DATA[item].offsets["dir"], def.ITEM_DATA[item].offsets["type"])
+
+	wpnSpr.hframes = def.ITEM_DATA[item].numFrames
+	wpnCool.wait_time = def.ITEM_DATA[item].cooldown
+
+	wpn.canCharge = def.ITEM_DATA[item].canCharge
