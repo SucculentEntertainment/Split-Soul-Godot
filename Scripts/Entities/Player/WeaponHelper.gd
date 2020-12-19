@@ -17,6 +17,7 @@ func _ready():
 
 func setWeapon(weapon):
 	item = weapon
+	wpn.itemName = item
 	
 	setFx()
 	setOffsets()

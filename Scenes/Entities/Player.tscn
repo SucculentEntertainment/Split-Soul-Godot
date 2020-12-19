@@ -32,24 +32,12 @@ tracks/0/keys = {
 resource_name = "hold_wand_left"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("../WeaponSprite:frame")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 24, 31 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.7, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
@@ -182,24 +170,12 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=83]
 resource_name = "init_wand_left"
 tracks/0/type = "value"
-tracks/0/path = NodePath("../WeaponSprite:frame")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 16, 23 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.7, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
@@ -1363,12 +1339,12 @@ script = ExtResource( 10 )
 texture = ExtResource( 8 )
 vframes = 5
 hframes = 8
-frame = 31
+frame = 39
 region_enabled = true
 region_rect = Rect2( 768, 0, 256, 160 )
 
 [node name="Effects" type="Node2D" parent="Weapon"]
-position = Vector2( 0, -2 )
+position = Vector2( 11, 1 )
 script = ExtResource( 11 )
 
 [node name="Particles2D" type="Particles2D" parent="Weapon/Effects"]
