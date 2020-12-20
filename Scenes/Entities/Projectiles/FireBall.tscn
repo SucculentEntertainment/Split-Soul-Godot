@@ -982,6 +982,7 @@ script = ExtResource( 1 )
 id = "r_fireBall"
 speed = 2000
 lifetime = 5
+damage = 10
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )

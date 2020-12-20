@@ -86,7 +86,7 @@ var currDimension = "d_alive"
 
 func _ready():
 	$AnimationTree.active = true
-	$AnimationTree.get("parameters/playback").start("Idle")
+	$AnimationTree.get("parameters/" + currWeaponGroup + "/playback").start("Idle")
 	$InvincibilityTimer.connect("timeout", self, "_onInvincibilityEnd")
 	$HitboxPivot/Hitbox.connect("area_entered", self, "_onGiveDamage")
 
@@ -128,11 +128,11 @@ func move(delta):
 
 func changeAnimation():
 	if dir != Vector2():
-		$AnimationTree.get("parameters/playback").travel("Walk")
-		$AnimationTree.get("parameters/Walk/playback").travel(currWeaponGroup)
+		$AnimationTree.get("parameters/playback").travel(currWeaponGroup)
+		$AnimationTree.get("parameters/" + currWeaponGroup + "/playback").travel("walk")
 	else:
-		$AnimationTree.get("parameters/playback").travel("Idle")
-		$AnimationTree.get("parameters/Idle/playback").travel(currWeaponGroup)
+		$AnimationTree.get("parameters/playback").travel(currWeaponGroup)
+		$AnimationTree.get("parameters/" + currWeaponGroup + "/playback").travel("idle")
 
 # ================================
 # Attack
@@ -145,9 +145,13 @@ func _onGiveDamage(area):
 			body.receiveDamage(damage)
 
 func attack(delta):
-	$AnimationTree.get("parameters/playback").travel("Attack")
-	$AnimationTree.get("parameters/Attack/playback").travel(currWeaponGroup)
-	var anim = $AnimationTree.get("parameters/Attack/" + currWeaponGroup + "/playback")
+	dir = self.position.direction_to(get_global_mouse_position())
+	dir = dir.normalized()
+	changeDir()
+	
+	$AnimationTree.get("parameters/playback").travel(currWeaponGroup)
+	$AnimationTree.get("parameters/" + currWeaponGroup + "/playback").travel("attack")
+	var anim = $AnimationTree.get("parameters/" + currWeaponGroup + "/attack/playback")
 	
 	match attackState:
 		ATK_INIT:
@@ -158,14 +162,14 @@ func attack(delta):
 			attackRelease(anim)
 
 func attackInit(anim):
-	anim.travel("Init")
+	anim.travel("init")
 
 func attackHold(anim):
 	if !$Weapon.canCharge:
 		attackState = ATK_RELEASE
 		return
 	
-	anim.travel("Hold")
+	anim.travel("hold")
 	
 	if currWeapon != "none": $Weapon.charge(self)
 
@@ -173,7 +177,7 @@ func attackHold(anim):
 		attackState = ATK_RELEASE
 
 func attackRelease(anim):
-	anim.travel("Release")
+	anim.travel("release")
 	
 	if !hasAttacked:
 		hasAttacked = true
@@ -249,6 +253,13 @@ func changeDimension(dimension):
 	transition.get_parent().remove_child(transition)
 	transition.queue_free()
 
+func changeDir():
+	if dir != Vector2():
+		$DirectionTree.set("parameters/blend_position", dir)
+		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
+		$Punchwave.region_rect.position.y = directionState * 32
+		$WeaponHelper.changeDir(directionState)
+
 func enableGlow():
 	$Light2D.show()
 
@@ -304,12 +315,7 @@ func moveInput():
 	dir.x = int(Input.is_action_pressed("ctrl_right")) - int(Input.is_action_pressed("ctrl_left"))
 	dir.y = int(Input.is_action_pressed("ctrl_down")) - int(Input.is_action_pressed("ctrl_up"))
 	dir = dir.normalized()
-	
-	if dir != Vector2():
-		$DirectionTree.set("parameters/blend_position", dir)
-		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(currDimension)] + directionOffsets[directionState]
-		$Punchwave.region_rect.position.y = directionState * 32
-		$WeaponHelper.changeDir(directionState)
+	changeDir()
 
 func attackInput():
 	if Input.is_action_just_pressed("ctrl_attack_primary"):

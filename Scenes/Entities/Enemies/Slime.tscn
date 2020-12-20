@@ -304,6 +304,8 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 
+[node name="ProjectileCooldown" type="Timer" parent="."]
+
 [node name="Interest" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
