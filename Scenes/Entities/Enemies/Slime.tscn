@@ -246,20 +246,21 @@ critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 maxHealth = 10
 speed = 2000
 layer = 3
-dimensionOffsets = [ 0, 64 ]
+dimensionOffsets = [ 0, 208 ]
 canSpawn = true
 useMovementCooldown = true
-closeRange = 7
+closeRange = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4, -7 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 centered = false
-vframes = 4
+vframes = 13
 hframes = 34
+frame = 44
 region_enabled = true
-region_rect = Rect2( 0, 0, 544, 64 )
+region_rect = Rect2( 0, 0, 544, 208 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -302,6 +303,8 @@ visible = false
 position = Vector2( 0, -12 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
+
+[node name="ProjectileCooldown" type="Timer" parent="."]
 
 [node name="Interest" type="Timer" parent="."]
 wait_time = 2.0
