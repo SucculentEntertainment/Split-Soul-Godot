@@ -862,154 +862,154 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=89]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "attack_none_hold"
 
-[sub_resource type="AnimationNodeAnimation" id=90]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "attack_none_init"
 
-[sub_resource type="AnimationNodeAnimation" id=91]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "attack_none_release"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
-[sub_resource type="AnimationNodeStateMachine" id=95]
-states/hold/node = SubResource( 89 )
+[sub_resource type="AnimationNodeStateMachine" id=42]
+states/hold/node = SubResource( 36 )
 states/hold/position = Vector2( 577, 77 )
-states/init/node = SubResource( 90 )
+states/init/node = SubResource( 37 )
 states/init/position = Vector2( 275, 77 )
-states/release/node = SubResource( 91 )
+states/release/node = SubResource( 38 )
 states/release/position = Vector2( 430, 156 )
-transitions = [ "init", "hold", SubResource( 92 ), "hold", "release", SubResource( 93 ), "release", "init", SubResource( 94 ) ]
+transitions = [ "init", "hold", SubResource( 39 ), "hold", "release", SubResource( 40 ), "release", "init", SubResource( 41 ) ]
 start_node = "init"
 
-[sub_resource type="AnimationNodeAnimation" id=96]
+[sub_resource type="AnimationNodeAnimation" id=43]
 animation = "death"
 
-[sub_resource type="AnimationNodeAnimation" id=97]
+[sub_resource type="AnimationNodeAnimation" id=44]
 animation = "idle_none"
 
-[sub_resource type="AnimationNodeAnimation" id=98]
+[sub_resource type="AnimationNodeAnimation" id=45]
 animation = "walk_none"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=105]
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=106]
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
 
-[sub_resource type="AnimationNodeStateMachine" id=107]
-states/attack/node = SubResource( 95 )
+[sub_resource type="AnimationNodeStateMachine" id=54]
+states/attack/node = SubResource( 42 )
 states/attack/position = Vector2( 211, 164 )
-states/death/node = SubResource( 96 )
+states/death/node = SubResource( 43 )
 states/death/position = Vector2( 483, 164 )
-states/idle/node = SubResource( 97 )
+states/idle/node = SubResource( 44 )
 states/idle/position = Vector2( 211, 50 )
-states/walk/node = SubResource( 98 )
+states/walk/node = SubResource( 45 )
 states/walk/position = Vector2( 483, 50 )
-transitions = [ "idle", "attack", SubResource( 99 ), "attack", "idle", SubResource( 100 ), "idle", "walk", SubResource( 101 ), "walk", "idle", SubResource( 102 ), "attack", "death", SubResource( 103 ), "walk", "death", SubResource( 104 ), "idle", "death", SubResource( 105 ), "death", "idle", SubResource( 106 ) ]
+transitions = [ "idle", "attack", SubResource( 46 ), "attack", "idle", SubResource( 47 ), "idle", "walk", SubResource( 48 ), "walk", "idle", SubResource( 49 ), "attack", "death", SubResource( 50 ), "walk", "death", SubResource( 51 ), "idle", "death", SubResource( 52 ), "death", "idle", SubResource( 53 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=108]
+[sub_resource type="AnimationNodeAnimation" id=55]
 animation = "attack_wand_hold"
 
-[sub_resource type="AnimationNodeAnimation" id=109]
+[sub_resource type="AnimationNodeAnimation" id=56]
 animation = "attack_wand_init"
 
-[sub_resource type="AnimationNodeAnimation" id=110]
+[sub_resource type="AnimationNodeAnimation" id=57]
 animation = "attack_wand_release"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
 
-[sub_resource type="AnimationNodeStateMachine" id=114]
-states/hold/node = SubResource( 108 )
+[sub_resource type="AnimationNodeStateMachine" id=61]
+states/hold/node = SubResource( 55 )
 states/hold/position = Vector2( 490, 74 )
-states/init/node = SubResource( 109 )
+states/init/node = SubResource( 56 )
 states/init/position = Vector2( 210, 74 )
-states/release/node = SubResource( 110 )
+states/release/node = SubResource( 57 )
 states/release/position = Vector2( 357, 160 )
-transitions = [ "init", "hold", SubResource( 111 ), "hold", "release", SubResource( 112 ), "release", "init", SubResource( 113 ) ]
+transitions = [ "init", "hold", SubResource( 58 ), "hold", "release", SubResource( 59 ), "release", "init", SubResource( 60 ) ]
 start_node = "init"
 
-[sub_resource type="AnimationNodeAnimation" id=115]
+[sub_resource type="AnimationNodeAnimation" id=62]
 animation = "death"
 
-[sub_resource type="AnimationNodeAnimation" id=116]
+[sub_resource type="AnimationNodeAnimation" id=63]
 animation = "idle_wand"
 
-[sub_resource type="AnimationNodeAnimation" id=117]
+[sub_resource type="AnimationNodeAnimation" id=64]
 animation = "walk_wand"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=120]
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=121]
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=122]
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=125]
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
 
-[sub_resource type="AnimationNodeStateMachine" id=126]
-states/attack/node = SubResource( 114 )
+[sub_resource type="AnimationNodeStateMachine" id=73]
+states/attack/node = SubResource( 61 )
 states/attack/position = Vector2( 236, 145 )
-states/death/node = SubResource( 115 )
+states/death/node = SubResource( 62 )
 states/death/position = Vector2( 475, 145 )
-states/idle/node = SubResource( 116 )
+states/idle/node = SubResource( 63 )
 states/idle/position = Vector2( 236, 43 )
-states/walk/node = SubResource( 117 )
+states/walk/node = SubResource( 64 )
 states/walk/position = Vector2( 475, 43 )
-transitions = [ "idle", "attack", SubResource( 118 ), "attack", "idle", SubResource( 119 ), "idle", "walk", SubResource( 120 ), "walk", "idle", SubResource( 121 ), "idle", "death", SubResource( 122 ), "death", "idle", SubResource( 123 ), "attack", "death", SubResource( 124 ), "walk", "death", SubResource( 125 ) ]
+transitions = [ "idle", "attack", SubResource( 65 ), "attack", "idle", SubResource( 66 ), "idle", "walk", SubResource( 67 ), "walk", "idle", SubResource( 68 ), "idle", "death", SubResource( 69 ), "death", "idle", SubResource( 70 ), "attack", "death", SubResource( 71 ), "walk", "death", SubResource( 72 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
 
-[sub_resource type="AnimationNodeStateMachine" id=72]
-states/none/node = SubResource( 107 )
+[sub_resource type="AnimationNodeStateMachine" id=76]
+states/none/node = SubResource( 54 )
 states/none/position = Vector2( -127, 99 )
-states/wand/node = SubResource( 126 )
+states/wand/node = SubResource( 73 )
 states/wand/position = Vector2( 54, 99 )
-transitions = [ "none", "wand", SubResource( 127 ), "wand", "none", SubResource( 128 ) ]
+transitions = [ "none", "wand", SubResource( 74 ), "wand", "none", SubResource( 75 ) ]
 start_node = "none"
 graph_offset = Vector2( -380, 3 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=73]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=77]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=129]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=78]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=130]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=79]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=131]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=80]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=132]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=81]
 
-[sub_resource type="Animation" id=79]
+[sub_resource type="Animation" id=82]
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -1025,30 +1025,30 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=80]
+[sub_resource type="AnimationNodeAnimation" id=83]
 animation = "left"
 
-[sub_resource type="AnimationNodeAnimation" id=81]
+[sub_resource type="AnimationNodeAnimation" id=84]
 animation = "right"
 
-[sub_resource type="AnimationNodeAnimation" id=82]
+[sub_resource type="AnimationNodeAnimation" id=85]
 animation = "down"
 
-[sub_resource type="AnimationNodeAnimation" id=83]
+[sub_resource type="AnimationNodeAnimation" id=86]
 animation = "up"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=84]
-blend_point_0/node = SubResource( 80 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=87]
+blend_point_0/node = SubResource( 83 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 81 )
+blend_point_1/node = SubResource( 84 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 82 )
+blend_point_2/node = SubResource( 85 )
 blend_point_2/pos = Vector2( 0, 1 )
-blend_point_3/node = SubResource( 83 )
+blend_point_3/node = SubResource( 86 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="Animation" id=85]
+[sub_resource type="Animation" id=88]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:directionState")
@@ -1113,7 +1113,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=86]
+[sub_resource type="Animation" id=89]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:directionState")
@@ -1178,7 +1178,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=87]
+[sub_resource type="Animation" id=90]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:directionState")
@@ -1243,7 +1243,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=88]
+[sub_resource type="Animation" id=91]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:directionState")
@@ -1337,6 +1337,7 @@ region_enabled = true
 region_rect = Rect2( 1024, 0, 256, 480 )
 
 [node name="Weapon" type="Node2D" parent="."]
+visible = false
 position = Vector2( 0, -6.5 )
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 10 )
@@ -1464,26 +1465,26 @@ anims/walk_none = SubResource( 34 )
 anims/walk_wand = SubResource( 35 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 72 )
+tree_root = SubResource( 76 )
 anim_player = NodePath("../AnimationPlayer")
 process_mode = 0
-parameters/playback = SubResource( 73 )
-parameters/none/playback = SubResource( 129 )
-parameters/none/attack/playback = SubResource( 130 )
-parameters/wand/playback = SubResource( 131 )
-parameters/wand/attack/playback = SubResource( 132 )
+parameters/playback = SubResource( 77 )
+parameters/none/playback = SubResource( 78 )
+parameters/none/attack/playback = SubResource( 79 )
+parameters/wand/playback = SubResource( 80 )
+parameters/wand/attack/playback = SubResource( 81 )
 
 [node name="CursorAnimation" type="AnimationPlayer" parent="."]
-anims/Cursor = SubResource( 79 )
+anims/Cursor = SubResource( 82 )
 
 [node name="DirectionTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 84 )
+tree_root = SubResource( 87 )
 anim_player = NodePath("../DirectionChanger")
 active = true
 parameters/blend_position = Vector2( 0, 0 )
 
 [node name="DirectionChanger" type="AnimationPlayer" parent="."]
-anims/down = SubResource( 85 )
-anims/left = SubResource( 86 )
-anims/right = SubResource( 87 )
-anims/up = SubResource( 88 )
+anims/down = SubResource( 88 )
+anims/left = SubResource( 89 )
+anims/right = SubResource( 90 )
+anims/up = SubResource( 91 )
