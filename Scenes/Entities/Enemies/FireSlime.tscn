@@ -1,10 +1,12 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Sprites/Entities/Enemies/FireSlime.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -144,47 +146,47 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Attack"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Death"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Move"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
-[sub_resource type="AnimationNodeStateMachine" id=32]
-states/Attack/node = SubResource( 34 )
+[sub_resource type="AnimationNodeStateMachine" id=20]
+states/Attack/node = SubResource( 9 )
 states/Attack/position = Vector2( 135, 158 )
-states/Death/node = SubResource( 35 )
+states/Death/node = SubResource( 10 )
 states/Death/position = Vector2( 387, 158 )
-states/Idle/node = SubResource( 36 )
+states/Idle/node = SubResource( 11 )
 states/Idle/position = Vector2( 135, 51 )
-states/Move/node = SubResource( 37 )
+states/Move/node = SubResource( 12 )
 states/Move/position = Vector2( 387, 51 )
-transitions = [ "Idle", "Move", SubResource( 38 ), "Move", "Idle", SubResource( 39 ), "Idle", "Attack", SubResource( 40 ), "Attack", "Idle", SubResource( 41 ), "Idle", "Death", SubResource( 42 ), "Attack", "Death", SubResource( 43 ), "Move", "Death", SubResource( 44 ) ]
+transitions = [ "Idle", "Move", SubResource( 13 ), "Move", "Idle", SubResource( 14 ), "Idle", "Attack", SubResource( 15 ), "Attack", "Idle", SubResource( 16 ), "Idle", "Death", SubResource( 17 ), "Attack", "Death", SubResource( 18 ), "Move", "Death", SubResource( 19 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [node name="EnemyFireSlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -257,6 +259,19 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 6 )
 
+[node name="Effects" type="Node2D" parent="."]
+position = Vector2( -0.0395012, -1.38247 )
+
+[node name="Particles2D" type="Particles2D" parent="Effects"]
+amount = 10
+local_coords = false
+process_material = ExtResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="Effects"]
+scale = Vector2( 0.025, 0.025 )
+texture = ExtResource( 7 )
+color = Color( 0.945098, 0.52549, 0.156863, 1 )
+
 [node name="ProjectileCooldown" type="Timer" parent="."]
 wait_time = 6.0
 
@@ -275,7 +290,7 @@ anims/Idle = SubResource( 7 )
 anims/Move = SubResource( 8 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 20 )
 anim_player = NodePath("../AnimationPlayer")
 process_mode = 0
-parameters/playback = SubResource( 33 )
+parameters/playback = SubResource( 21 )

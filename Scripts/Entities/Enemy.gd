@@ -213,7 +213,7 @@ func _onAwakened(body):
 func _onInterestLoss():
 	if updateInterest() == -1:
 		if instancedProjectile != null:
-			instancedProjectile.state = 3
+			instancedProjectile.queue_free()
 			instancedProjectile = null
 		player = null
 		state = IDLE

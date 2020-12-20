@@ -98,6 +98,7 @@ func destructionEnd():
 func changeDimension(dimension):
 	pass
 
+# FixMe: Change to Hurtbox Area instead of body
 func _onBodyEntered(body):
 	if "EnemySlime" in body.name:
 		body.changeType("e_fireSlime")

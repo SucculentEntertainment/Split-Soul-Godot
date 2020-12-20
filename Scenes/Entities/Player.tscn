@@ -1332,9 +1332,8 @@ texture = ExtResource( 5 )
 centered = false
 vframes = 15
 hframes = 8
-frame = 64
 region_enabled = true
-region_rect = Rect2( 1024, 0, 256, 480 )
+region_rect = Rect2( 0, 0, 256, 480 )
 
 [node name="Weapon" type="Node2D" parent="."]
 visible = false
