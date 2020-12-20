@@ -28,6 +28,7 @@ var health = 0
 var damageCooldown = false
 var movementCooldown = false
 
+var initializedMove = false
 var spawnedLoot = false
 
 var player = null
@@ -134,22 +135,25 @@ func targetPlayer(delta):
 	
 	$AnimationTree.get("parameters/playback").travel("Move")
 	
-	if !canLongRange:
-		if movementCooldown or !useMovementCooldown:
-			dir = self.global_position.direction_to(player.global_position)
+	var atkRange = closeRange
+	if canLongRange: atkRange = longRange
+	
+	if movementCooldown or !useMovementCooldown:
+		dir = self.global_position.direction_to(player.global_position)
+		initializedMove = false
 		
-			$AnimationTree.set("parameters/Idle/blend_position", dir)
-			$AnimationTree.set("parameters/Move/blend_position", dir)
-			$AnimationTree.set("parameters/Attack/blend_position", dir)
-		
-		if self.global_position.distance_to(player.global_position) > closeRange:
-			move(delta)
-		else:
-			state = ATTACK
-		
-		updateInterest()
+		$AnimationTree.set("parameters/Idle/blend_position", dir)
+		$AnimationTree.set("parameters/Move/blend_position", dir)
+		$AnimationTree.set("parameters/Attack/blend_position", dir)
+	
+	if self.global_position.distance_to(player.global_position) > atkRange:
+		if useMovementCooldown: initializedMove = true
+		else: move(delta)
 	else:
-		state = IDLE
+		state = ATTACK
+	
+	if initializedMove: move(delta)
+	updateInterest()
 
 func attack(delta):
 	$AnimationTree.get("parameters/playback").travel("Attack")

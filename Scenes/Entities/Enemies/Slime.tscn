@@ -249,7 +249,7 @@ layer = 3
 dimensionOffsets = [ 0, 208 ]
 canSpawn = true
 useMovementCooldown = true
-closeRange = 7
+closeRange = 5
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4, -7 )
