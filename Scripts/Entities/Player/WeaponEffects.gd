@@ -2,7 +2,7 @@ extends Node2D
 
 onready var def = get_node("/root/Definitions")
 
-export (Array, Vector2) var dirOffset = [Vector2(), Vector2(), Vector2(), Vector2()]
+export (int) var dir
 export (ParticlesMaterial) var particles
 export (Color) var lightColor
 
@@ -11,27 +11,33 @@ func _ready():
 	$Light2D.color = lightColor
 
 func updateDir(dir):
-	$Particles2D.position = dirOffset[dir]
-	$Light2D.position = dirOffset[dir]
+	self.dir = dir
 
 func setEffects(enableLight, enableParticles, color, particles):
-	setLight(enableLight)
-	setParticles(enableParticles)
-	updateColor(color)
-	updateParticles(particles)
-
-func setLight(state):
-	if state: $Light2D.show()
+	if enableLight: $Light2D.show()
 	else: $Light2D.hide()
-
-func setParticles(state):
-	if state: $Particles2D.show()
+	
+	if enableParticles: $Particles2D.show()
 	else: $Particles2D.hide()
-
-func updateColor(color):
+	
 	lightColor = color
 	$Light2D.color = lightColor
+	
+	self.particles = particles
+	$Particles2D.process_material = self.particles
 
-func updateParticles(res):
-	particles = res
-	$Particles2D.process_material = particles
+# ================================
+# Animation Stuff
+# ================================
+
+func playAnim(anim, type):
+	var dirStr = ""
+	
+	match dir:
+		0: dirStr = "down"
+		1: dirStr = "up"
+		2: dirStr = "right"
+		3: dirStr = "left"
+	
+	var animName = anim + "_" + type + "_" + dirStr
+	$AnimationPlayer.play(animName)

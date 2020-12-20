@@ -21,18 +21,25 @@ export (bool) var useMovementCooldown
 export (bool) var canLongRange
 
 export (int) var closeRange
-export (int) var longRange
+export (int) var longRangeMin
+export (int) var longRangeMax
+
+export (String) var projectile
 
 var health = 0
 
 var damageCooldown = false
 var movementCooldown = false
 
+var initializedMove = false
 var spawnedLoot = false
 
 var player = null
 var dir = Vector2()
 var vel = Vector2()
+
+var instancedProjectile = null
+var projectileCooldown = false
 
 enum {
 	IDLE,
@@ -64,6 +71,7 @@ func _ready():
 	
 	$Hitbox.connect("area_entered", self, "_onGiveDamage")
 	$Hitbox/Timer.connect("timeout", self, "_onDamageTimeout")
+	$ProjectileCooldown.connect("timeout", self, "_onProjectileTimeout")
 
 # ================================
 # Actions
@@ -86,8 +94,10 @@ func updateInterest():
 	for body in bodies:
 		if "Player" in body.name:
 			player = body
-			state = MOVE
+			if state == IDLE: state = MOVE
 			$Interest.start()
+			return 0
+	return -1
 
 # ================================
 # Movement
@@ -108,7 +118,6 @@ func move(delta):
 	if !movementCooldown:
 		vel = dir * speed * delta
 		vel = move_and_slide(vel)
-
 
 func moveCooldownStart():
 	if useMovementCooldown:
@@ -134,28 +143,59 @@ func targetPlayer(delta):
 	
 	$AnimationTree.get("parameters/playback").travel("Move")
 	
-	if !canLongRange:
-		if movementCooldown or !useMovementCooldown:
-			dir = self.global_position.direction_to(player.global_position)
+	var dist = self.global_position.distance_to(player.global_position)
+	var atkRange = closeRange
+	if canLongRange: atkRange = longRangeMax
+	
+	if movementCooldown or !useMovementCooldown:
+		dir = self.global_position.direction_to(player.global_position)
+		initializedMove = false
 		
-			$AnimationTree.set("parameters/Idle/blend_position", dir)
-			$AnimationTree.set("parameters/Move/blend_position", dir)
-			$AnimationTree.set("parameters/Attack/blend_position", dir)
+		if canLongRange and dist < longRangeMin:
+			dir = -dir
 		
-		if self.global_position.distance_to(player.global_position) > closeRange:
-			move(delta)
-		else:
-			state = ATTACK
-		
-		updateInterest()
-	else:
-		state = IDLE
+		$AnimationTree.set("parameters/Idle/blend_position", dir)
+		$AnimationTree.set("parameters/Move/blend_position", dir)
+		$AnimationTree.set("parameters/Attack/blend_position", dir)
+	
+	if dist > atkRange or (canLongRange and dist < longRangeMin):
+		if useMovementCooldown: initializedMove = true
+		else: move(delta)
+	
+	if dist <= atkRange:
+		if !useMovementCooldown or (useMovementCooldown and !initializedMove): state = ATTACK
+	
+	if useMovementCooldown and initializedMove: move(delta)
 
 func attack(delta):
+	if canLongRange and projectileCooldown:
+		state = MOVE
+		return
+	
 	$AnimationTree.get("parameters/playback").travel("Attack")
 
 func attackEnd():
-	state = IDLE
+	updateInterest()
+	state = MOVE
+
+func spawnProjectile():
+	if !canLongRange: return
+	if player == null: return
+	if projectileCooldown: return
+	
+	projectileCooldown = true
+	$ProjectileCooldown.start()
+	
+	var dir = self.global_position.direction_to(player.global_position)
+	var spawnHelper = player.get_parent().get_node("SpawnHelper")
+	
+	instancedProjectile = spawnHelper.spawn(projectile, self.global_position, Vector2(0.5, 0.5), "", player.get_parent().currentDimensionID, true)
+	instancedProjectile.init(dir, false)
+
+func shootProjectile():
+	if !canLongRange: return
+	if instancedProjectile == null: return
+	instancedProjectile.enableMovement()
 
 # ================================
 # Events
@@ -171,9 +211,13 @@ func _onAwakened(body):
 		$Interest.start()
 
 func _onInterestLoss():
-	player = null
-	state = IDLE
-	$Alert.hide()
+	if updateInterest() == -1:
+		if instancedProjectile != null:
+			instancedProjectile.queue_free()
+			instancedProjectile = null
+		player = null
+		state = IDLE
+		$Alert.hide()
 
 func _onDamageTimeout():
 	damageCooldown = false
@@ -184,6 +228,9 @@ func _onDamageTimeout():
 		
 		if body != null and "Player" in body.name:
 			_onGiveDamage(area)
+
+func _onProjectileTimeout():
+	projectileCooldown = false
 
 func changeType(id):
 	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")

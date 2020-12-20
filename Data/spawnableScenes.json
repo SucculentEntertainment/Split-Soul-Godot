@@ -74,10 +74,5 @@
     {
         "id": "r_fireBall",
         "scene": "res://Scenes/Entities/Projectiles/FireBall.tscn"
-    },
-    
-    {
-        "id": "i_fireWand",
-        "scene": "res://Scenes/Items/Weapons/FireWand.tscn"
     }
 ]

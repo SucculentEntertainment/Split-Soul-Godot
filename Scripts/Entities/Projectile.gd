@@ -3,6 +3,7 @@ extends KinematicBody2D
 export (String) var id
 export (int) var speed
 export (int) var lifetime
+export (int) var damage
 
 enum {
 	UNINIT,
@@ -97,7 +98,10 @@ func destructionEnd():
 func changeDimension(dimension):
 	pass
 
+# FixMe: Change to Hurtbox Area instead of body
 func _onBodyEntered(body):
 	if "EnemySlime" in body.name:
 		body.changeType("e_fireSlime")
+	elif "Player" in body.name:
+		body._onReceiveDamage(damage)
 	state = DESTROY
