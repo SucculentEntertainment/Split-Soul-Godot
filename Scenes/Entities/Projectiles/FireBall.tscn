@@ -980,6 +980,7 @@ graph_offset = Vector2( -256.585, -23.3246 )
 [node name="FireBall" type="KinematicBody2D"]
 script = ExtResource( 1 )
 id = "r_fireBall"
+element = "fire"
 speed = 2000
 lifetime = 5
 damage = 10
@@ -989,7 +990,7 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 4
 hframes = 19
-frame = 54
+frame = 64
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )
@@ -1006,9 +1007,8 @@ process_material = ExtResource( 4 )
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -8.5 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -1042,5 +1042,8 @@ parameters/Destruction/blend_position = Vector2( 0, 0 )
 parameters/Travel/blend_position = Vector2( 0, 0 )
 
 [node name="Creation" type="Timer" parent="."]
-wait_time = 0.5
+one_shot = true
+
+[node name="EatDelay" type="Timer" parent="."]
+wait_time = 0.25
 one_shot = true

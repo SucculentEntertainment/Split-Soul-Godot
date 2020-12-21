@@ -41,11 +41,15 @@ var vel = Vector2()
 var instancedProjectile = null
 var projectileCooldown = false
 
+var transTarget = ""
+
 enum {
 	IDLE,
 	MOVE,
 	ATTACK,
-	DEAD
+	DEAD,
+	TRANS_INIT,
+	TRANS
 }
 
 var state = IDLE
@@ -113,6 +117,10 @@ func _physics_process(delta):
 			attack(delta)
 		DEAD:
 			die()
+		TRANS_INIT:
+			transInit()
+		TRANS:
+			trans()
 
 func move(delta):
 	if !movementCooldown:
@@ -212,9 +220,6 @@ func _onAwakened(body):
 
 func _onInterestLoss():
 	if updateInterest() == -1:
-		if instancedProjectile != null:
-			instancedProjectile.queue_free()
-			instancedProjectile = null
 		player = null
 		state = IDLE
 		$Alert.hide()
@@ -305,3 +310,19 @@ func die():
 func deadAnimEnd():
 	get_parent().remove_child(self)
 	queue_free()
+
+# ================================
+# Transitions
+# ================================
+
+func transInit():
+	$AnimationTree.get("parameters/playback").travel("Transition_Init")
+
+func trans():
+	$AnimationTree.get("parameters/playback").travel("Transition_" + transTarget)
+
+func _transInitEnd():
+	state = TRANS
+
+func _transitionEnd():
+	changeType("e_" + transTarget + "Slime")
