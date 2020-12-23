@@ -19,10 +19,12 @@ export (Array, int) var dimensionOffsets
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
 export (bool) var canLongRange
+export (bool) var canSpecial
 
 export (int) var closeRange
 export (int) var longRangeMin
 export (int) var longRangeMax
+export (int) var interestRange
 
 export (String) var projectile
 
@@ -40,6 +42,8 @@ var vel = Vector2()
 
 var instancedProjectile = null
 var projectileCooldown = false
+var specialCooldown = false
+var wanderCooldown = true
 
 var transTarget = ""
 
@@ -49,7 +53,8 @@ enum {
 	ATTACK,
 	DEAD,
 	TRANS_INIT,
-	TRANS
+	TRANS,
+	ATTACK_SPECIAL
 }
 
 var state = IDLE
@@ -76,6 +81,10 @@ func _ready():
 	$Hitbox.connect("area_entered", self, "_onGiveDamage")
 	$Hitbox/Timer.connect("timeout", self, "_onDamageTimeout")
 	$ProjectileCooldown.connect("timeout", self, "_onProjectileTimeout")
+	$SpecialCooldown.connect("timeout", self, "_onSpecialTimeout")
+	
+	$IdleCooldown.start()
+	$IdleCooldown.connect("timeout", self, "_onWander")
 
 # ================================
 # Actions
@@ -101,6 +110,11 @@ func updateInterest():
 			if state == IDLE: state = MOVE
 			$Interest.start()
 			return 0
+	
+	if state == ATTACK_SPECIAL:
+		$Interest.start()
+		return 0
+	
 	return -1
 
 # ================================
@@ -112,7 +126,8 @@ func _physics_process(delta):
 		IDLE:
 			idle(delta)
 		MOVE:
-			targetPlayer(delta)
+			if player != null: targetPlayer(delta)
+			else: wander(delta)
 		ATTACK:
 			attack(delta)
 		DEAD:
@@ -121,6 +136,8 @@ func _physics_process(delta):
 			transInit()
 		TRANS:
 			trans()
+		ATTACK_SPECIAL:
+			$SpecialAtkHelper.attack(delta)
 
 func move(delta):
 	if !movementCooldown:
@@ -141,6 +158,24 @@ func moveCooldownEnd():
 
 func idle(delta):
 	$AnimationTree.get("parameters/playback").travel("Idle")
+	if !wanderCooldown: state = MOVE
+
+func wander(delta):
+	wanderCooldown = true
+	$AnimationTree.get("parameters/playback").travel("Move")
+	move(delta)
+
+func _onWander():
+	rng.randomize()
+	
+	if rng.randi_range(0, 3) == 3:
+		wanderCooldown = false
+		
+		rng.randomize()
+		dir = Vector2(rng.randf_range(-100, 100), rng.randf_range(-100, 100))
+		dir = dir.normalized()
+	else:
+		state = IDLE
 
 # ================================
 # Attack
@@ -161,10 +196,6 @@ func targetPlayer(delta):
 		
 		if canLongRange and dist < longRangeMin:
 			dir = -dir
-		
-		$AnimationTree.set("parameters/Idle/blend_position", dir)
-		$AnimationTree.set("parameters/Move/blend_position", dir)
-		$AnimationTree.set("parameters/Attack/blend_position", dir)
 	
 	if dist > atkRange or (canLongRange and dist < longRangeMin):
 		if useMovementCooldown: initializedMove = true
@@ -174,13 +205,35 @@ func targetPlayer(delta):
 		if !useMovementCooldown or (useMovementCooldown and !initializedMove): state = ATTACK
 	
 	if useMovementCooldown and initializedMove: move(delta)
+	
+	if canSpecial and !specialCooldown:
+		if $SpecialAtkHelper.checkUsefull():
+			$SpecialAtkHelper.init()
+			return
+	
+	updateInterest()
 
 func attack(delta):
 	if canLongRange and projectileCooldown:
 		state = MOVE
 		return
 	
-	$AnimationTree.get("parameters/playback").travel("Attack")
+	if canSpecial and !specialCooldown:
+		if $SpecialAtkHelper.checkUsefull():
+			$SpecialAtkHelper.init()
+			return
+	
+	updateInterest()
+	
+	var dist = self.global_position.distance_to(player.global_position)
+	var atkType = ""
+	
+	if !canLongRange: atkType = "Melee"
+	else:
+		if dist <= closeRange: atkType = "Melee"
+		elif dist >= longRangeMin and dist <= longRangeMax: atkType = "Range"
+	
+	$AnimationTree.get("parameters/playback").travel("Attack_" + atkType)
 
 func attackEnd():
 	updateInterest()
@@ -236,6 +289,9 @@ func _onDamageTimeout():
 
 func _onProjectileTimeout():
 	projectileCooldown = false
+
+func _onSpecialTimeout():
+	specialCooldown = false
 
 func changeType(id):
 	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
