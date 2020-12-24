@@ -32,8 +32,6 @@ func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
 	
-	$EatDelay.connect("timeout", self, "_onEatTimeout")
-	
 	$Creation.connect("timeout", self, "_onCreated")
 	$Hitbox.connect("area_entered", self, "_onAreaEntered")
 
@@ -95,7 +93,6 @@ func createEnd():
 	for a in $Hitbox.get_overlapping_areas():
 		if "Hurtbox" in a.name:
 			creator = a.get_parent()
-			print(creator)
 			break
 	
 	state = MOVE
@@ -112,10 +109,9 @@ func destructionEnd():
 func changeDimension(dimension):
 	pass
 
-# FixMe Ignore creator for some time
 func _onAreaEntered(area):
 	var body = area.get_parent()
-	if !created and body == creator: return
+	if !created and (creator == body or creator == null): return
 	
 	if "Eatbox" in area.name:
 		if "EnemySlime" in body.name:
@@ -123,12 +119,11 @@ func _onAreaEntered(area):
 			body.transTarget = element
 		
 		eat = true
-		$EatDelay.start()
+	
+	if "Consumebox" in area.name and eat:
+		state = DESTROY
 	
 	elif "Hurtbox" in area.name and !eat:
 		if "Player" in body.name:
 			body._onReceiveDamage(damage)
 		state = DESTROY
-
-func _onEatTimeout():
-	state = DESTROY

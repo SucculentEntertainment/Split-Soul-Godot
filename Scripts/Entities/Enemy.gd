@@ -158,22 +158,27 @@ func moveCooldownEnd():
 
 func idle(delta):
 	$AnimationTree.get("parameters/playback").travel("Idle")
-	if !wanderCooldown: state = MOVE
+	if !wanderCooldown:
+		state = MOVE
+		wanderCooldown = true
 
 func wander(delta):
-	wanderCooldown = true
 	$AnimationTree.get("parameters/playback").travel("Move")
 	move(delta)
 
 func _onWander():
 	rng.randomize()
 	
-	if rng.randi_range(0, 3) == 3:
+	if (state != MOVE and state != IDLE) or player != null: return
+	$IdleCooldown.start()
+	
+	if rng.randi_range(0, 8) == 1:
 		wanderCooldown = false
 		
-		rng.randomize()
-		dir = Vector2(rng.randf_range(-100, 100), rng.randf_range(-100, 100))
-		dir = dir.normalized()
+		if state == IDLE or !movementCooldown:
+			rng.randomize()
+			dir = Vector2(rng.randf_range(-100, 100), rng.randf_range(-100, 100))
+			dir = dir.normalized()
 	else:
 		state = IDLE
 

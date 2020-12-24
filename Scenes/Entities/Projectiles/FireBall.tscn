@@ -990,16 +990,18 @@ position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 4
 hframes = 19
-frame = 64
+frame = 57
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 2 )
 color = Color( 1, 0.615686, 0, 1 )
+energy = 0.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -8.5 )
+emitting = false
 amount = 16
 local_coords = false
 process_material = ExtResource( 4 )
@@ -1008,6 +1010,7 @@ process_material = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -8.5 )
+scale = Vector2( 1e-05, 1e-05 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -1042,8 +1045,4 @@ parameters/Destruction/blend_position = Vector2( 0, 0 )
 parameters/Travel/blend_position = Vector2( 0, 0 )
 
 [node name="Creation" type="Timer" parent="."]
-one_shot = true
-
-[node name="EatDelay" type="Timer" parent="."]
-wait_time = 0.25
 one_shot = true
