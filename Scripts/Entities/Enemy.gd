@@ -16,6 +16,9 @@ export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, int) var dimensionOffsets
 
+export (Array, Resource) var particles
+export (Array, Color) var lightColors
+
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
 export (bool) var canLongRange
@@ -95,6 +98,9 @@ func changeDimension(dimension):
 		show()
 		$CollisionShape2D.set_deferred("disabled", false)
 		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+		
+		if particles.size() > 0: $Effects/Particles2D.process_material = particles[def.getDimensionIndex(dimension)]
+		if lightColors.size() > 0: $Effects/Light2D.color = lightColors[def.getDimensionIndex(dimension)]
 	else:
 		hide()
 		$CollisionShape2D.set_deferred("disabled", true)

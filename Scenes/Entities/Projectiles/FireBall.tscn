@@ -1,9 +1,10 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Entities/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Entities/Projectiles/fireball.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=4]
+[ext_resource path="res://Resources/Particles/FireAlive.tres" type="Material" id=4]
+[ext_resource path="res://Resources/Particles/FireDead.tres" type="Material" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
@@ -984,13 +985,18 @@ element = "fire"
 speed = 2000
 lifetime = 5
 damage = 10
+layer = 3
+dimensionOffsets = [ 0, 304 ]
+particles = [ ExtResource( 4 ), ExtResource( 5 ) ]
+lightColors = [ Color( 0.945098, 0.52549, 0.156863, 1 ), Color( 0.156863, 0.835294, 0.945098, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 4
 hframes = 19
-frame = 57
+region_enabled = true
+region_rect = Rect2( 0, 0, 304, 64 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )

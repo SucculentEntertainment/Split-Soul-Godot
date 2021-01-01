@@ -1,10 +1,18 @@
 extends KinematicBody2D
 
+onready var def = get_node("/root/Definitions")
+
 export (String) var id
 export (String) var element
 export (int) var speed
 export (int) var lifetime
 export (int) var damage
+
+export (int, FLAGS, "Alive", "Dead") var layer
+
+export (Array, int) var dimensionOffsets
+export (Array, Resource) var particles
+export (Array, Color) var lightColors
 
 enum {
 	UNINIT,
@@ -107,7 +115,14 @@ func destructionEnd():
 	state = DESPAWN
 
 func changeDimension(dimension):
-	pass
+	if def.getDimensionLayer(dimension) & layer != 0:
+		show()
+		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(dimension)]
+		
+		if particles.size() > 0: $Particles2D.process_material = particles[def.getDimensionIndex(dimension)]
+		if lightColors.size() > 0: $Light2D.color = lightColors[def.getDimensionIndex(dimension)]
+	else:
+		hide()
 
 func _onAreaEntered(area):
 	var body = area.get_parent()

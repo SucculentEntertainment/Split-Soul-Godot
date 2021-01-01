@@ -35,13 +35,28 @@
 		"canCharge": true,
 		"offsets": {
 			"dir": 256,
-			"type": 0
+			"type": 0,
+			"dimension": [
+				0,
+				1024
+			]
+		},
+		
+		"layers": {
+			"d_alive": true,
+			"d_dead": true
 		},
 
 		"light": true,
 		"particles": true,
-		"lightColor": "#F18628",
-		"particleResource": "res://Resources/Particles/Fire.tres"
+		"lightColors": [
+			"#F18628",
+			"#28D5F1"
+		],
+		"particleResources": [
+			"res://Resources/Particles/FireAlive.tres",
+			"res://Resources/Particles/FireDead.tres"
+		]
 	},
 	
 	"i_slimeTear":

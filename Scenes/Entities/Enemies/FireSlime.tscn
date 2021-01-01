@@ -1,13 +1,14 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Sprites/Entities/Enemies/FireSlime.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=3]
+[ext_resource path="res://Resources/Particles/FireAlive.tres" type="Material" id=3]
 [ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Entities/Enemies/SpecialAtkHelper.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Resources/Particles/FireDead.tres" type="Material" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.0
@@ -24,7 +25,7 @@ height = 4.0
 radius = 1.75
 height = 4.0
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=5]
 resource_name = "Attack_Melee"
 length = 1.75
 loop = true
@@ -56,8 +57,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Attack_Range"
+[sub_resource type="Animation" id=6]
 length = 1.75
 step = 0.12
 tracks/0/type = "value"
@@ -93,7 +93,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 1.25
 step = 0.125
 tracks/0/type = "value"
@@ -123,8 +123,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "Idle"
+[sub_resource type="Animation" id=8]
 length = 1.75
 loop = true
 step = 0.12
@@ -141,8 +140,7 @@ tracks/0/keys = {
 "values": [ 0, 7 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Move"
+[sub_resource type="Animation" id=9]
 length = 1.75
 loop = true
 step = 0.12
@@ -179,62 +177,62 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Attack_Melee"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "Attack_Range"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "Death"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "Move"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id=20]
-states/Attack_Melee/node = SubResource( 23 )
+[sub_resource type="AnimationNodeStateMachine" id=26]
+states/Attack_Melee/node = SubResource( 10 )
 states/Attack_Melee/position = Vector2( -92.6391, 3 )
-states/Attack_Range/node = SubResource( 24 )
+states/Attack_Range/node = SubResource( 11 )
 states/Attack_Range/position = Vector2( -92.6391, 97 )
-states/Death/node = SubResource( 10 )
+states/Death/node = SubResource( 12 )
 states/Death/position = Vector2( 252, 151 )
-states/Idle/node = SubResource( 11 )
+states/Idle/node = SubResource( 13 )
 states/Idle/position = Vector2( 252, -50 )
-states/Move/node = SubResource( 12 )
+states/Move/node = SubResource( 14 )
 states/Move/position = Vector2( 387, 51 )
-transitions = [ "Idle", "Move", SubResource( 13 ), "Move", "Idle", SubResource( 14 ), "Idle", "Death", SubResource( 17 ), "Move", "Death", SubResource( 19 ), "Attack_Melee", "Idle", SubResource( 25 ), "Idle", "Attack_Melee", SubResource( 26 ), "Attack_Range", "Death", SubResource( 27 ), "Move", "Attack_Melee", SubResource( 28 ), "Move", "Attack_Range", SubResource( 29 ), "Idle", "Attack_Range", SubResource( 30 ), "Attack_Range", "Idle", SubResource( 31 ) ]
+transitions = [ "Idle", "Move", SubResource( 15 ), "Move", "Idle", SubResource( 16 ), "Idle", "Death", SubResource( 17 ), "Move", "Death", SubResource( 18 ), "Attack_Melee", "Idle", SubResource( 19 ), "Idle", "Attack_Melee", SubResource( 20 ), "Attack_Range", "Death", SubResource( 21 ), "Move", "Attack_Melee", SubResource( 22 ), "Move", "Attack_Range", SubResource( 23 ), "Idle", "Attack_Range", SubResource( 24 ), "Attack_Range", "Idle", SubResource( 25 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -321.639, -76 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
 
 [node name="EnemyFireSlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -246,6 +244,8 @@ maxHealth = 10
 speed = 2000
 layer = 3
 dimensionOffsets = [ 0, 64 ]
+particles = [ ExtResource( 3 ), ExtResource( 9 ) ]
+lightColors = [ Color( 0.945098, 0.52549, 0.156863, 1 ), Color( 0.156863, 0.835294, 0.945098, 1 ) ]
 canSpawn = true
 useMovementCooldown = true
 canLongRange = true
@@ -340,14 +340,14 @@ stream = ExtResource( 5 )
 volume_db = -6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack_Melee = SubResource( 22 )
-anims/Attack_Range = SubResource( 5 )
-anims/Death = SubResource( 6 )
-anims/Idle = SubResource( 7 )
-anims/Move = SubResource( 8 )
+anims/Attack_Melee = SubResource( 5 )
+anims/Attack_Range = SubResource( 6 )
+anims/Death = SubResource( 7 )
+anims/Idle = SubResource( 8 )
+anims/Move = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 20 )
+tree_root = SubResource( 26 )
 anim_player = NodePath("../AnimationPlayer")
 process_mode = 0
-parameters/playback = SubResource( 21 )
+parameters/playback = SubResource( 27 )

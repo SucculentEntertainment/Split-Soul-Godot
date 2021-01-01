@@ -8,7 +8,7 @@
 [ext_resource path="res://Sprites/GUI/cursor.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Entities/WeaponHelper.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/Items/HoldingItems.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=9]
+[ext_resource path="res://Resources/Particles/FireAlive.tres" type="Material" id=9]
 [ext_resource path="res://Scripts/Entities/Player/Weapons.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Entities/Player/WeaponEffects.gd" type="Script" id=11]
 
