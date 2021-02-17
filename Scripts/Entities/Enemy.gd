@@ -6,10 +6,6 @@ var rng = RandomNumberGenerator.new()
 
 export (String) var id
 
-export (Color) var healthy
-export (Color) var damaged
-export (Color) var critical
-
 export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
@@ -70,7 +66,6 @@ var maxAnimOffset = 1
 
 func _ready():
 	health = maxHealth
-	$HealthBar.changeHealth(health, maxHealth)
 	
 	$AnimationTree.active = true
 	$AnimationTree.get("parameters/playback").start("Idle")
@@ -316,7 +311,6 @@ func changeType(id):
 
 func receiveDamage(damage):
 	health -= damage
-	$HealthBar.changeHealth(health, maxHealth)
 	if health <= 0: state = DEAD
 
 func _onGiveDamage(area):

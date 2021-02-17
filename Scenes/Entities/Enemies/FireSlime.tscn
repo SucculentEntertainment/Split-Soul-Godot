@@ -1,9 +1,8 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Sprites/Entities/Enemies/FireSlime.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Enemy.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Particles/FireAlive.tres" type="Material" id=3]
-[ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=7]
@@ -237,9 +236,6 @@ graph_offset = Vector2( -321.639, -76 )
 [node name="EnemyFireSlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
 id = "e_fireSlime"
-healthy = Color( 0, 0.658824, 0.419608, 1 )
-damaged = Color( 1, 0.784314, 0.341176, 1 )
-critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 maxHealth = 10
 speed = 2000
 layer = 3
@@ -269,16 +265,6 @@ region_rect = Rect2( 0, 0, 544, 64 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
-
-[node name="HealthBar" parent="." instance=ExtResource( 4 )]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = -8.0
-margin_bottom = -8.0
-rect_scale = Vector2( 0.025, 0.025 )
-healthy = Color( 0, 0.658824, 0.419608, 1 )
-damaged = Color( 1, 0.784314, 0.341176, 1 )
-critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
 visible = false

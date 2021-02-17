@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Zombie.png-10d28fa993b2afedbcf40b601a568f04.stex"
+path="res://.import/ManaStaminaProgress.png-0f560df66b6f0b6892cc31f076b66669.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Color Schemes/Zombie.png"
-dest_files=[ "res://.import/Zombie.png-10d28fa993b2afedbcf40b601a568f04.stex" ]
+source_file="res://Sprites/GUI/ManaStaminaProgress.png"
+dest_files=[ "res://.import/ManaStaminaProgress.png-0f560df66b6f0b6892cc31f076b66669.stex" ]
 
 [params]
 

@@ -21,8 +21,9 @@ func givePlayerReference(player):
 	$Inventory.givePlayerReference(player)
 	$Debug.givePlayerReference(player)
 
-func updateValues(maxHealth):
-	$HealthBar.changeHealth(vars.health, maxHealth)
+func updateValues(maxHealth, maxMana, maxStamina):
+	$HealthBar.changeValue(vars.health, maxHealth)
+	$ManaStamina.changeValue(vars.health, maxHealth)
 	$Coins.changeAmount(vars.coins)
 	$SoulPoints.changeAmount(vars.soulpoints)
 
