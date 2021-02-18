@@ -3,28 +3,25 @@ extends Node2D
 onready var def = get_node("/root/Definitions")
 
 export (int) var dir
-export (ParticlesMaterial) var particles
-export (Color) var lightColor
 
 func _ready():
-	$Particles2D.process_material = particles
-	$Light2D.color = lightColor
+	pass
 
 func updateDir(dir):
 	self.dir = dir
 
-func setEffects(enableLight, enableParticles, color, particles):
+func setEffects(enableLight, enableParticles, colors, particles):
 	if enableLight: $Light2D.show()
 	else: $Light2D.hide()
 	
 	if enableParticles: $Particles2D.show()
 	else: $Particles2D.hide()
 	
-	lightColor = color
-	$Light2D.color = lightColor
+	var tmp = []
+	for p in particles: tmp.append(load(p))
 	
-	self.particles = particles
-	$Particles2D.process_material = self.particles
+	get_parent().lightColors = colors
+	get_parent().particles = tmp
 
 # ================================
 # Animation Stuff

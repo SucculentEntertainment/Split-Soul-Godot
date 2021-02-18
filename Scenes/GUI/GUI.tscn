@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scripts/GUI/GUI.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Entities/Powerups/Soulpoint.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scenes/GUI/Dialogs/LoadDialog.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/GUI/Dialogs/SaveDialog.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/GUI/Settings.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/GUI/ManaStaminaBar.tscn" type="PackedScene" id=17]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 7 )
@@ -113,6 +114,12 @@ healthy = Color( 0, 0.658824, 0.419608, 1 )
 damaged = Color( 1, 0.784314, 0.341176, 1 )
 critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 enableText = true
+
+[node name="ManaStaminaBar" parent="." instance=ExtResource( 17 )]
+margin_left = 32.0
+margin_top = 696.0
+margin_right = -1248.0
+margin_bottom = -23.9999
 
 [node name="Coins" parent="." instance=ExtResource( 5 )]
 margin_left = 32.0

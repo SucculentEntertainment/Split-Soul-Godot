@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Trees.png-b89b9d9d0b9624f5e1c806ed4b5a95f0.stex"
+path="res://.import/Logo.png-796715aaf6b329a162a7df824c149cb8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Color Schemes/Trees.png"
-dest_files=[ "res://.import/Trees.png-b89b9d9d0b9624f5e1c806ed4b5a95f0.stex" ]
+source_file="res://Logos/Succulent/Logo.png"
+dest_files=[ "res://.import/Logo.png-796715aaf6b329a162a7df824c149cb8.stex" ]
 
 [params]
 

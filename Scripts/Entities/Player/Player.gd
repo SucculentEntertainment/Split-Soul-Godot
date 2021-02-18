@@ -209,6 +209,8 @@ func itemAction(item):
 func updateWeapon():
 	var slot = 0
 	
+	if $Weapon.currDimension != currDimension: $Weapon.changeDimension(currDimension)
+	
 	if currDimension == "d_dead" and !fullGUIOpen:
 		slot = 1
 		useCustomCursor = true
@@ -242,6 +244,8 @@ func changeDimension(dimension):
 	
 	emit_signal("changeDimension", dimension)
 	$CollisionShape2D.disabled = false;
+	
+	$Weapon.changeDimension(dimension)
 	
 	if dimension == "d_dead": enableGlow()
 	else: disableGlow()

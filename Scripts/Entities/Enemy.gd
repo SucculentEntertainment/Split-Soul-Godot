@@ -6,23 +6,24 @@ var rng = RandomNumberGenerator.new()
 
 export (String) var id
 
-export (Color) var healthy
-export (Color) var damaged
-export (Color) var critical
-
 export (int) var maxHealth = 100
 export (int) var speed = 500
 export (int) var damage = 5
 export (int, FLAGS, "Alive", "Dead") var layer
 export (Array, int) var dimensionOffsets
 
+export (Array, Resource) var particles
+export (Array, Color) var lightColors
+
 export (bool) var canSpawn
 export (bool) var useMovementCooldown
 export (bool) var canLongRange
+export (bool) var canSpecial
 
 export (int) var closeRange
 export (int) var longRangeMin
 export (int) var longRangeMax
+export (int) var interestRange
 
 export (String) var projectile
 
@@ -40,12 +41,19 @@ var vel = Vector2()
 
 var instancedProjectile = null
 var projectileCooldown = false
+var specialCooldown = false
+var wanderCooldown = true
+
+var transTarget = ""
 
 enum {
 	IDLE,
 	MOVE,
 	ATTACK,
-	DEAD
+	DEAD,
+	TRANS_INIT,
+	TRANS,
+	ATTACK_SPECIAL
 }
 
 var state = IDLE
@@ -58,7 +66,6 @@ var maxAnimOffset = 1
 
 func _ready():
 	health = maxHealth
-	$HealthBar.changeHealth(health, maxHealth)
 	
 	$AnimationTree.active = true
 	$AnimationTree.get("parameters/playback").start("Idle")
@@ -72,6 +79,10 @@ func _ready():
 	$Hitbox.connect("area_entered", self, "_onGiveDamage")
 	$Hitbox/Timer.connect("timeout", self, "_onDamageTimeout")
 	$ProjectileCooldown.connect("timeout", self, "_onProjectileTimeout")
+	$SpecialCooldown.connect("timeout", self, "_onSpecialTimeout")
+	
+	$IdleCooldown.start()
+	$IdleCooldown.connect("timeout", self, "_onWander")
 
 # ================================
 # Actions
@@ -82,6 +93,9 @@ func changeDimension(dimension):
 		show()
 		$CollisionShape2D.set_deferred("disabled", false)
 		$Sprite.region_rect.position.y = dimensionOffsets[def.getDimensionIndex(dimension)]
+		
+		if particles.size() > 0: $Effects/Particles2D.process_material = particles[def.getDimensionIndex(dimension)]
+		if lightColors.size() > 0: $Effects/Light2D.color = lightColors[def.getDimensionIndex(dimension)]
 	else:
 		hide()
 		$CollisionShape2D.set_deferred("disabled", true)
@@ -97,6 +111,11 @@ func updateInterest():
 			if state == IDLE: state = MOVE
 			$Interest.start()
 			return 0
+	
+	if state == ATTACK_SPECIAL:
+		$Interest.start()
+		return 0
+	
 	return -1
 
 # ================================
@@ -108,11 +127,18 @@ func _physics_process(delta):
 		IDLE:
 			idle(delta)
 		MOVE:
-			targetPlayer(delta)
+			if player != null: targetPlayer(delta)
+			else: wander(delta)
 		ATTACK:
 			attack(delta)
 		DEAD:
 			die()
+		TRANS_INIT:
+			transInit()
+		TRANS:
+			trans()
+		ATTACK_SPECIAL:
+			$SpecialAtkHelper.attack(delta)
 
 func move(delta):
 	if !movementCooldown:
@@ -133,6 +159,29 @@ func moveCooldownEnd():
 
 func idle(delta):
 	$AnimationTree.get("parameters/playback").travel("Idle")
+	if !wanderCooldown:
+		state = MOVE
+		wanderCooldown = true
+
+func wander(delta):
+	$AnimationTree.get("parameters/playback").travel("Move")
+	move(delta)
+
+func _onWander():
+	rng.randomize()
+	
+	if (state != MOVE and state != IDLE) or player != null: return
+	$IdleCooldown.start()
+	
+	if rng.randi_range(0, 8) == 1:
+		wanderCooldown = false
+		
+		if state == IDLE or !movementCooldown:
+			rng.randomize()
+			dir = Vector2(rng.randf_range(-100, 100), rng.randf_range(-100, 100))
+			dir = dir.normalized()
+	else:
+		state = IDLE
 
 # ================================
 # Attack
@@ -153,10 +202,6 @@ func targetPlayer(delta):
 		
 		if canLongRange and dist < longRangeMin:
 			dir = -dir
-		
-		$AnimationTree.set("parameters/Idle/blend_position", dir)
-		$AnimationTree.set("parameters/Move/blend_position", dir)
-		$AnimationTree.set("parameters/Attack/blend_position", dir)
 	
 	if dist > atkRange or (canLongRange and dist < longRangeMin):
 		if useMovementCooldown: initializedMove = true
@@ -166,13 +211,35 @@ func targetPlayer(delta):
 		if !useMovementCooldown or (useMovementCooldown and !initializedMove): state = ATTACK
 	
 	if useMovementCooldown and initializedMove: move(delta)
+	
+	if canSpecial and !specialCooldown:
+		if $SpecialAtkHelper.checkUsefull():
+			$SpecialAtkHelper.init()
+			return
+	
+	updateInterest()
 
 func attack(delta):
 	if canLongRange and projectileCooldown:
 		state = MOVE
 		return
 	
-	$AnimationTree.get("parameters/playback").travel("Attack")
+	if canSpecial and !specialCooldown:
+		if $SpecialAtkHelper.checkUsefull():
+			$SpecialAtkHelper.init()
+			return
+	
+	updateInterest()
+	
+	var dist = self.global_position.distance_to(player.global_position)
+	var atkType = ""
+	
+	if !canLongRange: atkType = "Melee"
+	else:
+		if dist <= closeRange: atkType = "Melee"
+		elif dist >= longRangeMin and dist <= longRangeMax: atkType = "Range"
+	
+	$AnimationTree.get("parameters/playback").travel("Attack_" + atkType)
 
 func attackEnd():
 	updateInterest()
@@ -212,9 +279,6 @@ func _onAwakened(body):
 
 func _onInterestLoss():
 	if updateInterest() == -1:
-		if instancedProjectile != null:
-			instancedProjectile.queue_free()
-			instancedProjectile = null
 		player = null
 		state = IDLE
 		$Alert.hide()
@@ -232,6 +296,9 @@ func _onDamageTimeout():
 func _onProjectileTimeout():
 	projectileCooldown = false
 
+func _onSpecialTimeout():
+	specialCooldown = false
+
 func changeType(id):
 	var spawnHelper = get_parent().get_parent().get_node("SpawnHelper")
 	var obj = spawnHelper.call_deferred("spawn", id, position, scale, "", spawnHelper.get_parent().currentDimensionID, true)
@@ -244,7 +311,6 @@ func changeType(id):
 
 func receiveDamage(damage):
 	health -= damage
-	$HealthBar.changeHealth(health, maxHealth)
 	if health <= 0: state = DEAD
 
 func _onGiveDamage(area):
@@ -305,3 +371,19 @@ func die():
 func deadAnimEnd():
 	get_parent().remove_child(self)
 	queue_free()
+
+# ================================
+# Transitions
+# ================================
+
+func transInit():
+	$AnimationTree.get("parameters/playback").travel("Transition_Init")
+
+func trans():
+	$AnimationTree.get("parameters/playback").travel("Transition_" + transTarget)
+
+func _transInitEnd():
+	state = TRANS
+
+func _transitionEnd():
+	changeType("e_" + transTarget + "Slime")

@@ -9,6 +9,8 @@ var wpnSpr = null
 var wpnCool = null
 var wpnFx = null
 
+var dimensionID = 0
+
 func _ready():
 	wpn = get_parent().get_node("Weapon")
 	wpnSpr = get_parent().get_node("Weapon/WeaponSprite")
@@ -19,8 +21,13 @@ func setWeapon(weapon):
 	item = weapon
 	wpn.itemName = item
 	
-	setFx()
+	var i = 0
+	for l in def.ITEM_DATA[item].layers:
+		if l: wpn.layer |= (1 << i)
+		i += 1
+	
 	setOffsets()
+	setFx()
 
 func changeDir(dir):
 	self.dir = dir
@@ -28,7 +35,7 @@ func changeDir(dir):
 
 func setFx():
 	if item == "none" or !def.ITEM_DATA[item].canHold: return
-	wpnFx.setEffects(def.ITEM_DATA[item].light, def.ITEM_DATA[item].particles, def.ITEM_DATA[item].lightColor, load(def.ITEM_DATA[item].particleResource))
+	wpnFx.setEffects(def.ITEM_DATA[item].light, def.ITEM_DATA[item].particles, def.ITEM_DATA[item].lightColors, def.ITEM_DATA[item].particleResources)
 
 func setOffsets():
 	if item == "none" or item == "":
@@ -42,9 +49,13 @@ func setOffsets():
 
 	wpn.show()
 	wpnSpr.region_rect.size = Vector2(def.ITEM_DATA[item].offsets["dir"], 160)
-	wpnSpr.region_rect.position = Vector2(dir * def.ITEM_DATA[item].offsets["dir"], def.ITEM_DATA[item].offsets["type"])
+	wpnSpr.region_rect.position = Vector2(dir * def.ITEM_DATA[item].offsets["dir"] + def.ITEM_DATA[item].offsets["dimension"][dimensionID], def.ITEM_DATA[item].offsets["type"])
 
 	wpnSpr.hframes = def.ITEM_DATA[item].numFrames
 	wpnCool.wait_time = def.ITEM_DATA[item].cooldown
 
 	wpn.canCharge = def.ITEM_DATA[item].canCharge
+
+func changeDimension(dimension):
+	dimensionID = def.getDimensionIndex(dimension)
+	setOffsets()
