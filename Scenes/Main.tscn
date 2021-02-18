@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/GUI/GUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=2]
@@ -6,8 +6,18 @@
 [ext_resource path="res://Scenes/GUI/LoadingScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Effects/RetroShader.tscn" type="PackedScene" id=5]
 
+[sub_resource type="Environment" id=1]
+background_mode = 4
+ambient_light_color = Color( 0.0823529, 0.133333, 0.305882, 1 )
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
 
 [node name="Level" type="Node2D" parent="."]
 

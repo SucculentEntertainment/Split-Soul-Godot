@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Greys.png-e60fd75c9c9a739bda7524d585fceecd.stex"
+path="res://.import/ManaStaminaUnder.png-725b3d5bbb72a650b1b27b97f0cfb0f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Color Schemes/Greys.png"
-dest_files=[ "res://.import/Greys.png-e60fd75c9c9a739bda7524d585fceecd.stex" ]
+source_file="res://Sprites/GUI/ManaStaminaUnder.png"
+dest_files=[ "res://.import/ManaStaminaUnder.png-725b3d5bbb72a650b1b27b97f0cfb0f1.stex" ]
 
 [params]
 

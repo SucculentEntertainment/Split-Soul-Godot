@@ -1,8 +1,8 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Sprites/Entities/Enemies/Slime.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Entities/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/GUI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Entities/Enemies/SpecialAtkHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sounds/alert.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/GUI/Alert.png" type="Texture" id=6]
 
@@ -15,14 +15,14 @@ radius = 32.0
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 2.0
-height = 4.0
+height = 1.0
 
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 1.75
 height = 4.0
 
 [sub_resource type="Animation" id=5]
-resource_name = "Attack"
+resource_name = "Attack_Melee"
 length = 1.75
 loop = true
 step = 0.12
@@ -54,6 +54,56 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=6]
+resource_name = "Attack_Range"
+
+[sub_resource type="Animation" id=7]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 102, 135 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.3, 1.5, 1.8 ),
+"transitions": PoolRealArray( 0.5, 2, 1 ),
+"update": 0,
+"values": [ Vector2( -4, -7 ), Vector2( -4, -10 ), Vector2( -4, -7 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("SpecialAtkHelper")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.3, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "sj_startMovement"
+}, {
+"args": [  ],
+"method": "sj_endMovement"
+}, {
+"args": [  ],
+"method": "finish"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
 length = 1.25
 step = 0.125
 tracks/0/type = "value"
@@ -83,8 +133,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "Idle"
+[sub_resource type="Animation" id=9]
 length = 1.75
 loop = true
 step = 0.12
@@ -101,8 +150,7 @@ tracks/0/keys = {
 "values": [ 0, 7 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Move"
+[sub_resource type="Animation" id=10]
 length = 1.75
 loop = true
 step = 0.12
@@ -139,36 +187,73 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Jump (Attack)"
+[sub_resource type="Animation" id=11]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 136, 152 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_transInitEnd"
+} ]
+}
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Jump (Attack)"
+[sub_resource type="Animation" id=12]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 170, 181 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_transitionEnd"
+} ]
+}
 
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Jump (Attack)"
-
-[sub_resource type="AnimationNodeAnimation" id=12]
-animation = "Jump (Attack)"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=13]
-blend_point_0/node = SubResource( 9 )
-blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 10 )
-blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 11 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 12 )
-blend_point_3/pos = Vector2( -1, 0 )
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Attack_Melee"
 
 [sub_resource type="AnimationNodeAnimation" id=14]
-animation = "Death"
+animation = "Attack_Range"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "Idle"
+animation = "Attack_Special"
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "Idle"
+animation = "Death"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Idle"
@@ -176,21 +261,21 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=19]
-blend_point_0/node = SubResource( 15 )
-blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 16 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 17 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 18 )
-blend_point_3/pos = Vector2( 0, -1 )
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "Move"
+animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
-animation = "Move"
+[sub_resource type="AnimationNodeBlendSpace2D" id=21]
+blend_point_0/node = SubResource( 17 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 18 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 19 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 20 )
+blend_point_3/pos = Vector2( 0, -1 )
 
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "Move"
@@ -198,58 +283,100 @@ animation = "Move"
 [sub_resource type="AnimationNodeAnimation" id=23]
 animation = "Move"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=24]
-blend_point_0/node = SubResource( 20 )
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "Move"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Move"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+blend_point_0/node = SubResource( 22 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 21 )
+blend_point_1/node = SubResource( 23 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 22 )
+blend_point_2/node = SubResource( 24 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 23 )
+blend_point_3/node = SubResource( 25 )
 blend_point_3/pos = Vector2( -1, 0 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "Transition_Init"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-switch_mode = 2
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "Transition_fire"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 
-[sub_resource type="AnimationNodeStateMachine" id=32]
-states/Attack/node = SubResource( 13 )
-states/Attack/position = Vector2( 169, 151 )
-states/Death/node = SubResource( 14 )
-states/Death/position = Vector2( 323, 151 )
-states/Idle/node = SubResource( 19 )
-states/Idle/position = Vector2( 169, 64 )
-states/Move/node = SubResource( 24 )
-states/Move/position = Vector2( 323, 64 )
-transitions = [ "Idle", "Move", SubResource( 25 ), "Move", "Idle", SubResource( 26 ), "Idle", "Attack", SubResource( 27 ), "Attack", "Idle", SubResource( 28 ), "Attack", "Death", SubResource( 29 ), "Idle", "Death", SubResource( 30 ), "Move", "Death", SubResource( 31 ) ]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+
+[sub_resource type="AnimationNodeStateMachine" id=45]
+states/Attack_Melee/node = SubResource( 13 )
+states/Attack_Melee/position = Vector2( -54.213, 183 )
+states/Attack_Range/node = SubResource( 14 )
+states/Attack_Range/position = Vector2( -54.213, -62 )
+states/Attack_Special/node = SubResource( 15 )
+states/Attack_Special/position = Vector2( -54.213, 64 )
+states/Death/node = SubResource( 16 )
+states/Death/position = Vector2( 169, 304 )
+states/Idle/node = SubResource( 21 )
+states/Idle/position = Vector2( 169, 64 )
+states/Move/node = SubResource( 26 )
+states/Move/position = Vector2( 280, 183 )
+states/Transition_Init/node = SubResource( 27 )
+states/Transition_Init/position = Vector2( 169, -62 )
+states/Transition_fire/node = SubResource( 28 )
+states/Transition_fire/position = Vector2( 169, -160.181 )
+transitions = [ "Idle", "Move", SubResource( 29 ), "Move", "Idle", SubResource( 30 ), "Idle", "Death", SubResource( 31 ), "Move", "Death", SubResource( 32 ), "Idle", "Transition_Init", SubResource( 33 ), "Move", "Transition_Init", SubResource( 34 ), "Transition_Init", "Transition_fire", SubResource( 35 ), "Idle", "Attack_Range", SubResource( 36 ), "Attack_Range", "Idle", SubResource( 37 ), "Idle", "Attack_Special", SubResource( 38 ), "Attack_Special", "Idle", SubResource( 39 ), "Idle", "Attack_Melee", SubResource( 40 ), "Attack_Melee", "Idle", SubResource( 41 ), "Attack_Melee", "Death", SubResource( 42 ), "Attack_Special", "Death", SubResource( 43 ), "Attack_Range", "Death", SubResource( 44 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -270.213, -252.181 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
 [node name="EnemySlime" type="KinematicBody2D"]
 script = ExtResource( 2 )
 id = "e_slime"
-healthy = Color( 0, 0.658824, 0.419608, 1 )
-damaged = Color( 1, 0.784314, 0.341176, 1 )
-critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 maxHealth = 10
 speed = 2000
 layer = 3
 dimensionOffsets = [ 0, 208 ]
 canSpawn = true
 useMovementCooldown = true
+canSpecial = true
 closeRange = 5
+interestRange = 32
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -4, -7 )
@@ -258,7 +385,7 @@ texture = ExtResource( 1 )
 centered = false
 vframes = 13
 hframes = 34
-frame = 44
+frame = 47
 region_enabled = true
 region_rect = Rect2( 0, 0, 544, 208 )
 
@@ -266,16 +393,6 @@ region_rect = Rect2( 0, 0, 544, 208 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 shape = SubResource( 1 )
-
-[node name="HealthBar" parent="." instance=ExtResource( 4 )]
-margin_left = -8.0
-margin_top = -8.0
-margin_right = -8.0
-margin_bottom = -8.0
-rect_scale = Vector2( 0.025, 0.025 )
-healthy = Color( 0, 0.658824, 0.419608, 1 )
-damaged = Color( 1, 0.784314, 0.341176, 1 )
-critical = Color( 0.870588, 0.180392, 0.168627, 1 )
 
 [node name="Alerter" type="Area2D" parent="."]
 visible = false
@@ -286,6 +403,19 @@ shape = SubResource( 2 )
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="Eatbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eatbox"]
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="Consumebox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Consumebox"]
+position = Vector2( 0, -2 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
@@ -306,25 +436,38 @@ texture = ExtResource( 6 )
 
 [node name="ProjectileCooldown" type="Timer" parent="."]
 
+[node name="SpecialCooldown" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="Interest" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="IdleCooldown" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SpecialAtkHelper" parent="." instance=ExtResource( 3 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Attack = SubResource( 5 )
-anims/Death = SubResource( 6 )
-anims/Idle = SubResource( 7 )
-anims/Move = SubResource( 8 )
+anims/Attack_Melee = SubResource( 5 )
+anims/Attack_Range = SubResource( 6 )
+anims/Attack_Special = SubResource( 7 )
+anims/Death = SubResource( 8 )
+anims/Idle = SubResource( 9 )
+anims/Move = SubResource( 10 )
+anims/Transition_Init = SubResource( 11 )
+anims/Transition_fire = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 32 )
+tree_root = SubResource( 45 )
 anim_player = NodePath("../AnimationPlayer")
 process_mode = 0
-parameters/playback = SubResource( 33 )
-parameters/Attack/blend_position = Vector2( 0, 0 )
+parameters/playback = SubResource( 46 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Move/blend_position = Vector2( 0, 0 )

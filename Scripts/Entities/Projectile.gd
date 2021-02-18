@@ -1,9 +1,18 @@
 extends KinematicBody2D
 
+onready var def = get_node("/root/Definitions")
+
 export (String) var id
+export (String) var element
 export (int) var speed
 export (int) var lifetime
 export (int) var damage
+
+export (int, FLAGS, "Alive", "Dead") var layer
+
+export (Array, int) var dimensionOffsets
+export (Array, Resource) var particles
+export (Array, Color) var lightColors
 
 enum {
 	UNINIT,
@@ -22,12 +31,17 @@ var vel = Vector2()
 var animationEnd = false
 var allowMovement = true
 
+var eat = false
+var created = false
+
+var creator = null
+
 func _ready():
 	$Timer.connect("timeout", self, "_onTimeout")
 	$Timer.wait_time = lifetime
 	
 	$Creation.connect("timeout", self, "_onCreated")
-	$Hitbox.connect("body_entered", self, "_onBodyEntered")
+	$Hitbox.connect("area_entered", self, "_onAreaEntered")
 
 func init(dir, allowMovement = true):
 	self.dir = dir
@@ -63,7 +77,7 @@ func _physics_process(delta):
 			despawn(delta)
 
 func _onCreated():
-	$Hitbox/CollisionShape2D.disabled = false
+	created = true
 
 func create(delta):
 	$AnimationTree.get("parameters/playback").travel("Creation")
@@ -84,6 +98,11 @@ func _onTimeout():
 	state = DESTROY
 
 func createEnd():
+	for a in $Hitbox.get_overlapping_areas():
+		if "Hurtbox" in a.name:
+			creator = a.get_parent()
+			break
+	
 	state = MOVE
 	
 	if allowMovement:
@@ -96,12 +115,30 @@ func destructionEnd():
 	state = DESPAWN
 
 func changeDimension(dimension):
-	pass
+	if def.getDimensionLayer(dimension) & layer != 0:
+		show()
+		$Sprite.region_rect.position.x = dimensionOffsets[def.getDimensionIndex(dimension)]
+		
+		if particles.size() > 0: $Particles2D.process_material = particles[def.getDimensionIndex(dimension)]
+		if lightColors.size() > 0: $Light2D.color = lightColors[def.getDimensionIndex(dimension)]
+	else:
+		hide()
 
-# FixMe: Change to Hurtbox Area instead of body
-func _onBodyEntered(body):
-	if "EnemySlime" in body.name:
-		body.changeType("e_fireSlime")
-	elif "Player" in body.name:
-		body._onReceiveDamage(damage)
-	state = DESTROY
+func _onAreaEntered(area):
+	var body = area.get_parent()
+	if !created and (creator == body or creator == null): return
+	
+	if "Eatbox" in area.name:
+		if "EnemySlime" in body.name:
+			body.state = 4             # state = TRANS_INIT
+			body.transTarget = element
+		
+		eat = true
+	
+	if "Consumebox" in area.name and eat:
+		state = DESTROY
+	
+	elif "Hurtbox" in area.name and !eat:
+		if "Player" in body.name:
+			body._onReceiveDamage(damage)
+		state = DESTROY

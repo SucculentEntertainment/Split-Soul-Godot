@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Logo.png-df72b43fdd5a0cfd2672b292096eacbd.stex"
+path="res://.import/Color Palette.png-bfb9872f9dddd94e9e05d882b1563910.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Color Schemes/Logo.png"
-dest_files=[ "res://.import/Logo.png-df72b43fdd5a0cfd2672b292096eacbd.stex" ]
+source_file="res://Sprites/Color Schemes/Color Palette.png"
+dest_files=[ "res://.import/Color Palette.png-bfb9872f9dddd94e9e05d882b1563910.stex" ]
 
 [params]
 

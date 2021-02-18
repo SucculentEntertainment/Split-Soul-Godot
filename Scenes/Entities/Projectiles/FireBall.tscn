@@ -1,9 +1,10 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Scripts/Entities/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Effects/Light.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Entities/Projectiles/fireball.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Particles/Fire.tres" type="Material" id=4]
+[ext_resource path="res://Resources/Particles/FireAlive.tres" type="Material" id=4]
+[ext_resource path="res://Resources/Particles/FireDead.tres" type="Material" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.0
@@ -980,25 +981,33 @@ graph_offset = Vector2( -256.585, -23.3246 )
 [node name="FireBall" type="KinematicBody2D"]
 script = ExtResource( 1 )
 id = "r_fireBall"
+element = "fire"
 speed = 2000
 lifetime = 5
 damage = 10
+layer = 3
+dimensionOffsets = [ 0, 304 ]
+particles = [ ExtResource( 4 ), ExtResource( 5 ) ]
+lightColors = [ Color( 0.945098, 0.52549, 0.156863, 1 ), Color( 0.156863, 0.835294, 0.945098, 1 ) ]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )
 texture = ExtResource( 3 )
 vframes = 4
 hframes = 19
-frame = 54
+region_enabled = true
+region_rect = Rect2( 0, 0, 304, 64 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 0, -8.5 )
 scale = Vector2( 0.03, 0.03 )
 texture = ExtResource( 2 )
 color = Color( 1, 0.615686, 0, 1 )
+energy = 0.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -8.5 )
+emitting = false
 amount = 16
 local_coords = false
 process_material = ExtResource( 4 )
@@ -1006,9 +1015,9 @@ process_material = ExtResource( 4 )
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -8.5 )
+scale = Vector2( 1e-05, 1e-05 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -1042,5 +1051,4 @@ parameters/Destruction/blend_position = Vector2( 0, 0 )
 parameters/Travel/blend_position = Vector2( 0, 0 )
 
 [node name="Creation" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true

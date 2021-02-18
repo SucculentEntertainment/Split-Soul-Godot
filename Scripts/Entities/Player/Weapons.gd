@@ -1,10 +1,19 @@
 extends Node2D
 
+onready var def = get_node("/root/Definitions")
+
 export (String) var itemName
 export (bool) var canCharge
 
+export (int, FLAGS, "Alive", "Dead") var layer
+
+export (Array, Resource) var particles
+export (Array, Color) var lightColors
+
 var hasAttacked = false
 var isCharging = false
+
+var currDimension = "d_alive"
 
 var obj = null
 
@@ -39,6 +48,18 @@ func attack(player):
 			var dir = player.get_position().direction_to(get_global_mouse_position())
 			obj.changeDir(dir)
 			obj.enableMovement()
+
+func changeDimension(dimension):
+	currDimension = dimension
+	
+	if def.getDimensionLayer(dimension) & layer != 0:
+		show()
+		get_parent().get_node("WeaponHelper").changeDimension(dimension)
+		
+		if particles.size() > 0: $Effects/Particles2D.process_material = particles[def.getDimensionIndex(dimension)]
+		if lightColors.size() > 0: $Effects/Light2D.color = lightColors[def.getDimensionIndex(dimension)]
+	else:
+		hide()
 
 func _onCooldown():
 	hasAttacked = false
